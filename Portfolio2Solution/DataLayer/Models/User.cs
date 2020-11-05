@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace DataLayer.Models
 {
     public class User
@@ -16,8 +18,8 @@ namespace DataLayer.Models
 
         public override string ToString()
         {
-            return $"Id = {UserId}, first name: {FirstName}, birthday: {Birthday.Value.Year}-{Birthday.Value.Month}-{Birthday.Value.Day}," +
-                   $" Address: {Address.City}";
+            return $"Id = {UserId}, first name: {FirstName}, birthday: {Birthday.Value.Year}-{Birthday.Value.Month}-{Birthday.Value.Day},"+
+                 $" Address: {Address.City}";
         }
     }
 }
