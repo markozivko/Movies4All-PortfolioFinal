@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace DataLayer
@@ -14,7 +15,7 @@ namespace DataLayer
 
             using var context = new DatabaseContext(config["connectionString"]);
 
-            foreach (var user in context.Users)
+            foreach (var user in context.Users.Include(x => x.Address))
             {
                 Console.WriteLine(user);
             }

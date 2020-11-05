@@ -25,6 +25,8 @@ namespace DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder )
         {
+
+            //table users
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<User>().Property(x => x.UserId).HasColumnName("iduser");
             modelBuilder.Entity<User>().Property(x => x.FirstName).HasColumnName("f_name");
@@ -34,6 +36,17 @@ namespace DataLayer
             modelBuilder.Entity<User>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
             modelBuilder.Entity<User>().Property(x => x.UserName).HasColumnName("u_name");
+
+            //table address
+            modelBuilder.Entity<Address>().ToTable("address");
+            modelBuilder.Entity<Address>().HasKey(x => x.AddressId);
+            modelBuilder.Entity<Address>().Property(x => x.AddressId).HasColumnName("idaddress");
+            modelBuilder.Entity<Address>().Property(x => x.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<Address>().Property(x => x.StreetNumber).HasColumnName("streetnumber");
+            modelBuilder.Entity<Address>().Property(x => x.StreetName).HasColumnName("streetname");
+            modelBuilder.Entity<Address>().Property(x => x.ZipCode).HasColumnName("zipcode");
+            modelBuilder.Entity<Address>().Property(x => x.City).HasColumnName("city");
+            modelBuilder.Entity<Address>().Property(x => x.Country).HasColumnName("country");
         }
     }
 }
