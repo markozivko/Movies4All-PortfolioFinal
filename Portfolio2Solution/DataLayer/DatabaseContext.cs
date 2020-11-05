@@ -7,6 +7,12 @@ namespace DataLayer
 {
     public class DatabaseContext: DbContext
     {
+        private readonly string _connectionString;
+        public DatabaseContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         public DbSet<User> Users { get; set; }
@@ -14,7 +20,7 @@ namespace DataLayer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
-            optionsBuilder.UseNpgsql("host=localhost;db=imdb_small;uid=postgres;pwd=marko");
+            optionsBuilder.UseNpgsql(_connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder )
