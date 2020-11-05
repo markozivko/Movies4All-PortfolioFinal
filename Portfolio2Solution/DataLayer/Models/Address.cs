@@ -7,13 +7,12 @@ namespace DataLayer.Models
     {
 
         public int Id { get; set; }
-        public int UserId { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-       // public ICollection<User> Users { get; set; }
+       public ICollection<User> Users { get; set; }
         public override string ToString()
         {
             return $"Address id: {Id}, Street name: {StreetName}, zid code: {ZipCode}";
