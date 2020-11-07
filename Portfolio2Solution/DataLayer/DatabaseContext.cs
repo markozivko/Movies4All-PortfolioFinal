@@ -23,6 +23,7 @@ namespace DataLayer
         public DbSet<UserRates> UserRates { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<TitlePrincipal> TitlePrincipals { get; set; }
+        public DbSet<KnownFor> KnownFor { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -143,6 +144,20 @@ namespace DataLayer
                 .HasOne(tp => tp.Person)
                 .WithMany(p => p.TitlePrincipals)
                 .HasForeignKey(tp => tp.NameConst);
+
+            //knownfor
+            modelBuilder.Entity<KnownFor>().ToTable("knownfor");
+            modelBuilder.Entity<KnownFor>().HasKey(kf => new { kf.TitleConst, kf.NameConst});
+            modelBuilder.Entity<KnownFor>().Property(kf => kf.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<KnownFor>().Property(kf => kf.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<KnownFor>()
+                .HasOne(kn => kn.Title)
+                .WithMany(t => t.KnownFor)
+                .HasForeignKey(kn => kn.TitleConst);
+            modelBuilder.Entity<KnownFor>()
+                .HasOne(kn => kn.Person)
+                .WithMany(p => p.KnownFor)
+                .HasForeignKey(kn => kn.NameConst);
         }
 
     }

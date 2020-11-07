@@ -32,6 +32,11 @@ namespace DataLayer
             //{
             //    Console.WriteLine(p);
             //}
+
+            foreach (var p in context.Persons.Include(p =>p.KnownFor).Take(100))
+            {
+                Console.WriteLine(p);
+            }
         }
     }
 }
