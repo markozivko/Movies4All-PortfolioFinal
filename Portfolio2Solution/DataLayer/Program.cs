@@ -16,9 +16,17 @@ namespace DataLayer
 
             using var context = new DatabaseContext(config["connectionString"]);
 
-            foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
+            //foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
+            //{
+            //    Console.WriteLine(user);
+            //}
+            //foreach (var rates in context.Users.Include(u => u.UserRates))
+            //{
+            //    Console.WriteLine(rates);
+            //}
+            foreach (var p in context.Persons.Take(10))
             {
-                Console.WriteLine(user);
+                Console.WriteLine(p);
             }
         }
     }

@@ -21,6 +21,7 @@ namespace DataLayer
         public DbSet<TitleBasics> Titles { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<UserRates> UserRates { get; set; }
+        public DbSet<Person> Persons { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -105,7 +106,7 @@ namespace DataLayer
             modelBuilder.Entity<UserRates>().Property(ur => ur.UserId).HasColumnName("iduser");
             modelBuilder.Entity<UserRates>().Property(ur => ur.TitleConst).HasColumnName("titleconst");
             modelBuilder.Entity<UserRates>().Property(ur => ur.NumericR).HasColumnName("numericrating");
-            modelBuilder.Entity<UserRates>().Property(ur => ur.VerbalR).HasColumnName("varbalrating");
+            modelBuilder.Entity<UserRates>().Property(ur => ur.VerbalR).HasColumnName("verbalrating");
             modelBuilder.Entity<UserRates>().Property(ur => ur.Date).HasColumnName("r_date");
             modelBuilder.Entity<UserRates>()
                 .HasOne(ur => ur.User)
@@ -115,6 +116,15 @@ namespace DataLayer
                .HasOne(ur => ur.Title)
                .WithMany(tr => tr.UserRates)
                .HasForeignKey(ur => ur.TitleConst);
+
+            //persons
+            modelBuilder.Entity<Person>().ToTable("persons");
+            modelBuilder.Entity<Person>().HasKey(p => p.NameConst);
+            modelBuilder.Entity<Person>().Property(p => p.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<Person>().Property(p => p.Name).HasColumnName("primaryname");
+            modelBuilder.Entity<Person>().Property(p => p.BirthYear).HasColumnName("birthyear");
+            modelBuilder.Entity<Person>().Property(p => p.DeathYear).HasColumnName("deathyear");
         }
+
     }
 }

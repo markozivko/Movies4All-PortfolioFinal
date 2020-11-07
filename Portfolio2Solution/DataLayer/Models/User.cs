@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace DataLayer.Models
 {
@@ -21,7 +22,10 @@ namespace DataLayer.Models
         public override string ToString()
         {
             return $"Id = {UserId}, first name: {FirstName}, birthday: {BirthDay.Year}-{BirthDay.Month}-{BirthDay.Day},"+
-                 $" Address Id: {Address.Id}" + $" Address: {Address.City}";
+                 //$" Address Id: {Address.Id}" + $" Address: {Address.City}" + 
+                 $" NumRates: {UserRates.First().NumericR}" + 
+                 $" VerbalRates: {UserRates.First().VerbalR}" + 
+                 $" Date: {UserRates.First().Date}";
         }
     }
 }
