@@ -17,8 +17,9 @@ namespace DataLayer
 
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Address { get; set; }
-        //public DbSet<TitleBasics> TitleBasic { get; set; }
-
+        public DbSet<TitleGenre> TitleGenres { get; set; }
+        public DbSet<TitleBasics> Titles { get; set; }
+        public DbSet<Genre> Genres { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -45,14 +46,49 @@ namespace DataLayer
 
             //table address
             modelBuilder.Entity<Address>().ToTable("address");
+            modelBuilder.Entity<Address>().HasKey(a => a.Id);
             modelBuilder.Entity<Address>().Property(a => a.Id).HasColumnName("idaddress");
             modelBuilder.Entity<Address>().Property(a => a.StreetNumber).HasColumnName("streetnumber");
             modelBuilder.Entity<Address>().Property(a => a.StreetName).HasColumnName("streetname");
             modelBuilder.Entity<Address>().Property(a => a.ZipCode).HasColumnName("zipcode");
             modelBuilder.Entity<Address>().Property(a => a.City).HasColumnName("city");
             modelBuilder.Entity<Address>().Property(a => a.Country).HasColumnName("country");
-           modelBuilder.Entity<Address>().HasKey(a => a.Id);
             
+
+            //table titlebasics
+            modelBuilder.Entity<TitleBasics>().ToTable("titlebasics");
+            modelBuilder.Entity<TitleBasics>().HasKey(t => t.Const);
+            modelBuilder.Entity<TitleBasics>().Property(t => t.Const).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.Type).HasColumnName("titletype");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.PrimaryTitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.IsAdult).HasColumnName("isadult");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.StartYear).HasColumnName("startyear");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.EndYear).HasColumnName("endyear");
+            modelBuilder.Entity<TitleBasics>().Property(t => t.Runtime).HasColumnName("runtimeinmins");
+            
+
+            //Genres
+            modelBuilder.Entity<Genre>().ToTable("genre");
+            modelBuilder.Entity<Genre>().HasKey(g => g.Id);
+            modelBuilder.Entity<Genre>().Property(g => g.Id).HasColumnName("idgenre");
+            modelBuilder.Entity<Genre>().Property(g => g.Name).HasColumnName("name");
+            
+
+            //titleGenre
+            modelBuilder.Entity<TitleGenre>().ToTable("titlegenre");
+            modelBuilder.Entity<TitleGenre>().HasKey(tg => new { tg.TitleConst, tg.IdGenre });
+            modelBuilder.Entity<TitleGenre>().Property(tg => tg.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleGenre>().Property(tg => tg.IdGenre).HasColumnName("idgenre");
+            modelBuilder.Entity<TitleGenre>()
+                .HasOne(tg => tg.Title)
+                .WithMany(tg => tg.TitleGenres)
+                .HasForeignKey(tg => tg.TitleConst);
+            modelBuilder.Entity<TitleGenre>()
+               .HasOne(tg => tg.Genre)
+               .WithMany(tg => tg.TitleGenres)
+               .HasForeignKey(tg => tg.IdGenre);
+
+
         }
     }
 }

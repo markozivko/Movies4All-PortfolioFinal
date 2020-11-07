@@ -4,13 +4,15 @@ using System.Text;
 
 namespace DataLayer.Models
 {
-    class TitleGenre
+    public class TitleGenre
     {
         public string TitleConst { get; set; }
+        public TitleBasics Title { get; set; }
         public int IdGenre { get; set; }
+        public Genre Genre { get; set; }
         public override string ToString()
         {
-            return $"TitleConst: {TitleConst}, IdGenre: {IdGenre}";
+            return $"TitleConst: {TitleConst}, IdGenre: {IdGenre}, Genre: {Genre.Name}";
         }
     }
 }
