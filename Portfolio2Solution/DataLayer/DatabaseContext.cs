@@ -22,6 +22,7 @@ namespace DataLayer
         public DbSet<Genre> Genres { get; set; }
         public DbSet<UserRates> UserRates { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<TitlePrincipal> TitlePrincipals { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -124,6 +125,24 @@ namespace DataLayer
             modelBuilder.Entity<Person>().Property(p => p.Name).HasColumnName("primaryname");
             modelBuilder.Entity<Person>().Property(p => p.BirthYear).HasColumnName("birthyear");
             modelBuilder.Entity<Person>().Property(p => p.DeathYear).HasColumnName("deathyear");
+
+            //titleprincipals
+            modelBuilder.Entity<TitlePrincipal>().ToTable("titleprincipals");
+            modelBuilder.Entity<TitlePrincipal>().HasKey(tp => new { tp.TitleConst, tp.NameConst, tp.Ordering });
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Ordering).HasColumnName("ordering");
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Category).HasColumnName("category");
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Job).HasColumnName("job");
+            modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Characters).HasColumnName("characters");
+            modelBuilder.Entity<TitlePrincipal>()
+                .HasOne(tp => tp.Title)
+                .WithMany(t => t.TitlePrincipals)
+                .HasForeignKey(tp => tp.TitleConst);
+            modelBuilder.Entity<TitlePrincipal>()
+                .HasOne(tp => tp.Person)
+                .WithMany(p => p.TitlePrincipals)
+                .HasForeignKey(tp => tp.NameConst);
         }
 
     }

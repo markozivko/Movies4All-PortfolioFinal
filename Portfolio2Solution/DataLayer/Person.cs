@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataLayer.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataLayer
@@ -10,9 +12,11 @@ namespace DataLayer
         public string Name { get; set; }
         public string BirthYear { get; set; }
         public string DeathYear { get; set; }
+        public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
         public override string ToString()
         {
-            return $"Person Id: {NameConst}, Name: {Name}, BirthYear: {BirthYear}, DeathYear {DeathYear}";
+            return $"Person Id: {NameConst}, Name: {Name}, BirthYear: {BirthYear}, DeathYear {DeathYear}, title: {TitlePrincipals.First().TitleConst} as  {TitlePrincipals.First().Category}";
         }
     }
 }
+

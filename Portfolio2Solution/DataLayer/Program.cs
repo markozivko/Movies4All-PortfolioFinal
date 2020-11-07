@@ -24,10 +24,14 @@ namespace DataLayer
             //{
             //    Console.WriteLine(rates);
             //}
-            foreach (var p in context.Persons.Take(10))
-            {
-                Console.WriteLine(p);
-            }
+            //foreach (var p in context.Persons.Take(10))
+            //{
+            //    Console.WriteLine(p);
+            //}
+            //foreach (var p in context.Persons.Include(p =>p.TitlePrincipals).Take(10))
+            //{
+            //    Console.WriteLine(p);
+            //}
         }
     }
 }
