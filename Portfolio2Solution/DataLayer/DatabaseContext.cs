@@ -20,6 +20,7 @@ namespace DataLayer
         public DbSet<TitleGenre> TitleGenres { get; set; }
         public DbSet<TitleBasics> Titles { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<UserRates> UserRates { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -65,7 +66,10 @@ namespace DataLayer
             modelBuilder.Entity<TitleBasics>().Property(t => t.StartYear).HasColumnName("startyear");
             modelBuilder.Entity<TitleBasics>().Property(t => t.EndYear).HasColumnName("endyear");
             modelBuilder.Entity<TitleBasics>().Property(t => t.Runtime).HasColumnName("runtimeinmins");
-            
+            modelBuilder.Entity<TitleBasics>()
+                .HasOne(t => t.Rating)
+                .WithOne(tr => tr.Title)
+                .HasForeignKey<TitleRating>(t => t.Const);
 
             //Genres
             modelBuilder.Entity<Genre>().ToTable("genre");
@@ -81,14 +85,36 @@ namespace DataLayer
             modelBuilder.Entity<TitleGenre>().Property(tg => tg.IdGenre).HasColumnName("idgenre");
             modelBuilder.Entity<TitleGenre>()
                 .HasOne(tg => tg.Title)
-                .WithMany(tg => tg.TitleGenres)
+                .WithMany(t => t.TitleGenres)
                 .HasForeignKey(tg => tg.TitleConst);
             modelBuilder.Entity<TitleGenre>()
                .HasOne(tg => tg.Genre)
-               .WithMany(tg => tg.TitleGenres)
+               .WithMany(g => g.TitleGenres)
                .HasForeignKey(tg => tg.IdGenre);
 
+            //titleRating
+            modelBuilder.Entity<TitleRating>().ToTable("titleratings");
+            modelBuilder.Entity<TitleRating>().HasKey(tr => tr.Const);
+            modelBuilder.Entity<TitleRating>().Property(tr => tr.Const).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleRating>().Property(tr => tr.Average).HasColumnName("avgrating");
+            modelBuilder.Entity<TitleRating>().Property(tr => tr.NumVotes).HasColumnName("numvotes");
 
+            //userRates  
+            modelBuilder.Entity<UserRates>().ToTable("rates");
+            modelBuilder.Entity<UserRates>().HasKey(ur => new { ur.UserId, ur.TitleConst });
+            modelBuilder.Entity<UserRates>().Property(ur => ur.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<UserRates>().Property(ur => ur.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<UserRates>().Property(ur => ur.NumericR).HasColumnName("numericrating");
+            modelBuilder.Entity<UserRates>().Property(ur => ur.VerbalR).HasColumnName("varbalrating");
+            modelBuilder.Entity<UserRates>().Property(ur => ur.Date).HasColumnName("r_date");
+            modelBuilder.Entity<UserRates>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRates)
+                .HasForeignKey(ur => ur.UserId);
+            modelBuilder.Entity<UserRates>()
+               .HasOne(ur => ur.Title)
+               .WithMany(tr => tr.UserRates)
+               .HasForeignKey(ur => ur.TitleConst);
         }
     }
 }

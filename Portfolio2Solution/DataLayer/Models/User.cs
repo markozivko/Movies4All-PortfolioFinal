@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Models
@@ -16,7 +17,7 @@ namespace DataLayer.Models
         public string UserName { get; set; }
         public int AddressId { get; set; }
         public Address Address { get; set; }
-
+        public ICollection<UserRates> UserRates { get; set; }
         public override string ToString()
         {
             return $"Id = {UserId}, first name: {FirstName}, birthday: {BirthDay.Year}-{BirthDay.Month}-{BirthDay.Day},"+

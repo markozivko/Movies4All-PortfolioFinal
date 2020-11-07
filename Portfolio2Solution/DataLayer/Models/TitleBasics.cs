@@ -13,11 +13,12 @@ namespace DataLayer.Models
         public bool IsAdult { get; set; }
         public string StartYear { get; set; }
         public string EndYear { get; set; }
-        public int Runtime { get; set; }
+        public int? Runtime { get; set; }
         public ICollection<TitleGenre> TitleGenres { get; set; }
+        public TitleRating Rating { get; set; }
         public override string ToString()
         {
-            return $"Title id: {Const}, Type: {Type}, primary title: {PrimaryTitle}, start year {StartYear}, end year {EndYear}, runtime {Runtime}, Genre: {TitleGenres.First().Genre.Name}";
+            return $"Title id: {Const}, Type: {Type}, primary title: {PrimaryTitle}, start year {StartYear}, end year {EndYear}, runtime {Runtime.Value}, rating: {Rating.Average}";
         }
     }
 }
