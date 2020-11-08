@@ -33,16 +33,14 @@ namespace DataLayer
          * Framework functionalities
          * Function: FindProductionTeam
          */
-        public IList<Person> FindProductionTeam(int userid, string title, string plot, string characters, string names)
+        public IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names)
         {
             var ctx = new DatabaseContext(_connectionString);
 
-            return ctx.Persons
+            return ctx.ProductionTeam
   
                 .FromSqlRaw("SELECT * FROM find_production_team({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
-                .Include(p => p.TitlePrincipals)
                 .ToList(); 
-
         }
 
         public User GetUser(int id)
@@ -97,5 +95,29 @@ namespace DataLayer
                 .ToList();
         }
 
+
+        /*
+         * Framework functionalities
+         * Function: Find coplayers
+         */
+        public IList<CoPlayers> FindCoPlayers(int userid, string name)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.CoPlayers
+                .FromSqlRaw("select * from find_co_players({0}, {1})", userid, name)
+                .ToList();
+        }
+
+        /*
+         * Framework functionalities
+         * Function: Find Best match
+         */
+        public IList<TitleBestMatch> FindTitleBestMatch(string [] args)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleBestMatch
+                .FromSqlRaw("select * from find_title_best_match({0})", args)
+                .ToList();
+        }
     }
 }

@@ -30,6 +30,10 @@ namespace DataLayer
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Actors> Actors { get; set; }
+        public DbSet<CoPlayers> CoPlayers { get; set; }
+        public DbSet<ProductionTeam> ProductionTeam { get; set; }
+        public DbSet<TitleBestMatch> TitleBestMatch { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -213,6 +217,25 @@ namespace DataLayer
             modelBuilder.Entity<Actors>().Property(a => a.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<Actors>().Property(a => a.Name).HasColumnName("primaryname");
             modelBuilder.Entity<Actors>().Property(a => a.Gender).HasColumnName("gender");
+
+            //CoPlayers
+            modelBuilder.Entity<CoPlayers>().HasNoKey();
+            modelBuilder.Entity<CoPlayers>().Property(cp => cp.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<CoPlayers>().Property(cp => cp.Name).HasColumnName("pname");
+            modelBuilder.Entity<CoPlayers>().Property(cp => cp.Frequency).HasColumnName("frequency");
+
+            //Production team
+            modelBuilder.Entity<ProductionTeam>().HasNoKey();
+            modelBuilder.Entity<ProductionTeam>().Property(pt => pt.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<ProductionTeam>().Property(pt => pt.Name).HasColumnName("primaryname");
+            modelBuilder.Entity<ProductionTeam>().Property(pt => pt.Role).HasColumnName("role");
+
+            //Title best match
+            modelBuilder.Entity<TitleBestMatch>().HasNoKey();
+            modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.Title).HasColumnName("primarytitle");
+            modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.Rank).HasColumnName("rank");
+
         }
     }
 }

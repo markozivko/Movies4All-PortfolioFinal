@@ -30,13 +30,25 @@ namespace DataLayer
             //              $"Is staff: {user.IsStaff}");
 
 
-            var actor = dataService.FindActors(1, "tt0418455", "see", "", "");
-            foreach(var a in actor)
-            {
-                Console.WriteLine($"Id: {a.NameConst} \n" +
-                          $"Name: {a.Name}\n" +
-                          $"Gender: {a.Gender}");
-            }
+            //var actor = dataService.FindActors(1, "tt0418455", "see", "", "");
+            //foreach(var a in actor)
+            //{
+            //    Console.WriteLine($"Id: {a.NameConst} \n" +
+            //              $"Name: {a.Name}\n" +
+            //              $"Gender: {a.Gender}");
+            //}
+
+            /*
+             * Framework functionalities
+             * Function: findCoPlayers
+             */
+
+            //var coPlayer = dataService.FindCoPlayers(1, "Mads miKKelsen");
+
+            //foreach (var x in coPlayer)
+            //{
+            //    Console.WriteLine($"Id: {x.NameConst}, Name: {x.Name}, Freq: {x.Frequency}");
+            //}
 
             ///*
             // * Return users by user ID
@@ -86,6 +98,20 @@ namespace DataLayer
              * Function: FindProductionTeam
              */
             //var team = dataService.FindProductionTeam(1, "tt0418455", "see", "", "");
+
+            //foreach (var p in team)
+            //{
+            //    Console.WriteLine($"Id: {p.NameConst}, Name: {p.Name}, Role: {p.Role}");
+            //}
+
+
+            string[] arguments = { "apple", "mikkelsen", "mads" };
+            var bestMatch = dataService.FindTitleBestMatch(arguments);
+
+            foreach (var bm in bestMatch)
+            {
+                Console.WriteLine($"Id: {bm.TitleConst}, Title: {bm.Title}, Rank: {bm.Rank}");
+            }
 
             //foreach (var t in team)
             //{
