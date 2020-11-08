@@ -37,9 +37,13 @@ namespace DataLayer
             //{
             //    Console.WriteLine(p);
             //}
-            foreach (var ta in context.TitleAkas.Include(ta => ta.Title).Take(10))
+            //foreach (var ta in context.TitleAkas.Include(ta => ta.Title).Take(10))
+            //{
+            //    Console.WriteLine(ta);
+            //}
+            foreach (var s in context.SearchHistory.Include(sh => sh.User).Take(10))
             {
-                Console.WriteLine(ta);
+                Console.WriteLine(s);
             }
         }
     }

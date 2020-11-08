@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DataLayer
 {
-    public class DatabaseContext: DbContext
+    public class DatabaseContext : DbContext
     {
         private readonly string _connectionString;
         public DatabaseContext(string connectionString)
@@ -25,13 +25,14 @@ namespace DataLayer
         public DbSet<TitlePrincipal> TitlePrincipals { get; set; }
         public DbSet<KnownFor> KnownFor { get; set; }
         public DbSet<TitleAka> TitleAkas { get; set; }
+        public DbSet<SearchHistory> SearchHistory { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
             optionsBuilder.UseNpgsql(_connectionString);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder )
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             //table users
@@ -58,7 +59,7 @@ namespace DataLayer
             modelBuilder.Entity<Address>().Property(a => a.ZipCode).HasColumnName("zipcode");
             modelBuilder.Entity<Address>().Property(a => a.City).HasColumnName("city");
             modelBuilder.Entity<Address>().Property(a => a.Country).HasColumnName("country");
-            
+
 
             //table titlebasics
             modelBuilder.Entity<TitleBasics>().ToTable("titlebasics");
@@ -80,7 +81,7 @@ namespace DataLayer
             modelBuilder.Entity<Genre>().HasKey(g => g.Id);
             modelBuilder.Entity<Genre>().Property(g => g.Id).HasColumnName("idgenre");
             modelBuilder.Entity<Genre>().Property(g => g.Name).HasColumnName("name");
-            
+
 
             //titleGenre
             modelBuilder.Entity<TitleGenre>().ToTable("titlegenre");
@@ -148,7 +149,7 @@ namespace DataLayer
 
             //knownfor
             modelBuilder.Entity<KnownFor>().ToTable("knownfor");
-            modelBuilder.Entity<KnownFor>().HasKey(kf => new { kf.TitleConst, kf.NameConst});
+            modelBuilder.Entity<KnownFor>().HasKey(kf => new { kf.TitleConst, kf.NameConst });
             modelBuilder.Entity<KnownFor>().Property(kf => kf.TitleConst).HasColumnName("titleconst");
             modelBuilder.Entity<KnownFor>().Property(kf => kf.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<KnownFor>()
@@ -170,7 +171,15 @@ namespace DataLayer
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Region).HasColumnName("region");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Types).HasColumnName("types");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Attributes).HasColumnName("attributes");
-        }
 
+            //SearchHistory
+            modelBuilder.Entity<SearchHistory>().ToTable("searchhistory");
+            modelBuilder.Entity<SearchHistory>().HasKey(sh => sh.SearchId);
+            modelBuilder.Entity<SearchHistory>().Property(sh => sh.SearchId).HasColumnName("idsearch");
+            modelBuilder.Entity<SearchHistory>().Property(sh => sh.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<SearchHistory>().Property(sh => sh.Word).HasColumnName("word");
+            modelBuilder.Entity<SearchHistory>().Property(sh => sh.Date).HasColumnName("h_date");
+
+        }
     }
 }

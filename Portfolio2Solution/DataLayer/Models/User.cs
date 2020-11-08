@@ -19,6 +19,7 @@ namespace DataLayer.Models
         public int AddressId { get; set; }
         public Address Address { get; set; }
         public ICollection<UserRates> UserRates { get; set; }
+        public ICollection<SearchHistory>Searches { get; set; }
         public override string ToString()
         {
             return $"Id = {UserId}, first name: {FirstName}, birthday: {BirthDay.Year}-{BirthDay.Month}-{BirthDay.Day},"+
