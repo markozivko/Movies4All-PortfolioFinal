@@ -41,9 +41,13 @@ namespace DataLayer
             //{
             //    Console.WriteLine(ta);
             //}
-            foreach (var s in context.SearchHistory.Include(sh => sh.User).Take(10))
+            //foreach (var s in context.SearchHistory.Include(sh => sh.User).Take(10))
+            //{
+            //    Console.WriteLine(s);
+            //}
+            foreach (var e in context.Episodes.Include(e => e.Title).Take(10))
             {
-                Console.WriteLine(s);
+                Console.WriteLine(e);
             }
         }
     }
