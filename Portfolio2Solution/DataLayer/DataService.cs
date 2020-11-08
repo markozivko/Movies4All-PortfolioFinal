@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataLayer.FromSQL;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,13 +19,14 @@ namespace DataLayer
          * Framework functionalities
          * Function: checkUserRole
          */
-        //public void CheckUserRole(int userid)
-        //{
-        //    var ctx = new DatabaseContext(_connectionString);
+        public UserRole CheckUserRole(int userid)
+        {
+            var ctx = new DatabaseContext(_connectionString);
 
-        //    var result = ctx.Users.FromSqlRaw($"select * from check_user_role({0})", userid);
-        //    Console.WriteLine($"user id: {result.FirstOrDefault().UserId}, is staff: {result.FirstOrDefault().IsStaff}");
-        //}
+            return ctx.UserRole.FromSqlRaw("select iduser, isstaff from check_user_role({0})", userid).FirstOrDefault();
+           
+        }
+       
 
         /*
          * Framework functionalities

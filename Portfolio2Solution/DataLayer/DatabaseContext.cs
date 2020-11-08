@@ -1,4 +1,5 @@
 ﻿using System;
+using DataLayer.FromSQL;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ namespace DataLayer
         public DbSet<TitleAka> TitleAkas { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
         public DbSet<Episode> Episodes { get; set; }
+        public DbSet<UserRole> UserRole { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -196,6 +198,11 @@ namespace DataLayer
                 .HasOne(e => e.Title)
                 .WithMany(t => t.Episodes)
                 .HasForeignKey(e => e.SerieId);
+
+            //User Role
+            modelBuilder.Entity<UserRole>().HasNoKey();
+            modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<UserRole>().Property(ur => ur.IsStaff).HasColumnName("isstaff");
         }
     }
 }
