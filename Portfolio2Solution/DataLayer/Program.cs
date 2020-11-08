@@ -25,7 +25,7 @@ namespace DataLayer
              * Framework functionalities
              * Function: checkUserRole
              */
-            dataService.CheckUserRole(config["connectionString"], 2);
+            //dataService.CheckUserRole(config["connectionString"], 2);
 
             /*
              * Return users by user ID
@@ -45,6 +45,26 @@ namespace DataLayer
             {
                 Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
                              $"Address: {x.Address.City}\n===================");
+            }
+
+            /*
+             * Return search history for user
+             */
+            var searchHistoryForUser = dataService.GetSearchHistoryForUser(1);
+
+            foreach (var x in searchHistoryForUser)
+            {
+                Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
+            }
+
+            /*
+            * Return search history for all users
+            */
+            var searchHistory = dataService.GetAllSearchHistory();
+
+            foreach (var x in searchHistory)
+            {
+                Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
             }
 
 

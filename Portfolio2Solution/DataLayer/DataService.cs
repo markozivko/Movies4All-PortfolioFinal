@@ -31,6 +31,8 @@ namespace DataLayer
                 .Where(u => u.UserId == id)
                 .Include(x => x.Address)
                 .FirstOrDefault();
+
+           
         }
 
         public IList<User> GetUsers()
@@ -39,6 +41,25 @@ namespace DataLayer
 
             return ctx.Users
                 .Include(x => x.Address)
+                .ToList();
+        }
+
+        public IList<SearchHistory> GetSearchHistoryForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.SearchHistory
+                .Where(u => u.UserId == id)
+                .Include(x => x.User)
+                .ToList();
+        }
+
+        public IList<SearchHistory> GetAllSearchHistory()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.SearchHistory
+                .Include(x => x.User)
                 .ToList();
         }
     }
