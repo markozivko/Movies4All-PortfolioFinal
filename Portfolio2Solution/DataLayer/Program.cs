@@ -33,9 +33,13 @@ namespace DataLayer
             //    Console.WriteLine(p);
             //}
 
-            foreach (var p in context.Persons.Include(p =>p.KnownFor).Take(100))
+            //foreach (var p in context.Persons.Include(p =>p.KnownFor).Take(100))
+            //{
+            //    Console.WriteLine(p);
+            //}
+            foreach (var ta in context.TitleAkas.Include(ta => ta.Title).Take(10))
             {
-                Console.WriteLine(p);
+                Console.WriteLine(ta);
             }
         }
     }

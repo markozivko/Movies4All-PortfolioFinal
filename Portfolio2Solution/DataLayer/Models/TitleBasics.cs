@@ -18,6 +18,7 @@ namespace DataLayer.Models
         public TitleRating Rating { get; set; }
         public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
         public ICollection<KnownFor> KnownFor { get; set; }
+        public ICollection<TitleAka> TitleAkas { get; set; }
 
         public override string ToString()
         {

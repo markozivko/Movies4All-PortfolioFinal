@@ -24,6 +24,7 @@ namespace DataLayer
         public DbSet<Person> Persons { get; set; }
         public DbSet<TitlePrincipal> TitlePrincipals { get; set; }
         public DbSet<KnownFor> KnownFor { get; set; }
+        public DbSet<TitleAka> TitleAkas { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -158,6 +159,17 @@ namespace DataLayer
                 .HasOne(kn => kn.Person)
                 .WithMany(p => p.KnownFor)
                 .HasForeignKey(kn => kn.NameConst);
+
+            //TitleAkas
+            modelBuilder.Entity<TitleAka>().ToTable("titleakas");
+            modelBuilder.Entity<TitleAka>().HasKey(ta => new { ta.Titleconst, ta.Ordering });
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Titleconst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Ordering).HasColumnName("ordering");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Alias).HasColumnName("title");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.IsOriginal).HasColumnName("isoriginal");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Region).HasColumnName("region");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Types).HasColumnName("types");
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.Attributes).HasColumnName("attributes");
         }
 
     }
