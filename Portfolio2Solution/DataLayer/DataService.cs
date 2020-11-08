@@ -4,6 +4,7 @@ using System.Linq;
 using DataLayer.FromSQL;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace DataLayer
 {
@@ -83,5 +84,18 @@ namespace DataLayer
                 .Include(x => x.User)
                 .ToList();
         }
+
+        /*
+         * Framework functionalities
+         * Function: FindActors
+         */
+        public IList<Actors> FindActors(int userid, string title, string plot, string characters, string names) 
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Actors
+                .FromSqlRaw("select * from find_actors({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
+                .ToList();
+        }
+
     }
 }

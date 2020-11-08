@@ -29,6 +29,7 @@ namespace DataLayer
         public DbSet<SearchHistory> SearchHistory { get; set; }
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<Actors> Actors { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(loggerFactory);
@@ -199,10 +200,19 @@ namespace DataLayer
                 .WithMany(t => t.Episodes)
                 .HasForeignKey(e => e.SerieId);
 
+            /*
+             * Database functions results
+             */
             //User Role
             modelBuilder.Entity<UserRole>().HasNoKey();
             modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).HasColumnName("iduser");
             modelBuilder.Entity<UserRole>().Property(ur => ur.IsStaff).HasColumnName("isstaff");
+
+            //Actor
+            modelBuilder.Entity<Actors>().HasNoKey();
+            modelBuilder.Entity<Actors>().Property(a => a.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<Actors>().Property(a => a.Name).HasColumnName("primaryname");
+            modelBuilder.Entity<Actors>().Property(a => a.Gender).HasColumnName("gender");
         }
     }
 }

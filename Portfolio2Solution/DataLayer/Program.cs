@@ -25,9 +25,18 @@ namespace DataLayer
              * Framework functionalities
              * Function: checkUserRole
              */
-            var user = dataService.CheckUserRole(2);
-            Console.WriteLine($"Name: {user.UserId} \n" +
-                          $"Is staff: {user.IsStaff}");
+            //var user = dataService.CheckUserRole(2);
+            //Console.WriteLine($"Name: {user.UserId} \n" +
+            //              $"Is staff: {user.IsStaff}");
+
+
+            var actor = dataService.FindActors(1, "tt0418455", "see", "", "");
+            foreach(var a in actor)
+            {
+                Console.WriteLine($"Id: {a.NameConst} \n" +
+                          $"Name: {a.Name}\n" +
+                          $"Gender: {a.Gender}");
+            }
 
             ///*
             // * Return users by user ID
