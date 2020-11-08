@@ -27,6 +27,27 @@ namespace DataLayer
              */
             dataService.CheckUserRole(config["connectionString"], 2);
 
+            /*
+             * Return users by user ID
+             */
+            var user = dataService.GetUser(1);
+
+            Console.WriteLine($"Name: {user.FirstName} {user.LastName}\n" +
+                              $"Address: {user.Address.City}");
+
+            /*
+             * Return list of users
+             */
+
+            var userList = dataService.GetUsers();
+
+            foreach (var x in userList)
+            {
+                Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
+                             $"Address: {x.Address.City}\n===================");
+            }
+
+
             //foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
             //{
             //    Console.WriteLine(user);
