@@ -25,7 +25,40 @@ namespace DataLayer
              * Framework functionalities
              * Function: checkUserRole
              */
-            dataService.CheckUserRole(config["connectionString"], 2);
+            // dataService.CheckUserRole(config["connectionString"], 2);
+            /*
+             * Framework functionalities
+             * Function: FindProductionTeam
+             */
+            var team = dataService.FindProductionTeam(1, "tt0418455", "see", "", "");
+
+            foreach (var t in team)
+            {
+                Console.WriteLine($"Id: {t.NameConst}, {t.Name}, {t.BirthYear}, {t.DeathYear}, {t.TitlePrincipals.FirstOrDefault().Category}");
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             //foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
             //{
