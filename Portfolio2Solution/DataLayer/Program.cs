@@ -16,6 +16,17 @@ namespace DataLayer
 
             using var context = new DatabaseContext(config["connectionString"]);
 
+
+
+            var dataService = new DataService(config["connectionString"]);
+
+
+            /*
+             * Framework functionalities
+             * Function: checkUserRole
+             */
+            dataService.CheckUserRole(config["connectionString"], 2);
+
             //foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
             //{
             //    Console.WriteLine(user);
@@ -45,10 +56,10 @@ namespace DataLayer
             //{
             //    Console.WriteLine(s);
             //}
-            foreach (var e in context.Episodes.Include(e => e.Title).Take(10))
-            {
-                Console.WriteLine(e);
-            }
+            //foreach (var e in context.Episodes.Include(e => e.Title).Take(10))
+            //{
+            //    Console.WriteLine(e);
+            //}
         }
     }
 }
