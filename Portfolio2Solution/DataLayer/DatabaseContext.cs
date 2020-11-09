@@ -27,7 +27,8 @@ namespace DataLayer
         public DbSet<KnownFor> KnownFor { get; set; }
         public DbSet<TitleAka> TitleAkas { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
-        public DbSet<OmdbData> omdbData { get; set; }
+        public DbSet<OmdbData> OmdbData { get; set; }
+        public DbSet<WordIndex> WordIndex { get; set; }
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Actors> Actors { get; set; }
@@ -208,6 +209,7 @@ namespace DataLayer
                 .HasOne(e => e.Title)
                 .WithMany(t => t.Episodes)
                 .HasForeignKey(e => e.SerieId);
+
             //OmdbData
             modelBuilder.Entity<OmdbData>().ToTable("omdbdata");
             modelBuilder.Entity<OmdbData>().HasKey(od => od.TitleConst);
@@ -215,6 +217,15 @@ namespace DataLayer
             modelBuilder.Entity<OmdbData>().Property(od => od.Poster).HasColumnName("poster");
             modelBuilder.Entity<OmdbData>().Property(od => od.Awards).HasColumnName("awards");
             modelBuilder.Entity<OmdbData>().Property(od => od.Plot).HasColumnName("plot");
+
+            //WordIndex
+            modelBuilder.Entity<WordIndex>().ToTable("wordindex");
+            modelBuilder.Entity<WordIndex>().HasKey(wi => new { wi.TitleConst, wi.Word, wi.Field });
+            modelBuilder.Entity<WordIndex>().Property(wi => wi.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<WordIndex>().Property(wi => wi.Word).HasColumnName("word");
+            modelBuilder.Entity<WordIndex>().Property(wi => wi.Field).HasColumnName("field");
+            modelBuilder.Entity<WordIndex>().Property(wi => wi.Lexeme).HasColumnName("lexeme");
+
 
             /*
              * Database functions results

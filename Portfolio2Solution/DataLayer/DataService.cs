@@ -5,6 +5,7 @@ using DataLayer.FromSQL;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Npgsql;
 
 namespace DataLayer
 {
@@ -112,11 +113,22 @@ namespace DataLayer
          * Framework functionalities
          * Function: Find Best match
          */
-        public IList<TitleBestMatch> FindTitleBestMatch(string [] args)
+        public IList<TitleBestMatch> FindTitleBestMatch(params string [] args)
         {
             using var ctx = new DatabaseContext(_connectionString);
+            // Pass a dynamic list of values as Npgsqparameters with FromSqlRaw 
+            var parameters = new string[args.Length];
+            var npgSqlParameters = new List<NpgsqlParameter>();
+            for (var i = 0; i < args.Length; i++)
+            {
+                parameters[i] = string.Format("@p{0}", i);// create parameter indexes syntax @p{0}, @p{1} ....@p{n}
+                npgSqlParameters.Add(new NpgsqlParameter(parameters[i], args[i])); //add the indexes and related items into the npgSql Parameters list 
+            }
+
+            var rawCommand = string.Format("select * from find_title_best_match({0})", string.Join(", ", parameters)); // format the query head
+
             return ctx.TitleBestMatch
-                .FromSqlRaw("select * from find_title_best_match({0})", args)
+                .FromSqlRaw(rawCommand, npgSqlParameters.ToArray()) //create the query with command and parameters
                 .ToList();
         }
     }
