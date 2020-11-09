@@ -16,34 +16,18 @@ namespace DataLayer
         {
             _connectionString = connectionString;
         }
-        /* ************************************************************
-         * Framework functionalities
-         * Function: checkUserRole
-         * ************************************************************/
-        public UserRole CheckUserRole(int userid)
-        {
-            var ctx = new DatabaseContext(_connectionString);
 
-            return ctx.UserRole.FromSqlRaw("select iduser, isstaff from check_user_role({0})", userid).FirstOrDefault();
 
-        }
-        /* *************************************************************
-         * Framework functionalities
-         * Function: FindProductionTeam
-         * *************************************************************/
-        public IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names)
-        {
-            var ctx = new DatabaseContext(_connectionString);
 
-            return ctx.ProductionTeam
+        /* ****************************************************************************************************************
+         *                                         FUNCTIONS TO GET 
+         * ****************************************************************************************************************/
 
-                .FromSqlRaw("SELECT * FROM find_production_team({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
-                .ToList();
-        }
-        /* *************************************************************
-         * Framework functionalities
-         * Function: Get user by Id
-         * *************************************************************/
+
+        /* **********************************
+        * Framework functionalities
+        * Function: Get user by Id
+        * ************************************/
         public User GetUser(int id)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -55,10 +39,10 @@ namespace DataLayer
 
 
         }
-        /* *************************************************************
+        /* ***********************************
          * Framework functionalities
          * Function: Get users
-         * *************************************************************/
+         * ***********************************/
         public IList<User> GetUsers()
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -67,10 +51,10 @@ namespace DataLayer
                 .Include(x => x.Address)
                 .ToList();
         }
-        /* *************************************************************
+        /* *************************************
          * Framework functionalities
          * Function: GetSearchHistoryForUser
-         * *************************************************************/
+         * *************************************/
         public IList<SearchHistory> GetSearchHistoryForUser(int id)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -80,10 +64,10 @@ namespace DataLayer
                 .Include(x => x.User)
                 .ToList();
         }
-        /* *************************************************************
+        /* **************************************
          * Framework functionalities
          * Function: GetAllSearchHistory
-         * *************************************************************/
+         * **************************************/
         public IList<SearchHistory> GetAllSearchHistory()
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -92,10 +76,43 @@ namespace DataLayer
                 .Include(x => x.User)
                 .ToList();
         }
-        /* *************************************************************
+
+        /* **************************************
+         * Framework functionalities
+         * Function: checkUserRole
+         * **************************************/
+        public UserRole CheckUserRole(int userid)
+        {
+            var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.UserRole.FromSqlRaw("select iduser, isstaff from check_user_role({0})", userid).FirstOrDefault();
+
+        }
+
+
+        /* ****************************************************************************************************************
+         *                                         FUNCTIONS TO FIND 
+         * ****************************************************************************************************************/
+
+
+        /* ****************************************
+         * Framework functionalities
+         * Function: FindProductionTeam
+         * ****************************************/
+        public IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names)
+        {
+            var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.ProductionTeam
+
+                .FromSqlRaw("SELECT * FROM find_production_team({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
+                .ToList();
+        }
+       
+        /* ****************************************
          * Framework functionalities
          * Function: FindActors
-         * *************************************************************/
+         * ****************************************/
         public IList<Actors> FindActors(int userid, string title, string plot, string characters, string names)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -103,10 +120,10 @@ namespace DataLayer
                 .FromSqlRaw("select * from find_actors({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
                 .ToList();
         }
-        /* ************************************************************
+        /* *****************************************
          * Framework functionalities
          * Function: Find coplayers
-         * ************************************************************/
+         * *****************************************/
         public IList<CoPlayers> FindCoPlayers(int userid, string name)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -114,10 +131,10 @@ namespace DataLayer
                 .FromSqlRaw("select * from find_co_players({0}, {1})", userid, name)
                 .ToList();
         }
-        /* **************************************************************
+        /* *******************************************
          * Framework functionalities
          * Function: Find Best match
-         * **************************************************************/
+         * *******************************************/
         public IList<TitleBestMatch> FindTitleBestMatch(params string[] args)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -136,10 +153,10 @@ namespace DataLayer
                 .FromSqlRaw(rawCommand, npgSqlParameters.ToArray()) //create the query with command and parameters
                 .ToList();
         }
-        /* ************************************************************
+        /* **********************************************
          * Framework functionalities
          * Function: Find Exact match
-         * ************************************************************/
+         * **********************************************/
         public IList<TitleExactMatch> FindTitleExactMatch(params string[] args)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -158,10 +175,10 @@ namespace DataLayer
                 .FromSqlRaw(rawCommand, npgSqlParameters.ToArray()) //create the query with command and parameters
                 .ToList();
         }
-        /* ************************************************************
+        /* **********************************************
          * Framework functionalities
          * Function: String search
-         * ************************************************************/
+         * **********************************************/
         public IList<SimpleSearch> StringSearch(int userid, string search)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -169,10 +186,10 @@ namespace DataLayer
                 .FromSqlRaw("select * from string_search({0}, {1})", userid, search)
                 .ToList();
         }
-        /* *************************************************************
+        /* **********************************************
          * Framework functionalities
          * Function: Structured search
-         * *************************************************************/
+         * **********************************************/
         public IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -180,10 +197,10 @@ namespace DataLayer
                 .FromSqlRaw("select * from structured_string_search({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
                 .ToList();
         }
-        /* *************************************************************
+        /* ***********************************************
          * Framework functionalities
          * Function: Title recommendation
-         * *************************************************************/
+         * ***********************************************/
         public IList<TitleRecommendation> RecommendTitles(string title)
         {
             using var ctx = new DatabaseContext(_connectionString);
