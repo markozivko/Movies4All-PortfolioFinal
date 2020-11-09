@@ -137,15 +137,26 @@ namespace DataLayer
             //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
             //}
 
+            ///*
+            //* Framework functionalities
+            //* Function: Simple Search
+            //*/
+            //var search = dataService.StructuredStringSearch(2,"flowers", "", "", "");
+
+            //foreach (var ss in search)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            //}
+
             /*
             * Framework functionalities
-            * Function: Simple Search
+            * Function: Title recommendations
             */
-            var search = dataService.StructuredStringSearch(2,"flowers", "", "", "");
+            var search = dataService.RecommendTitles("tt4669954");
 
             foreach (var ss in search)
             {
-                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}, Celebrity: {ss.Celebrity}, Enrolled As: {ss.EnrolledAs}");
             }
         }
     }

@@ -180,5 +180,16 @@ namespace DataLayer
                 .FromSqlRaw("select * from structured_string_search({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
                 .ToList();
         }
+        /* *************************************************************
+         * Framework functionalities
+         * Function: Title recommendation
+         * *************************************************************/
+        public IList<TitleRecommendation> RecommendTitles(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleRecommendations
+                .FromSqlRaw("select * from title_recommendations({0})", title)
+                .ToList();
+        }
     }
 }
