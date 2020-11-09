@@ -108,55 +108,46 @@ namespace DataLayer
             // * Framework functionalities
             // * Function: FindTitleBestMatch
             // */
-            var bestMatch = dataService.FindTitleBestMatch("apple", "mikkelsen", "mads");
+            //var bestMatch = dataService.FindTitleBestMatch("apple", "mikkelsen", "mads");
 
-            foreach (var bm in bestMatch)
+            //foreach (var bm in bestMatch)
+            //{
+            //    Console.WriteLine($"Id: {bm.TitleConst}, Title: {bm.Title}, Rank: {bm.Rank}");
+            //}
+
+            ///*
+            // * Framework functionalities
+            // * Function: FindTitleBestMatch
+            // */
+            //var exactMatch = dataService.FindTitleExactMatch("apple", "mikkelsen", "mads");
+
+            //foreach (var em in exactMatch)
+            //{
+            //    Console.WriteLine($"Id: {em.TitleConst}, Title: {em.PrimaryTitle}");
+            //}
+
+            /*
+             * Framework functionalities
+             * Function: Simple Search
+             */
+            //var search = dataService.StringSearch(1, "flower");
+
+            //foreach (var ss in search)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            //}
+
+            /*
+            * Framework functionalities
+            * Function: Simple Search
+            */
+            var search = dataService.StructuredStringSearch(2,"flowers", "", "", "");
+
+            foreach (var ss in search)
             {
-                Console.WriteLine($"Id: {bm.TitleConst}, Title: {bm.Title}, Rank: {bm.Rank}");
+                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
             }
-
-            //foreach (var t in team)
-            //{
-            //    Console.WriteLine($"Id: {t.NameConst}, {t.Name}, {t.BirthYear}, {t.DeathYear}, {t.TitlePrincipals.FirstOrDefault().Category}");
-            //}
-
-            //foreach (var user in context.Titles.Include(t => t.Rating).Take(10))
-            //{
-            //    Console.WriteLine(user);
-            //}
-            //foreach (var rates in context.Users.Include(u => u.UserRates))
-            //{
-            //    Console.WriteLine(rates);
-            //}
-            //foreach (var p in context.Persons.Take(10))
-            //{
-            //    Console.WriteLine(p);
-            //}
-            //foreach (var p in context.Persons.Include(p =>p.TitlePrincipals).Take(10))
-            //{
-            //    Console.WriteLine(p);
-            //}
-
-            //foreach (var p in context.Persons.Include(p =>p.KnownFor).Take(100))
-            //{
-            //    Console.WriteLine(p);
-            //}
-            //foreach (var ta in context.TitleAkas.Include(ta => ta.Title).Take(10))
-            //{
-            //    Console.WriteLine(ta);
-            //}
-            //foreach (var s in context.SearchHistory.Include(sh => sh.User).Take(10))
-            //{
-            //    Console.WriteLine(s);
-            //}
-            //foreach (var e in context.Episodes.Include(e => e.Title).Take(10))
-            //{
-            //    Console.WriteLine(e);
-            //}
-            //foreach (var e in context.Titles.Include(e => e.OmdbData).Take(10))
-            //{
-            //    Console.WriteLine(e);
-            //}
         }
     }
+
 }

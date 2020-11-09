@@ -15,7 +15,9 @@ namespace DataLayer
         }
 
         public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
-
+        /* **************************
+         * Models
+         * **************************/
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<TitleGenre> TitleGenres { get; set; }
@@ -30,11 +32,17 @@ namespace DataLayer
         public DbSet<OmdbData> OmdbData { get; set; }
         public DbSet<WordIndex> WordIndex { get; set; }
         public DbSet<Episode> Episodes { get; set; }
+        /* **************************
+         * From Sql
+         * **************************/
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Actors> Actors { get; set; }
         public DbSet<CoPlayers> CoPlayers { get; set; }
         public DbSet<ProductionTeam> ProductionTeam { get; set; }
         public DbSet<TitleBestMatch> TitleBestMatch { get; set; }
+        public DbSet<TitleExactMatch> TitleExactMatch { get; set; }
+        public DbSet<SimpleSearch> SimpleSearch { get; set; }
+        public DbSet<StructuredSearch> StructuredSearch { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,8 +52,9 @@ namespace DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //table users
+            /* **************************
+             * table Users
+             * **************************/
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<User>().HasKey(u => u.UserId);
             modelBuilder.Entity<User>().Property(u => u.UserId).HasColumnName("iduser");
@@ -58,9 +67,9 @@ namespace DataLayer
             modelBuilder.Entity<User>().Property(u => u.UserName).HasColumnName("u_name");
             modelBuilder.Entity<User>().Property(u => u.AddressId).HasColumnName("idaddress");
 
-
-
-            //table address
+            /* **************************
+             * table Address
+             * **************************/
             modelBuilder.Entity<Address>().ToTable("address");
             modelBuilder.Entity<Address>().HasKey(a => a.Id);
             modelBuilder.Entity<Address>().Property(a => a.Id).HasColumnName("idaddress");
@@ -70,8 +79,9 @@ namespace DataLayer
             modelBuilder.Entity<Address>().Property(a => a.City).HasColumnName("city");
             modelBuilder.Entity<Address>().Property(a => a.Country).HasColumnName("country");
 
-
-            //table titlebasics
+            /* **************************
+             * table titleBasics
+             * **************************/
             modelBuilder.Entity<TitleBasics>().ToTable("titlebasics");
             modelBuilder.Entity<TitleBasics>().HasKey(t => t.Const);
             modelBuilder.Entity<TitleBasics>().Property(t => t.Const).HasColumnName("titleconst");
@@ -90,14 +100,17 @@ namespace DataLayer
                 .WithOne(od => od.Title)
                 .HasForeignKey<OmdbData>(t => t.TitleConst);
 
-            //Genres
+            /* **************************
+             * table Genres
+             * **************************/
             modelBuilder.Entity<Genre>().ToTable("genre");
             modelBuilder.Entity<Genre>().HasKey(g => g.Id);
             modelBuilder.Entity<Genre>().Property(g => g.Id).HasColumnName("idgenre");
             modelBuilder.Entity<Genre>().Property(g => g.Name).HasColumnName("name");
 
-
-            //titleGenre
+            /* **************************
+             * table titleGenre
+             * **************************/
             modelBuilder.Entity<TitleGenre>().ToTable("titlegenre");
             modelBuilder.Entity<TitleGenre>().HasKey(tg => new { tg.TitleConst, tg.IdGenre });
             modelBuilder.Entity<TitleGenre>().Property(tg => tg.TitleConst).HasColumnName("titleconst");
@@ -111,14 +124,18 @@ namespace DataLayer
                .WithMany(g => g.TitleGenres)
                .HasForeignKey(tg => tg.IdGenre);
 
-            //titleRating
+            /* **************************
+             * table titleRating
+             * **************************/
             modelBuilder.Entity<TitleRating>().ToTable("titleratings");
             modelBuilder.Entity<TitleRating>().HasKey(tr => tr.Const);
             modelBuilder.Entity<TitleRating>().Property(tr => tr.Const).HasColumnName("titleconst");
             modelBuilder.Entity<TitleRating>().Property(tr => tr.Average).HasColumnName("avgrating");
             modelBuilder.Entity<TitleRating>().Property(tr => tr.NumVotes).HasColumnName("numvotes");
 
-            //userRates  
+            /* **************************
+             * table userrates
+             * **************************/
             modelBuilder.Entity<UserRates>().ToTable("rates");
             modelBuilder.Entity<UserRates>().HasKey(ur => new { ur.UserId, ur.TitleConst });
             modelBuilder.Entity<UserRates>().Property(ur => ur.UserId).HasColumnName("iduser");
@@ -135,7 +152,9 @@ namespace DataLayer
                .WithMany(tr => tr.UserRates)
                .HasForeignKey(ur => ur.TitleConst);
 
-            //persons
+            /* **************************
+             * table Persons
+             * **************************/
             modelBuilder.Entity<Person>().ToTable("persons");
             modelBuilder.Entity<Person>().HasKey(p => p.NameConst);
             modelBuilder.Entity<Person>().Property(p => p.NameConst).HasColumnName("nameconst");
@@ -143,7 +162,9 @@ namespace DataLayer
             modelBuilder.Entity<Person>().Property(p => p.BirthYear).HasColumnName("birthyear");
             modelBuilder.Entity<Person>().Property(p => p.DeathYear).HasColumnName("deathyear");
 
-            //titleprincipals
+            /* **************************
+             * table TitlePrincipals
+             * **************************/
             modelBuilder.Entity<TitlePrincipal>().ToTable("titleprincipals");
             modelBuilder.Entity<TitlePrincipal>().HasKey(tp => new { tp.TitleConst, tp.NameConst, tp.Ordering });
             modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.TitleConst).HasColumnName("titleconst");
@@ -161,7 +182,9 @@ namespace DataLayer
                 .WithMany(p => p.TitlePrincipals)
                 .HasForeignKey(tp => tp.NameConst);
 
-            //knownfor
+            /* **************************
+             * table KnownFor
+             * **************************/
             modelBuilder.Entity<KnownFor>().ToTable("knownfor");
             modelBuilder.Entity<KnownFor>().HasKey(kf => new { kf.TitleConst, kf.NameConst });
             modelBuilder.Entity<KnownFor>().Property(kf => kf.TitleConst).HasColumnName("titleconst");
@@ -175,7 +198,9 @@ namespace DataLayer
                 .WithMany(p => p.KnownFor)
                 .HasForeignKey(kn => kn.NameConst);
 
-            //TitleAkas
+            /* **************************
+             * table TitleAkas
+             * **************************/
             modelBuilder.Entity<TitleAka>().ToTable("titleakas");
             modelBuilder.Entity<TitleAka>().HasKey(ta => new { ta.Titleconst, ta.Ordering });
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Titleconst).HasColumnName("titleconst");
@@ -186,7 +211,9 @@ namespace DataLayer
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Types).HasColumnName("types");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Attributes).HasColumnName("attributes");
 
-            //SearchHistory
+            /* **************************
+             * table SearchHistory
+             * **************************/
             modelBuilder.Entity<SearchHistory>().ToTable("searchhistory");
             modelBuilder.Entity<SearchHistory>().HasKey(sh => sh.SearchId);
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.SearchId).HasColumnName("idsearch");
@@ -194,7 +221,9 @@ namespace DataLayer
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.Word).HasColumnName("word");
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.Date).HasColumnName("h_date");
 
-            //Episode
+            /* **************************
+             * table Episode
+             * **************************/
             modelBuilder.Entity<Episode>().ToTable("episode");
             modelBuilder.Entity<Episode>().HasKey(e => new { e.TitleConst, e.SerieId });
             modelBuilder.Entity<Episode>().Property(e => e.TitleConst).HasColumnName("titleconst");
@@ -210,7 +239,9 @@ namespace DataLayer
                 .WithMany(t => t.Episodes)
                 .HasForeignKey(e => e.SerieId);
 
-            //OmdbData
+            /* **************************
+             * table OmdbData
+             * **************************/
             modelBuilder.Entity<OmdbData>().ToTable("omdbdata");
             modelBuilder.Entity<OmdbData>().HasKey(od => od.TitleConst);
             modelBuilder.Entity<OmdbData>().Property(od => od.TitleConst).HasColumnName("titleconst");
@@ -218,7 +249,9 @@ namespace DataLayer
             modelBuilder.Entity<OmdbData>().Property(od => od.Awards).HasColumnName("awards");
             modelBuilder.Entity<OmdbData>().Property(od => od.Plot).HasColumnName("plot");
 
-            //WordIndex
+            /* **************************
+             * table WordIndex
+             * **************************/
             modelBuilder.Entity<WordIndex>().ToTable("wordindex");
             modelBuilder.Entity<WordIndex>().HasKey(wi => new { wi.TitleConst, wi.Word, wi.Field });
             modelBuilder.Entity<WordIndex>().Property(wi => wi.TitleConst).HasColumnName("titleconst");
@@ -227,37 +260,73 @@ namespace DataLayer
             modelBuilder.Entity<WordIndex>().Property(wi => wi.Lexeme).HasColumnName("lexeme");
 
 
-            /*
-             * Database functions results
-             */
-            //User Role
+            /* *************************************************************************************************************************
+             * 
+             *                                            Database functions results
+             * 
+             * *************************************************************************************************************************/
+         
+
+
+            /* **************************
+             * User Role
+             * **************************/
             modelBuilder.Entity<UserRole>().HasNoKey();
             modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).HasColumnName("iduser");
             modelBuilder.Entity<UserRole>().Property(ur => ur.IsStaff).HasColumnName("isstaff");
 
-            //Actor
+            /* **************************
+             * Actors
+             * **************************/
             modelBuilder.Entity<Actors>().HasNoKey();
             modelBuilder.Entity<Actors>().Property(a => a.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<Actors>().Property(a => a.Name).HasColumnName("primaryname");
             modelBuilder.Entity<Actors>().Property(a => a.Gender).HasColumnName("gender");
 
-            //CoPlayers
+            /* **************************
+             * CoPlayers
+             * **************************/
             modelBuilder.Entity<CoPlayers>().HasNoKey();
             modelBuilder.Entity<CoPlayers>().Property(cp => cp.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<CoPlayers>().Property(cp => cp.Name).HasColumnName("pname");
             modelBuilder.Entity<CoPlayers>().Property(cp => cp.Frequency).HasColumnName("frequency");
 
-            //Production team
+            /* **************************
+             * Production Team
+             * **************************/
             modelBuilder.Entity<ProductionTeam>().HasNoKey();
             modelBuilder.Entity<ProductionTeam>().Property(pt => pt.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<ProductionTeam>().Property(pt => pt.Name).HasColumnName("primaryname");
             modelBuilder.Entity<ProductionTeam>().Property(pt => pt.Role).HasColumnName("role");
 
-            //Title best match
+            /* **************************
+             * Title Best Match
+             * **************************/
             modelBuilder.Entity<TitleBestMatch>().HasNoKey();
             modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.TitleConst).HasColumnName("titleconst");
             modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.Title).HasColumnName("primarytitle");
             modelBuilder.Entity<TitleBestMatch>().Property(tbm => tbm.Rank).HasColumnName("rank");
+
+            /* **************************
+             * Title Exact Match
+             * **************************/
+            modelBuilder.Entity<TitleExactMatch>().HasNoKey();
+            modelBuilder.Entity<TitleExactMatch>().Property(tem => tem.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleExactMatch>().Property(tem => tem.PrimaryTitle).HasColumnName("primarytitle");
+
+            /* **************************
+             * Simple Search
+             * **************************/
+            modelBuilder.Entity<SimpleSearch>().HasNoKey();
+            modelBuilder.Entity<SimpleSearch>().Property(ss => ss.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<SimpleSearch>().Property(ss => ss.PrimaryTitle).HasColumnName("primarytitle");
+
+            /* **************************
+             * Structured Search
+             * **************************/
+            modelBuilder.Entity<StructuredSearch>().HasNoKey();
+            modelBuilder.Entity<StructuredSearch>().Property(sts => sts.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<StructuredSearch>().Property(sts => sts.PrimaryTitle).HasColumnName("primarytitle");
 
         }
     }
