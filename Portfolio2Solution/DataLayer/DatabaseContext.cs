@@ -27,6 +27,7 @@ namespace DataLayer
         public DbSet<KnownFor> KnownFor { get; set; }
         public DbSet<TitleAka> TitleAkas { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
+        public DbSet<OmdbData> omdbData { get; set; }
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Actors> Actors { get; set; }
@@ -83,6 +84,10 @@ namespace DataLayer
                 .HasOne(t => t.Rating)
                 .WithOne(tr => tr.Title)
                 .HasForeignKey<TitleRating>(t => t.Const);
+            modelBuilder.Entity<TitleBasics>()
+                .HasOne(t => t.OmdbData)
+                .WithOne(od => od.Title)
+                .HasForeignKey<OmdbData>(t => t.TitleConst);
 
             //Genres
             modelBuilder.Entity<Genre>().ToTable("genre");
@@ -203,6 +208,13 @@ namespace DataLayer
                 .HasOne(e => e.Title)
                 .WithMany(t => t.Episodes)
                 .HasForeignKey(e => e.SerieId);
+            //OmdbData
+            modelBuilder.Entity<OmdbData>().ToTable("omdbdata");
+            modelBuilder.Entity<OmdbData>().HasKey(od => od.TitleConst);
+            modelBuilder.Entity<OmdbData>().Property(od => od.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<OmdbData>().Property(od => od.Poster).HasColumnName("poster");
+            modelBuilder.Entity<OmdbData>().Property(od => od.Awards).HasColumnName("awards");
+            modelBuilder.Entity<OmdbData>().Property(od => od.Plot).HasColumnName("plot");
 
             /*
              * Database functions results

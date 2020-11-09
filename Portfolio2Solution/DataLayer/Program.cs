@@ -104,14 +104,17 @@ namespace DataLayer
             //    Console.WriteLine($"Id: {p.NameConst}, Name: {p.Name}, Role: {p.Role}");
             //}
 
+            ///*
+            // * Framework functionalities
+            // * Function: FindTitleBestMatch
+            // */
+            //string[] arguments = { "apple", "mikkelsen", "mads" };
+            //var bestMatch = dataService.FindTitleBestMatch(arguments);
 
-            string[] arguments = { "apple", "mikkelsen", "mads" };
-            var bestMatch = dataService.FindTitleBestMatch(arguments);
-
-            foreach (var bm in bestMatch)
-            {
-                Console.WriteLine($"Id: {bm.TitleConst}, Title: {bm.Title}, Rank: {bm.Rank}");
-            }
+            //foreach (var bm in bestMatch)
+            //{
+            //    Console.WriteLine($"Id: {bm.TitleConst}, Title: {bm.Title}, Rank: {bm.Rank}");
+            //}
 
             //foreach (var t in team)
             //{
@@ -151,6 +154,10 @@ namespace DataLayer
             //{
             //    Console.WriteLine(e);
             //}
+            foreach (var e in context.Titles.Include(e => e.OmdbData).Take(10))
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
