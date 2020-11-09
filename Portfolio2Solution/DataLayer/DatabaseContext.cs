@@ -32,6 +32,9 @@ namespace DataLayer
         public DbSet<OmdbData> OmdbData { get; set; }
         public DbSet<WordIndex> WordIndex { get; set; }
         public DbSet<Episode> Episodes { get; set; }
+        public DbSet<TitleBookMark> TitleBookMarks { get; set; }
+        public DbSet<Personalities> Personalities { get; set; }
+
         /* **************************
          * From Sql
          * **************************/
@@ -260,13 +263,47 @@ namespace DataLayer
             modelBuilder.Entity<WordIndex>().Property(wi => wi.Field).HasColumnName("field");
             modelBuilder.Entity<WordIndex>().Property(wi => wi.Lexeme).HasColumnName("lexeme");
 
+            /* **************************
+             * table TitleBookMarks
+             * **************************/
+            modelBuilder.Entity<TitleBookMark>().ToTable("titlebookmarks");
+            modelBuilder.Entity<TitleBookMark>().HasKey(tbook => new { tbook.UserId, tbook.TitleConst });
+            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.Notes).HasColumnName("notes");
+            modelBuilder.Entity<TitleBookMark>()
+                .HasOne(tbook => tbook.Title)
+                .WithMany(t => t.TitleBookMarks)
+                .HasForeignKey(tbook => tbook.TitleConst);
+            modelBuilder.Entity<TitleBookMark>()
+                .HasOne(tbook => tbook.User)
+                .WithMany(u => u.TitleBookMarks)
+                .HasForeignKey(tbook => tbook.UserId);
+
+            /* **************************
+             * table Personalities
+             * **************************/
+            modelBuilder.Entity<Personalities>().ToTable("personalities");
+            modelBuilder.Entity<Personalities>().HasKey(pbook => new { pbook.UserId, pbook.NameConst });
+            modelBuilder.Entity<Personalities>().Property(pbook => pbook.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<Personalities>().Property(pbook => pbook.NameConst).HasColumnName("nameconst");
+            modelBuilder.Entity<Personalities>().Property(pbook => pbook.Notes).HasColumnName("notes");
+            modelBuilder.Entity<Personalities>()
+                .HasOne(pbook => pbook.FavoritePerson)
+                .WithMany(p => p.Personalities)
+                .HasForeignKey(pbook => pbook.NameConst);
+            modelBuilder.Entity<Personalities>()
+                .HasOne(pbook => pbook.User)
+                .WithMany(u => u.Personalities)
+                .HasForeignKey(pbook => pbook.UserId);
+
 
             /* *************************************************************************************************************************
              * 
              *                                            Database functions results
              * 
              * *************************************************************************************************************************/
-         
+
 
 
             /* **************************

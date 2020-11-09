@@ -15,11 +15,11 @@ namespace DataLayer
         public string DeathYear { get; set; }
         public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
         public ICollection<KnownFor> KnownFor { get; set; }
+        public ICollection<Personalities> Personalities { get; set; }
+
         public override string ToString()
         {
-            return $"Person Id: {NameConst}, Name: {Name}, BirthYear: {BirthYear}, DeathYear {DeathYear}, " +
-                //$" title: {TitlePrincipals.First().TitleConst} as  {TitlePrincipals.First().Category}"
-                $" known for : {KnownFor.Count()}";
+            return $"Person Id: {NameConst}, Name: {Name}, BirthYear: {BirthYear}, DeathYear {DeathYear}" ;
         }
     }
 }

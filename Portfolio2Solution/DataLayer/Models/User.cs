@@ -20,13 +20,13 @@ namespace DataLayer.Models
         public Address Address { get; set; }
         public ICollection<UserRates> UserRates { get; set; }
         public ICollection<SearchHistory>Searches { get; set; }
+        public ICollection<TitleBookMark> TitleBookMarks { get; set; }
+        public ICollection<Personalities> Personalities { get; set; }
+
         public override string ToString()
         {
-            return $"Id = {UserId}, first name: {FirstName}, birthday: {BirthDay.Year}-{BirthDay.Month}-{BirthDay.Day},";
-                 //$" Address Id: {Address.Id}" + $" Address: {Address.City}" + 
-                 //$" NumRates: {UserRates.First().NumericR}" + 
-                 //$" VerbalRates: {UserRates.First().VerbalR}" + 
-                // $" Date: {UserRates.First().Date}";
+            return $"Id = {UserId}, first name: {FirstName}, birthday: {BirthDay.Year}-{BirthDay.Month}-{BirthDay.Day}";
+                
         }
     }
 }

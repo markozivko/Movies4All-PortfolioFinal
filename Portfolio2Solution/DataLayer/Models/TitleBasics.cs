@@ -20,11 +20,12 @@ namespace DataLayer.Models
         public ICollection<KnownFor> KnownFor { get; set; }
         public ICollection<TitleAka> TitleAkas { get; set; }
         public ICollection<Episode> Episodes { get; set; }
+        public ICollection<TitleBookMark> TitleBookMarks { get; set; }
         public OmdbData OmdbData { get; set; }
 
         public override string ToString()
         {
-            return $"Title id: {Const}, Type: {Type}, primary title: {PrimaryTitle}, start year {StartYear}, end year {EndYear}, runtime {Runtime.Value},omdbdata: {OmdbData.Awards}";
+            return $"Title id: {Const}, Type: {Type}, primary title: {PrimaryTitle}, start year {StartYear}, end year {EndYear}, runtime {Runtime.Value}";
         }
         
     }
