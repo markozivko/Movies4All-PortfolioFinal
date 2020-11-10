@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace DataLayer.Models
+namespace DataServiceLibrary.Models
 {
     public class Address
     {

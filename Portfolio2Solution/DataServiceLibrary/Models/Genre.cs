@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
-namespace DataLayer.Models
+namespace DataServiceLibrary.Models
 {
     public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //public ICollection<TitleGenre> TitleGenres { get; set; }
+        [JsonIgnore]
+        public ICollection<TitleGenre> TitleGenres { get; set; }
         public override string ToString()
         {
             return $"Id: {Id}, Name: {Name}";

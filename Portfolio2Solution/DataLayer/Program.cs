@@ -63,13 +63,13 @@ namespace DataLayer
             // * Return list of users
             // */
 
-            //var userList = dataService.GetUsers();
+            var userList = dataService.GetUsers();
 
-            //foreach (var x in userList)
-            //{
-            //    Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
-            //                 $"Address: {x.Address.City}\n===================");
-            //}
+            foreach (var x in userList)
+            {
+                Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
+                             $"Address: {x.Address.City}\n===================");
+            }
 
             ///*
             // * Return search history for user
@@ -90,7 +90,6 @@ namespace DataLayer
             //{
             //    Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
             //}
-
 
 
             // dataService.CheckUserRole(config["connectionString"], 2);
