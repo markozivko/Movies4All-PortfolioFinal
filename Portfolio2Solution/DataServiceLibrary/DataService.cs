@@ -8,7 +8,7 @@ using Npgsql;
 
 namespace DataServiceLibrary
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private readonly string _connectionString;
         public DataService(string connectionString)

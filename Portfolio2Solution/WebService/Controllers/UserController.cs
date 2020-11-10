@@ -8,23 +8,29 @@ namespace WebService.Controllers
     [ApiController]
     public class UserController: ControllerBase
     {
+
+        IDataService _dataService;
         private readonly string _connectionString;
-        public UserController()
+        public UserController(IDataService dataService)
         {
             var config = new ConfigurationBuilder()
                   .AddJsonFile("config.json")
                   .Build();
             _connectionString = config["connectionString"];
+            _dataService = dataService;
         }
 
         [HttpGet("api/users")]
-        public JsonResult GetUsers()
+        public IActionResult GetUsers()
         {
 
-            var dataService = new DataService(_connectionString);
+            var users = _dataService.GetUsers();
 
-            var users = dataService.GetUsers();
-            return new JsonResult(users);
+            if (users == null) {
+                return NotFound();
+            }
+
+            return Ok(users);
         }
     }
 }
