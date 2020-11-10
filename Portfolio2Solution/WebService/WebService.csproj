@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Models\Profiles\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,5 +23,8 @@
     <ProjectReference Include="..\DataServiceLibrary\DataServiceLibrary.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
 </Project>

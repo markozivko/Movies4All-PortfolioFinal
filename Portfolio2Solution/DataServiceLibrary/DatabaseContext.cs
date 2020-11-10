@@ -48,6 +48,8 @@ namespace DataServiceLibrary
         public DbSet<SimpleSearch> SimpleSearch { get; set; }
         public DbSet<StructuredSearch> StructuredSearch { get; set; }
         public DbSet<TitleRecommendation> TitleRecommendations { get; set; }
+        public DbSet<TitleDetails> TitleDetails { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -379,6 +381,16 @@ namespace DataServiceLibrary
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.EnrolledAs).HasColumnName("enrolled_as");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.Average).HasColumnName("average");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.NumVotes).HasColumnName("numvotes");
+
+            /* **************************
+             * Title details
+             * **************************/
+            modelBuilder.Entity<TitleDetails>().HasNoKey();
+            modelBuilder.Entity<TitleDetails>().Property(td => td.Rating).HasColumnName("average");
+            modelBuilder.Entity<TitleDetails>().Property(td => td.Rating).HasColumnName("rating");
+            modelBuilder.Entity<TitleDetails>().Property(td => td.Rating).HasColumnName("rating");
+            modelBuilder.Entity<TitleDetails>().Property(td => td.Casting).HasColumnName("primaryname");
+
 
         }
     }
