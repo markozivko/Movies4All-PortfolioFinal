@@ -91,7 +91,6 @@ namespace DataLayer
             //}
 
 
-
             // dataService.CheckUserRole(config["connectionString"], 2);
             /*
              * Framework functionalities
