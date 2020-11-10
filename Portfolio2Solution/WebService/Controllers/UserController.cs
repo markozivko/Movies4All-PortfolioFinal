@@ -10,13 +10,8 @@ namespace WebService.Controllers
     {
 
         IDataService _dataService;
-        private readonly string _connectionString;
         public UserController(IDataService dataService)
         {
-            var config = new ConfigurationBuilder()
-                  .AddJsonFile("config.json")
-                  .Build();
-            _connectionString = config["connectionString"];
             _dataService = dataService;
         }
 
