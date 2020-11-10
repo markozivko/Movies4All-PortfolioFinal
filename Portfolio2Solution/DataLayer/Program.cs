@@ -152,12 +152,50 @@ namespace DataLayer
             * Framework functionalities
             * Function: Title recommendations
             */
-            var search = dataService.RecommendTitles("tt4669954");
+            //var search = dataService.RecommendTitles("tt4669954");
 
-            foreach (var ss in search)
-            {
-                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}, Celebrity: {ss.Celebrity}, Enrolled As: {ss.EnrolledAs}");
-            }
+            //foreach (var ss in search)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}, Celebrity: {ss.Celebrity}, Enrolled As: {ss.EnrolledAs}");
+            //}
+
+            ///*
+            //* Return ratings from all users
+            //*/
+            //var rates = dataService.GetAllUsersRatings();
+
+            //foreach (var ur in rates)
+            //{
+
+            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
+            //}
+
+            ///*
+            //* Return ratings from a specific users
+            //*/
+            //var rates = dataService.GetUserRatings(3);
+
+            //foreach (var ur in rates)
+            //{
+            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
+            //}
+
+            ///*
+            //* Return all titles ratings 
+            //*/
+            //var trates = dataService.GetAllTitlesRatings();
+
+            //foreach (var tr in trates)
+            //{
+            //    Console.WriteLine($"Title Id: {tr.Const}, Title: {tr.Title.PrimaryTitle}, Average: {tr.Average}, NumVotes: {tr.NumVotes}");
+            //}
+
+            ///*
+            //* Return title rating 
+            //*/
+            //var trates = dataService.GetTitleRating("tt6666448");
+
+            //Console.WriteLine($"Title Id: {trates.Const}, Title: {trates.Title.PrimaryTitle}, Average: {trates.Average}, NumVotes: {trates.NumVotes}");      
         }
     }
 

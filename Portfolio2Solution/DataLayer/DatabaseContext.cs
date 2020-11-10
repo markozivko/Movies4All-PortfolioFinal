@@ -21,6 +21,7 @@ namespace DataLayer
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<TitleGenre> TitleGenres { get; set; }
+        public DbSet<TitleRating> TitleRatings { get; set; }
         public DbSet<TitleBasics> Titles { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<UserRates> UserRates { get; set; }

@@ -33,8 +33,8 @@ namespace DataLayer
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.Users
-                .Where(u => u.UserId == id)
                 .Include(x => x.Address)
+                .Where(u => u.UserId == id)
                 .FirstOrDefault();
 
 
@@ -60,8 +60,8 @@ namespace DataLayer
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.SearchHistory
-                .Where(u => u.UserId == id)
                 .Include(x => x.User)
+                .Where(u => u.UserId == id)
                 .ToList();
         }
         /* **************************************
@@ -76,7 +76,6 @@ namespace DataLayer
                 .Include(x => x.User)
                 .ToList();
         }
-
         /* **************************************
          * Framework functionalities
          * Function: checkUserRole
@@ -85,9 +84,58 @@ namespace DataLayer
         {
             var ctx = new DatabaseContext(_connectionString);
 
-            return ctx.UserRole.FromSqlRaw("select iduser, isstaff from check_user_role({0})", userid).FirstOrDefault();
+            return ctx.UserRole
+                .FromSqlRaw("select iduser, isstaff from check_user_role({0})", userid).FirstOrDefault();
 
         }
+        /* **************************************
+         * Framework functionalities
+         * Function: getAllUsersRatings
+         * **************************************/
+        public IList<UserRates> GetAllUsersRatings()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.UserRates
+                .Include(ur => ur.User)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getUserRatings
+         * **************************************/
+        public IList<UserRates> GetUserRatings(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.UserRates
+                .Include(ur => ur.User)
+                .Where(ur => ur.UserId == id)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getAllTitlesRatings
+         * **************************************/
+        public IList<TitleRating> GetAllTitlesRatings()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleRatings
+                .Include(tr => tr.Title)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitleRating
+         * **************************************/
+        public TitleRating GetTitleRating(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleRatings
+                .Include(tr => tr.Title)
+                .Where(tr => tr.Const == title)
+                .FirstOrDefault();
+        }
+
+
 
 
         /* ****************************************************************************************************************
