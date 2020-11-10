@@ -25,7 +25,7 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public ICollection<SearchHistory> Searches { get; set; }
         [JsonIgnore]
-        public ICollection<TitleBookMark> TitleBookMarks { get; set; }
+        public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         [JsonIgnore]
         public ICollection<Personalities> Personalities { get; set; }
 

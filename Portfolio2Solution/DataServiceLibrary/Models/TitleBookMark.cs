@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
-    public class TitleBookMark
+    public class TitleBookmark
     {
         public string TitleConst { get; set; }
         [JsonIgnore]

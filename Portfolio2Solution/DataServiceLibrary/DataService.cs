@@ -133,6 +133,118 @@ namespace DataServiceLibrary
                 .Where(tr => tr.Const == title)
                 .FirstOrDefault();
         }
+        /* **************************************
+ * Framework functionalities
+ * Function: getTitleGenres
+ * **************************************/
+        public IList<TitleGenre> GetTitleGenres(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleGenres
+                .Include(tg => tg.Genre)
+                .Include(tg => tg.Title)
+                .Where(tg => tg.TitleConst == title)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getAllGenres
+         * **************************************/
+        public IList<Genre> GetAllGenres()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Genres
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getAllTitleBookmarks
+         * **************************************/
+        public IList<TitleBookmark> GetTitlesBookmarks()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleBookmarks
+                .Include(tbm => tbm.Title)
+                .Include(tbm => tbm.User)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitleBookmarkForUser
+         * **************************************/
+        public IList<TitleBookmark> GetTitleBookmarkForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleBookmarks
+                .Include(tbm => tbm.Title)
+                .Include(tbm => tbm.User)
+                .Where(tbm => tbm.UserId == id)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getPersonalities
+         * **************************************/
+        public IList<Personalities> GetPersonalities()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Personalities
+                .Include(p => p.User)
+                .Include(p => p.FavoritePerson)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getPersonalitiesForUser
+         * **************************************/
+        public IList<Personalities> GetPersonalitiesForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Personalities
+                .Include(p => p.User)
+                .Include(p => p.FavoritePerson)
+                .Where(tbm => tbm.UserId == id)
+                .ToList();
+        }
+
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitlePrincipals
+         * **************************************/
+        public IList<TitlePrincipal> GetTitlePrincipals(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitlePrincipals
+                .Include(tp => tp.Title)
+                .Include(tp => tp.Person)
+                .Where(tbm => tbm.TitleConst == title)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitleAkas
+         * **************************************/
+        public IList<TitleAka> GetTitleAkas(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleAkas
+                .Include(ta => ta.Title)
+                .Where(ta => ta.TitleConst == title)
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
+         * Function: getKnownTitleForPersons
+         * **************************************/
+        public IList<KnownFor> GetKnownTitleForPersons(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.KnownFor
+                .Include(kf => kf.Title)
+                .Include(kf => kf.Person)
+                .Where(kf => kf.TitleConst == title)
+                .ToList();
+        }
 
 
 

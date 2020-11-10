@@ -33,7 +33,7 @@ namespace DataServiceLibrary
         public DbSet<OmdbData> OmdbData { get; set; }
         public DbSet<WordIndex> WordIndex { get; set; }
         public DbSet<Episode> Episodes { get; set; }
-        public DbSet<TitleBookMark> TitleBookMarks { get; set; }
+        public DbSet<TitleBookmark> TitleBookmarks { get; set; }
         public DbSet<Personalities> Personalities { get; set; }
 
         /* **************************
@@ -207,8 +207,8 @@ namespace DataServiceLibrary
              * table TitleAkas
              * **************************/
             modelBuilder.Entity<TitleAka>().ToTable("titleakas");
-            modelBuilder.Entity<TitleAka>().HasKey(ta => new { ta.Titleconst, ta.Ordering });
-            modelBuilder.Entity<TitleAka>().Property(ta => ta.Titleconst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleAka>().HasKey(ta => new { ta.TitleConst, ta.Ordering });
+            modelBuilder.Entity<TitleAka>().Property(ta => ta.TitleConst).HasColumnName("titleconst");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Ordering).HasColumnName("ordering");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Alias).HasColumnName("title");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.IsOriginal).HasColumnName("isoriginal");
@@ -267,16 +267,16 @@ namespace DataServiceLibrary
             /* **************************
              * table TitleBookMarks
              * **************************/
-            modelBuilder.Entity<TitleBookMark>().ToTable("titlebookmarks");
-            modelBuilder.Entity<TitleBookMark>().HasKey(tbook => new { tbook.UserId, tbook.TitleConst });
-            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.UserId).HasColumnName("iduser");
-            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.TitleConst).HasColumnName("titleconst");
-            modelBuilder.Entity<TitleBookMark>().Property(tbook => tbook.Notes).HasColumnName("notes");
-            modelBuilder.Entity<TitleBookMark>()
+            modelBuilder.Entity<TitleBookmark>().ToTable("titlebookmarks");
+            modelBuilder.Entity<TitleBookmark>().HasKey(tbook => new { tbook.UserId, tbook.TitleConst });
+            modelBuilder.Entity<TitleBookmark>().Property(tbook => tbook.UserId).HasColumnName("iduser");
+            modelBuilder.Entity<TitleBookmark>().Property(tbook => tbook.TitleConst).HasColumnName("titleconst");
+            modelBuilder.Entity<TitleBookmark>().Property(tbook => tbook.Notes).HasColumnName("notes");
+            modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.Title)
                 .WithMany(t => t.TitleBookMarks)
                 .HasForeignKey(tbook => tbook.TitleConst);
-            modelBuilder.Entity<TitleBookMark>()
+            modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.User)
                 .WithMany(u => u.TitleBookMarks)
                 .HasForeignKey(tbook => tbook.UserId);
