@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataLayer.Models
 {
-    public class TitleBookMark
+    public class TitleBookmark
     {
         public string TitleConst { get; set; }
         public TitleBasics Title { get; set; }
@@ -13,7 +13,7 @@ namespace DataLayer.Models
         public string Notes { get; set; }
         public override string ToString()
         {
-            return $"User Id: {UserId}, title bookmarked: {TitleConst}, Personal Notes: {Notes}";
+            return $"User Id: {UserId}, title bookmarks: {TitleConst}, Personal Notes: {Notes}";
         }
     }
 }

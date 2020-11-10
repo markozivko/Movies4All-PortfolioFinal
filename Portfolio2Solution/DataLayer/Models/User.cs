@@ -20,7 +20,7 @@ namespace DataLayer.Models
         public Address Address { get; set; }
         public ICollection<UserRates> UserRates { get; set; }
         public ICollection<SearchHistory>Searches { get; set; }
-        public ICollection<TitleBookMark> TitleBookMarks { get; set; }
+        public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         public ICollection<Personalities> Personalities { get; set; }
 
         public override string ToString()
