@@ -33,5 +33,6 @@ namespace DataServiceLibrary
         IList<TitleRecommendation> RecommendTitles(string title);
         IList<SimpleSearch> StringSearch(int userid, string search);
         IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names);
+        TitleBasics GetTitle(string title);
     }
 }

@@ -258,8 +258,20 @@ namespace DataServiceLibrary
                 .ToList();
 
         }
+        /* **************************************
+        * Framework functionalities
+        * Function: getTitle
+        * **************************************/
+        public TitleBasics GetTitle(string title)
+        {
 
+            using var ctx = new DatabaseContext(_connectionString);
 
+            return ctx.Titles
+                .Where(t => t.Const == title)
+                .FirstOrDefault();
+
+        }
         /* ****************************************************************************************************************
          *                                         FUNCTIONS TO FIND 
          * ****************************************************************************************************************/

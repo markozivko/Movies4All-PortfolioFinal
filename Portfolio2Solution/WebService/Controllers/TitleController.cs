@@ -10,8 +10,7 @@ namespace WebService.Controllers
     [Route("api/titles")]
     public class TitleController : ControllerBase
     {
-
-        IDataService _dataService;
+        readonly IDataService _dataService;
         private readonly IMapper _mapper;
         public TitleController(IDataService dataService, IMapper mapper)
         {
@@ -19,11 +18,31 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}", Name = nameof(GetTitlesGenres))]
-        public IActionResult GetTitlesGenres(string id)
+        //[HttpGet("{id}", Name = nameof(GetTitlesGenres))]
+        //public IActionResult GetTitlesGenres(string id)
+        //{
+
+        //    var titles = _dataService.GetTitleGenres(id);
+
+        //    if (titles == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var dto = _mapper.Map<TitleDto>(titles);
+        //    dto.Url = Url.Link(nameof(GetTitlesGenres), new { id });
+        //    dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.TitleConst });
+
+        //    //WE LEFT HERE
+
+        //    return Ok(titles);
+        //}
+        [HttpGet("{id}", Name = nameof(GetTitle))]
+        public IActionResult GetTitle(string id)
         {
 
-            var titles = _dataService.GetTitleGenres(id);
+            var titles = _dataService.GetTitle(id);
+                         
 
             if (titles == null)
             {
@@ -31,12 +50,12 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<TitleDto>(titles);
-            dto.Url = Url.Link(nameof(GetTitlesGenres), new { id });
-            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.TitleConst });
+            //dto.Url = Url.Link(nameof(GetTitle), new { id });
+            //dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.TitleConst });
 
             //WE LEFT HERE
 
-            return Ok(titles);
+            return Ok(dto);
         }
     }
 }

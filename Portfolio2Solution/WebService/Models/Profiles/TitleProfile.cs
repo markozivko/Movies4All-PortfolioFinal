@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using DataServiceLibrary.Models;
 namespace WebService.Models.Profiles
 {
     public class TitleProfile: Profile
@@ -7,7 +8,7 @@ namespace WebService.Models.Profiles
         public TitleProfile()
         {
 
-            CreateMap<TitleDto, TitleDetailsDto>();
+            CreateMap<TitleBasics, TitleDto>();
         }
     }
 }
