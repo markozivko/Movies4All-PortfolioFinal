@@ -12,7 +12,6 @@ namespace DataLayer.Models
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-       public ICollection<User> Users { get; set; }
         public override string ToString()
         {
             return $"Address id: {Id}, Street name: {StreetName}, zid code: {ZipCode}";

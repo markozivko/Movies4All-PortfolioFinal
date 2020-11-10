@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataServiceLibrary;
 using DataServiceLibrary.FromSQL;
 using DataServiceLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Npgsql;
 
 namespace DataServiceLibrary
