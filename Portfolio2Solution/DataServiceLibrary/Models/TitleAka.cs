@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
@@ -14,6 +15,7 @@ namespace DataServiceLibrary.Models
         public string Region { get; set; }
         public string Types { get; set; }
         public string Attributes { get; set; }
+        [JsonIgnore]
         public TitleBasics Title { get; set; }
         public override string ToString()
         {

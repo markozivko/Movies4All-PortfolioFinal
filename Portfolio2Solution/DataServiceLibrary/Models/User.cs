@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
@@ -17,10 +18,15 @@ namespace DataServiceLibrary.Models
         public string Password { get; set; }
         public string UserName { get; set; }
         public int AddressId { get; set; }
+        [JsonIgnore]
         public Address Address { get; set; }
+        [JsonIgnore]
         public ICollection<UserRates> UserRates { get; set; }
-        public ICollection<SearchHistory>Searches { get; set; }
+        [JsonIgnore]
+        public ICollection<SearchHistory> Searches { get; set; }
+        [JsonIgnore]
         public ICollection<TitleBookMark> TitleBookMarks { get; set; }
+        [JsonIgnore]
         public ICollection<Personalities> Personalities { get; set; }
 
         public override string ToString()

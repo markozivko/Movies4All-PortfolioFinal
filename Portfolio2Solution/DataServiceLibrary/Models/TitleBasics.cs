@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
@@ -14,13 +15,21 @@ namespace DataServiceLibrary.Models
         public string StartYear { get; set; }
         public string EndYear { get; set; }
         public int? Runtime { get; set; }
+        [JsonIgnore]
         public ICollection<TitleGenre> TitleGenres { get; set; }
+        [JsonIgnore]
         public TitleRating Rating { get; set; }
+        [JsonIgnore]
         public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
+        [JsonIgnore]
         public ICollection<KnownFor> KnownFor { get; set; }
+        [JsonIgnore]
         public ICollection<TitleAka> TitleAkas { get; set; }
+        [JsonIgnore]
         public ICollection<Episode> Episodes { get; set; }
+        [JsonIgnore]
         public ICollection<TitleBookMark> TitleBookMarks { get; set; }
+        [JsonIgnore]
         public OmdbData OmdbData { get; set; }
 
         public override string ToString()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Xml;
 
 namespace DataServiceLibrary.Models
@@ -9,8 +10,10 @@ namespace DataServiceLibrary.Models
     public class UserRates
     {
         public int UserId { get; set; }
+        [JsonIgnore]
         public User User { get; set; }
         public string TitleConst { get; set; }
+        [JsonIgnore]
         public TitleRating Title { get; set; }
         public int NumericR { get; set; }
         public string VerbalR { get; set; }

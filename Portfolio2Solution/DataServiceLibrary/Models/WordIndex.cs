@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
     public class WordIndex
     {
         public string TitleConst { get; set; }
+        [JsonIgnore]
         public TitleBasics Title { get; set; }
         public string Word { get; set; }
         public string Field { get; set; }

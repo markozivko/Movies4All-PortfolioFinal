@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DataServiceLibrary.Models
 {
@@ -8,6 +9,7 @@ namespace DataServiceLibrary.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [JsonIgnore]
         public ICollection<TitleGenre> TitleGenres { get; set; }
         public override string ToString()
         {
