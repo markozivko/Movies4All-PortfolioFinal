@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 namespace WebService.Controllers
 {
     [ApiController]
+    [Route("api/users")]
     public class UserController: ControllerBase
     {
 
@@ -15,7 +16,7 @@ namespace WebService.Controllers
             _dataService = dataService;
         }
 
-        [HttpGet("api/users")]
+        [HttpGet]
         public IActionResult GetUsers()
         {
 

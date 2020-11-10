@@ -22,7 +22,6 @@ namespace WebService
                   .AddJsonFile("config.json")
                   .Build();
             services.AddControllers();
-
             services.AddScoped<IDataService>(_ => new DataService(config["connectionString"]));
 
         }
