@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class AdressDto
+    public class TitleBookmarksDto
     {
+        public string Title { get; set; }
+        public string Notes { get; set; }
     }
 }

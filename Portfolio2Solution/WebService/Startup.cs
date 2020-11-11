@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,7 @@ namespace WebService
                   .Build();
             services.AddControllers();
             services.AddScoped<IDataService>(_ => new DataService(config["connectionString"]));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }
 

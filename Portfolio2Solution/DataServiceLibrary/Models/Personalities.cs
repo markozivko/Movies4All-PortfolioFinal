@@ -11,7 +11,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public User User { get; set; }
         public string NameConst { get; set; }
-        [JsonIgnore]
         public Person FavoritePerson { get; set; }
         public string Notes { get; set; }
         public override string ToString()
