@@ -162,13 +162,13 @@ namespace DataLayer
             ///*
             //* Return ratings from all users
             //*/
-            var rates = dataService.GetAllUsersRatings();
+            //var rates = dataService.GetAllUsersRatings();
 
-            foreach (var ur in rates)
-            {
+            //foreach (var ur in rates)
+            //{
 
-                Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
-            }
+            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
+            //}
 
             ///*
             //* Return ratings from a specific users
@@ -183,12 +183,12 @@ namespace DataLayer
             ///*
             //* Return all titles ratings 
             //*/
-            //var trates = dataService.GetAllTitlesRatings();
+            var trates = dataService.GetAllTitlesRatings();
 
-            //foreach (var tr in trates)
-            //{
-            //    Console.WriteLine($"Title Id: {tr.Const}, Title: {tr.Title.PrimaryTitle}, Average: {tr.Average}, NumVotes: {tr.NumVotes}");
-            //}
+            foreach (var tr in trates)
+            {
+                Console.WriteLine($"Title Id: {tr.Const}, Title: {tr.Title.PrimaryTitle}, Average: {tr.Average}, NumVotes: {tr.NumVotes}");
+            }
 
             ///*
             //* Return title rating 
