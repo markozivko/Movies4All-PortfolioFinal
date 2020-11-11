@@ -231,6 +231,10 @@ namespace DataServiceLibrary
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.UserId).HasColumnName("iduser");
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.Word).HasColumnName("word");
             modelBuilder.Entity<SearchHistory>().Property(sh => sh.Date).HasColumnName("h_date");
+            modelBuilder.Entity<SearchHistory>()
+               .HasOne(tp => tp.User)
+               .WithMany()
+               .HasForeignKey(tp => tp.UserId);
 
             /* **************************
              * table Episode

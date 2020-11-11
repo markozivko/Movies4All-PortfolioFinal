@@ -84,12 +84,12 @@ namespace DataLayer
             ///*
             //* Return search history for all users
             //*/
-            //var searchHistory = dataService.GetAllSearchHistory();
+            var searchHistory = dataService.GetAllSearchHistory();
 
-            //foreach (var x in searchHistory)
-            //{
-            //    Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
-            //}
+            foreach (var x in searchHistory)
+            {
+                Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
+            }
 
 
             // dataService.CheckUserRole(config["connectionString"], 2);
@@ -230,12 +230,12 @@ namespace DataLayer
             /*
              * Return personalities 
              */
-            var favorite = dataService.GetPersonalitiesForUser(3);
+            //var favorite = dataService.GetPersonalitiesForUser(3);
 
-            foreach (var t in favorite)
-            {
-                Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
-            }
+            //foreach (var t in favorite)
+            //{
+            //    Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+            //}
 
             ///*
             //* Return titleprincipals
