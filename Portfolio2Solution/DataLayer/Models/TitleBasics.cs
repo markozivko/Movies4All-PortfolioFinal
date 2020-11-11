@@ -18,7 +18,6 @@ namespace DataLayer.Models
         public TitleRating Rating { get; set; }
         public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
         public ICollection<KnownFor> KnownFor { get; set; }
-        //public ICollection<TitleAka> TitleAkas { get; set; }
         public ICollection<Episode> Episodes { get; set; }
         public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         public OmdbData OmdbData { get; set; }

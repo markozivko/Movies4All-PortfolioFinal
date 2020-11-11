@@ -15,12 +15,9 @@ namespace DataServiceLibrary.Models
         public string Region { get; set; }
         public string Types { get; set; }
         public string Attributes { get; set; }
-        [JsonIgnore]
-        public TitleBasics Title { get; set; }
         public override string ToString()
         {
-            return $"Title ID: {TitleConst}, Ordering: {Ordering}, Alias: {Alias}, Original Name? {IsOriginal}"+
-                $"Title: {Title.PrimaryTitle}"+
+            return $"Title ID: {TitleConst}, Ordering: {Ordering}, Alias: {Alias}, Original Name? {IsOriginal}"+    
                 $"Region: {Region}, Types: {Types}, {Attributes}";
         }
     }

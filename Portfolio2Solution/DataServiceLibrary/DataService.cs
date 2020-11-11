@@ -226,7 +226,6 @@ namespace DataServiceLibrary
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.TitleAkas
-                .Include(ta => ta.Title)
                 .Where(ta => ta.TitleConst == title)
                 .ToList();
         }

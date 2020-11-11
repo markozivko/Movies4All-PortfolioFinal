@@ -63,13 +63,13 @@ namespace DataLayer
             // * Return list of users
             // */
 
-            var userList = dataService.GetUsers();
+            //var userList = dataService.GetUsers();
 
-            foreach (var x in userList)
-            {
-                Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
-                             $"Address: {x.Address.City}\n===================");
-            }
+            //foreach (var x in userList)
+            //{
+            //    Console.WriteLine($"Name: {x.FirstName} {x.LastName}\n" +
+            //                 $"Address: {x.Address.City}\n===================");
+            //}
 
             ///*
             // * Return search history for user
@@ -200,12 +200,12 @@ namespace DataLayer
             ///*
             //* Return title genres 
             //*/
-            var genres = dataService.GetTitleGenres("tt6666448");
+            //var genres = dataService.GetTitleGenres("tt6666448");
 
-            foreach (var tg in genres)
-            {
-                Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
-            }
+            //foreach (var tg in genres)
+            //{
+            //    Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
+            //}
 
             ///*
             //* Return all genres 
@@ -239,12 +239,12 @@ namespace DataLayer
             // /*
             //* Return titleakas
             //*/
-            // var takas = dataService.GetTitleAkas("tt0078672");
+            var takas = dataService.GetTitleAkas("tt0078672");
 
-            // foreach (var t in takas)
-            // {
-            //     Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Alias: {t.Alias}, Region: {t.Region}, IsOriginalName: {t.IsOriginal}");
-            // }
+            foreach (var t in takas)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, Alias: {t.Alias}, Region: {t.Region}, IsOriginalName: {t.IsOriginal}");
+            }
         }
     }
 

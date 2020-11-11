@@ -217,6 +217,10 @@ namespace DataServiceLibrary
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Region).HasColumnName("region");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Types).HasColumnName("types");
             modelBuilder.Entity<TitleAka>().Property(ta => ta.Attributes).HasColumnName("attributes");
+            modelBuilder.Entity<TitleAka>()
+                .HasOne<TitleBasics>()
+                .WithMany()
+                .HasForeignKey(p => p.TitleConst);
 
             /* **************************
              * table SearchHistory

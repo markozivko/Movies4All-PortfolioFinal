@@ -9,6 +9,7 @@ namespace WebService.Models.Profiles
         {
 
             CreateMap<TitleBasics, TitleDto>();
+            //.ForMember(dest => dest.DetailsUrl, opt => opt.MapFrom(src => src.CurrentCity));
         }
     }
 }

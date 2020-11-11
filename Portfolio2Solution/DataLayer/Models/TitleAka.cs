@@ -14,11 +14,9 @@ namespace DataLayer.Models
         public string Region { get; set; }
         public string Types { get; set; }
         public string Attributes { get; set; }
-        public TitleBasics Title { get; set; }
         public override string ToString()
         {
             return $"Title ID: {TitleConst}, Ordering: {Ordering}, Alias: {Alias}, Original Name? {IsOriginal}"+
-                $"Title: {Title.PrimaryTitle}"+
                 $"Region: {Region}, Types: {Types}, {Attributes}";
         }
     }

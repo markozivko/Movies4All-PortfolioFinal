@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataLayer.Models
 {
     public class TitleRating
     {
+        [ForeignKey("TitleBasics")]
         public string Const { get; set; }
         public decimal Average { get; set; }
         public int NumVotes { get; set; }

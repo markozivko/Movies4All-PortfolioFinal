@@ -24,8 +24,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public ICollection<KnownFor> KnownFor { get; set; }
         [JsonIgnore]
-        public ICollection<TitleAka> TitleAkas { get; set; }
-        [JsonIgnore]
         public ICollection<Episode> Episodes { get; set; }
         [JsonIgnore]
         public ICollection<TitleBookmark> TitleBookMarks { get; set; }
