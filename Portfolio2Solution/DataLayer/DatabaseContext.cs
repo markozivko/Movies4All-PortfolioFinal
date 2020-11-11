@@ -150,11 +150,11 @@ namespace DataLayer
             modelBuilder.Entity<UserRates>().Property(ur => ur.Date).HasColumnName("r_date");
             modelBuilder.Entity<UserRates>()
                 .HasOne(ur => ur.User)
-                .WithMany(u => u.UserRates)
+                .WithMany()
                 .HasForeignKey(ur => ur.UserId);
             modelBuilder.Entity<UserRates>()
                .HasOne(ur => ur.Title)
-               .WithMany(tr => tr.UserRates)
+               .WithMany()
                .HasForeignKey(ur => ur.TitleConst);
 
             /* **************************

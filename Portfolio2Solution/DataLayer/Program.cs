@@ -84,12 +84,12 @@ namespace DataLayer
             ///*
             //* Return search history for all users
             //*/
-            var searchHistory = dataService.GetAllSearchHistory();
+            //var searchHistory = dataService.GetAllSearchHistory();
 
-            foreach (var x in searchHistory)
-            {
-                Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
-            }
+            //foreach (var x in searchHistory)
+            //{
+            //    Console.WriteLine($"User: {x.User.UserName}, Search id: {x.SearchId}");
+            //}
 
 
             // dataService.CheckUserRole(config["connectionString"], 2);
@@ -162,13 +162,13 @@ namespace DataLayer
             ///*
             //* Return ratings from all users
             //*/
-            //var rates = dataService.GetAllUsersRatings();
+            var rates = dataService.GetAllUsersRatings();
 
-            //foreach (var ur in rates)
-            //{
+            foreach (var ur in rates)
+            {
 
-            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
-            //}
+                Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
+            }
 
             ///*
             //* Return ratings from a specific users

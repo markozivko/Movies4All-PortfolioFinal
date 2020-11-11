@@ -21,8 +21,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public Address Address { get; set; }
         [JsonIgnore]
-        public ICollection<UserRates> UserRates { get; set; }
-        [JsonIgnore]
         public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         [JsonIgnore]
         public ICollection<Personalities> Personalities { get; set; }

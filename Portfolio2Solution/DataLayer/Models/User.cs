@@ -18,7 +18,6 @@ namespace DataLayer.Models
         public string UserName { get; set; }
         public int AddressId { get; set; }
         public Address Address { get; set; }
-        public ICollection<UserRates> UserRates { get; set; }
         public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         public ICollection<Personalities> Personalities { get; set; }
 

@@ -12,8 +12,6 @@ namespace DataServiceLibrary.Models
         public int NumVotes { get; set; }
         [JsonIgnore]
         public TitleBasics Title { get; set; }
-        [JsonIgnore]
-        public ICollection<UserRates> UserRates { get; set; }
         public override string ToString()
         {
             return $"tile: {Const}, Average Rating: {Average}, NumVotes: {NumVotes}";
