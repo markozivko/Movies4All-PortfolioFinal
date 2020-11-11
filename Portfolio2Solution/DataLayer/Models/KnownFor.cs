@@ -12,7 +12,7 @@ namespace DataLayer.Models
         public Person Person { get; set; }
         public override string ToString()
         {
-            return $"Person {NameConst}  is known for {TitleConst} ";
+            return $"Person {NameConst}  is known for {TitleConst}";
         }
     }
 }

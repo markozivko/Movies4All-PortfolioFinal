@@ -183,12 +183,12 @@ namespace DataLayer
             ///*
             //* Return all titles ratings 
             //*/
-            var trates = dataService.GetAllTitlesRatings();
+            //var trates = dataService.GetAllTitlesRatings();
 
-            foreach (var tr in trates)
-            {
-                Console.WriteLine($"Title Id: {tr.Const}, Title: {tr.Title.PrimaryTitle}, Average: {tr.Average}, NumVotes: {tr.NumVotes}");
-            }
+            //foreach (var tr in trates)
+            //{
+            //    Console.WriteLine($"Title Id: {tr.Const}, Title: {tr.Title.PrimaryTitle}, Average: {tr.Average}, NumVotes: {tr.NumVotes}");
+            //}
 
             ///*
             //* Return title rating 
@@ -240,7 +240,7 @@ namespace DataLayer
             ///*
             //* Return titleprincipals
             //*/
-            //var tprincipals = dataService.GetTitlePrincipals("tt0078672");
+            //var tprincipals = dataService.GetTitlePrincipals("tt0063929");
 
             //foreach (var t in tprincipals)
             //{
@@ -259,14 +259,14 @@ namespace DataLayer
             //}
 
             /*
-             * Return titleakas
-             */
-            //var kfor = dataService.GetKnownTitleForPersons("tt0969216");
+             * Return known for
+            // */
+            var kfor = dataService.GetKnownTitleForPersons("tt0063929");
 
-            //foreach (var t in kfor)
-            //{
-            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle} NameConst: {t.NameConst}, {t.Person.Name}");
-            //}
+            foreach (var t in kfor)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
+            }
         }
     }
 

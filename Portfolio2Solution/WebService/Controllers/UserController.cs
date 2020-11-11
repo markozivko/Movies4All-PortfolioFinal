@@ -1,7 +1,9 @@
 ﻿using System;
+using AutoMapper;
 using DataServiceLibrary;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using WebService.Models;
 
 namespace WebService.Controllers
 {
@@ -11,9 +13,12 @@ namespace WebService.Controllers
     {
 
         IDataService _dataService;
-        public UserController(IDataService dataService)
+        private readonly IMapper _mapper;
+
+        public UserController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -25,7 +30,7 @@ namespace WebService.Controllers
             if (users == null) {
                 return NotFound();
             }
-
+            var userDto = _mapper.Map<UserDto>(users);
             return Ok(users);
         }
     }

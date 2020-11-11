@@ -199,7 +199,7 @@ namespace DataLayer
                 .HasForeignKey(kn => kn.TitleConst);
             modelBuilder.Entity<KnownFor>()
                 .HasOne(kn => kn.Person)
-                .WithMany()
+                .WithMany(p => p.KnownFor)
                 .HasForeignKey(kn => kn.NameConst);
 
             /* **************************

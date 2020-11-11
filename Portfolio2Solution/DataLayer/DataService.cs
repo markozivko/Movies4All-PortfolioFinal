@@ -241,8 +241,8 @@ namespace DataLayer
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.KnownFor
-                .Include(kf => kf.Title)
                 .Include(kf => kf.Person)
+                .Include(kf => kf.Title)
                 .Where(kf => kf.TitleConst == title)
                 .ToList();
         }
