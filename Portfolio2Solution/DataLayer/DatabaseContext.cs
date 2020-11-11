@@ -196,11 +196,11 @@ namespace DataLayer
             modelBuilder.Entity<KnownFor>().Property(kf => kf.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<KnownFor>()
                 .HasOne(kn => kn.Title)
-                .WithMany(t => t.KnownFor)
+                .WithMany()
                 .HasForeignKey(kn => kn.TitleConst);
             modelBuilder.Entity<KnownFor>()
                 .HasOne(kn => kn.Person)
-                .WithMany(p => p.KnownFor)
+                .WithMany()
                 .HasForeignKey(kn => kn.NameConst);
 
             /* **************************
@@ -278,7 +278,7 @@ namespace DataLayer
             modelBuilder.Entity<TitleBookmark>().Property(tbook => tbook.Notes).HasColumnName("notes");
             modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.Title)
-                .WithMany(t => t.TitleBookMarks)
+                .WithMany()
                 .HasForeignKey(tbook => tbook.TitleConst);
             modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.User)

@@ -280,7 +280,7 @@ namespace DataServiceLibrary
             modelBuilder.Entity<TitleBookmark>().Property(tbook => tbook.Notes).HasColumnName("notes");
             modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.Title)
-                .WithMany(t => t.TitleBookMarks)
+                .WithMany()
                 .HasForeignKey(tbook => tbook.TitleConst);
             modelBuilder.Entity<TitleBookmark>()
                 .HasOne(tbook => tbook.User)

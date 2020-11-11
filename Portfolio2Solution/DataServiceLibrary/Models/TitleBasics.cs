@@ -24,8 +24,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public ICollection<Episode> Episodes { get; set; }
         [JsonIgnore]
-        public ICollection<TitleBookmark> TitleBookMarks { get; set; }
-        [JsonIgnore]
         public OmdbData OmdbData { get; set; }
 
         public override string ToString()

@@ -200,12 +200,12 @@ namespace DataLayer
             ///*
             //* Return title genres 
             //*/
-            var genres = dataService.GetTitleGenres("tt6666448");
+            //var genres = dataService.GetTitleGenres("tt6666448");
 
-            foreach (var tg in genres)
-            {
-                Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
-            }
+            //foreach (var tg in genres)
+            //{
+            //    Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
+            //}
 
             ///*
             //* Return all genres 
@@ -220,12 +220,12 @@ namespace DataLayer
             ///*
             // * Return all titlebookmarks 
             // */
-            //  var tbookmarks = dataService.GetTitlesBookmarks();
+            var tbookmarks = dataService.GetTitlesBookmarks();
 
-            //  foreach (var t in tbookmarks)
-            //  {
-            //      Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
-            //  }
+            foreach (var t in tbookmarks)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+            }
             ///*
             //* Return titleprincipals
             //*/
@@ -236,14 +236,25 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Person Id: {t.NameConst}, Person: {t.Person.Name}, Category: {t.Category}");
             //}
 
-            // /*
-            //* Return titleakas
-            //*/
-            //var takas = dataService.GetTitleAkas("tt0078672");
+            //    /*
+            //   * Return titleakas
+            //   */
+            //    var takas = dataService.GetTitleAkas("tt0078672");
 
-            //foreach (var t in takas)
+            //    foreach (var t in takas)
+            //    {
+            //        Console.WriteLine($"Title Id: {t.TitleConst}, Alias: {t.Alias}, Region: {t.Region}, IsOriginalName: {t.IsOriginal}");
+            //    }
+            //}
+
+            /*
+             * Return titleakas
+             */
+            //var kfor = dataService.GetKnownTitleForPersons("tt0969216");
+
+            //foreach (var t in kfor)
             //{
-            //    Console.WriteLine($"Title Id: {t.TitleConst}, Alias: {t.Alias}, Region: {t.Region}, IsOriginalName: {t.IsOriginal}");
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle} NameConst: {t.NameConst}, {t.Person.Name}");
             //}
         }
     }
