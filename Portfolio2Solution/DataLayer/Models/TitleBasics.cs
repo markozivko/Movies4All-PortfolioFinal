@@ -17,7 +17,6 @@ namespace DataLayer.Models
         public ICollection<TitleGenre> TitleGenres { get; set; }
         public TitleRating Rating { get; set; }
         public ICollection<Episode> Episodes { get; set; }
-        //public ICollection<TitleBookmark> TitleBookMarks { get; set; }
         public OmdbData OmdbData { get; set; }
 
         public override string ToString()

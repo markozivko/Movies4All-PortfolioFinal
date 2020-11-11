@@ -13,8 +13,8 @@ namespace DataLayer
         public string Name { get; set; }
         public string BirthYear { get; set; }
         public string DeathYear { get; set; }
-        //public ICollection<KnownFor> KnownFor { get; set; }
-        public ICollection<Personalities> Personalities { get; set; }
+        public ICollection<KnownFor> KnownFor { get; set; }
+        //public ICollection<Personalities> Personalities { get; set; }
 
         public override string ToString()
         {

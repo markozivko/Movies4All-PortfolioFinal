@@ -220,12 +220,23 @@ namespace DataLayer
             ///*
             // * Return all titlebookmarks 
             // */
-            var tbookmarks = dataService.GetTitlesBookmarks();
+            //var tbookmarks = dataService.GetTitlesBookmarks();
 
-            foreach (var t in tbookmarks)
+            //foreach (var t in tbookmarks)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+            //}
+
+            /*
+             * Return personalities 
+             */
+            var favorite = dataService.GetPersonalitiesForUser(3);
+
+            foreach (var t in favorite)
             {
-                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+                Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
             }
+
             ///*
             //* Return titleprincipals
             //*/

@@ -295,7 +295,7 @@ namespace DataLayer
             modelBuilder.Entity<Personalities>().Property(pbook => pbook.Notes).HasColumnName("notes");
             modelBuilder.Entity<Personalities>()
                 .HasOne(pbook => pbook.FavoritePerson)
-                .WithMany(p => p.Personalities)
+                .WithMany()
                 .HasForeignKey(pbook => pbook.NameConst);
             modelBuilder.Entity<Personalities>()
                 .HasOne(pbook => pbook.User)
