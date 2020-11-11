@@ -22,7 +22,16 @@ namespace WebService.Models.Profiles
                     dest.Address,
                     opt => opt.MapFrom(src => src.Address.StreetNumber + " " + src.Address.StreetName + " " + src.Address.ZipCode + " "+ src.Address.City + " " + src.Address.Country));
 
-
+            CreateMap<User, UserListDto>()
+                .ForMember(dest =>
+                    dest.FName,
+                    opt => opt.MapFrom(src => src.FirstName))
+                .ForMember(dest =>
+                    dest.LName,
+                    opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest =>
+                    dest.Address,
+                    opt => opt.MapFrom(src => src.Address.StreetNumber + " " + src.Address.StreetName + " " + src.Address.ZipCode + " " + src.Address.City + " " + src.Address.Country));
         }
     }
 }

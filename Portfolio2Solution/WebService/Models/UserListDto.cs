@@ -11,8 +11,6 @@ namespace WebService.Models
         public string UserName { get; set; }
         public DateTime BirtDay { get; set; }
         public string Email { get; set; }
-        public Address Address { get; set; }
-        public ICollection<TitleBookmark> TitleBookmarks { get; set; }
-        public ICollection<Personalities> Personalities { get; set; }
+        public string Address { get; set; }
     }
 }

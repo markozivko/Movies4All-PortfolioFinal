@@ -48,6 +48,12 @@ namespace DataServiceLibrary
                 .Include(x => x.Address)
                 .ToList();
         }
+        /* ***********************************
+         * Framework functionalities
+         * Function: Number of users
+         * ***********************************/
+
+
         /* *************************************
          * Framework functionalities
          * Function: GetSearchHistoryForUser

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataServiceLibrary;
 using DataServiceLibrary.Models;
@@ -15,6 +16,7 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         IMapper _mapper;
+        private const int MaxPageSize = 25;
 
         public UserController(IDataService dataService, IMapper mapper)
         {
@@ -35,60 +37,26 @@ namespace WebService.Controllers
             return Ok(userDto);
         }
 
-        //private UserListDto CreateProductElementDto(User user)
-        //{
-        //    var dto = _mapper.Map<UserListDto>(user);
-        //    dto.Url = Url.Link(nameof(GetUser), new { user.Id });
-        //    return dto;
-        //}
-        ///*
-        // *
-        // * Helpers
-        // */
+        [HttpGet]
+        public IActionResult GetUsers() 
+        {
+            var users = _dataService.GetUsers();
+            var result = CreateResult(users);
+            return Ok(result);
+        }
+        private UserListDto CreateUserElementDto(User user)
+        {
+            var dto = _mapper.Map<UserListDto>(user);
+            return dto;
+        }
 
-        //private int CheckPageSize(int pageSize)
-        //{
-        //    return pageSize > MaxPageSize ? MaxPageSize : pageSize;
-        //}
+  
+        private object CreateResult(IList<User> users)
+        {
+            var items = users.Select(CreateUserElementDto);
 
-        //private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
-        //{
-        //    string prev = null;
-
-        //    if (page > 0)
-        //    {
-        //        prev = Url.Link(nameof(GetUsers), new { page = page - 1, pageSize });
-        //    }
-
-        //    string next = null;
-
-        //    if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-        //        next = Url.Link(nameof(GetUsers), new { page = page + 1, pageSize });
-
-        //    var cur = Url.Link(nameof(GetUsers), new { page, pageSize });
-
-        //    return (prev, cur, next);
-        //}
-
-        //private object CreateResult(int page, int pageSize, IList<User> users)
-        //{
-        //    var items = users.Select(CreateProductElementDto);
-
-        //    var count = _dataService.NumberOfUsers();
-
-        //    var navigationUrls = CreatePagingNavigation(page, pageSize, count);
-
-
-        //    var result = new
-        //    {
-        //        navigationUrls.prev,
-        //        navigationUrls.cur,
-        //        navigationUrls.next,
-        //        count,
-        //        items
-        //    };
-        //    return result;
-        //}
+            return new { items };
+        }
 
     }
 }
