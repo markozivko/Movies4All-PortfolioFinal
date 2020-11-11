@@ -126,7 +126,7 @@ namespace DataLayer
                 .HasForeignKey(tg => tg.TitleConst);
             modelBuilder.Entity<TitleGenre>()
                .HasOne(tg => tg.Genre)
-               .WithMany(g => g.TitleGenres)
+               .WithMany()
                .HasForeignKey(tg => tg.IdGenre);
 
             /* **************************
@@ -179,12 +179,12 @@ namespace DataLayer
             modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Job).HasColumnName("job");
             modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Characters).HasColumnName("characters");
             modelBuilder.Entity<TitlePrincipal>()
-                .HasOne(tp => tp.Title)
-                .WithMany(t => t.TitlePrincipals)
+                .HasOne(tp =>tp.Title)
+                .WithMany()
                 .HasForeignKey(tp => tp.TitleConst);
             modelBuilder.Entity<TitlePrincipal>()
                 .HasOne(tp => tp.Person)
-                .WithMany(p => p.TitlePrincipals)
+                .WithMany()
                 .HasForeignKey(tp => tp.NameConst);
 
             /* **************************

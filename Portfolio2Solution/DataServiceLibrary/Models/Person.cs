@@ -14,8 +14,6 @@ namespace DataServiceLibrary.Models
         public string BirthYear { get; set; }
         public string DeathYear { get; set; }
         [JsonIgnore]
-        public ICollection<TitlePrincipal> TitlePrincipals { get; set; }
-        [JsonIgnore]
         public ICollection<KnownFor> KnownFor { get; set; }
         [JsonIgnore]
         public ICollection<Personalities> Personalities { get; set; }

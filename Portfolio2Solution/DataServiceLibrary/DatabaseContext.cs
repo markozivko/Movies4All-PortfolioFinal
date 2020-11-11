@@ -128,7 +128,7 @@ namespace DataServiceLibrary
                 .HasForeignKey(tg => tg.TitleConst);
             modelBuilder.Entity<TitleGenre>()
                .HasOne(tg => tg.Genre)
-               .WithMany(g => g.TitleGenres)
+               .WithMany()
                .HasForeignKey(tg => tg.IdGenre);
 
             /* **************************
@@ -182,11 +182,11 @@ namespace DataServiceLibrary
             modelBuilder.Entity<TitlePrincipal>().Property(tp => tp.Characters).HasColumnName("characters");
             modelBuilder.Entity<TitlePrincipal>()
                 .HasOne(tp => tp.Title)
-                .WithMany(t => t.TitlePrincipals)
+                .WithMany()
                 .HasForeignKey(tp => tp.TitleConst);
             modelBuilder.Entity<TitlePrincipal>()
                 .HasOne(tp => tp.Person)
-                .WithMany(p => p.TitlePrincipals)
+                .WithMany()
                 .HasForeignKey(tp => tp.NameConst);
 
             /* **************************
