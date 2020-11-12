@@ -36,5 +36,7 @@ namespace DataServiceLibrary
         IList<TitleGenre> GetTitleByGenre(int idgenre);
         Person GetPerson(string id);
         OmdbData GetOmdbData(string title);
+        IList<TitlePrincipal> GetTitleDirectors(string title);
+        IList<TitlePrincipal> GetActors(string title);
     }
 }

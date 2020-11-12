@@ -257,6 +257,36 @@ namespace DataServiceLibrary
                 .Where(tbm => tbm.TitleConst == title)
                 .ToList();
         }
+
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitleDirectors
+         * **************************************/
+        public IList<TitlePrincipal> GetTitleDirectors(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitlePrincipals
+                .Include(tp => tp.Title)
+                .Include(tp => tp.Person)
+                .Where(tbm => tbm.TitleConst == title)
+                .Where(tbm => tbm.Category == "director")
+                .ToList();
+        }
+
+        /* **************************************
+         * Framework functionalities
+         * Function: getActors
+         * **************************************/
+        public IList<TitlePrincipal> GetActors(string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitlePrincipals
+                .Include(tp => tp.Title)
+                .Include(tp => tp.Person)
+                .Where(tbm => tbm.TitleConst == title)
+                .Where(tbm => tbm.Category == "actor" || tbm.Category == "actress")
+                .ToList();
+        }
         /* **************************************
          * Framework functionalities
          * Function: getTitleAkas

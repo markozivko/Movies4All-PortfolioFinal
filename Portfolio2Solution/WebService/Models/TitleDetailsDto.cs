@@ -10,6 +10,7 @@ namespace WebService.Models
         public decimal Rating { get; set; }
         public int NumVotes { get; set; }
         public string Plot { get; set; }
-        public string ActorsUrl { get; set; }
+        public ICollection<PrincipalsDto> Actors { get; set; }
+        public PrincipalsDto Director { get; set; }
     }
 }
