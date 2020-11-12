@@ -200,12 +200,12 @@ namespace DataLayer
             ///*
             //* Return title genres 
             //*/
-            var genres = dataService.GetTitleGenres("tt6666448");
+            //var genres = dataService.GetTitleGenres("tt6666448");
 
-            foreach (var tg in genres)
-            {
-                Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
-            }
+            //foreach (var tg in genres)
+            //{
+            //    Console.WriteLine($"Title Id: {tg.TitleConst}, Title: {tg.Title.PrimaryTitle}, Genre: {tg.Genre.Name}");
+            //}
 
             ///*
             //* Return all genres 
@@ -277,9 +277,9 @@ namespace DataLayer
 
 
 
-            //var person = dataService.GetTitle("tt0063929");
+            var person = dataService.GetTitle("tt0063929");
 
-            //Console.WriteLine($"Name: {person.TitleGenres.FirstOrDefault().Genre.Name}");
+            Console.WriteLine($"Name: {person.TitleGenres.FirstOrDefault().Genre.Name}");
 
         }
     }

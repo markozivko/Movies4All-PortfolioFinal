@@ -4,7 +4,7 @@ using AutoMapper;
 using DataServiceLibrary.Models;
 namespace WebService.Models.Profiles
 {
-    public class TitleProfile: Profile
+    public class TitleProfile : Profile
     {
         public TitleProfile()
         {
@@ -15,11 +15,11 @@ namespace WebService.Models.Profiles
 
             CreateMap<TitleBasics, TitleDto>();
             //.ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.TitleGenres.FirstOrDefault().Genre.Name));
-                
-                CreateMap<TitleGenre, TitleListDto>()
-                .ForMember(dest => dest.PrimaryTitle, opt => opt.MapFrom(src => src.Title.PrimaryTitle))
-                .ForMember(dest => dest.StartYear, opt => opt.MapFrom(src => src.Title.StartYear));
-                //.ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name));
+
+            CreateMap<TitleGenre, TitleListDto>()
+            .ForMember(dest => dest.PrimaryTitle, opt => opt.MapFrom(src => src.Title.PrimaryTitle))
+            .ForMember(dest => dest.StartYear, opt => opt.MapFrom(src => src.Title.StartYear));
+            //.ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name));
         }
     }
 }
