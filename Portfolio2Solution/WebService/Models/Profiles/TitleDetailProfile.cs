@@ -18,8 +18,12 @@ namespace WebService.Models.Profiles
             CreateMap<OmdbData, TitleDetailsDto>()
                 .ForMember(dest => dest.Plot, opt => opt.MapFrom(src => src.Plot));
 
-            CreateMap<PrincipalsDto, TitleDetailsDto>()
-                .ForMember(dest => dest.Director, opt => opt.MapFrom(src => src.Name));
+            //CreateMap<ICollection<PrincipalsDto>, TitleDetailsDto>()
+            //    .ForMember(dest => dest.Principals.GetEnumerator().Current.Name, opt => opt.MapFrom(src => src.GetEnumerator().Current.Name))
+            //    .ForMember(dest => dest.Principals.GetEnumerator().Current.Characters, opt => opt.MapFrom(src => src.GetEnumerator().Current.Characters))
+            //    .ForMember(dest => dest.Principals.GetEnumerator().Current.Category, opt => opt.MapFrom(src => src.GetEnumerator().Current.Category));
+
+
 
         }
     }
