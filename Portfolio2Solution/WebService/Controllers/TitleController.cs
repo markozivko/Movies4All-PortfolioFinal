@@ -35,7 +35,7 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<TitleDto>(titles);
-            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.Const });
+            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
 
             return Ok(dto);
         }

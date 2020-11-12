@@ -36,7 +36,7 @@ namespace WebService.Controllers
         private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)
         {
             var pDto = _mapper.Map<PersonalitiesDto>(p);
-            pDto.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = p.NameConst });
+            pDto.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = p.NameConst.Replace(" ", String.Empty) });
             return pDto;
 
         }
