@@ -34,7 +34,9 @@ namespace WebService.Controllers
                 return NotFound();
             }
             var userDto = _mapper.Map<UserDto>(user);
-            userDto.TitleBookMarksUrl = Url.Link();
+            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId});
+            userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
+
             return Ok(userDto);
         }
 
