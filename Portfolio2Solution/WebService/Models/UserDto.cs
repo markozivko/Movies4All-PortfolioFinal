@@ -14,6 +14,6 @@ namespace WebService.Models
         public string Email { get; set;}
         public string Address { get; set; }
         public string TitleBookMarksUrl { get; set; }
-        public string Personalities {  get; set;  }
+        public string PersonalitiesUrl {  get; set;  }
     }
 }

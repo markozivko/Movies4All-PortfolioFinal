@@ -38,10 +38,15 @@ namespace WebService.Controllers
 
             return Ok(dto);
         }
-        [HttpGet]
+        [HttpGet("category/{id}")]
         public IActionResult GetTitlesByCategory(int genre)
         {
             var titles = _dataService.GetTitleByGenre(genre);
+
+            if (titles == null)
+            {
+                return NotFound();
+            }
             var result = CreateResult(titles);
             return Ok(result);
         }

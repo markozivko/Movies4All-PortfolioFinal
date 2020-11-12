@@ -261,11 +261,18 @@ namespace DataLayer
             /*
              * Return known for
             // */
-            var kfor = dataService.GetKnownTitleForPersons("tt0063929");
+            //var kfor = dataService.GetKnownTitleForPersons("tt0063929");
+
+            //foreach (var t in kfor)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
+            //}
+
+            var kfor = dataService.GetTitleByGenre(2);
 
             foreach (var t in kfor)
             {
-                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
+                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
             }
         }
     }

@@ -246,6 +246,20 @@ namespace DataLayer
                 .Where(kf => kf.TitleConst == title)
                 .ToList();
         }
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitlesByGenre
+         * **************************************/
+        public IList<TitleGenre> GetTitleByGenre(int idgenre)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleGenres
+                .Include(tg => tg.Genre)
+                .Include(tg => tg.Title)
+                .Where(tg => tg.IdGenre == idgenre)
+                .Take(5)
+                .ToList();
+        }
 
         /* ****************************************************************************************************************
          *                                         FUNCTIONS TO FIND 
