@@ -268,12 +268,17 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
             //}
 
-            var kfor = dataService.GetTitleByGenre(2);
+            //var kfor = dataService.GetTitleByGenre(2);
 
-            foreach (var t in kfor)
-            {
-                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
-            }
+            //foreach (var t in kfor)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
+            //}
+
+            var person = dataService.GetPerson("nm0000015");
+
+            Console.WriteLine($"Name: {person.NameConst} {person.Name}\n");
+
         }
     }
 

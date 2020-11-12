@@ -7,7 +7,7 @@ namespace WebService.Models
 {
     public class PersonalitiesDto
     {
-        public string Favorite { get; set; }
+        public string FavoritePersonUrl { get; set; }
         public string Notes { get; set; }
     }
 }

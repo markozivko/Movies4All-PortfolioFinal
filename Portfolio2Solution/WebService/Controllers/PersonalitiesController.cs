@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataServiceLibrary;
+using DataServiceLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
 
@@ -26,9 +28,24 @@ namespace WebService.Controllers
         {
 
             var pMarks = _dataService.GetPersonalitiesForUser(id);
-            var pDto = _mapper.Map<IEnumerable<PersonalitiesDto>>(pMarks);
+            var result = CreateResult(pMarks);
 
-            return Ok(pDto);
+            return Ok(result);
+        }
+
+        private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)
+        {
+            var pDto = _mapper.Map<PersonalitiesDto>(p);
+            pDto.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = p.NameConst });
+            return pDto;
+
+        }
+
+        private object CreateResult(IList<Personalities> p)
+        {
+            var items = p.Select(CreatePersonalitiesElementDto);
+
+            return new { items };
         }
 
     }

@@ -293,6 +293,22 @@ namespace DataServiceLibrary
                 .FirstOrDefault();
 
         }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: getPerson
+        * **************************************/
+        public Person GetPerson(string id)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.Persons
+                .Where(p => p.NameConst == id)
+                .FirstOrDefault();
+        }
+
+
         /* ****************************************************************************************************************
          *                                         FUNCTIONS TO FIND 
          * ****************************************************************************************************************/

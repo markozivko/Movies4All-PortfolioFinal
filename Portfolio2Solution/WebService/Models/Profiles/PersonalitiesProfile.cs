@@ -9,9 +9,7 @@ namespace WebService.Models.Profiles
         public PersonalitiesProfile()
         {
 
-            CreateMap<Personalities, PersonalitiesDto>()
-                .ForMember(dest => dest.Favorite,
-                opt => opt.MapFrom(src => src.FavoritePerson.Name));
+            CreateMap<Personalities, PersonalitiesDto>();
         }
     }
 }

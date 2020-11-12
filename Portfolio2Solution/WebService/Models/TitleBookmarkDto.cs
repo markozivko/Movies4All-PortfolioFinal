@@ -7,7 +7,7 @@ namespace WebService.Models
 {
     public class TitleBookmarkDto
     {
-        public string FavoriteTitle { get; set; }
+        public string FavoriteTitleUrl { get; set; }
         public string Notes { get; set; }
     }
 }

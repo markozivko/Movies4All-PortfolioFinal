@@ -35,5 +35,6 @@ namespace DataServiceLibrary
         IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names);
         TitleBasics GetTitle(string title);
         IList<TitleGenre> GetTitleByGenre(int idgenre);
+        Person GetPerson(string id);
     }
 }

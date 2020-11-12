@@ -9,10 +9,7 @@ namespace WebService.Models.Profiles
         public TitleBookmarkProfile()
         {
 
-            CreateMap<TitleBookmark, TitleBookmarkDto>()
-                .ForMember(dest =>
-                dest.FavoriteTitle,
-                opt => opt.MapFrom(src => src.Title.PrimaryTitle));
+            CreateMap<TitleBookmark, TitleBookmarkDto>();
         }
     }
 }
