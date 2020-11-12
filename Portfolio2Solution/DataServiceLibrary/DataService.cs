@@ -138,9 +138,9 @@ namespace DataServiceLibrary
                 .FirstOrDefault();
         }
         /* **************************************
- * Framework functionalities
- * Function: getTitleGenres
- * **************************************/
+         * Framework functionalities
+         * Function: getTitleGenres
+         * **************************************/
         public IList<TitleGenre> GetTitleGenres(string title)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -150,6 +150,21 @@ namespace DataServiceLibrary
                 .Where(tg => tg.TitleConst == title)
                 .ToList();
         }
+        /* **************************************
+         * Framework functionalities
+         * Function: getTitlesByGenre
+         * **************************************/
+        public IList<TitleGenre> GetTitleByGenre(int idgenre)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleGenres
+                .Include(tg => tg.Genre)
+                .Include(tg => tg.Title)
+                .Where(tg => tg.IdGenre == idgenre)
+                .Take(5)
+                .ToList();
+        }
+
         /* **************************************
          * Framework functionalities
          * Function: getAllGenres
@@ -273,6 +288,7 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.Titles
+                .Include(t => t.TitleGenres)
                 .Where(t => t.Const == title)
                 .FirstOrDefault();
 

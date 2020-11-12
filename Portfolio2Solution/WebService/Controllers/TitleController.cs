@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataServiceLibrary;
+using DataServiceLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
 
@@ -18,25 +21,7 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet("{id}", Name = nameof(GetTitlesGenres))]
-        //public IActionResult GetTitlesGenres(string id)
-        //{
-
-        //    var titles = _dataService.GetTitleGenres(id);
-
-        //    if (titles == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var dto = _mapper.Map<TitleDto>(titles);
-        //    dto.Url = Url.Link(nameof(GetTitlesGenres), new { id });
-        //    dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.TitleConst });
-
-        //    //WE LEFT HERE
-
-        //    return Ok(titles);
-        //}
+ 
         [HttpGet("{id}", Name = nameof(GetTitle))]
         public IActionResult GetTitle(string id)
         {
@@ -50,12 +35,28 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<TitleDto>(titles);
-            //dto.Url = Url.Link(nameof(GetTitle), new { id });
-            //dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.TitleConst });
-
-            //WE LEFT HERE
 
             return Ok(dto);
+        }
+        [HttpGet]
+        public IActionResult GetTitlesByCategory(int genre)
+        {
+            var titles = _dataService.GetTitleByGenre(genre);
+            var result = CreateResult(titles);
+            return Ok(result);
+        }
+        private TitleListDto CreateTitleElementDto(TitleGenre title)
+        {
+            var dto = _mapper.Map<TitleListDto>(title);
+            return dto;
+        }
+
+
+        private object CreateResult(IList<TitleGenre> titles)
+        {
+            var items = titles.Select(CreateTitleElementDto);
+
+            return new { items };
         }
     }
 }
