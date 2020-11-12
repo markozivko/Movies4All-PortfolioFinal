@@ -268,22 +268,17 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
             //}
 
-            var kfor = dataService.GetTitleByGenre(2);
+            //var kfor = dataService.GetTitleByGenre(2);
 
-            foreach (var t in kfor)
-            {
-                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
-            }
-
-
-
-            //var person = dataService.GetTitle("tt0063929");
-            //foreach (var i in person.TitleGenres)
+            //foreach (var t in kfor)
             //{
-
-            //    Console.WriteLine($"Name: {i.Genre.Name}");
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
             //}
 
+
+            var user = dataService.CreateNewUser("Ivana", "Zivko", DateTime.Now, true, "ivana@net.hr", "mIvana1971", "marko", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
+
+            Console.WriteLine($"User name: {user.UserId}");
 
         }
     }

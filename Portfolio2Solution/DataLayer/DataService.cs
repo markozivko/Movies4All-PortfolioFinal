@@ -409,5 +409,25 @@ namespace DataLayer
                 .FromSqlRaw("select * from title_recommendations({0})", title)
                 .ToList();
         }
+
+        /* ****************************************************************************************************************
+        *                                         FUNCTIONS TO CREATE
+        * ****************************************************************************************************************/
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: CreateNewUser
+        * ***********************************************/
+        public User CreateNewUser(string FName, string LName, DateTime BirthDay, bool Staff, string Email, string Password, string UserName, string StreetNum, string StreetName, string ZipCode, string CityName, string CountryName)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            var currentId = ctx.Users.Max(x => x.UserId);
+            Console.WriteLine(currentId);
+
+            ctx.Users
+                .FromSqlRaw("call create_new_user({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11})", FName, LName, BirthDay, Staff, Email, Password, UserName, StreetNum, StreetName, ZipCode, CityName, CountryName);
+               
+            return GetUser(currentId + 1);
+        }
     }
 }
