@@ -422,11 +422,8 @@ namespace DataLayer
         {
             using var ctx = new DatabaseContext(_connectionString);
             var currentId = ctx.Users.Max(x => x.UserId);
-            Console.WriteLine(currentId);
-
-            ctx.Users
-                .FromSqlRaw("call create_new_user({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11})", FName, LName, BirthDay, Staff, Email, Password, UserName, StreetNum, StreetName, ZipCode, CityName, CountryName);
-               
+            ctx.Database.ExecuteSqlInterpolated($"call create_new_user({FName}, {LName}, {BirthDay}, {Staff}, {Email}, {Password}, {UserName}, {StreetNum}, {StreetName}, {ZipCode}, {CityName}, {CountryName})");
+            ctx.SaveChanges();
             return GetUser(currentId + 1);
         }
     }

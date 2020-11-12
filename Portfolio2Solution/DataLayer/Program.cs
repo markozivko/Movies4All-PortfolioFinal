@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ namespace DataLayer
     class Program
     {
 
-    static void Main(string[] args)
+        static void Main(string[] args)
         {
             var config = new ConfigurationBuilder()
                   .AddJsonFile("config.json")
@@ -275,8 +276,10 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
             //}
 
+            DateTime thisDate1 = new DateTime(2011, 6, 10);
+            Console.WriteLine($"User name: {thisDate1.Date}");
 
-            var user = dataService.CreateNewUser("Ivana", "Zivko", DateTime.Now, true, "ivana@net.hr", "mIvana1971", "marko", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
+            var user = dataService.CreateNewUser("Petra", "Nadia", thisDate1.Date, true, "petra@net.hr", "mIPana5171", "mopld", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
 
             Console.WriteLine($"User name: {user.UserId}");
 
