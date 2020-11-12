@@ -23,6 +23,8 @@ namespace WebService.Controllers
         {
 
             var titles = _dataService.GetTitleDetails(id);
+            var rating = _dataService.GetTitleRating(id);
+            var plot = _dataService.GetOmdbData(id);
 
             if (titles == null)
             {

@@ -18,7 +18,9 @@ namespace WebService.Models.Profiles
             CreateMap<TitleGenre, TitleListDto>()
             .ForMember(dest => dest.PrimaryTitle, opt => opt.MapFrom(src => src.Title.PrimaryTitle))
             .ForMember(dest => dest.StartYear, opt => opt.MapFrom(src => src.Title.StartYear))
-            .ForMember(dest => dest.Runtime, opt => opt.MapFrom(src => src.Title.Runtime));
+            .ForMember(dest => dest.Runtime, opt => opt.MapFrom(src => src.Title.Runtime))
+            .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Title.Rating.Average));
+            
         }
 
         public string Flatten(ICollection<TitleGenre> genres)

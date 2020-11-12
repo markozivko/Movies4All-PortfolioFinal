@@ -10,5 +10,6 @@ namespace WebService.Models
         public string PrimaryTitle { get; set; }
         public string StartYear { get; set; }
         public int? Runtime { get; set; }
+        public decimal Rating { get; set; }
     }
 }

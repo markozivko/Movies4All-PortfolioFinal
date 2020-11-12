@@ -137,6 +137,23 @@ namespace DataServiceLibrary
                 .Where(tr => tr.Const == title)
                 .FirstOrDefault();
         }
+
+        /* **************************************
+         * Framework functionalities
+         * Function: getOmdbData
+         * **************************************/
+        public OmdbData GetOmdbData(string title)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.OmdbData
+                .Include(tr => tr.Title)
+                .Where(tr => tr.TitleConst == title)
+                .FirstOrDefault();
+
+        }
+
+
         /* **************************************
          * Framework functionalities
          * Function: getTitleGenres
@@ -160,6 +177,7 @@ namespace DataServiceLibrary
             return ctx.TitleGenres
                 .Include(tg => tg.Genre)
                 .Include(tg => tg.Title)
+                .ThenInclude(t => t.Rating)
                 .Where(tg => tg.IdGenre == idgenre)
                 .Take(5)
                 .ToList();
