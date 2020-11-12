@@ -24,12 +24,11 @@ namespace WebService.Controllers
         public IActionResult GetTitleDetails(string id)
         {
 
-            var titles = _dataService.GetTitleDetails(id);
             var rating = _dataService.GetTitleRating(id);
             var plot = _dataService.GetOmdbData(id);
             var tdo1 = _mapper.Map<TitleDetailsDto>(rating);
             var tdo2= _mapper.Map(plot, tdo1);
-            if (titles == null)
+            if (rating == null || plot == null) 
             {
                 return NotFound();
             }

@@ -12,7 +12,6 @@ namespace DataServiceLibrary
         IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names);
         IList<TitleBestMatch> FindTitleBestMatch(params string[] args);
         IList<TitleExactMatch> FindTitleExactMatch(params string[] args);
-        IList<TitleDetails> GetTitleDetails(string id);
         IList<Genre> GetAllGenres();
         IList<SearchHistory> GetAllSearchHistory();
         IList<TitleRating> GetAllTitlesRatings();

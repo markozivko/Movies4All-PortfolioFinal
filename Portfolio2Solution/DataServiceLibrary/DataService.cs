@@ -281,21 +281,7 @@ namespace DataServiceLibrary
                 .Where(kf => kf.TitleConst == title)
                 .ToList();
         }
-
-        /* **************************************
-        * Framework functionalities
-        * Function: getTitleDetails
-        * **************************************/
-        public IList<TitleDetails> GetTitleDetails(string title)
-        {
-
-            using var ctx = new DatabaseContext(_connectionString);
-
-            return ctx.TitleDetails
-                .FromSqlRaw("select avgrating, numvotes, plot, primaryname from titlerating natural join titleprincipals natural join omdbdata where titleconst = {0}", title)
-                .ToList();
-
-        }
+      
         /* **************************************
         * Framework functionalities
         * Function: getTitle
