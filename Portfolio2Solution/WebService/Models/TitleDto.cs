@@ -9,7 +9,5 @@ namespace WebService.Models
         public int? Runtime { get; set; }
         public string Genre { get; set; }
         public string DetailsUrl { get; set; }
-        
-
     }
 }

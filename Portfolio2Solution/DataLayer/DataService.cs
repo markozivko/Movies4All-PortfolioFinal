@@ -275,6 +275,22 @@ namespace DataLayer
                 .FirstOrDefault();
         }
 
+        /* **************************************
+       * Framework functionalities
+       * Function: getTitle
+       * **************************************/
+        public TitleBasics GetTitle(string title)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            return ctx.Titles
+                .Include(t => t.TitleGenres)
+                .Where(t => t.Const == title)
+                .FirstOrDefault();
+
+        }
+
         /* ****************************************************************************************************************
          *                                         FUNCTIONS TO FIND 
          * ****************************************************************************************************************/

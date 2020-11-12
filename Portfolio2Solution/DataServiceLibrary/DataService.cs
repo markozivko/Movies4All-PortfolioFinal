@@ -288,7 +288,7 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.Titles
-                .Include(t => t.TitleGenres)
+                //.Include(t => t.TitleGenres)
                 .Where(t => t.Const == title)
                 .FirstOrDefault();
 
