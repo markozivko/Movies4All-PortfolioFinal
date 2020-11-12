@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using DataServiceLibrary;
+using DataServiceLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
 
@@ -25,19 +26,15 @@ namespace WebService.Controllers
 
             var titles = _dataService.GetTitleDetails(id);
             var rating = _dataService.GetTitleRating(id);
-            var plot = _dataService.GetOmdbData(id).Plot;
-
-            TitleDetailsDto tdo = new TitleDetailsDto(rating.Average, rating.NumVotes, plot, null);
-
+            var plot = _dataService.GetOmdbData(id);
             var tdo1 = _mapper.Map<TitleDetailsDto>(rating);
-            var tdo2 = _mapper.Map<TitleDetailsDto>(plot);
-
+            var tdo2= _mapper.Map(plot, tdo1);
             if (titles == null)
             {
                 return NotFound();
             }
 
-            return Ok(titles);
+            return Ok(tdo2);
         }
     }
 }
