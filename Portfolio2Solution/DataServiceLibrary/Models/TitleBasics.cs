@@ -15,8 +15,8 @@ namespace DataServiceLibrary.Models
         public string StartYear { get; set; }
         public string EndYear { get; set; }
         public int? Runtime { get; set; }
-        //[JsonIgnore]
-        //public ICollection<TitleGenre> TitleGenres { get; set; }
+        [JsonIgnore]
+        public ICollection<TitleGenre> TitleGenres { get; set; }
         [JsonIgnore]
         public TitleRating Rating { get; set; }
         [JsonIgnore]

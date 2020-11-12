@@ -278,8 +278,12 @@ namespace DataLayer
 
 
             var person = dataService.GetTitle("tt0063929");
+            foreach (var i in person.TitleGenres)
+            {
 
-            Console.WriteLine($"Name: {person.TitleGenres.FirstOrDefault().Genre.Name}");
+                Console.WriteLine($"Name: {i.Genre.Name}");
+            }
+            
 
         }
     }

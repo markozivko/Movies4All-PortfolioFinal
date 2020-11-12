@@ -283,9 +283,9 @@ namespace DataLayer
         {
 
             using var ctx = new DatabaseContext(_connectionString);
-
             return ctx.Titles
                 .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
                 .Where(t => t.Const == title)
                 .FirstOrDefault();
 
