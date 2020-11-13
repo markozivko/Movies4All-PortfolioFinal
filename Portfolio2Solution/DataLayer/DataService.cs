@@ -508,9 +508,9 @@ namespace DataLayer
         }
 
         /* ***********************************************
-       * Framework functionalities
-       * Function: UserUpdateAddress
-       * ***********************************************/
+        * Framework functionalities
+        * Function: UserUpdateAddress
+        * ***********************************************/
         public bool UserUpdateAddress(int Iduser, Address updatedAddress)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -535,5 +535,52 @@ namespace DataLayer
 
         }
 
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdateBookmarkNotes
+        * ***********************************************/
+        public bool UserUpdateBookmarkNotes(int Iduser, string Notes)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var titleBookmark = ctx.TitleBookmarks.Find(Iduser);
+
+            if (titleBookmark != null)
+            {
+
+                titleBookmark.Notes = Notes;
+                ctx.SaveChanges();
+                return true;
+
+            }
+
+            return false;
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdatePersonality
+        * ***********************************************/
+        public bool UserUpdatePersonality(int Iduser, string Notes)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var personality = ctx.TitleBookmarks.Find(Iduser);
+
+            if (personality != null)
+            {
+
+                personality.Notes = Notes;
+                ctx.SaveChanges();
+                return true;
+
+            }
+
+            return false;
+
+        }
     }
 }

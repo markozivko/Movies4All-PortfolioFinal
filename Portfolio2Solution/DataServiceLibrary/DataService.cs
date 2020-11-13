@@ -544,5 +544,81 @@ namespace DataServiceLibrary
             return false;
 
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdateAddress
+        * ***********************************************/
+        public bool UserUpdateAddress(int Iduser, Address updatedAddress)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var user = ctx.Users.Find(Iduser);
+            Console.WriteLine("Hello user");
+            if (user != null)
+            {
+
+                var address = ctx.Address.Find(GetUser(Iduser).AddressId);
+
+                address.City = updatedAddress.City;
+                address.Country = updatedAddress.Country;
+                address.ZipCode = updatedAddress.ZipCode;
+                address.StreetName = updatedAddress.StreetName;
+                address.StreetNumber = updatedAddress.StreetNumber;
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdateBookmarkNotes
+        * ***********************************************/
+        public bool UserUpdateBookmarkNotes(int Iduser, string Notes)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var titleBookmark = ctx.TitleBookmarks.Find(Iduser);
+
+            if (titleBookmark != null)
+            {
+
+                titleBookmark.Notes = Notes;
+                ctx.SaveChanges();
+                return true;
+
+            }
+
+            return false;
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdatePersonality
+        * ***********************************************/
+        public bool UserUpdatePersonality(int Iduser, string Notes)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var personality = ctx.TitleBookmarks.Find(Iduser);
+
+            if (personality != null)
+            {
+
+                personality.Notes = Notes;
+                ctx.SaveChanges();
+                return true;
+
+            }
+
+            return false;
+
+        }
     }
 }

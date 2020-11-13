@@ -46,5 +46,7 @@ namespace DataServiceLibrary
         void UserAddPersonality(int Iduser, string PersonalityId, string Notes);
         bool UserUpdate(int Iduser, User updatedUser);
         bool UserUpdateAddress(int Iduser, Address updatedAddress);
+        bool UserUpdateBookmarkNotes(int Iduser, string Notes);
+        bool UserUpdatePersonality(int Iduser, string Notes);
     }
 }
