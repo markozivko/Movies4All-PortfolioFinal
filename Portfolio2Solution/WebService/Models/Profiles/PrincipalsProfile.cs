@@ -12,7 +12,8 @@ namespace WebService.Models.Profiles
         public PrincipalsProfile()
         {
             CreateMap<TitlePrincipal, PrincipalsDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Person.Name));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Person.Name))
+                .ForMember(dest => dest.Characters, opt => opt.MapFrom(src => src.Characters.Trim(new Char[] { (char)39, '[', ']' }).Replace("','", ", ")));
         }
     }
 }
