@@ -518,5 +518,31 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
             ctx.Database.ExecuteSqlInterpolated($"call user_add_personalities({Iduser}, {PersonalityId}, {Notes})");
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdateFirstName
+        * ***********************************************/
+        public bool UserUpdate(int Iduser, User updatedUser)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var user = ctx.Users.Find(Iduser);
+            Console.WriteLine("Hello user");
+            if (user != null)
+            {
+                user.FirstName = updatedUser.FirstName;
+                user.LastName = updatedUser.LastName;
+                user.Password = updatedUser.Password;
+                user.BirthDay = updatedUser.BirthDay;
+                user.UserName = updatedUser.UserName;
+                user.Email = updatedUser.Email;
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
+
+        }
     }
 }

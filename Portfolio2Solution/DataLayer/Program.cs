@@ -292,7 +292,17 @@ namespace DataLayer
 
             //}
 
-            dataService.UserAddPersonality(3, "nm0001037", "This should be a new favorite personality");
+            var user = new Address {
+
+                City = "whatee",
+                Country = "mew",
+                ZipCode = "12331",
+                StreetNumber = "2",
+                StreetName = "ilica"
+                
+            };
+
+            dataService.UserUpdateAddress(4, user);
 
            
         }

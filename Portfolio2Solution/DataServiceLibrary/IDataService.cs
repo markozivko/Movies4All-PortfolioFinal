@@ -44,5 +44,7 @@ namespace DataServiceLibrary
         IList<Episode> GetEpisodesBySeason(string serieid, int season);
         void UserAddTitleBookmark(int Iduser, string TitleId, string Notes);
         void UserAddPersonality(int Iduser, string PersonalityId, string Notes);
+        bool UserUpdate(int Iduser, User updatedUser);
+        bool UserUpdateAddress(int Iduser, Address updatedAddress);
     }
 }
