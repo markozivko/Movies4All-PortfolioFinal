@@ -462,5 +462,20 @@ namespace DataServiceLibrary
                 .FromSqlRaw("select * from title_recommendations({0})", title)
                 .ToList();
         }
+        /* ****************************************************************************************************************
+        *                                         FUNCTIONS TO CREATE
+        * ****************************************************************************************************************/
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: CreateNewUser
+        * ***********************************************/
+        public void CreateNewUser(User user, Address address )
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            var currentId = ctx.Users.Max(x => x.UserId);
+            ctx.Database.ExecuteSqlInterpolated($"call create_new_user({user.FirstName}, {user.LastName}, {user.BirthDay}, {user.IsStaff}, {user.Email}, {user.Password}, {user.UserName}, {address.StreetNumber}, {address.StreetName}, {address.ZipCode}, {address.City}, {address.Country})");
+            ctx.SaveChanges();
+        }
     }
 }

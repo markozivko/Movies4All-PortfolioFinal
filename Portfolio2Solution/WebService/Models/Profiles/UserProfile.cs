@@ -21,12 +21,15 @@ namespace WebService.Models.Profiles
             .ForMember(dest =>
                     dest.Address,
                     opt => opt.MapFrom(src => src.Address.StreetNumber + " " + src.Address.StreetName + " " + src.Address.ZipCode + " "+ src.Address.City + " " + src.Address.Country));
-
             CreateMap<User, UserListDto>()
                 .ForMember(dest =>
                     dest.FullName,
                     opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
-              
+
+            CreateMap<UserForCreationOrUpdateDto, User>()
+                .ForMember(dest => dest.BirthDay ,opt => opt.MapFrom(src => Convert.ToDateTime(src.BirthDay)));
+
+            CreateMap<UserForCreationOrUpdateDto, Address>();
         }
     }
 }

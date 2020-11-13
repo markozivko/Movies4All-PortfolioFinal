@@ -60,6 +60,15 @@ namespace WebService.Controllers
 
             return new { items };
         }
+        [HttpPost]
+        public IActionResult CreateUser(UserForCreationOrUpdateDto newuser)
+        {
+            var user = _mapper.Map<User>(newuser);
+            var address = _mapper.Map<Address>(newuser);
 
+            _dataService.CreateNewUser(user, address);
+
+            return Created("", user);
+        }
     }
 }

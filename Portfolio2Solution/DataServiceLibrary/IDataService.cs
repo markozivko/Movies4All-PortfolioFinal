@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataServiceLibrary.FromSQL;
 using DataServiceLibrary.Models;
 
@@ -38,5 +39,6 @@ namespace DataServiceLibrary
         OmdbData GetOmdbData(string title);
         IList<TitlePrincipal> GetTitleDirectors(string title);
         IList<TitlePrincipal> GetActors(string title);
+        void CreateNewUser(User user, Address address);
     }
 }
