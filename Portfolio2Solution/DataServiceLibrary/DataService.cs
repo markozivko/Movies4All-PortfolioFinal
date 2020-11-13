@@ -494,7 +494,6 @@ namespace DataServiceLibrary
         public void CreateNewUser(User user, Address address )
         {
             using var ctx = new DatabaseContext(_connectionString);
-            var currentId = ctx.Users.Max(x => x.UserId);
             ctx.Database.ExecuteSqlInterpolated($"call create_new_user({user.FirstName}, {user.LastName}, {user.BirthDay}, {user.IsStaff}, {user.Email}, {user.Password}, {user.UserName}, {address.StreetNumber}, {address.StreetName}, {address.ZipCode}, {address.City}, {address.Country})");
             ctx.SaveChanges();
         }
