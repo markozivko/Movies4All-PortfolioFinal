@@ -582,5 +582,25 @@ namespace DataLayer
             return false;
 
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UnsubsribeUser
+        * ***********************************************/
+        public bool UnsubsribeUser(int Iduser)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            var user = ctx.Users.Find(Iduser);
+
+            if (user != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"CALL unsuscribe_user ({Iduser})");
+                return true;
+            }
+
+            return false;
+
+        }
     }
 }

@@ -48,5 +48,8 @@ namespace DataServiceLibrary
         bool UserUpdateAddress(int Iduser, Address updatedAddress);
         bool UserUpdateBookmarkNotes(int Iduser, string Notes);
         bool UserUpdatePersonality(int Iduser, string Notes);
+        bool UnsubsribeUser(int Iduser);
+        bool DeleteBookmarkForUser(int Iduser, string titleId);
+        bool DeletePersonalityForUser(int Iduser, string titleId);
     }
 }

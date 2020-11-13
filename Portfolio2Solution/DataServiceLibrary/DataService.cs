@@ -620,5 +620,65 @@ namespace DataServiceLibrary
             return false;
 
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UnsubsribeUser
+        * ***********************************************/
+        public bool UnsubsribeUser(int Iduser)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            var user = ctx.Users.Find(Iduser);
+
+            if (user != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"CALL unsuscribe_user ({Iduser})");
+                return true;
+            }
+
+            return false;
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: DeleteBookmarkForUser
+        * ***********************************************/
+        public bool DeleteBookmarkForUser(int Iduser, string titleId)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            var user = ctx.Users.Find(Iduser);
+
+            if (user != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"CALL user_delete_titlebookmarks ({Iduser}, {titleId})");
+                return true;
+            }
+
+            return false;
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: DeletePersonalityForUser
+        * ***********************************************/
+        public bool DeletePersonalityForUser(int Iduser, string titleId)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            var user = ctx.Users.Find(Iduser);
+
+            if (user != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"CALL user_delete_personalities ({Iduser}, {titleId})");
+                return true;
+            }
+
+            return false;
+
+        }
     }
 }
