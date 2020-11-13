@@ -241,12 +241,12 @@ namespace DataLayer
             ///*
             //* Return titleprincipals
             //*/
-            //var tprincipals = dataService.GetTitlePrincipals("tt0063929");
+            var tprincipals = dataService.GetTitlePrincipals("tt0418455");
 
-            //foreach (var t in tprincipals)
-            //{
-            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Person Id: {t.NameConst}, Person: {t.Person.Name}, Category: {t.Category}");
-            //}
+            foreach (var t in tprincipals)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Person Id: {t.NameConst}, Person: {t.Person.Name}, Category: {t.Category}");
+            }
 
             //    /*
             //   * Return titleakas
@@ -276,12 +276,12 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
             //}
 
-            DateTime thisDate1 = new DateTime(2011, 6, 10);
-            Console.WriteLine($"User name: {thisDate1.Date}");
+            //DateTime thisDate1 = new DateTime(2011, 6, 10);
+            //Console.WriteLine($"User name: {thisDate1.Date}");
 
-            var user = dataService.CreateNewUser("Petra", "Nadia", thisDate1.Date, true, "petra@net.hr", "mIPana5171", "mopld", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
+            //var user = dataService.CreateNewUser("Petra", "Nadia", thisDate1.Date, true, "petra@net.hr", "mIPana5171", "mopld", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
 
-            Console.WriteLine($"User name: {user.UserId}");
+            //Console.WriteLine($"User name: {user.UserId}");
 
         }
     }

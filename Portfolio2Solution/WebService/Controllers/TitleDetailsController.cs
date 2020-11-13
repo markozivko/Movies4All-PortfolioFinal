@@ -28,12 +28,10 @@ namespace WebService.Controllers
 
             var rating = _dataService.GetTitleRating(id);
             var plot = _dataService.GetOmdbData(id);
-           // var principals = _dataService.GetTitlePrincipals(id);
-
+           IList<PrincipalsDto> principals = _mapper.Map<IList<TitlePrincipal>, IList<PrincipalsDto>>(_dataService.GetTitlePrincipals(id));
             var tdo1 = _mapper.Map<TitleDetailsDto>(rating);
             var tdo2= _mapper.Map(plot, tdo1);
-
-            //var tdo3 = _mapper.Map(director.Select(CreateDirectorsElementDto), tdo2);
+            tdo2.Principals = principals;
             if (rating == null || plot == null) 
             {
                 return NotFound();
@@ -41,17 +39,5 @@ namespace WebService.Controllers
 
             return Ok(tdo2);
         }
-
-        //private PrincipalsDto CreateDirectorsElementDto(TitleDetailsDto tdo, TitlePrincipal tp)
-        //{
-        //    var tpDto = _mapper.Map<PrincipalsDto>(tp);
-        //    return tpDto;
-        //}
-
-        //private object CreateResult(IList<TitlePrincipal> tp)
-        //{ 
-        //    var items = tp.Select(CreateDirectorsElementDto);
-        //    return new { items };
-        //}
     }
 }
