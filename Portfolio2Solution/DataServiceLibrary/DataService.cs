@@ -577,19 +577,39 @@ namespace DataServiceLibrary
         * Framework functionalities
         * Function: UserUpdateBookmarkNotes
         * ***********************************************/
-        public bool UserUpdateBookmarkNotes(int Iduser, string Notes)
+        public bool UserUpdateBookmarkNotes(int Iduser, string Title, string Notes)
         {
 
             using var ctx = new DatabaseContext(_connectionString);
 
             var titleBookmark = ctx.TitleBookmarks.Find(Iduser);
+            var t = GetTitleBookmarkForUser(Iduser);
+
+            bool isBookmarked = false;
+
+            foreach (var i in t)
+            {
+                if (i.TitleConst.Equals(Title))
+                {
+                    isBookmarked = true;
+                }
+                else
+                {
+                    isBookmarked = false;
+                }
+            }
 
             if (titleBookmark != null)
             {
+                if (isBookmarked == true)
+                {
 
-                titleBookmark.Notes = Notes;
-                ctx.SaveChanges();
-                return true;
+                    titleBookmark.Notes = Notes;
+                    ctx.SaveChanges();
+                    return true;
+                }
+
+                //MISSING PART
 
             }
 
