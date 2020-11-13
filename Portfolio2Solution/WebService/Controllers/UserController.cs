@@ -60,15 +60,27 @@ namespace WebService.Controllers
 
             return new { items };
         }
-        [HttpPost]
-        public IActionResult CreateUser(UserForCreationOrUpdateDto newuser)
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto UserOrUpdateDto)
         {
-            var user = _mapper.Map<User>(newuser);
-            var address = _mapper.Map<Address>(newuser);
+            var user = _mapper.Map<User>(UserOrUpdateDto);
+            var address = _mapper.Map<Address>(UserOrUpdateDto);
 
-            _dataService.CreateNewUser(user, address);
+            if (!_dataService.UserUpdate(id, user))
+            {
+                return NotFound();
+            } else
+            {
+                if (!_dataService.UserUpdateAddress(id, address))
+                {
+                    return NotFound();
 
-            return Created("", user);
+                }
+            }
+
+            return NoContent();
+
         }
     }
 }

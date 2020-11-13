@@ -64,5 +64,17 @@ namespace WebService.Controllers
 
             return new { items };
         }
+
+        //AUTHENTICATION NEEDED
+
+        //[HttpPost("{id}")]
+        //public IActionResult AddTitleBookmarksForUser(TitleDto td)
+        //{
+
+        //    var tBook = _mapper.Map<TitleBookmark>(td);
+
+        //    _dataService.UserAddTitleBookmark()
+
+        //}
     }
 }
