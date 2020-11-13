@@ -283,28 +283,13 @@ namespace DataLayer
 
             //Console.WriteLine($"User name: {user.UserId}");
 
-            //var episodes = dataService.GetAllEpisodes("tt0141842");
+            var episodes = dataService.GetAllEpisodes("tt0141842");
 
-            //foreach (var t in episodes)
-            //{
+            foreach (var t in episodes)
+            {
 
-            //    Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} ");
-
-            //}
-
-            var user = new Address {
-
-                City = "whatee",
-                Country = "mew",
-                ZipCode = "12331",
-                StreetNumber = "2",
-                StreetName = "ilica"
-                
-            };
-
-            dataService.UnsubsribeUser(5);
-
-           
+                Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} Episode Id: {t.Title.PrimaryTitle}");
+            }
         }
     }
     

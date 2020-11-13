@@ -298,7 +298,7 @@ namespace DataLayer
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Episodes
-                .FromSqlRaw("SELECT * FROM episode AS e INNER JOIN titlebasics AS t ON e.titleconst = t.titleconst")
+                .Include(e => e.Title)
                 .Where(e => e.SerieId == serieid)
                 .ToList();
         }
@@ -310,14 +310,11 @@ namespace DataLayer
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Episodes
-                .FromSqlRaw("SELECT * FROM episode AS e INNER JOIN titlebasics AS t ON e.titleconst = t.titleconst")
+                .Include(e => e.Title)
                 .Where(e => e.SerieId == serieid)
                 .Where(e => e.Season == season)
                 .ToList();
-            //    .Include(e => e.Title)
-            //    .Where(e => e.SerieId == serieid)
-            //    .Where(e => e.Season == season)
-            //    .ToList();
+         
 
 
         }
