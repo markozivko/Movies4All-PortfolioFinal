@@ -288,7 +288,7 @@ namespace DataLayer
             foreach (var t in episodes)
             {
                 
-                Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} ");
+                Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} Episode Id: {t.Title.PrimaryTitle}");
 
             }
         }

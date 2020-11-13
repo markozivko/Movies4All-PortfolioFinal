@@ -244,14 +244,14 @@ namespace DataServiceLibrary
             modelBuilder.Entity<Episode>().Property(e => e.SerieId).HasColumnName("parenttconst");
             modelBuilder.Entity<Episode>().Property(e => e.Season).HasColumnName("seasonnumber");
             modelBuilder.Entity<Episode>().Property(e => e.NumEpisode).HasColumnName("episodenumber");
-            modelBuilder.Entity<Episode>()
-                .HasOne(e => e.Title)
-                .WithMany(t => t.Episodes)
-                .HasForeignKey(e => e.TitleConst);
-            modelBuilder.Entity<Episode>()
-                .HasOne(e => e.Title)
-                .WithMany(t => t.Episodes)
-                .HasForeignKey(e => e.SerieId);
+            //modelBuilder.Entity<Episode>()
+            //    .HasOne(e => e.Title)
+            //    .WithMany(t => t.Episodes)
+            //    .HasForeignKey(e => e.TitleConst);
+            //modelBuilder.Entity<Episode>()
+            //    .HasOne(e => e.Title)
+            //    .WithMany(t => t.Episodes)
+            //    .HasForeignKey(e => e.SerieId);
 
             /* **************************
              * table OmdbData
