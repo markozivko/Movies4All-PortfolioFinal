@@ -42,5 +42,7 @@ namespace DataServiceLibrary
         void CreateNewUser(User user, Address address);
         IList<Episode> GetAllEpisodes(string serieid);
         IList<Episode> GetEpisodesBySeason(string serieid, int season);
+        void UserAddTitleBookmark(int Iduser, string TitleId, string Notes);
+        void UserAddPersonality(int Iduser, string PersonalityId, string Notes);
     }
 }

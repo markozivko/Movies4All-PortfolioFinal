@@ -457,5 +457,29 @@ namespace DataLayer
             ctx.SaveChanges();
             return GetUser(currentId + 1);
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserAddTitleBookmark
+        * ***********************************************/
+        public void UserAddTitleBookmark(int Iduser, string TitleId, string Notes)
+        {
+            //check here what to do if user wants to create the same bookmark for existing bookmark
+            //check also if users exists
+            using var ctx = new DatabaseContext(_connectionString);
+            ctx.Database.ExecuteSqlInterpolated($"call user_add_titlebookmarks({Iduser}, {TitleId}, {Notes})");
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserAddPersonality
+        * ***********************************************/
+        public void UserAddPersonality(int Iduser, string PersonalityId, string Notes)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            ctx.Database.ExecuteSqlInterpolated($"call user_add_personalities({Iduser}, {PersonalityId}, {Notes})");
+        }
+
     }
 }

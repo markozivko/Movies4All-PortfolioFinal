@@ -283,14 +283,18 @@ namespace DataLayer
 
             //Console.WriteLine($"User name: {user.UserId}");
 
-            var episodes = dataService.GetAllEpisodes("tt0141842");
+            //var episodes = dataService.GetAllEpisodes("tt0141842");
 
-            foreach (var t in episodes)
-            {
-                
-                Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} ");
+            //foreach (var t in episodes)
+            //{
 
-            }
+            //    Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} ");
+
+            //}
+
+            dataService.UserAddPersonality(3, "nm0001037", "This should be a new favorite personality");
+
+           
         }
     }
     

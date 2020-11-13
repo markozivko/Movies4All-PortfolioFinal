@@ -497,5 +497,26 @@ namespace DataServiceLibrary
             ctx.Database.ExecuteSqlInterpolated($"call create_new_user({user.FirstName}, {user.LastName}, {user.BirthDay}, {user.IsStaff}, {user.Email}, {user.Password}, {user.UserName}, {address.StreetNumber}, {address.StreetName}, {address.ZipCode}, {address.City}, {address.Country})");
             ctx.SaveChanges();
         }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserAddTitleBookmark
+        * ***********************************************/
+        public void UserAddTitleBookmark(int Iduser, string TitleId, string Notes)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            ctx.Database.ExecuteSqlInterpolated($"call user_add_titlebookmarks({Iduser}, {TitleId}, {Notes})");
+
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserAddPersonality
+        * ***********************************************/
+        public void UserAddPersonality(int Iduser, string PersonalityId, string Notes)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            ctx.Database.ExecuteSqlInterpolated($"call user_add_personalities({Iduser}, {PersonalityId}, {Notes})");
+        }
     }
 }
