@@ -241,12 +241,12 @@ namespace DataLayer
             ///*
             //* Return titleprincipals
             //*/
-            var tprincipals = dataService.GetTitlePrincipals("tt0418455");
+            //var tprincipals = dataService.GetTitlePrincipals("tt0418455");
 
-            foreach (var t in tprincipals)
-            {
-                Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Person Id: {t.NameConst}, Person: {t.Person.Name}, Category: {t.Category}");
-            }
+            //foreach (var t in tprincipals)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}, Person Id: {t.NameConst}, Person: {t.Person.Name}, Category: {t.Category}");
+            //}
 
             //    /*
             //   * Return titleakas
@@ -283,7 +283,13 @@ namespace DataLayer
 
             //Console.WriteLine($"User name: {user.UserId}");
 
+            var episodes = dataService.GetAllEpisodes("tt0141842");
+
+            foreach (var t in episodes)
+            {
+                Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst}");
+            }
         }
     }
-
+    
 }

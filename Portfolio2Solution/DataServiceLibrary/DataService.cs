@@ -342,6 +342,27 @@ namespace DataServiceLibrary
                 .Where(p => p.NameConst == id)
                 .FirstOrDefault();
         }
+        /* **************************************
+         * Framework functionalities
+         * Function: getEpisodes
+         * **************************************/
+        public IList<Episode> GetAllEpisodes(string serieid)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Episodes
+                .Include(e => e.Title)
+                .Where(e => e.SerieId == serieid)
+                .ToList();
+        }
+        public IList<Episode> GetEpisodesBySeason(string serieid, int season)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Episodes
+                .Include(e => e.Title)
+                .Where(e => e.SerieId == serieid)
+                .Where(e => e.Season == season)
+                .ToList();
+        }
 
 
         /* ****************************************************************************************************************

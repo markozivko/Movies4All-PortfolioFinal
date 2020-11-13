@@ -40,5 +40,7 @@ namespace DataServiceLibrary
         IList<TitlePrincipal> GetTitleDirectors(string title);
         IList<TitlePrincipal> GetActors(string title);
         void CreateNewUser(User user, Address address);
+        IList<Episode> GetAllEpisodes(string serieid);
+        IList<Episode> GetEpisodesBySeason(string serieid, int season);
     }
 }
