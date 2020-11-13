@@ -34,14 +34,14 @@ namespace WebService.Controllers
                 return NotFound();
             }
             var userDto = _mapper.Map<UserDto>(user);
-            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId});
+            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
             userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
 
             return Ok(userDto);
         }
 
         [HttpGet]
-        public IActionResult GetUsers() 
+        public IActionResult GetUsers()
         {
             var users = _dataService.GetUsers();
             var result = CreateResult(users);
@@ -53,7 +53,7 @@ namespace WebService.Controllers
             return dto;
         }
 
-  
+
         private object CreateResult(IList<User> users)
         {
             var items = users.Select(CreateUserElementDto);
@@ -82,5 +82,17 @@ namespace WebService.Controllers
             return NoContent();
 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult UnsubscribeUser(int id)
+        {
+            if(!_dataService.UnsubsribeUser(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
     }
 }
