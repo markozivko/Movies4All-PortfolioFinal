@@ -46,7 +46,6 @@ namespace WebService.Controllers
             foreach (var e in episodes)
             {
 
-                //DOES NOT WORK
                 var dto = _mapper.Map<EpisodeDto>(e);
                 var plot = _dataService.GetOmdbData(e.TitleConst.Trim()).Plot;
 
