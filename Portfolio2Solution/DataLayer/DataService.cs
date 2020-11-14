@@ -550,17 +550,17 @@ namespace DataLayer
         * Framework functionalities
         * Function: UserUpdateBookmarkNotes
         * ***********************************************/
-        public bool UserUpdateBookmarkNotes(int Iduser, string Notes)
+        public bool UserUpdateBookmarkNotes(int Iduser, string Title, string Notes)
         {
 
             using var ctx = new DatabaseContext(_connectionString);
 
-            var titleBookmark = ctx.TitleBookmarks.Find(Iduser);
+            var titleBookmark = ctx.TitleBookmarks.Find(Iduser, Title);
 
             if (titleBookmark != null)
             {
-
                 titleBookmark.Notes = Notes;
+                Console.WriteLine($"Notes {Notes}");
                 ctx.SaveChanges();
                 return true;
 
@@ -569,17 +569,16 @@ namespace DataLayer
             return false;
 
         }
-
         /* ***********************************************
         * Framework functionalities
         * Function: UserUpdatePersonality
         * ***********************************************/
-        public bool UserUpdatePersonality(int Iduser, string Notes)
+        public bool UserUpdatePersonality(int Iduser, string Name, string Notes)
         {
 
             using var ctx = new DatabaseContext(_connectionString);
 
-            var personality = ctx.TitleBookmarks.Find(Iduser);
+            var personality = ctx.TitleBookmarks.Find(Iduser, Name);
 
             if (personality != null)
             {

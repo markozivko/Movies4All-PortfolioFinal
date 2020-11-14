@@ -46,10 +46,10 @@ namespace DataServiceLibrary
         bool UserUpdate(int Iduser, User updatedUser);
         bool UserUpdateAddress(int Iduser, Address updatedAddress);
         bool UserUpdateBookmarkNotes(int Iduser, string Title, string Notes);
-        bool UserUpdatePersonality(int Iduser, string Notes);
         bool UnsubsribeUser(int Iduser);
         bool DeleteBookmarkForUser(int Iduser, string titleId);
         bool DeletePersonalityForUser(int Iduser, string titleId);
         OmdbData GetOmdbData(string title);
+        bool UserUpdatePersonality(int Iduser, string Name, string Notes);
     }
 }

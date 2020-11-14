@@ -517,6 +517,9 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
             ctx.Database.ExecuteSqlInterpolated($"call user_add_personalities({Iduser}, {PersonalityId}, {Notes})");
         }
+        /* ****************************************************************************************************************
+        *                                         FUNCTIONS TO UPDATE
+        * ****************************************************************************************************************/
 
         /* ***********************************************
         * Framework functionalities
@@ -581,34 +584,14 @@ namespace DataServiceLibrary
 
             using var ctx = new DatabaseContext(_connectionString);
 
-            var titleBookmark = ctx.TitleBookmarks.Find(Iduser);
-            var t = GetTitleBookmarkForUser(Iduser);
-
-            bool isBookmarked = false;
-
-            foreach (var i in t)
-            {
-                if (i.TitleConst.Equals(Title))
-                {
-                    isBookmarked = true;
-                }
-                else
-                {
-                    isBookmarked = false;
-                }
-            }
+            var titleBookmark = ctx.TitleBookmarks.Find(Iduser, Title);
 
             if (titleBookmark != null)
             {
-                if (isBookmarked == true)
-                {
-
                     titleBookmark.Notes = Notes;
+                    Console.WriteLine($"Notes {Notes}");
                     ctx.SaveChanges();
                     return true;
-                }
-
-                //MISSING PART
 
             }
 
@@ -620,12 +603,12 @@ namespace DataServiceLibrary
         * Framework functionalities
         * Function: UserUpdatePersonality
         * ***********************************************/
-        public bool UserUpdatePersonality(int Iduser, string Notes)
+        public bool UserUpdatePersonality(int Iduser, string Name, string Notes)
         {
 
             using var ctx = new DatabaseContext(_connectionString);
 
-            var personality = ctx.TitleBookmarks.Find(Iduser);
+            var personality = ctx.TitleBookmarks.Find(Iduser, Name);
 
             if (personality != null)
             {
@@ -639,6 +622,9 @@ namespace DataServiceLibrary
             return false;
 
         }
+        /* ****************************************************************************************************************
+        *                                         FUNCTIONS TO DELETE
+        * ****************************************************************************************************************/
 
         /* ***********************************************
         * Framework functionalities

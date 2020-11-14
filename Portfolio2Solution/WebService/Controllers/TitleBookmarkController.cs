@@ -48,19 +48,20 @@ namespace WebService.Controllers
             return new { items };
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult UpdateBookMarksForUser(int id, TitleBookmarkForCreationOrUpdateDto tb)
-        //{
+        [HttpPut("{id}")]
+        public IActionResult UpdateBookMarksForUser(int id, TitleBookmarkForCreationOrUpdateDto tb)
+        {
 
-        //    var tb1 = _mapper.Map<TitleBookmark>(tb);
+            var tb1 = _mapper.Map<TitleBookmark>(tb);
 
-        //    if (!_dataService.UserUpdateBookmarkNotes(id, tb1.Notes))
-        //    {
-        //        return NotFound();
-        //    }
+            if (!_dataService.UserUpdateBookmarkNotes(id, tb1.TitleConst, tb1.Notes))
+            {
+                return NotFound();
+            }
+            return NoContent();
 
 
 
-        //}
+        }
     }
 }

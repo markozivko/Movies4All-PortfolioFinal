@@ -292,7 +292,7 @@ namespace DataLayer
             //}
 
 
-            var ds = dataService.GetOmdbData("tt0141842").Plot;
+            var ds = dataService.UserUpdateBookmarkNotes(3, "tt0141842", "deserve to win a award");
 
             Console.WriteLine(ds);
         }
