@@ -559,8 +559,10 @@ namespace DataLayer
 
             if (titleBookmark != null)
             {
+
+                Console.WriteLine($"==========={titleBookmark.Notes}");
+
                 titleBookmark.Notes = Notes;
-                Console.WriteLine($"Notes {Notes}");
                 ctx.SaveChanges();
                 return true;
 
