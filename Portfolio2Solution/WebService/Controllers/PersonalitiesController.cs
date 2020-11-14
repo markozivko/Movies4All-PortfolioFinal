@@ -26,11 +26,32 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetPersonalitiesForUser))]
         public IActionResult GetPersonalitiesForUser(int id)
         {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+                        var pMarks = _dataService.GetPersonalitiesForUser(id);
+                        var result = CreateResult(pMarks);
 
-            var pMarks = _dataService.GetPersonalitiesForUser(id);
-            var result = CreateResult(pMarks);
-
-            return Ok(result);
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
 
         private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)

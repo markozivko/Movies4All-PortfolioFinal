@@ -45,9 +45,7 @@ namespace WebService.Middleware
             if (!string.IsNullOrEmpty(auth))
             {
                 Program.CurrentUser = _dataService.GetUser(Int32.Parse(auth.ToString()));
-                Console.WriteLine($"========{Program.CurrentUser.UserId}");
             }
-
 
             // Call the next delegate/middleware in the pipeline
             await _next(context);

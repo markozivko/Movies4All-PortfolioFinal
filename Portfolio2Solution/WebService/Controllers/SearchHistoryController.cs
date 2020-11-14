@@ -26,12 +26,31 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetSearchHistoryForUser))]
         public IActionResult GetSearchHistoryForUser(int id)
         {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+                        var search = _dataService.GetSearchHistoryForUser(id);
+                        var result = CreateResult(search);
 
-            var search = _dataService.GetSearchHistoryForUser(id);
-            var result = CreateResult(search);
-
-            return Ok(result);
-
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
         }
 
         private SearchHistoryDto CreateSearchHistoryElementDto(SearchHistory sh)

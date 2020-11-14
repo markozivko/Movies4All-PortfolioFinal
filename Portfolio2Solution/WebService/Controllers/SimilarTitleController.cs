@@ -26,21 +26,33 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetTitleSuggestions))]
         public IActionResult GetTitleSuggestions(string id)
         {
-            var titleSuggestion = _dataService.RecommendTitles(id);
 
-            IList<SimilarTitleDto> items = new List<SimilarTitleDto>();
-
-
-            foreach (var s in titleSuggestion)
+            try
             {
-                SimilarTitleDto title = new SimilarTitleDto();
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
 
-                title.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = s.TitleConst.Trim() });
-                items.Add(title);
+                var titleSuggestion = _dataService.RecommendTitles(id);
+
+                IList<SimilarTitleDto> items = new List<SimilarTitleDto>();
+
+
+                foreach (var s in titleSuggestion)
+                {
+                    SimilarTitleDto title = new SimilarTitleDto();
+
+                    title.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = s.TitleConst.Trim() });
+                    items.Add(title);
+                }
+
+                return Ok(new { items });
             }
-
-            return Ok(new { items });
-
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
         }
     }
 }

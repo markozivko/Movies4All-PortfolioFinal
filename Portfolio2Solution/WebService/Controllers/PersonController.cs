@@ -26,16 +26,27 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetPerson))]
         public IActionResult GetPerson(string id)
         {
-
-            var person = _dataService.GetPerson(id);
-
-            if (person == null)
+            try
             {
-                return NotFound();
-            }
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
 
-            var pDto = _mapper.Map<PersonDto>(person);
-            return Ok(pDto);
+                var person = _dataService.GetPerson(id);
+
+                if (person == null)
+                {
+                    return NotFound();
+                }
+
+                var pDto = _mapper.Map<PersonDto>(person);
+                return Ok(pDto);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }  
         }
     }
 }

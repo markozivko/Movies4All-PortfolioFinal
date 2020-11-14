@@ -27,26 +27,58 @@ namespace WebService.Controllers
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+                        var user = _dataService.GetUser(id);
 
-            var user = _dataService.GetUser(id);
+                        var userDto = _mapper.Map<UserDto>(user);
+                        userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
+                        userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
+                        userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
 
-            if (user == null) {
-                return NotFound();
+                        return Ok(userDto);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+
             }
-            var userDto = _mapper.Map<UserDto>(user);
-            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
-            userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
-            userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
-
-            return Ok(userDto);
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
 
         [HttpGet]
         public IActionResult GetUsers()
         {
-            var users = _dataService.GetUsers();
-            var result = CreateResult(users);
-            return Ok(result);
+            try
+            {
+                if (!_dataService.CheckUserRole(Program.CurrentUser.UserId).IsStaff)
+                {
+                    return Unauthorized();
+                }
+
+                var users = _dataService.GetUsers();
+                var result = CreateResult(users);
+                return Ok(result);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+          
         }
         private UserListDto CreateUserElementDto(User user)
         {
@@ -65,34 +97,61 @@ namespace WebService.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto UserOrUpdateDto)
         {
-            var user = _mapper.Map<User>(UserOrUpdateDto);
-            var address = _mapper.Map<Address>(UserOrUpdateDto);
 
-            if (!_dataService.UserUpdate(id, user))
+            try
             {
-                return NotFound();
-            } else
-            {
-                if (!_dataService.UserUpdateAddress(id, address))
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var user = _mapper.Map<User>(UserOrUpdateDto);
+                var address = _mapper.Map<Address>(UserOrUpdateDto);
+
+                if (!_dataService.UserUpdate(id, user))
                 {
                     return NotFound();
-
                 }
+                else
+                {
+                    if (!_dataService.UserUpdateAddress(id, address))
+                    {
+                        return NotFound();
+
+                    }
+                }
+
+                return NoContent();
             }
-
-            return NoContent();
-
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult UnsubscribeUser(int id)
         {
-            if(!_dataService.UnsubsribeUser(id))
-            {
-                return NotFound();
-            }
 
-            return NoContent();
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                if (!_dataService.UnsubsribeUser(id))
+                {
+                    return NotFound();
+                }
+
+                return NoContent();
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
 
     }

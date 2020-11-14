@@ -53,14 +53,27 @@ namespace WebService.Controllers
         [HttpGet("category/{id}", Name = nameof(GetTitlesByCategory))]
         public IActionResult GetTitlesByCategory(int id)
         {
-            var titles = _dataService.GetTitleByGenre(id);
-
-            if (titles == null)
+            try
             {
-                return NotFound();
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var titles = _dataService.GetTitleByGenre(id);
+
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+                var result = CreateResult(titles);
+                return Ok(result);
             }
-            var result = CreateResult(titles);
-            return Ok(result);
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
         private TitleListDto CreateTitleElementDto(TitleGenre title)
         {
@@ -97,9 +110,7 @@ namespace WebService.Controllers
             catch (ArgumentException)
             {
                 return Unauthorized();
-            }
-            
-
+            } 
         }
     }
 }
