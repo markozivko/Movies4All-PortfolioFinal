@@ -43,7 +43,7 @@ namespace WebService.Controllers
                         userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
                         userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
                         userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
-
+                        userDto.UserRatingsUrl = Url.Link(nameof(UserRatingsController.GetRatingsForUser), new { Id = user.UserId });
                         return Ok(userDto);
                     }
                     else

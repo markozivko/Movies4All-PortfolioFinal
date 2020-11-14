@@ -111,6 +111,8 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.UserRates
                 .Include(ur => ur.User)
+                .Include(ur => ur.Title)
+                .ThenInclude(ur => ur.Title)
                 .Where(ur => ur.UserId == id)
                 .ToList();
         }

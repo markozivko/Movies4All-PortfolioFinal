@@ -174,12 +174,12 @@ namespace DataLayer
             ///*
             //* Return ratings from a specific users
             //*/
-            //var rates = dataService.GetUserRatings(3);
+            var rates = dataService.GetUserRatings(3);
 
-            //foreach (var ur in rates)
-            //{
-            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Verbal Rating: {ur.VerbalR}");
-            //}
+            foreach (var ur in rates)
+            {
+                Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Title: {ur.Title.Title.PrimaryTitle}");
+            }
 
             ///*
             //* Return all titles ratings 

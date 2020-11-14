@@ -16,5 +16,6 @@ namespace WebService.Models
         public string TitleBookMarksUrl { get; set; }
         public string PersonalitiesUrl {  get; set;  }
         public string SearchHistoryUrl {  get; set; }
+        public string UserRatingsUrl {  get; set; }
     }
 }
