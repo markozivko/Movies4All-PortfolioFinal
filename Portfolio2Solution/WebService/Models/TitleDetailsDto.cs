@@ -11,5 +11,6 @@ namespace WebService.Models
         public int NumVotes { get; set; }
         public string Plot { get; set; }
         public IList<PrincipalsDto> Principals { get; set; }
+        public string EpisodeUrl { get; set; }
     }
 }

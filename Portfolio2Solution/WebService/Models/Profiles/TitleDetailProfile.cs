@@ -18,10 +18,6 @@ namespace WebService.Models.Profiles
             CreateMap<OmdbData, TitleDetailsDto>()
                 .ForMember(dest => dest.Plot, opt => opt.MapFrom(src => src.Plot));
 
-            
-
-
-
         }
     }
 }

@@ -28,10 +28,13 @@ namespace WebService.Controllers
 
             var rating = _dataService.GetTitleRating(id);
             var plot = _dataService.GetOmdbData(id);
-           IList<PrincipalsDto> principals = _mapper.Map<IList<TitlePrincipal>, IList<PrincipalsDto>>(_dataService.GetTitlePrincipals(id));
+            IList<PrincipalsDto> principals = _mapper.Map<IList<TitlePrincipal>, IList<PrincipalsDto>>(_dataService.GetTitlePrincipals(id));
             var tdo1 = _mapper.Map<TitleDetailsDto>(rating);
             var tdo2= _mapper.Map(plot, tdo1);
             tdo2.Principals = principals;
+
+            tdo2.EpisodeUrl = Url.Link(nameof(EpisodeController.GetEpisodeForSerie), new { Id = id });
+
             if (rating == null || plot == null) 
             {
                 return NotFound();

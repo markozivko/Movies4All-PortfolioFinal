@@ -233,6 +233,18 @@ namespace DataLayer
                 .Where(ta => ta.TitleConst == title)
                 .ToList();
         }
+
+        public OmdbData GetOmdbData(string title)
+        {
+
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.OmdbData
+                .Include(tr => tr.Title)
+                .Where(tr => tr.TitleConst == title)
+                .FirstOrDefault();
+
+        }
+
         /* **************************************
          * Framework functionalities
          * Function: getKnownTitleForPersons
