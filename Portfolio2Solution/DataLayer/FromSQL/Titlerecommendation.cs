@@ -9,9 +9,6 @@ namespace DataLayer.FromSQL
         public string TitleConst { get; set; }
         public string PrimaryTitle { get; set; }
         public string Tags { get; set; }
-        public string NameConst { get; set; }
-        public string Celebrity { get; set; }
-        public string EnrolledAs { get; set; }
         public decimal Average { get; set; }
         public int NumVotes { get; set; }
     }

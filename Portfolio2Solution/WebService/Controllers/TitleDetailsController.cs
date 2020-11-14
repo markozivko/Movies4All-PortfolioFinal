@@ -32,8 +32,8 @@ namespace WebService.Controllers
             var tdo1 = _mapper.Map<TitleDetailsDto>(rating);
             var tdo2= _mapper.Map(plot, tdo1);
             tdo2.Principals = principals;
-
             tdo2.EpisodeUrl = Url.Link(nameof(EpisodeController.GetEpisodeForSerie), new { Id = id });
+            tdo2.SimilarTitleUrl = Url.Link(nameof(SimilarTitleController.GetTitleSuggestions), new { Id = id });
 
             if (rating == null || plot == null) 
             {

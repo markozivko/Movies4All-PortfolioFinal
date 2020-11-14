@@ -153,12 +153,12 @@ namespace DataLayer
             * Framework functionalities
             * Function: Title recommendations
             */
-            //var search = dataService.RecommendTitles("tt4669954");
+            var search = dataService.RecommendTitles("tt9911774");
 
-            //foreach (var ss in search)
-            //{
-            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}, Celebrity: {ss.Celebrity}, Enrolled As: {ss.EnrolledAs}");
-            //}
+            foreach (var ss in search)
+            {
+                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}");
+            }
 
             ///*
             //* Return ratings from all users
@@ -291,10 +291,6 @@ namespace DataLayer
             //    Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} Episode Id: {t.Title.PrimaryTitle}");
             //}
 
-
-            var ds = dataService.UserUpdateBookmarkNotes(3, "tt0146803", "deserve to win a award");
-
-            Console.WriteLine(ds);
         }
     }
     
