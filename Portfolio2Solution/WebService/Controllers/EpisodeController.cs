@@ -48,12 +48,12 @@ namespace WebService.Controllers
 
                 //DOES NOT WORK
                 var dto = _mapper.Map<EpisodeDto>(e);
-                var plot = _dataService.GetOmdbData(e.TitleConst.Trim());
+                var plot = _dataService.GetOmdbData(e.TitleConst.Trim()).Plot;
 
                 Console.WriteLine(e.TitleConst);
                 Console.WriteLine(plot);
-                var dto2 = _mapper.Map(plot, dto);
-                items.Add(dto2);
+                dto.StoryLine = plot;
+                items.Add(dto);
             }
 
             return new { items };
