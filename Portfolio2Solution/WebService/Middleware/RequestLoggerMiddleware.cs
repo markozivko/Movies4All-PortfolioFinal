@@ -4,12 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataServiceLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace WebService.Middleware
 {
+
     public static class RequestLoggerMiddlewareExtension
     {
         public static IApplicationBuilder UseRequestLogging(this IApplicationBuilder builder)
@@ -21,18 +23,31 @@ namespace WebService.Middleware
     public class RequestLoggerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly IDataService _dataService;
         private ILogger _logger;
 
-        public RequestLoggerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        public RequestLoggerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IDataService dataService)
         {
             _next = next;
+            _dataService = dataService;
             _logger = loggerFactory.CreateLogger<RequestLoggerMiddleware>();
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
 
+            Program.CurrentUser = null;
+
             _logger.LogInformation(await FormatRequest(context.Request));
+
+            var auth = context.Request.Headers["Authorization"].ToString();
+
+            if (!string.IsNullOrEmpty(auth))
+            {
+                Program.CurrentUser = _dataService.GetUser(Int32.Parse(auth.ToString()));
+                Console.WriteLine($"========{Program.CurrentUser.UserId}");
+            }
+
 
             // Call the next delegate/middleware in the pipeline
             await _next(context);
