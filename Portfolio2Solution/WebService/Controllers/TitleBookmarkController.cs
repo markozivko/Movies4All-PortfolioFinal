@@ -37,7 +37,7 @@ namespace WebService.Controllers
         private TitleBookmarkDto CreateTitleBookmarkElementDto(TitleBookmark tb)
         {
             var tbDto = _mapper.Map<TitleBookmarkDto>(tb);
-            tbDto.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = tb.TitleConst });
+            tbDto.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = tb.TitleConst.Replace(" ", string.Empty) });
             return tbDto;
         }
 
