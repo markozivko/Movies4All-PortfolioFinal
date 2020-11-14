@@ -26,30 +26,54 @@ namespace WebService.Controllers
         public IActionResult GetTitle(string id)
         {
 
-            var titles = _dataService.GetTitle(id);
-                         
-
-            if (titles == null)
+            try
             {
-                return NotFound();
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                } 
+
+                var titles = _dataService.GetTitle(id);
+
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+
+                var dto = _mapper.Map<TitleDto>(titles);
+                dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
+
+                return Ok(dto);
+            } catch (ArgumentException)
+            {
+                return Unauthorized();
             }
-
-            var dto = _mapper.Map<TitleDto>(titles);
-            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
-
-            return Ok(dto);
+            
         }
         [HttpGet("category/{id}", Name = nameof(GetTitlesByCategory))]
         public IActionResult GetTitlesByCategory(int id)
         {
-            var titles = _dataService.GetTitleByGenre(id);
-
-            if (titles == null)
+            try
             {
-                return NotFound();
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var titles = _dataService.GetTitleByGenre(id);
+
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+                var result = CreateResult(titles);
+                return Ok(result);
             }
-            var result = CreateResult(titles);
-            return Ok(result);
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
         private TitleListDto CreateTitleElementDto(TitleGenre title)
         {
@@ -65,16 +89,28 @@ namespace WebService.Controllers
             return new { items };
         }
 
-        //AUTHENTICATION NEEDED
 
-        //[HttpPost("{id}")]
-        //public IActionResult AddTitleBookmarksForUser(TitleDto td)
-        //{
+        [HttpPost("{id}")]
+        public IActionResult AddTitleBookmarksForUser(TitleBookmarkForCreationOrUpdateDto td)
+        {
 
-        //    var tBook = _mapper.Map<TitleBookmark>(td);
+            try
+            {
 
-        //    _dataService.UserAddTitleBookmark()
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                } 
+                var tBook = _mapper.Map<TitleBookmark>(td);
 
-        //}
+                _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.Title, td.Notes);
+
+                return Created("", tBook);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            } 
+        }
     }
 }

@@ -373,9 +373,6 @@ namespace DataServiceLibrary
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.TitleConst).HasColumnName("titleconst");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.PrimaryTitle).HasColumnName("primarytitle");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.Tags).HasColumnName("tags");
-            modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.NameConst).HasColumnName("id_p");
-            modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.Celebrity).HasColumnName("celebrities");
-            modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.EnrolledAs).HasColumnName("enrolled_as");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.Average).HasColumnName("average");
             modelBuilder.Entity<TitleRecommendation>().Property(trec => trec.NumVotes).HasColumnName("numvotes");
 

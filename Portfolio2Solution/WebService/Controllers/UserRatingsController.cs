@@ -10,21 +10,20 @@ using WebService.Models;
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/personalities")]
-    public class PersonalitiesController: ControllerBase
+    [Route("api/ratings")]
+    public class UserRatingsController : ControllerBase
     {
-
         IDataService _dataService;
         IMapper _mapper;
 
-        public PersonalitiesController(IDataService dataService, IMapper mapper)
+        public UserRatingsController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
             _mapper = mapper;
         }
 
-        [HttpGet("{id}", Name = nameof(GetPersonalitiesForUser))]
-        public IActionResult GetPersonalitiesForUser(int id)
+        [HttpGet("{id}", Name = nameof(GetRatingsForUser))]
+        public IActionResult GetRatingsForUser(int id)
         {
             try
             {
@@ -36,10 +35,13 @@ namespace WebService.Controllers
                 {
                     if (Program.CurrentUser.UserId == id)
                     {
-                        var pMarks = _dataService.GetPersonalitiesForUser(id);
-                        var result = CreateResult(pMarks);
+
+                        var user = _dataService.GetUserRatings(id);
+
+                        var result = CreateResult(user);
 
                         return Ok(result);
+
                     }
                     else
                     {
@@ -51,23 +53,20 @@ namespace WebService.Controllers
             {
                 return Unauthorized();
             }
-            
         }
 
-        private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)
+        private object CreateuserRatesElementDto(UserRates ur)
         {
-            var pDto = _mapper.Map<PersonalitiesDto>(p);
-            pDto.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = p.NameConst.Replace(" ", String.Empty) });
-            return pDto;
+
+            var dto = _mapper.Map<UserRatingsDto>(ur);
+            return dto;
 
         }
 
-        private object CreateResult(IList<Personalities> p)
+        private object CreateResult(IList<UserRates> users)
         {
-            var items = p.Select(CreatePersonalitiesElementDto);
-
+            var items = users.Select(CreateuserRatesElementDto);
             return new { items };
         }
-
     }
 }

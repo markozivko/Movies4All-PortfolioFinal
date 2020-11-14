@@ -12,5 +12,6 @@ namespace WebService.Models
         public string Plot { get; set; }
         public IList<PrincipalsDto> Principals { get; set; }
         public string EpisodeUrl { get; set; }
+        public string SimilarTitleUrl { get; set; }
     }
 }

@@ -25,17 +25,28 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetEpisodeForSerie))]
         public IActionResult GetEpisodeForSerie(string id)
         {
-
-            var episodes = _dataService.GetAllEpisodes(id);
-
-            var result = CreateResult(episodes);
-
-            if (result == null)
+            try
             {
-                return NotFound();
-            }
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                var episodes = _dataService.GetAllEpisodes(id);
 
-            return Ok(result);
+                var result = CreateResult(episodes);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
 
         }
 
@@ -46,7 +57,6 @@ namespace WebService.Controllers
             foreach (var e in episodes)
             {
 
-                //DOES NOT WORK
                 var dto = _mapper.Map<EpisodeDto>(e);
                 var plot = _dataService.GetOmdbData(e.TitleConst.Trim()).Plot;
 

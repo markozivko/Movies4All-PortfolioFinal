@@ -10,21 +10,21 @@ using WebService.Models;
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/personalities")]
-    public class PersonalitiesController: ControllerBase
+    [Route("api/searchHistory")]
+    public class SearchHistoryController: ControllerBase
     {
-
         IDataService _dataService;
-        IMapper _mapper;
-
-        public PersonalitiesController(IDataService dataService, IMapper mapper)
+        private readonly IMapper _mapper;
+        public SearchHistoryController(IDataService dataService, IMapper mapper)
         {
+
             _dataService = dataService;
             _mapper = mapper;
+
         }
 
-        [HttpGet("{id}", Name = nameof(GetPersonalitiesForUser))]
-        public IActionResult GetPersonalitiesForUser(int id)
+        [HttpGet("{id}", Name = nameof(GetSearchHistoryForUser))]
+        public IActionResult GetSearchHistoryForUser(int id)
         {
             try
             {
@@ -36,8 +36,8 @@ namespace WebService.Controllers
                 {
                     if (Program.CurrentUser.UserId == id)
                     {
-                        var pMarks = _dataService.GetPersonalitiesForUser(id);
-                        var result = CreateResult(pMarks);
+                        var search = _dataService.GetSearchHistoryForUser(id);
+                        var result = CreateResult(search);
 
                         return Ok(result);
                     }
@@ -51,21 +51,19 @@ namespace WebService.Controllers
             {
                 return Unauthorized();
             }
-            
         }
 
-        private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)
+        private SearchHistoryDto CreateSearchHistoryElementDto(SearchHistory sh)
         {
-            var pDto = _mapper.Map<PersonalitiesDto>(p);
-            pDto.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = p.NameConst.Replace(" ", String.Empty) });
-            return pDto;
+
+            var shDto = _mapper.Map<SearchHistoryDto>(sh);
+            return shDto;
 
         }
 
-        private object CreateResult(IList<Personalities> p)
+        private object CreateResult(IList<SearchHistory> sh)
         {
-            var items = p.Select(CreatePersonalitiesElementDto);
-
+            var items = sh.Select(CreateSearchHistoryElementDto);
             return new { items };
         }
 

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebService.Middleware;
 
 namespace WebService
 {
@@ -23,7 +24,7 @@ namespace WebService
                   .AddJsonFile("config.json")
                   .Build();
             services.AddControllers();
-            services.AddScoped<IDataService>(_ => new DataService(config["connectionString"]));
+            services.AddSingleton<IDataService>(_ => new DataService(config["connectionString"]));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }
@@ -37,6 +38,7 @@ namespace WebService
             }
 
             app.UseRouting();
+            app.UseMiddleware<RequestLoggerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

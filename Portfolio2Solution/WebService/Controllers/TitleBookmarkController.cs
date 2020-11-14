@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataServiceLibrary;
@@ -27,11 +28,30 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetTitleBookmarksForUser))]
         public IActionResult GetTitleBookmarksForUser(int id)
         {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+                        var titleBookmarks = _dataService.GetTitleBookmarkForUser(id);
+                        var result = CreateResult(titleBookmarks);
 
-            var titleBookmarks = _dataService.GetTitleBookmarkForUser(id);
-            var result = CreateResult(titleBookmarks);
-
-            return Ok(result);
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
         }
 
         private TitleBookmarkDto CreateTitleBookmarkElementDto(TitleBookmark tb)
@@ -51,17 +71,34 @@ namespace WebService.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBookMarksForUser(int id, TitleBookmarkForCreationOrUpdateDto tb)
         {
-
-            var tb1 = _mapper.Map<TitleBookmark>(tb);
-
-            if (!_dataService.UserUpdateBookmarkNotes(id, tb1.TitleConst, tb1.Notes))
+            try
             {
-                return NotFound();
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+                        var tb1 = _mapper.Map<TitleBookmark>(tb);
+
+                        if (!_dataService.UserUpdateBookmarkNotes(id, tb1.TitleConst, tb1.Notes))
+                        {
+                            return NotFound();
+                        }
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
             }
-            return NoContent();
-
-
-
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
         }
     }
 }
