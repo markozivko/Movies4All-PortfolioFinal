@@ -36,7 +36,6 @@ namespace DataServiceLibrary
         TitleBasics GetTitle(string title);
         IList<TitleGenre> GetTitleByGenre(int idgenre);
         Person GetPerson(string id);
-        OmdbData GetOmdbData(string title);
         IList<TitlePrincipal> GetTitleDirectors(string title);
         IList<TitlePrincipal> GetActors(string title);
         void CreateNewUser(User user, Address address);
@@ -51,5 +50,6 @@ namespace DataServiceLibrary
         bool UnsubsribeUser(int Iduser);
         bool DeleteBookmarkForUser(int Iduser, string titleId);
         bool DeletePersonalityForUser(int Iduser, string titleId);
+        OmdbData GetOmdbData(string title);
     }
 }

@@ -13,6 +13,8 @@ namespace WebService.Models.Profiles
                 .ForMember(dest => dest.EpisodeNumber, opt => opt.MapFrom(src => src.NumEpisode))
                 .ForMember(dest => dest.SeasonNumber, opt => opt.MapFrom(src => src.Season))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.PrimaryTitle));
+            CreateMap<OmdbData, EpisodeDto>()
+                .ForMember(dest => dest.StoryLine, opt => opt.MapFrom(src => src.Plot));
         }
     }
 }

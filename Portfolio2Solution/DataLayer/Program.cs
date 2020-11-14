@@ -292,9 +292,9 @@ namespace DataLayer
             //}
 
 
-            var ds = dataService.GetOmdbData("tt0141842");
+            var ds = dataService.GetOmdbData("tt0141842").Plot;
 
-            Console.WriteLine(ds.Plot);
+            Console.WriteLine(ds);
         }
     }
     
