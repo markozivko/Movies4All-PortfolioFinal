@@ -33,11 +33,10 @@ namespace WebService.Controllers
 
             _dataService.CreateNewUser(user, address);
 
-            //var user1 = _dataService.GetUsers().Last();
+            var user1 = _dataService.GetUsers().Last();
+            var result = _mapper.Map<UserDto>(user1);
 
-            //var result = _mapper.Map(user1.Address, _mapper.Map<UserDto>(user1));
-
-            return Created("", user);
+            return Created("", result);
         }
     }
 }
