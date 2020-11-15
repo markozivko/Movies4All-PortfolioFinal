@@ -3,7 +3,7 @@ namespace WebService.Models
 {
     public class TitleBookmarkForCreationOrUpdateDto
     {
-        public string Title { get; set; }
+        public string TitleId { get; set; }
         public string Notes { get; set; }
     }
 }

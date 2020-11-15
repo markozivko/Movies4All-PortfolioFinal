@@ -11,7 +11,7 @@ namespace WebService.Models.Profiles
 
             CreateMap<TitleBookmark, TitleBookmarkDto>();
             CreateMap<TitleBookmarkForCreationOrUpdateDto, TitleBookmark>()
-                .ForMember(dest => dest.TitleConst, opt => opt.MapFrom(src => src.Title));
+                .ForMember(dest => dest.TitleConst, opt => opt.MapFrom(src => src.TitleId));
          
         }
     }

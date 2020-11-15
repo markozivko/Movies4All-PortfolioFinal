@@ -36,7 +36,7 @@ namespace WebService.Controllers
             var user1 = _dataService.GetUsers().Last();
             var result = _mapper.Map<UserDto>(user1);
 
-            //test
+            //test1
 
             return Created("", result);
         }

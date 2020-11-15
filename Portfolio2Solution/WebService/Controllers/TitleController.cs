@@ -102,7 +102,7 @@ namespace WebService.Controllers
                     return Unauthorized();
                 } 
 
-                _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.Title, td.Notes);
+                _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.TitleId, td.Notes);
 
                 var bookmark = _dataService.GetTitleBookmarkForUser(Program.CurrentUser.UserId).Last();
 

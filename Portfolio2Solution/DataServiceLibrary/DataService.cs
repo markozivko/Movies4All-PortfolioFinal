@@ -591,10 +591,8 @@ namespace DataServiceLibrary
             if (titleBookmark != null)
             {
                     titleBookmark.Notes = Notes;
-                    Console.WriteLine($"Notes {Notes}");
                     ctx.SaveChanges();
                     return true;
-
             }
 
             return false;
@@ -614,7 +612,6 @@ namespace DataServiceLibrary
 
             if (personality != null)
             {
-
                 personality.Notes = Notes;
                 ctx.SaveChanges();
                 return true;

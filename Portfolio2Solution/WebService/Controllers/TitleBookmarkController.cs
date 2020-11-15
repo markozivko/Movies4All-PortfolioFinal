@@ -82,6 +82,8 @@ namespace WebService.Controllers
                     if (Program.CurrentUser.UserId == id)
                     {
                         var tb1 = _mapper.Map<TitleBookmark>(tb);
+                        Console.WriteLine($"======================{tb1.Notes}");
+
 
                         if (!_dataService.UserUpdateBookmarkNotes(id, tb1.TitleConst, tb1.Notes))
                         {
