@@ -11,7 +11,7 @@ namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/personalities")]
-    public class PersonalitiesController: ControllerBase
+    public class PersonalitiesController : ControllerBase
     {
 
         IDataService _dataService;
@@ -51,7 +51,7 @@ namespace WebService.Controllers
             {
                 return Unauthorized();
             }
-            
+
         }
 
         private PersonalitiesDto CreatePersonalitiesElementDto(Personalities p)
@@ -67,6 +67,44 @@ namespace WebService.Controllers
             var items = p.Select(CreatePersonalitiesElementDto);
 
             return new { items };
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePersonalityForUser(int id, PersonForCreateOrUpdateDto pfc)
+        {
+
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    if (Program.CurrentUser.UserId == id)
+                    {
+
+                        var pfc1 = _mapper.Map<Personalities>(pfc);
+
+                        if (!_dataService.UserUpdatePersonality(id, pfc1.NameConst, pfc1.Notes))
+                        {
+                            return NotFound();
+                        }
+
+                        return NoContent();
+
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+
         }
 
     }

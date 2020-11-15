@@ -11,7 +11,7 @@ namespace WebService.Controllers
 {
     [ApiController]
     [Route("api/titlebookmarks")]
-    public class TitleBookmarkController:  ControllerBase
+    public class TitleBookmarkController : ControllerBase
     {
 
         IDataService _dataService;
@@ -33,7 +33,7 @@ namespace WebService.Controllers
                 if (Program.CurrentUser == null)
                 {
                     return Unauthorized();
-                }else
+                } else
                 {
                     if (Program.CurrentUser.UserId == id)
                     {
@@ -100,5 +100,42 @@ namespace WebService.Controllers
                 return Unauthorized();
             }
         }
+
+        [HttpDelete("{idU}/{idT}")]
+        public IActionResult DeleteTitleBookmarkForUser(int idU, string idT)
+        {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+
+                    if (Program.CurrentUser.UserId == idU)
+                    {
+
+                        if (!_dataService.DeleteBookmarkForUser(idU, idT))
+                        {
+                            return NotFound();
+                        }
+
+                        return NoContent();
+
+                    }else
+                    {
+                        return Unauthorized();
+                    }
+
+                }
+            }
+            catch(ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
+
+
     }
 }
