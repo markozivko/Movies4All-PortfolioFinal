@@ -41,6 +41,7 @@ namespace WebService.Controllers
                 }
 
                 var pDto = _mapper.Map<PersonDto>(person);
+                pDto.KnownForUrl = Url.Link(nameof(KnownForController.GetKnownTitleForPerson), new { Id = id });
                 return Ok(pDto);
             }
             catch (ArgumentException)

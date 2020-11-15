@@ -266,7 +266,7 @@ namespace DataLayer
 
             foreach (var t in kfor)
             {
-                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person.Name}");
+                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
             }
 
             //var kfor = dataService.GetTitleByGenre(2);
