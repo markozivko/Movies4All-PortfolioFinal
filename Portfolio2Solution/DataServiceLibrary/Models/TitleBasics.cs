@@ -20,8 +20,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public TitleRating Rating { get; set; }
         [JsonIgnore]
-        public ICollection<KnownFor> KnownFor { get; set; }
-        [JsonIgnore]
         public ICollection<Episode> Episodes { get; set; }
         [JsonIgnore]
         public OmdbData OmdbData { get; set; }

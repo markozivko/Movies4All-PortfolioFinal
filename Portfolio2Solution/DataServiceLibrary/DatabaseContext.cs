@@ -197,11 +197,11 @@ namespace DataServiceLibrary
             modelBuilder.Entity<KnownFor>().Property(kf => kf.NameConst).HasColumnName("nameconst");
             modelBuilder.Entity<KnownFor>()
                 .HasOne(kn => kn.Title)
-                .WithMany(t => t.KnownFor)
+                .WithMany()
                 .HasForeignKey(kn => kn.TitleConst);
             modelBuilder.Entity<KnownFor>()
                 .HasOne(kn => kn.Person)
-                .WithMany(p => p.KnownFor)
+                .WithMany()
                 .HasForeignKey(kn => kn.NameConst);
 
             /* **************************

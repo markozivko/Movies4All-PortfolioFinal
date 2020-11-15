@@ -11,7 +11,6 @@ namespace DataServiceLibrary.Models
         [JsonIgnore]
         public TitleBasics Title { get; set; }
         public string NameConst { get; set; }
-        [JsonIgnore]
         public Person Person { get; set; }
         public override string ToString()
         {

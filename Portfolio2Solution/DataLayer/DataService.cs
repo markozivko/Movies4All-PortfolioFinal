@@ -251,13 +251,13 @@ namespace DataLayer
          * Framework functionalities
          * Function: getKnownTitleForPersons
          * **************************************/
-        public IList<KnownFor> GetKnownTitleForPersons(string title)
+        public IList<KnownFor> GetKnownTitleForPersons(string person)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.KnownFor
                 .Include(kf => kf.Person)
                 .Include(kf => kf.Title)
-                .Where(kf => kf.TitleConst == title)
+                .Where(kf => kf.NameConst == person)
                 .ToList();
         }
         /* **************************************
@@ -578,7 +578,7 @@ namespace DataLayer
         * Function: UserUpdatePersonality
         * ***********************************************/
         public bool UserUpdatePersonality(int Iduser, string Name, string Notes)
-        {
+        { 
 
             using var ctx = new DatabaseContext(_connectionString);
 

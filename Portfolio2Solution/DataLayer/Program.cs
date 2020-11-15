@@ -153,12 +153,12 @@ namespace DataLayer
             * Framework functionalities
             * Function: Title recommendations
             */
-            var search = dataService.RecommendTitles("tt9911774");
+            //var search = dataService.RecommendTitles("tt9911774");
 
-            foreach (var ss in search)
-            {
-                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}");
-            }
+            //foreach (var ss in search)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}, Tags: {ss.Tags}");
+            //}
 
             ///*
             //* Return ratings from all users
@@ -174,12 +174,12 @@ namespace DataLayer
             ///*
             //* Return ratings from a specific users
             //*/
-            var rates = dataService.GetUserRatings(3);
+            //var rates = dataService.GetUserRatings(3);
 
-            foreach (var ur in rates)
-            {
-                Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Title: {ur.Title.Title.PrimaryTitle}");
-            }
+            //foreach (var ur in rates)
+            //{
+            //    Console.WriteLine($"User Id: {ur.UserId}, User Name: {ur.User.FirstName}, Title: {ur.TitleConst}, Numeric Rating: {ur.NumericR}, Title: {ur.Title.Title.PrimaryTitle}");
+            //}
 
             ///*
             //* Return all titles ratings 
@@ -262,12 +262,12 @@ namespace DataLayer
             /*
              * Return known for
             // */
-            //var kfor = dataService.GetKnownTitleForPersons("tt0063929");
+            var kfor = dataService.GetKnownTitleForPersons("nm0000083");
 
-            //foreach (var t in kfor)
-            //{
-            //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person != null}");
-            //}
+            foreach (var t in kfor)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Person.Name}");
+            }
 
             //var kfor = dataService.GetTitleByGenre(2);
 
