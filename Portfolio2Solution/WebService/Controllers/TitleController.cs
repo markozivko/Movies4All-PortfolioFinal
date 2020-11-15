@@ -15,6 +15,7 @@ namespace WebService.Controllers
     {
         readonly IDataService _dataService;
         private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
         public TitleController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
@@ -51,7 +52,7 @@ namespace WebService.Controllers
             
         }
         [HttpGet("category/{id}", Name = nameof(GetTitlesByCategory))]
-        public IActionResult GetTitlesByCategory(int id)
+        public IActionResult GetTitlesByCategory(int id, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -60,13 +61,16 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                var titles = _dataService.GetTitleByGenre(id);
+                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                var titles = _dataService.GetTitleByGenre(id, page, pageSize);
 
                 if (titles == null)
                 {
                     return NotFound();
                 }
-                var result = CreateResult(titles);
+
+                var result = CreateResult(titles, id, page, pageSize);
                 return Ok(result);
             }
             catch (ArgumentException)
@@ -82,11 +86,38 @@ namespace WebService.Controllers
         }
 
 
-        private object CreateResult(IList<TitleGenre> titles)
+        private object CreateResult(IList<TitleGenre> titles, int id, int page, int pageSize)
         {
             var items = titles.Select(CreateTitleElementDto);
 
-            return new { items };
+            var count = _dataService.NumberOfTitleByGenre(id);
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetTitlesByCategory), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetTitlesByCategory), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetTitlesByCategory), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
         }
 
 
@@ -104,7 +135,7 @@ namespace WebService.Controllers
 
                 _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.TitleId, td.Notes);
 
-                var bookmark = _dataService.GetTitleBookmarkForUser(Program.CurrentUser.UserId).Last();
+                var bookmark = _dataService.GetTitleBookmarkForUser(Program.CurrentUser.UserId, _dataService.NumberOfBookmarksForUser(Program.CurrentUser.UserId), 10).Last();
 
                 var result = _mapper.Map<TitleBookmarkDto>(bookmark);
                 result.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = bookmark.TitleConst.Trim()});

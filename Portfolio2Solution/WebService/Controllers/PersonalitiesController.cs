@@ -16,6 +16,7 @@ namespace WebService.Controllers
 
         IDataService _dataService;
         IMapper _mapper;
+        private const int MaxPageSize = 25;
 
         public PersonalitiesController(IDataService dataService, IMapper mapper)
         {
@@ -24,7 +25,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetPersonalitiesForUser))]
-        public IActionResult GetPersonalitiesForUser(int id)
+        public IActionResult GetPersonalitiesForUser(int id, int page, int pageSize)
         {
             try
             {
@@ -36,8 +37,11 @@ namespace WebService.Controllers
                 {
                     if (Program.CurrentUser.UserId == id)
                     {
-                        var pMarks = _dataService.GetPersonalitiesForUser(id);
-                        var result = CreateResult(pMarks);
+
+                        pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                        var pMarks = _dataService.GetPersonalitiesForUser(id, page, pageSize);
+                        var result = CreateResult(pMarks, id, page, pageSize);
 
                         return Ok(result);
                     }
@@ -62,11 +66,38 @@ namespace WebService.Controllers
 
         }
 
-        private object CreateResult(IList<Personalities> p)
+        private object CreateResult(IList<Personalities> p, int id, int page, int pageSize)
         {
             var items = p.Select(CreatePersonalitiesElementDto);
 
-            return new { items };
+            var count = _dataService.NumberOfBookmarksForUser(id);
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetPersonalitiesForUser), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetPersonalitiesForUser), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetPersonalitiesForUser), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
         }
 
         [HttpPut("{id}")]

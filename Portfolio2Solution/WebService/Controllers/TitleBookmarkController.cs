@@ -16,6 +16,8 @@ namespace WebService.Controllers
 
         IDataService _dataService;
         IMapper _mapper;
+        private const int MaxPageSize = 25;
+
 
         public TitleBookmarkController(IDataService dataService, IMapper mapper)
         {
@@ -26,7 +28,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetTitleBookmarksForUser))]
-        public IActionResult GetTitleBookmarksForUser(int id)
+        public IActionResult GetTitleBookmarksForUser(int id, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -37,8 +39,11 @@ namespace WebService.Controllers
                 {
                     if (Program.CurrentUser.UserId == id)
                     {
-                        var titleBookmarks = _dataService.GetTitleBookmarkForUser(id);
-                        var result = CreateResult(titleBookmarks);
+                        pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+
+                        var titleBookmarks = _dataService.GetTitleBookmarkForUser(id, page, pageSize);
+                        var result = CreateResult(titleBookmarks, id, page, pageSize);
 
                         return Ok(result);
                     }
@@ -61,11 +66,39 @@ namespace WebService.Controllers
             return tbDto;
         }
 
-        private object CreateResult(IList<TitleBookmark> tb)
+        private object CreateResult(IList<TitleBookmark> tb, int id, int page, int pageSize)
         {
             var items = tb.Select(CreateTitleBookmarkElementDto);
 
-            return new { items };
+            var count = _dataService.NumberOfBookmarksForUser(id);
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetTitleBookmarksForUser), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetTitleBookmarksForUser), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetTitleBookmarksForUser), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+
+            return result;
         }
 
         [HttpPut("{id}")]

@@ -60,19 +60,30 @@ namespace WebService.Controllers
             
         }
 
-        [HttpGet]
-        public IActionResult GetUsers()
+        [HttpGet(Name = nameof(GetUsers))]
+        public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
             try
             {
-                if (!_dataService.CheckUserRole(Program.CurrentUser.UserId).IsStaff)
+
+                if (Program.CurrentUser == null)
                 {
                     return Unauthorized();
+                }else
+                {
+
+                    if (!_dataService.CheckUserRole(Program.CurrentUser.UserId).IsStaff)
+                    {
+                        return Unauthorized();
+                    }
+
+                    pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                    var users = _dataService.GetUsers(page, pageSize);
+                    var result = CreateResult(users, page, pageSize);
+                    return Ok(result);
                 }
 
-                var users = _dataService.GetUsers();
-                var result = CreateResult(users);
-                return Ok(result);
             }
             catch (ArgumentException)
             {
@@ -87,11 +98,37 @@ namespace WebService.Controllers
         }
 
 
-        private object CreateResult(IList<User> users)
+        private object CreateResult(IList<User> users, int page, int pageSize)
         {
             var items = users.Select(CreateUserElementDto);
 
-            return new { items };
+            var count = _dataService.NumberOfUsers();
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetUsers), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetUsers), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetUsers), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+            return result;
         }
 
         [HttpPut("{id}")]

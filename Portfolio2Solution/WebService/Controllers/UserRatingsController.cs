@@ -15,6 +15,7 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         IMapper _mapper;
+        private const int MaxPageSize = 25;
 
         public UserRatingsController(IDataService dataService, IMapper mapper)
         {
@@ -23,7 +24,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetRatingsForUser))]
-        public IActionResult GetRatingsForUser(int id)
+        public IActionResult GetRatingsForUser(int id, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -36,9 +37,11 @@ namespace WebService.Controllers
                     if (Program.CurrentUser.UserId == id)
                     {
 
-                        var user = _dataService.GetUserRatings(id);
+                        pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
-                        var result = CreateResult(user);
+                        var user = _dataService.GetUserRatings(id, page, pageSize);
+
+                        var result = CreateResult(user, id, page, pageSize);
 
                         return Ok(result);
 
@@ -63,10 +66,37 @@ namespace WebService.Controllers
 
         }
 
-        private object CreateResult(IList<UserRates> users)
+        private object CreateResult(IList<UserRates> users, int id, int page, int pageSize)
         {
             var items = users.Select(CreateuserRatesElementDto);
-            return new { items };
+            var count = _dataService.NumberOfUserRatings(id);
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetRatingsForUser), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetRatingsForUser), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetRatingsForUser), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
         }
     }
 }

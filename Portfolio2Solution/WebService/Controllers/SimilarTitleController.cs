@@ -24,7 +24,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetTitleSuggestions))]
-        public IActionResult GetTitleSuggestions(string id)
+        public IActionResult GetTitleSuggestions(string id, int page = 0, int pageSize = 10)
         {
 
             try
@@ -34,9 +34,11 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                var titleSuggestion = _dataService.RecommendTitles(id);
+                var titleSuggestion = _dataService.RecommendTitles(id, page, pageSize);
 
                 IList<SimilarTitleDto> items = new List<SimilarTitleDto>();
+
+                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
 
                 foreach (var s in titleSuggestion)
@@ -47,7 +49,35 @@ namespace WebService.Controllers
                     items.Add(title);
                 }
 
-                return Ok(new { items });
+
+                var count = _dataService.NumberOfRecommendedTitles(id);
+
+                string prev = null;
+
+                if (page > 0)
+                {
+                    prev = Url.Link(nameof(GetTitleSuggestions), new { page = page - 1, pageSize });
+                }
+
+                string next = null;
+
+                if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                {
+                    next = Url.Link(nameof(GetTitleSuggestions), new { page = page + 1, pageSize });
+                }
+
+                var cur = Url.Link(nameof(GetTitleSuggestions), new { page, pageSize });
+
+                var result = new
+                {
+                    prev,
+                    next,
+                    cur,
+                    count,
+                    items
+                };
+
+                return Ok(result);
             }
             catch (ArgumentException)
             {

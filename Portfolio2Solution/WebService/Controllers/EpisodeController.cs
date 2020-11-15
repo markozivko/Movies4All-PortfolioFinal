@@ -16,6 +16,8 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
+
         public EpisodeController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
@@ -23,7 +25,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetEpisodeForSerie))]
-        public IActionResult GetEpisodeForSerie(string id)
+        public IActionResult GetEpisodeForSerie(string id, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -31,9 +33,12 @@ namespace WebService.Controllers
                 {
                     return Unauthorized();
                 }
-                var episodes = _dataService.GetAllEpisodes(id);
 
-                var result = CreateResult(episodes);
+                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                var episodes = _dataService.GetAllEpisodes(id, page, pageSize);
+
+                var result = CreateResult(episodes, id, page, pageSize);
 
                 if (result == null)
                 {
@@ -50,7 +55,7 @@ namespace WebService.Controllers
 
         }
 
-        private object CreateResult(IList<Episode> episodes)
+        private object CreateResult(IList<Episode> episodes,string id, int page, int pageSize)
         {
             IList<EpisodeDto> items = new List<EpisodeDto>();
 
@@ -66,7 +71,34 @@ namespace WebService.Controllers
                 items.Add(dto);
             }
 
-            return new { items };
+            var count = _dataService.NumberOfEpisodesForSerie(id);
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetEpisodeForSerie), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetEpisodeForSerie), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetEpisodeForSerie), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
 
         }
     }

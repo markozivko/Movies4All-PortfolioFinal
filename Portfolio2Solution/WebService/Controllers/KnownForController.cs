@@ -16,6 +16,8 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
+
         public KnownForController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
@@ -23,7 +25,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetKnownTitleForPerson))]
-        public IActionResult GetKnownTitleForPerson(string id)
+        public IActionResult GetKnownTitleForPerson(string id, int page = 0, int pageSize = 10)
         {
 
             try
@@ -33,7 +35,9 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                var knownForTitle = _dataService.GetKnownTitleForPersons(id);
+                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                var knownForTitle = _dataService.GetKnownTitleForPersons(id, page, pageSize);
                 IList<KnownForDto> knowForList = new List<KnownForDto>();
                 var kf = new KnownForDto();
 
@@ -44,7 +48,33 @@ namespace WebService.Controllers
                     knowForList.Add(kf);
                 }
 
-                return Ok(new { knowForList });
+                var count = _dataService.NumberOfKnownTitlesForPerson(id);
+
+                string prev = null;
+
+                if (page > 0)
+                {
+                    prev = Url.Link(nameof(GetKnownTitleForPerson), new { page = page - 1, pageSize });
+                }
+
+                string next = null;
+
+                if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                {
+                    next = Url.Link(nameof(GetKnownTitleForPerson), new { page = page + 1, pageSize });
+                }
+
+                var cur = Url.Link(nameof(GetKnownTitleForPerson), new { page, pageSize });
+
+                var result = new
+                {
+                    prev,
+                    next,
+                    cur,
+                    count,
+                    knowForList
+                };
+                return Ok(result);
 
             }
             catch (ArgumentException)

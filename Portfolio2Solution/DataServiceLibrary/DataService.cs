@@ -40,32 +40,57 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: Get users
          * ***********************************/
-        public IList<User> GetUsers()
+        public IList<User> GetUsers(int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.Users
                 .Include(x => x.Address)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
         /* ***********************************
          * Framework functionalities
          * Function: Number of users
          * ***********************************/
+        public int NumberOfUsers()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tg = ctx.Users.Count();
+            return tg;
+
+        }
 
 
         /* *************************************
          * Framework functionalities
          * Function: GetSearchHistoryForUser
          * *************************************/
-        public IList<SearchHistory> GetSearchHistoryForUser(int id)
+        public IList<SearchHistory> GetSearchHistoryForUser(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
 
             return ctx.SearchHistory
                 .Include(x => x.User)
                 .Where(u => u.UserId == id)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
+        }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfTitleByGenre
+        * **************************************/
+        public int NumberOfSearchHistoryForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var sh = ctx.SearchHistory.Where(sh => sh.UserId == id).Count();
+            return sh;
+
         }
         /* **************************************
          * Framework functionalities
@@ -106,7 +131,7 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getUserRatings
          * **************************************/
-        public IList<UserRates> GetUserRatings(int id)
+        public IList<UserRates> GetUserRatings(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.UserRates
@@ -114,8 +139,24 @@ namespace DataServiceLibrary
                 .Include(ur => ur.Title)
                 .ThenInclude(ur => ur.Title)
                 .Where(ur => ur.UserId == id)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfUserRatings
+        * **************************************/
+        public int NumberOfUserRatings(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var ur = ctx.UserRates.Where(ur => ur.UserId == id).Count();
+            return ur;
+
+        }
+
         /* **************************************
          * Framework functionalities
          * Function: getAllTitlesRatings
@@ -172,7 +213,7 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getTitlesByGenre
          * **************************************/
-        public IList<TitleGenre> GetTitleByGenre(int idgenre)
+        public IList<TitleGenre> GetTitleByGenre(int idgenre, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.TitleGenres
@@ -180,8 +221,22 @@ namespace DataServiceLibrary
                 .Include(tg => tg.Title)
                 .ThenInclude(t => t.Rating)
                 .Where(tg => tg.IdGenre == idgenre)
-                .Take(5)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
+        }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfTitleByGenre
+        * **************************************/
+        public int NumberOfTitleByGenre(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tg = ctx.TitleGenres.Where(tg => tg.IdGenre == id).Count();
+            return tg;
+
         }
 
         /* **************************************
@@ -210,14 +265,29 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getTitleBookmarkForUser
          * **************************************/
-        public IList<TitleBookmark> GetTitleBookmarkForUser(int id)
+        public IList<TitleBookmark> GetTitleBookmarkForUser(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.TitleBookmarks
                 .Include(tbm => tbm.Title)
                 .Include(tbm => tbm.User)
                 .Where(tbm => tbm.UserId == id)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
+        }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfTitleByGenre
+        * **************************************/
+        public int NumberOfBookmarksForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tb = ctx.TitleBookmarks.Where(tb => tb.UserId == id).Count();
+            return tb;
+
         }
         /* **************************************
          * Framework functionalities
@@ -235,15 +305,30 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getPersonalitiesForUser
          * **************************************/
-        public IList<Personalities> GetPersonalitiesForUser(int id)
+        public IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Personalities
                 .Include(p => p.User)
                 .Include(p => p.FavoritePerson)
                 .Where(tbm => tbm.UserId == id)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+       /* **************************************
+        * Framework functionalities
+        * Function: NumberOfRecomendedTitles
+        ***************************************/
+        public int NumberOfPersonalitiesForUser(int id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tb = ctx.Personalities.Where(tb => tb.UserId == id).Count();
+            return tb;
+
+        }
+
 
         /* **************************************
          * Framework functionalities
@@ -303,14 +388,29 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getKnownTitleForPersons
          * **************************************/
-        public IList<KnownFor> GetKnownTitleForPersons(string person)
+        public IList<KnownFor> GetKnownTitleForPersons(string person, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.KnownFor
                 .Include(kf => kf.Person)
                 .Include(kf => kf.Title)
                 .Where(kf => kf.NameConst == person)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
+        }
+
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfKnownTitlesForPerson
+        * **************************************/
+        public int NumberOfKnownTitlesForPerson(string id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tg = ctx.KnownFor.Where(kf => kf.NameConst == id).Count();
+            return tg;
         }
 
         /* **************************************
@@ -347,14 +447,33 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: getEpisodes
          * **************************************/
-        public IList<Episode> GetAllEpisodes(string serieid)
+        public IList<Episode> GetAllEpisodes(string serieid, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Episodes
                 .Include(e => e.Title)
                 .Where(e => e.SerieId == serieid)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfEpisodesForSerie
+        * **************************************/
+        public int NumberOfEpisodesForSerie(string id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var e = ctx.Episodes.Where(e => e.SerieId == id).Count();
+            return e;
+
+        }
+
+
+
         public IList<Episode> GetEpisodesBySeason(string serieid, int season)
         {
             using var ctx = new DatabaseContext(_connectionString);
@@ -477,12 +596,26 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: Title recommendation
          * ***********************************************/
-        public IList<TitleRecommendation> RecommendTitles(string title)
+        public IList<TitleRecommendation> RecommendTitles(string title, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.TitleRecommendations
                 .FromSqlRaw("select * from title_recommendations({0})", title)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
+        }
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfRecomendedTitles
+        * **************************************/
+        public int NumberOfRecommendedTitles(string id)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var tb = ctx.TitleRecommendations.FromSqlRaw("select * from title_recommendations({0})", id).Count();
+            return tb;
+
         }
         /* ****************************************************************************************************************
         *                                         FUNCTIONS TO CREATE
