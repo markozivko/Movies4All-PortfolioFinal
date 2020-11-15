@@ -107,5 +107,39 @@ namespace WebService.Controllers
 
         }
 
+        [HttpDelete("{idU}/{idP}")]
+        public IActionResult DeletePersonalityForUser(int idU, string idP)
+        {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+
+                    if (Program.CurrentUser.UserId == idU)
+                    {
+                        if (!_dataService.DeletePersonalityForUser(idU, idP))
+                        {
+                            return NotFound();
+                        }
+
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
+
     }
 }
