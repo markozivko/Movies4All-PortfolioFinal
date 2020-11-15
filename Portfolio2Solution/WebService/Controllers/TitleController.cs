@@ -101,11 +101,15 @@ namespace WebService.Controllers
                 {
                     return Unauthorized();
                 } 
-                var tBook = _mapper.Map<TitleBookmark>(td);
 
                 _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.Title, td.Notes);
 
-                return Created("", tBook);
+                var bookmark = _dataService.GetTitleBookmarkForUser(Program.CurrentUser.UserId).Last();
+
+                var result = _mapper.Map<TitleBookmarkDto>(bookmark);
+                result.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = bookmark.TitleConst.Trim()});
+
+                return Created("", result);
             }
             catch (ArgumentException)
             {

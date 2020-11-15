@@ -49,5 +49,29 @@ namespace WebService.Controllers
                 return Unauthorized();
             }  
         }
+
+        [HttpPost("{id}")]
+        public IActionResult AddFavoritePersonForUser(PersonForCreateOrUpdateDto pfc)
+        {
+            try
+            {
+                if(Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                _dataService.UserAddPersonality(Program.CurrentUser.UserId, pfc.Name, pfc.Notes);
+
+                var personality = _dataService.GetPersonalitiesForUser(Program.CurrentUser.UserId).Last();
+
+                var result = _mapper.Map<PersonalitiesDto>(personality);
+                result.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new {Id = personality.NameConst.Trim() });
+                return Created("", result);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
     }
 }

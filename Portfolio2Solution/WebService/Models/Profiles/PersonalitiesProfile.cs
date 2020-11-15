@@ -10,6 +10,8 @@ namespace WebService.Models.Profiles
         {
 
             CreateMap<Personalities, PersonalitiesDto>();
+            CreateMap<PersonForCreateOrUpdateDto, Personalities>()
+                .ForMember(dest => dest.NameConst, opt => opt.MapFrom(src => src.Name));
         }
     }
 }
