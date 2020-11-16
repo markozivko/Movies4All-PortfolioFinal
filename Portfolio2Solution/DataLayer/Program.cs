@@ -293,7 +293,7 @@ namespace DataLayer
 
             //dataService.UserRatesTitles("tt0078672", 1, 5);
 
-            dataService.UserDeletesRatings("tt0078672", 1);
+            dataService.UserUpdateBookmarkNotes(3, "tt0078672", "updated5");
         }
     }
     

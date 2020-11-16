@@ -124,10 +124,8 @@ namespace WebService.Controllers
         [HttpPost("{id}")]
         public IActionResult AddTitleBookmarksForUser(TitleBookmarkForCreationOrUpdateDto td)
         {
-
             try
             {
-
                 if (Program.CurrentUser == null)
                 {
                     return Unauthorized();

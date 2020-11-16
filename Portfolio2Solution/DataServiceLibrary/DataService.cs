@@ -746,12 +746,17 @@ namespace DataServiceLibrary
             using var ctx = new DatabaseContext(_connectionString);
 
             var titleBookmark = ctx.TitleBookmarks.Find(Iduser, Title);
-
             if (titleBookmark != null)
             {
-                    titleBookmark.Notes = Notes;
-                    ctx.SaveChanges();
-                    return true;
+                TitleBookmark tb = new TitleBookmark
+                {
+                    TitleConst = Title,
+                    UserId = Iduser,
+                    Notes = Notes
+                };
+                ctx.Update(tb);
+                ctx.SaveChanges();
+                return true;
             }
 
             return false;
@@ -771,9 +776,15 @@ namespace DataServiceLibrary
 
             if (personality != null)
             {
-                personality.Notes = Notes;
+
+                Personalities p = new Personalities
+                {
+                    NameConst = Name,
+                    UserId = Iduser,
+                    Notes = Notes
+                };
+                ctx.Update(p);
                 ctx.SaveChanges();
-                return true;
 
             }
 

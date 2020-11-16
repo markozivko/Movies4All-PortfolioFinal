@@ -583,18 +583,19 @@ namespace DataLayer
             using var ctx = new DatabaseContext(_connectionString);
 
             var titleBookmark = ctx.TitleBookmarks.Find(Iduser, Title);
-
             if (titleBookmark != null)
             {
-
-                Console.WriteLine($"==========={titleBookmark.Notes}");
-
-                titleBookmark.Notes = Notes;
+                TitleBookmark tb = new TitleBookmark
+                {
+                    TitleConst = Title,
+                    UserId = Iduser,
+                    Notes = Notes
+                };
+                ctx.Update(tb);
                 ctx.SaveChanges();
                 return true;
-
             }
-
+           
             return false;
 
         }
@@ -612,9 +613,14 @@ namespace DataLayer
             if (personality != null)
             {
 
-                personality.Notes = Notes;
+                Personalities p = new Personalities
+                {
+                    NameConst = Name,
+                    UserId = Iduser,
+                    Notes = Notes
+                };
+                ctx.Update(p);
                 ctx.SaveChanges();
-                return true;
 
             }
 
