@@ -98,5 +98,75 @@ namespace WebService.Controllers
 
             return result;
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateRatingsForTitle(int id, UserRatingForCreationOrUpdateDto ur)
+        {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    Console.WriteLine($"{Program.CurrentUser.UserId}");
+                    if (Program.CurrentUser.UserId == id)
+                        
+                    {
+                        var tb1 = _mapper.Map<UserRates>(ur);
+                        if (!_dataService.UserUpdateRatings(tb1.TitleConst, id, tb1.NumericR))
+                        {
+                            return NotFound();
+                        }
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete("{idU}/{idT}")]
+        public IActionResult DeleteTitleBookmarkForUser(int idU, string idT)
+        {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+
+                    if (Program.CurrentUser.UserId == idU)
+                    {
+
+                        if (!_dataService.UserDeletesRatings(idT, idU))
+                        {
+                            return NotFound();
+                        }
+
+                        return NoContent();
+
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
     }
 }

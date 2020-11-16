@@ -144,5 +144,28 @@ namespace WebService.Controllers
                 return Unauthorized();
             } 
         }
+        [HttpPost("Ratings/{id}")]
+        public IActionResult AddRatingsForTitle(UserRatingForCreationOrUpdateDto ur) 
+        {
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                _dataService.UserRatesTitles(ur.TitleId, Program.CurrentUser.UserId, ur.Rating);
+                var uRating = _mapper.Map<UserRates>(ur);
+                uRating.Date = DateTime.Now;
+                var result = _mapper.Map<UserRatingsDto>(uRating);
+
+                return Created("", result);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+        }
+
+
     }
 }

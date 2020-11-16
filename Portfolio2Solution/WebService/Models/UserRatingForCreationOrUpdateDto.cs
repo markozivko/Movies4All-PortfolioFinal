@@ -7,7 +7,7 @@ namespace WebService.Models
 {
     public class UserRatingForCreationOrUpdateDto
     {
-        public string Title { get; set; }
+        public string TitleId { get; set; }
         public int Rating { get; set; }
     }
 }
