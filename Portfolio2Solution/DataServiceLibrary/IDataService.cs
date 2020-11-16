@@ -60,5 +60,8 @@ namespace DataServiceLibrary
         bool DeletePersonalityForUser(int Iduser, string titleId);
         OmdbData GetOmdbData(string title);
         bool UserUpdatePersonality(int Iduser, string Name, string Notes);
+        void UserRatesTitles(string Title, int idUser, int Rating);
+        bool UserUpdateRatings(string Title, int UserId, int Rating);
+        bool UserDeletesRatings(string Title, int IdUser);
     }
 }

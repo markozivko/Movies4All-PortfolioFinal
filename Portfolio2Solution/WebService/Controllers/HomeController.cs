@@ -33,8 +33,8 @@ namespace WebService.Controllers
 
             _dataService.CreateNewUser(user, address);
 
-            var user1 = _dataService.GetUsers(_dataService.NumberOfUsers(), 10).Last();
-            var result = _mapper.Map<UserDto>(user1);
+            //var user1 = _dataService.GetUsers(0, 10).Last();
+            var result = _mapper.Map<UserDto>(user);
 
             //test1
 

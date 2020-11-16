@@ -262,12 +262,12 @@ namespace DataLayer
             /*
              * Return known for
             // */
-            var kfor = dataService.GetKnownTitleForPersons("nm0000083");
+            //var kfor = dataService.GetKnownTitleForPersons("nm0000083");
 
-            foreach (var t in kfor)
-            {
-                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
-            }
+            //foreach (var t in kfor)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
+            //}
 
             //var kfor = dataService.GetTitleByGenre(2);
 
@@ -291,6 +291,9 @@ namespace DataLayer
             //    Console.WriteLine($" Serie Id: {t.SerieId}, Season {t.Season} Episode {t.NumEpisode} Episode Id: {t.TitleConst} Episode Id: {t.Title.PrimaryTitle}");
             //}
 
+            //dataService.UserRatesTitles("tt0078672", 1, 5);
+
+            dataService.UserDeletesRatings("tt0078672", 1);
         }
     }
     

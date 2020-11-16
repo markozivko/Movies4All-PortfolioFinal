@@ -631,6 +631,16 @@ namespace DataServiceLibrary
             ctx.Database.ExecuteSqlInterpolated($"call create_new_user({user.FirstName}, {user.LastName}, {user.BirthDay}, {user.IsStaff}, {user.Email}, {user.Password}, {user.UserName}, {address.StreetNumber}, {address.StreetName}, {address.ZipCode}, {address.City}, {address.Country})");
             ctx.SaveChanges();
         }
+        /* ***********************************************
+        * Framework functionalities
+        * Function: CreateNewUser
+        * ***********************************************/
+        public void UserRatesTitles(string Title, int idUser, int Rating)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            ctx.Database.ExecuteSqlInterpolated($"call user_rates({Title}, {idUser}, {Rating})");
+            ctx.SaveChanges();
+        }
 
         /* ***********************************************
         * Framework functionalities
@@ -680,6 +690,22 @@ namespace DataServiceLibrary
 
             return false;
 
+        }
+
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserUpdatesRatings
+        * ***********************************************/
+        public bool UserUpdateRatings(string Title, int UserId, int Rating)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            var userRating = ctx.UserRates.Find(UserId, Title);
+            if (userRating != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"call user_updates_rates({UserId}, {Title}, {Rating})");
+                return true;
+            }
+            return false;
         }
 
         /* ***********************************************
@@ -816,6 +842,21 @@ namespace DataServiceLibrary
 
             return false;
 
+        }
+        /* ***********************************************
+        * Framework functionalities
+        * Function: UserDeleteRatings
+        * ***********************************************/
+        public bool UserDeletesRatings(string Title, int IdUser)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            var userRating = ctx.UserRates.Find(IdUser, Title);
+            if (userRating != null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"call user_deletes_rates({IdUser}, {Title})");
+                return true;
+            }
+            return false;
         }
     }
 }
