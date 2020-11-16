@@ -133,8 +133,7 @@ namespace WebService.Controllers
 
                 _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.TitleId, td.Notes);
 
-                var bookmark = _dataService.GetTitleBookmarkForUser(Program.CurrentUser.UserId, _dataService.NumberOfBookmarksForUser(Program.CurrentUser.UserId), 10).Last();
-
+                var bookmark = _mapper.Map<TitleBookmark>(td);
                 var result = _mapper.Map<TitleBookmarkDto>(bookmark);
                 result.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = bookmark.TitleConst.Trim()});
 

@@ -62,8 +62,7 @@ namespace WebService.Controllers
 
                 _dataService.UserAddPersonality(Program.CurrentUser.UserId, pfc.Name, pfc.Notes);
 
-                var personality = _dataService.GetPersonalitiesForUser(Program.CurrentUser.UserId, _dataService.NumberOfPersonalitiesForUser(Program.CurrentUser.UserId), 10).Last();
-
+                var personality = _mapper.Map<Personalities>(pfc);
                 var result = _mapper.Map<PersonalitiesDto>(personality);
                 result.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new {Id = personality.NameConst.Trim() });
                 return Created("", result);

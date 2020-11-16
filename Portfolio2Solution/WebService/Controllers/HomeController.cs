@@ -30,14 +30,9 @@ namespace WebService.Controllers
         {
             var user = _mapper.Map<User>(newuser);
             var address = _mapper.Map<Address>(newuser);
-
             _dataService.CreateNewUser(user, address);
-
-            //var user1 = _dataService.GetUsers(0, 10).Last();
+            user.Address = address;
             var result = _mapper.Map<UserDto>(user);
-
-            //test1
-
             return Created("", result);
         }
     }

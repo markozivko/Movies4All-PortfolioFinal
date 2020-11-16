@@ -8,19 +8,7 @@ namespace DataServiceLibrary.Models
 {
     public class User
     {
-        //public User(int userId, string firstName, string lastName, DateTime birthDay, bool isStaff, string email, string password, string userName, int addressId)
-        //{
-        //    UserId = userId;
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    BirthDay = birthDay;
-        //    IsStaff = isStaff;
-        //    Email = email;
-        //    Password = password;
-        //    UserName = userName;
-        //    AddressId = addressId;
-        //}
-
+        
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
