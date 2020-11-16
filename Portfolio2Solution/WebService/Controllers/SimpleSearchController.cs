@@ -15,6 +15,7 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         IMapper _mapper;
+        private const int MaxPageSize = 25;
 
         public SimpleSearchController(IDataService dataService, IMapper mapper)
         {
@@ -22,7 +23,7 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
         [HttpGet(Name = nameof(SimpleSearch))]
-        public IActionResult SimpleSearch(string search)
+        public IActionResult SimpleSearch(string search, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -31,7 +32,9 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                var simpleSearch = _dataService.StringSearch(Program.CurrentUser.UserId, search);
+                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+                var simpleSearch = _dataService.StringSearch(Program.CurrentUser.UserId, search, page, pageSize);
 
                 if (simpleSearch == null)
                 {
@@ -47,7 +50,34 @@ namespace WebService.Controllers
                     items.Add(simpleSearchDto);
                 }
 
-                return Ok(new { items});
+                var count = _dataService.NumberOfStringSearchMatched(search, Program.CurrentUser.UserId);
+
+                string prev = null;
+
+                if (page > 0)
+                {
+                    prev = Url.Link(nameof(SimpleSearch), new { page = page - 1, pageSize });
+                }
+
+                string next = null;
+
+                if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                {
+                    next = Url.Link(nameof(SimpleSearch), new { page = page + 1, pageSize });
+                }
+
+                var cur = Url.Link(nameof(SimpleSearch), new { page, pageSize });
+
+                var result = new
+                {
+                    prev,
+                    next,
+                    cur,
+                    count,
+                    items
+                };
+
+                return Ok(result);
 
             } 
             catch (ArgumentException)

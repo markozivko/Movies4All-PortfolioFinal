@@ -589,13 +589,31 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: String search
          * **********************************************/
-        public IList<SimpleSearch> StringSearch(int userid, string search)
+        public IList<SimpleSearch> StringSearch(int userid, string search, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.SimpleSearch
                 .FromSqlRaw("select * from string_search({0}, {1})", userid, search)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+
+        /* ***********************************
+         * Framework functionalities
+         * Function: NumberOfStringSearchMatched
+         * ***********************************/
+        public int NumberOfStringSearchMatched(string search, int userid)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var ss = ctx.SimpleSearch
+            .FromSqlRaw("select * from string_search({0}, {1})", userid, search).Count();
+
+            return ss;
+
+        }
+
         /* **********************************************
          * Framework functionalities
          * Function: Structured search
