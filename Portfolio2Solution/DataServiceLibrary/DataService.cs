@@ -129,6 +129,21 @@ namespace DataServiceLibrary
         }
         /* **************************************
          * Framework functionalities
+         * Function: GetUserSpecificRating
+         * **************************************/
+        public UserRates GetUserSpecificRating(int id, string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.UserRates
+                .Include(ur => ur.User)
+                .Include(ur => ur.Title)
+                .ThenInclude(ur => ur.Title)
+                .Where(ur => ur.UserId == id)
+                .Where(ur => ur.TitleConst == title)
+                .FirstOrDefault();
+        }
+        /* **************************************
+         * Framework functionalities
          * Function: getUserRatings
          * **************************************/
         public IList<UserRates> GetUserRatings(int id, int page, int pageSize)

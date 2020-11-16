@@ -63,5 +63,6 @@ namespace DataServiceLibrary
         void UserRatesTitles(string Title, int idUser, int Rating);
         bool UserUpdateRatings(string Title, int UserId, int Rating);
         bool UserDeletesRatings(string Title, int IdUser);
+        UserRates GetUserSpecificRating(int id, string title);
     }
 }

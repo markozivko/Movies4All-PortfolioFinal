@@ -116,6 +116,21 @@ namespace DataLayer
         }
         /* **************************************
          * Framework functionalities
+         * Function: GetUserSpecificRating
+         * **************************************/
+        public UserRates GetUserSpecificRating(int id, string title)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.UserRates
+                .Include(ur => ur.User)
+                .Include(ur => ur.Title)
+                .ThenInclude(ur => ur.Title)
+                .Where(ur => ur.UserId == id)
+                .Where(ur => ur.TitleConst == title)
+                .FirstOrDefault();
+        }
+        /* **************************************
+         * Framework functionalities
          * Function: getAllTitlesRatings
          * **************************************/
         public IList<TitleRating> GetAllTitlesRatings()

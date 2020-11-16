@@ -293,7 +293,10 @@ namespace DataLayer
 
             //dataService.UserRatesTitles("tt0078672", 1, 5);
 
-            dataService.UserUpdateBookmarkNotes(3, "tt0078672", "updated5");
+            //dataService.UserUpdateBookmarkNotes(3, "tt0078672", "updated5");
+
+            var specUR = dataService.GetUserSpecificRating(11, "tt0078672");
+            Console.WriteLine($"{ specUR.VerbalR}");
         }
     }
     
