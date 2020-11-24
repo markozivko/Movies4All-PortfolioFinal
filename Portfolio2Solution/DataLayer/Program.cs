@@ -131,23 +131,23 @@ namespace DataLayer
             // * Framework functionalities
             // * Function: Simple Search
             // */
-            var search = dataService.StringSearch(1, "butterfly");
+            //var search = dataService.StringSearch(1, "butterfly");
 
-            foreach (var ss in search)
-            {
-                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
-            }
+            //foreach (var ss in search)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            //}
 
             /////*
             ////* Framework functionalities
             ////* Function: Simple Search
             ////*/
-            //var search1 = dataService.StructuredStringSearch(2, "flowers", "", "", "");
+            var search1 = dataService.StructuredStringSearch(2, "butterfly", "", "", "");
 
-            //foreach (var ss in search1)
-            //{
-            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
-            //}
+            foreach (var ss in search1)
+            {
+                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            }
 
             ///*
             //* Framework functionalities

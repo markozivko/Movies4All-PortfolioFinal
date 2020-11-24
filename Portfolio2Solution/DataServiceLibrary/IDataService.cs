@@ -40,7 +40,8 @@ namespace DataServiceLibrary
         int NumberOfRecommendedTitles(string id);
         IList<SimpleSearch> StringSearch(int userid, string search, int page, int pageSize);
         int NumberOfStringSearchMatched(string search, int userid);
-        IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names);
+        IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names, int page, int pageSize);
+        int NumberOfStructuredSearchMatched(int userid, string title, string plot, string characters, string names);
         TitleBasics GetTitle(string title);
         IList<TitleGenre> GetTitleByGenre(int idgenre, int page, int pageSize);
         int NumberOfTitleByGenre(int id);

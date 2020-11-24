@@ -620,13 +620,32 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: Structured search
          * **********************************************/
-        public IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names)
+        public IList<StructuredSearch> StructuredStringSearch(int userid, string title, string plot, string characters, string names, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.StructuredSearch
                 .FromSqlRaw("select * from structured_string_search({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+
+
+        /* ***********************************
+        * Framework functionalities
+        * Function: NumberOfStringSearchMatched
+        * ***********************************/
+        public int NumberOfStructuredSearchMatched(int userid, string title, string plot, string characters, string names)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var advs = ctx.StructuredSearch
+                .FromSqlRaw("select * from structured_string_search({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names).Count();
+
+            return advs;
+
+        }
+
         /* ***********************************************
          * Framework functionalities
          * Function: Title recommendation
