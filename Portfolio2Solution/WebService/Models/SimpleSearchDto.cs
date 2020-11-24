@@ -8,5 +8,7 @@ namespace WebService.Models
     public class SimpleSearchDto
     {
         public string Search { get; set; }
+        public string PrimaryTitle { get; set; }
+        public string TitleUrl { get; set; }
     }
 }

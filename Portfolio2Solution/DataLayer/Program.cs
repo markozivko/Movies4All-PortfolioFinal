@@ -131,12 +131,12 @@ namespace DataLayer
             // * Framework functionalities
             // * Function: Simple Search
             // */
-            //var search = dataService.StringSearch(1, "flower");
+            var search = dataService.StringSearch(1, "butterfly");
 
-            //foreach (var ss in search)
-            //{
-            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
-            //}
+            foreach (var ss in search)
+            {
+                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            }
 
             /////*
             ////* Framework functionalities
@@ -276,12 +276,12 @@ namespace DataLayer
             //    Console.WriteLine($"Title Id: {t.TitleConst}, Title: {t.Title.PrimaryTitle}");
             //}
 
-            DateTime thisDate1 = new DateTime(2011, 6, 10);
-            //Console.WriteLine($"User name: {thisDate1.Date}");
+            //DateTime thisDate1 = new DateTime(2011, 6, 10);
+            ////Console.WriteLine($"User name: {thisDate1.Date}");
 
-            var user3 = dataService.CreateNewUser("Michale", "Ivanovich", thisDate1.Date, true, "Ivanovich@hotmail.com", "mIPana5171", "mopld", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
+            //var user3 = dataService.CreateNewUser("Michale", "Ivanovich", thisDate1.Date, true, "Ivanovich@hotmail.com", "mIPana5171", "mopld", "48165", "Bayside", "4980-125", "Zagreb", "Croatia");
 
-            Console.WriteLine($"User name: {user3.UserId}");
+            //Console.WriteLine($"User name: {user3.UserId}");
 
             //var episodes = dataService.GetAllEpisodes("tt0141842");
 

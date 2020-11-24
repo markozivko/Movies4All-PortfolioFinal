@@ -10,7 +10,7 @@ using WebService.Models;
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/search")]
+    [Route("api/search/simple")]
     public class SimpleSearchController: ControllerBase
     {
         IDataService _dataService;
@@ -40,13 +40,15 @@ namespace WebService.Controllers
                 {
                     return NotFound();
                 }
-                SimpleSearchDto simpleSearchDto = new SimpleSearchDto();
 
                 IList<SimpleSearchDto> items = new List<SimpleSearchDto>();
 
                 foreach (var s in simpleSearch)
                 {
-                    simpleSearchDto.Search = Url.Link(nameof(TitleController.GetTitle), new { Id = s.TitleConst.Trim() });
+                    SimpleSearchDto simpleSearchDto = new SimpleSearchDto();
+                    simpleSearchDto.Search = search;
+                    simpleSearchDto.PrimaryTitle = s.PrimaryTitle;
+                    simpleSearchDto.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = s.TitleConst.Trim() });
                     items.Add(simpleSearchDto);
                 }
 

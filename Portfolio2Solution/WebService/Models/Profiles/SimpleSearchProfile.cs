@@ -12,7 +12,7 @@ namespace WebService.Models.Profiles
         public SimpleSearchProfile()
         {
             CreateMap<SimpleSearch, SimpleSearchDto>()
-                .ForMember(dest => dest.Search, opt => opt.MapFrom(src => src.PrimaryTitle));
+                .ForMember(dest => dest.PrimaryTitle, opt => opt.MapFrom(src => src.PrimaryTitle));
 
         }
     }
