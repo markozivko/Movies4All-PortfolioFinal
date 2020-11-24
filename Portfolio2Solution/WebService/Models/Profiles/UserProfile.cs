@@ -27,9 +27,15 @@ namespace WebService.Models.Profiles
                     opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
 
             CreateMap<UserForCreationOrUpdateDto, User>()
-                .ForMember(dest => dest.BirthDay ,opt => opt.MapFrom(src => Convert.ToDateTime(src.BirthDay)));
+                .ForMember(dest => dest.BirthDay ,opt => opt.MapFrom(src => PrettyDate(Convert.ToDateTime(src.BirthDay))));
 
             CreateMap<UserForCreationOrUpdateDto, Address>();
+        }
+
+        public string PrettyDate(DateTime d)
+        {
+            var pretty = $"{d.Year}-{d.Month}-{d.Day}";
+            return pretty;
         }
     }
 }
