@@ -9,7 +9,8 @@ namespace DataServiceLibrary
     {
         UserRole CheckUserRole(int userid);
         IList<Actors> FindActors(int userid, string title, string plot, string characters, string names);
-        IList<CoPlayers> FindCoPlayers(int userid, string name);
+        IList<CoPlayers> FindCoPlayers(int userid, string name, int page, int pageSize);
+        int NumberOfCoPlayers(string name, int userid);
         IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names);
         IList<TitleBestMatch> FindTitleBestMatch(params string[] args);
         IList<TitleExactMatch> FindTitleExactMatch(params string[] args);

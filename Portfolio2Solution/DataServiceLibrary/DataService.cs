@@ -536,13 +536,32 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: Find coplayers
          * *****************************************/
-        public IList<CoPlayers> FindCoPlayers(int userid, string name)
+        public IList<CoPlayers> FindCoPlayers(int userid, string name, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.CoPlayers
                 .FromSqlRaw("select * from find_co_players({0}, {1})", userid, name)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+
+        /* ***********************************
+         * Framework functionalities
+         * Function: NumberOfStringSearchMatched
+         * ***********************************/
+        public int NumberOfCoPlayers(string name, int userid)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var ss = ctx.SimpleSearch
+                .FromSqlRaw("select * from find_co_players({0}, {1})", userid, name).Count();
+
+            return ss;
+
+        }
+
+
         /* *******************************************
          * Framework functionalities
          * Function: Find Best match
