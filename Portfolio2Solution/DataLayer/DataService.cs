@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using DataLayer.FromSQL;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,25 @@ namespace DataLayer
             _connectionString = connectionString;
         }
 
+        public string HashPassword(string password)
+        {
+            // generate a 128-bit salt using a secure PRNG
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+            Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
+            // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+            Console.WriteLine($"Hashed: {hashed}");
+            return hashed;
+        }
 
 
         /* ****************************************************************************************************************
@@ -481,7 +502,7 @@ namespace DataLayer
         {
             using var ctx = new DatabaseContext(_connectionString);
             var currentId = ctx.Users.Max(x => x.UserId);
-            ctx.Database.ExecuteSqlInterpolated($"call create_new_user({FName}, {LName}, {BirthDay}, {Staff}, {Email}, {Password}, {UserName}, {StreetNum}, {StreetName}, {ZipCode}, {CityName}, {CountryName})");
+            ctx.Database.ExecuteSqlInterpolated($"call create_new_user({FName}, {LName}, {BirthDay}, {Staff}, {Email}, {HashPassword(Password)}, {UserName}, {StreetNum}, {StreetName}, {ZipCode}, {CityName}, {CountryName})");
             ctx.SaveChanges();
             return GetUser(currentId + 1);
         }
