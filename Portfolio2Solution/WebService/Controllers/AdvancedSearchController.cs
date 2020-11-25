@@ -32,9 +32,10 @@ namespace WebService.Controllers
                 }
 
                 pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
-
-                Console.WriteLine($"#####HELOOOOOOOOOOOOOOO");
-
+                SearchPlot ??= "";
+                SearchTitle ??= "";
+                SearchCharacter ??= "";
+                SearchPersonName ??= "";
                 var advancedSearch = _dataService.StructuredStringSearch(Program.CurrentUser.UserId, SearchTitle, SearchPlot, SearchCharacter, SearchPersonName, page, pageSize);
 
                 Console.WriteLine($"#####{advancedSearch[0].PrimaryTitle}");
@@ -52,10 +53,10 @@ namespace WebService.Controllers
                 {
                     AdvancedSearchDto advanceDto = new AdvancedSearchDto();
 
-                    advanceDto.SearchTitle = SearchTitle ?? "";
-                    advanceDto.SearchPlot = SearchPlot ?? "";
-                    advanceDto.SearchCharacter = SearchCharacter ?? "";
-                    advanceDto.SearchPersonName = SearchPersonName ?? "";
+                    advanceDto.SearchTitle = SearchTitle;
+                    advanceDto.SearchPlot = SearchPlot;
+                    advanceDto.SearchCharacter = SearchCharacter;
+                    advanceDto.SearchPersonName = SearchPersonName;
                     advanceDto.PrimaryTitle = a.PrimaryTitle;
                     advanceDto.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = a.TitleConst.Trim() });
                     items.Add(advanceDto);
