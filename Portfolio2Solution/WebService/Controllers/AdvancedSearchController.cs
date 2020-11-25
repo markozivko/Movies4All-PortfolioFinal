@@ -37,10 +37,6 @@ namespace WebService.Controllers
                 SearchCharacter ??= "";
                 SearchPersonName ??= "";
                 var advancedSearch = _dataService.StructuredStringSearch(Program.CurrentUser.UserId, SearchTitle, SearchPlot, SearchCharacter, SearchPersonName, page, pageSize);
-
-                Console.WriteLine($"#####{advancedSearch[0].PrimaryTitle}");
-
-
                 if (advancedSearch == null)
                 {
                     return NotFound();

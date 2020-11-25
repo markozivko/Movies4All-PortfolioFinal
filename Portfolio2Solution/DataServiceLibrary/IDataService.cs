@@ -8,7 +8,8 @@ namespace DataServiceLibrary
     public interface IDataService
     {
         UserRole CheckUserRole(int userid);
-        IList<Actors> FindActors(int userid, string title, string plot, string characters, string names);
+        IList<Actors> FindActors(int userid, string title, string plot, string characters, string names, int page, int pageSize);
+        int NumberOfActorsSearchMatched(int userid, string title, string plot, string characters, string names);
         IList<CoPlayers> FindCoPlayers(int userid, string name, int page, int pageSize);
         int NumberOfCoPlayers(string name, int userid);
         IList<ProductionTeam> FindProductionTeam(int userid, string title, string plot, string characters, string names);

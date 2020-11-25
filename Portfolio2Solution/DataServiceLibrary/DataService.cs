@@ -525,13 +525,31 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: FindActors
          * ****************************************/
-        public IList<Actors> FindActors(int userid, string title, string plot, string characters, string names)
+        public IList<Actors> FindActors(int userid, string title, string plot, string characters, string names, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Actors
                 .FromSqlRaw("select * from find_actors({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names)
+                .Skip(page * pageSize)
+                .Take(pageSize)
                 .ToList();
         }
+        /* ***********************************
+          * Framework functionalities
+          * Function: NumberOfActorsSearchMatched
+          * ***********************************/
+        public int NumberOfActorsSearchMatched(int userid, string title, string plot, string characters, string names)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var ss = ctx.Actors
+                .FromSqlRaw("select * from find_actors({0}, {1}, {2}, {3}, {4})", userid, title, plot, characters, names).Count();
+
+            return ss;
+
+        }
+
+
         /* *****************************************
          * Framework functionalities
          * Function: Find coplayers
@@ -554,7 +572,7 @@ namespace DataServiceLibrary
         {
             using var ctx = new DatabaseContext(_connectionString);
 
-            var ss = ctx.SimpleSearch
+            var ss = ctx.CoPlayers
                 .FromSqlRaw("select * from find_co_players({0}, {1})", userid, name).Count();
 
             return ss;

@@ -32,13 +32,13 @@ namespace DataLayer
             //              $"Is staff: {user.IsStaff}");
 
 
-            //var actor = dataService.FindActors(1, "tt0418455", "see", "", "");
-            //foreach (var a in actor)
-            //{
-            //    Console.WriteLine($"Id: {a.NameConst} \n" +
-            //              $"Name: {a.Name}\n" +
-            //              $"Gender: {a.Gender}");
-            //}
+            var actor = dataService.FindActors(1, "america", "", "", "");
+            foreach (var a in actor)
+            {
+                Console.WriteLine($"Id: {a.NameConst} \n" +
+                          $"Name: {a.Name}\n" +
+                          $"Gender: {a.Gender}");
+            }
 
             ///*
             // * Framework functionalities
@@ -142,12 +142,12 @@ namespace DataLayer
             ////* Framework functionalities
             ////* Function: Simple Search
             ////*/
-            var search1 = dataService.StructuredStringSearch(2, "butterfly", "", "", "");
+            //var search1 = dataService.StructuredStringSearch(2, "butterfly", "", "", "");
 
-            foreach (var ss in search1)
-            {
-                Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
-            }
+            //foreach (var ss in search1)
+            //{
+            //    Console.WriteLine($"Id: {ss.TitleConst}, Title: {ss.PrimaryTitle}");
+            //}
 
             ///*
             //* Framework functionalities
