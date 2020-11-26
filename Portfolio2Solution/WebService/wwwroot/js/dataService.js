@@ -63,41 +63,42 @@ let createUser = function (user, callback) {
 * Function: Update the user
 * ************************************/
 
-let updateUser = function (url, user, callback) {
-    fetch(url, {
-        method: "PUT", body: JSON.stringify(user), headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 49
-        }
-    })
-        .then(response => response.json())
-        .then(data => callback(data));
-}
+//let updateUser = function (user, callback) {
+//    fetch("api/users/49", {
+//        method: "PUT",
+//        body: JSON.stringify(user),
+//        headers: {
+//                'Content-Type': 'application/json',
+//                'Authorization': 49
+//        }
+//    })
+//        .then(response => response.json())
+//        .then(data => callback(data));
+//}
 
-updateUser("api/users/49", {
-    FirstName: "A-gun-new-name",
-    LastName: "Aabidah2",
-    BirthDay: "01/08/2009",
-    IsStaff: false,
-    Email: "gun@super.com",
-    Password: "gun123",
-    UserName: "shootGub-newName",
-    StreetNumber: "21",
-    StreetName: "Joyful",
-    ZipCode: "35214",
-    City: "Mumbai",
-    Country: "India"
-}, function (data) {
-        console.log(data);
-});
+//updateUser({
+//    FirstName: "A-gun-new-name",
+//    LastName: "Aabidah2",
+//    BirthDay: "01/08/2009",
+//    IsStaff: false,
+//    Email: "gun@super.com",
+//    Password: "gun123",
+//    UserName: "shootGub-newName",
+//    StreetNumber: "21",
+//    StreetName: "Joyful",
+//    ZipCode: "35214",
+//    City: "Mumbai",
+//    Country: "India"
+//}, function (data) {
+//        console.log(data);
+//});
 
 /* **********************************
 * Function: Delete user
 * ************************************/
 let unsubscribeUser = url => fetch(url, {
     method: "DELETE", headers: {
-        'Authorization': 50,
-
+        'Authorization': 50
     }
 });
 
