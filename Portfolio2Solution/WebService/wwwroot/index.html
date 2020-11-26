@@ -2,15 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="js/lib/twitter-bootstrap/css/bootstrap.css">
 </head>
 <body>
 
-    <h1> Hello from HTML </h1>
+    <section id="title">
 
-    <input data-bind="textInput: name"/>
-    <div data-bind="text:name"/>
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-md navbar-light bg-dark">
+            <a class="navbar-brand" href="#">Movies4All</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </section>
+
+    <input data-bind="textInput: name" />
+    <div data-bind="text:name" />
     <!--<script src="js/dataService.js"></script>-->
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
