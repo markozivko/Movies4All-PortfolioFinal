@@ -39,7 +39,7 @@ namespace WebService
 
             app.UseRouting();
             app.UseMiddleware<RequestLoggerMiddleware>();
-
+            app.UseFileServer();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
