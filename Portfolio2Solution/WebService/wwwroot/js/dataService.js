@@ -4,29 +4,49 @@
  * ****************************************************************************************************************/
 
 
-/* **********************************
-* Function: Get users
-* ************************************/
+define([], () => {
 
-let getUsers = function (callback) {
-    fetch("api/users", {
-        headers: {
-            'Authorization': 3,
-            
-        }
+    /* **********************************
+    * Function: Get users
+    * ************************************/
 
-    })
-        .then(function (response) {
-            return response.json();
+    let getUsers = function (callback) {
+        fetch("api/users", {
+            headers: {
+                'Authorization': 3,
+
+            }
+
         })
-        .then(function (data) {
-            callback(data);
-        });
-}
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                callback(data);
+            });
+    }
 
-//getUsers(function (data) {
-//    console.log(data);
-//});
+    //getUsers(function (data) {
+    //    console.log(data);
+    //});
+
+    /* **********************************
+    * Function: Get specific user
+    * ************************************/
+    let getUser = (id, callback) => {
+        fetch("api/users/" + id)
+            .then(response => response.json())
+            .then(callback);
+    }
+
+    return {
+        getUsers,
+        getUser
+    }
+
+});
+
+
 
 /* **********************************
 * Function: Create new user

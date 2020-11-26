@@ -40,6 +40,7 @@ namespace WebService
             app.UseRouting();
             app.UseMiddleware<RequestLoggerMiddleware>();
             app.UseFileServer();
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
