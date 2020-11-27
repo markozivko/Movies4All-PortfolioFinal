@@ -461,6 +461,7 @@ namespace DataServiceLibrary
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
                 .Where( t => t.Rating.NumVotes >= _popularityScale)
+                .Where(t => t.Type != "tvEpisode")
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -480,6 +481,7 @@ namespace DataServiceLibrary
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
                 .Where(t => t.Rating.NumVotes >= _popularityScale)
+                .Where(t => t.Type != "tvEpisode")
                 .Count();
             return e;
 

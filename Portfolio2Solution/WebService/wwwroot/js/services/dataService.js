@@ -138,10 +138,7 @@ define([], () => {
 
     let getPopularTitles = function (callback) {
         fetch("api", {
-            method : 'GET',
-            headers: {
-                'Authorization': 3,    
-            }
+            method : 'GET'
 
         })
             .then(function (response) {

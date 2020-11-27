@@ -40,7 +40,7 @@ namespace WebService.Controllers
         private TitleDto CreateTitleElementDto(TitleBasics title)
         {
             var dto = _mapper.Map<TitleDto>(title);
-            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
+            dto.DetailsUrl = Url.Link(nameof(PopularTitlesController.GetPopularTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
             return dto;
         }
 
