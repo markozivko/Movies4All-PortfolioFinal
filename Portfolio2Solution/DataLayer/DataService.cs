@@ -15,6 +15,7 @@ namespace DataLayer
     public class DataService
     {
         private readonly string _connectionString;
+        private const int _popularityScale = 10000;
         public DataService(string connectionString)
         {
             _connectionString = connectionString;
@@ -368,7 +369,39 @@ namespace DataLayer
 
 
         }
+        /* **************************************
+         * Framework functionalities
+         * Function: getPopularTitles
+         * **************************************/
+        public IList<TitleBasics> GetPopularTitles()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where( t => t.Rating.NumVotes >= _popularityScale )
+                .ToList();
+        }
 
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfPopularTitles
+        * **************************************/
+        public int NumberOfPopularTitles()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var e = ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where(t => t.Rating.NumVotes >= _popularityScale)
+                .Count();
+            return e;
+
+        }
 
 
         /* ****************************************************************************************************************

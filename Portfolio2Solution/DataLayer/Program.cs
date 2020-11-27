@@ -32,13 +32,13 @@ namespace DataLayer
             //              $"Is staff: {user.IsStaff}");
 
 
-            var actor = dataService.FindActors(1, "america", "", "", "");
-            foreach (var a in actor)
-            {
-                Console.WriteLine($"Id: {a.NameConst} \n" +
-                          $"Name: {a.Name}\n" +
-                          $"Gender: {a.Gender}");
-            }
+            //var actor = dataService.FindActors(1, "america", "", "", "");
+            //foreach (var a in actor)
+            //{
+            //    Console.WriteLine($"Id: {a.NameConst} \n" +
+            //              $"Name: {a.Name}\n" +
+            //              $"Gender: {a.Gender}");
+            //}
 
             ///*
             // * Framework functionalities
@@ -297,6 +297,12 @@ namespace DataLayer
 
             //var specUR = dataService.GetUserSpecificRating(11, "tt0078672");
             //Console.WriteLine($"{ specUR.VerbalR}");
+
+            var popularTitles = dataService.GetPopularTitles();
+            foreach(var i in popularTitles)
+            {
+                Console.WriteLine($"Popular Titles {i.Const}, {i.Rating.NumVotes}, {i.TitleGenres.FirstOrDefault().Genre.Name}");
+            }
         }
     }
     

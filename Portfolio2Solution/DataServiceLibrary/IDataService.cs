@@ -68,5 +68,7 @@ namespace DataServiceLibrary
         bool UserUpdateRatings(string Title, int UserId, int Rating);
         bool UserDeletesRatings(string Title, int IdUser);
         UserRates GetUserSpecificRating(int id, string title);
+        IList<TitleBasics> GetPopularTitles(int page, int pageSize);
+        int NumberOfPopularTitles();
     }
 }

@@ -125,3 +125,37 @@ let unsubscribeUser = url => fetch(url, {
 //unsubscribeUser("api/users/50")
 
 
+/* ****************************************************************************************************************
+ *                                         Functionalitites for titles
+ * ****************************************************************************************************************/
+
+
+define([], () => {
+
+    /* **********************************
+    * Function: Get popular titles
+    * ************************************/
+
+    let getPopularTitles = function (callback) {
+        fetch("api", {
+            method : 'GET',
+            headers: {
+                'Authorization': 3,    
+            }
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                callback(data);
+            });
+    }
+
+    return {
+        getPopularTitles
+    }
+
+});
+
+

@@ -25,6 +25,59 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet(Name = nameof(GetPopularTitles))]
+        public IActionResult GetPopularTitles(int page = 0, int pageSize = 10)
+        {
+            var titles = _dataService.GetPopularTitles(page, pageSize);
+            if (titles == null)
+            {
+                return NotFound();
+            }
+
+            var result = CreateResult(titles, page, pageSize);
+            return Ok(result);
+        }
+        private TitleDto CreateTitleElementDto(TitleBasics title)
+        {
+            var dto = _mapper.Map<TitleDto>(title);
+            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
+            return dto;
+        }
+
+        private object CreateResult(IList<TitleBasics> titles,int page, int pageSize)
+        {
+            var items = titles.Select(CreateTitleElementDto);
+
+            var count = _dataService.NumberOfPopularTitles();
+
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetPopularTitles), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            {
+                next = Url.Link(nameof(GetPopularTitles), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetPopularTitles), new { page, pageSize });
+
+            var result = new
+            {
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
+        }
+
         [HttpPost]
         public IActionResult CreateUser(UserForCreationOrUpdateDto newuser)
         {

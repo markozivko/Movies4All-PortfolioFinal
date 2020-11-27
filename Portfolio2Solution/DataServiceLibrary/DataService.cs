@@ -13,6 +13,7 @@ namespace DataServiceLibrary
     public class DataService : IDataService
     {
         private readonly string _connectionString;
+        private const int _popularityScale = 15000;
         public DataService(string connectionString)
         {
             _connectionString = connectionString;
@@ -197,6 +198,7 @@ namespace DataServiceLibrary
                 .Where(tr => tr.Const == title)
                 .FirstOrDefault();
         }
+
 
         /* **************************************
          * Framework functionalities
@@ -444,6 +446,42 @@ namespace DataServiceLibrary
                 .ThenInclude(tg => tg.Genre)
                 .Where(t => t.Const == title)
                 .FirstOrDefault();
+
+        }
+
+        /* **************************************
+         * Framework functionalities
+         * Function: getPopularTitles
+         * **************************************/
+        public IList<TitleBasics> GetPopularTitles(int page, int pageSize)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where( t => t.Rating.NumVotes >= _popularityScale)
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfPopularTitles
+        * **************************************/
+        public int NumberOfPopularTitles()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var e = ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where(t => t.Rating.NumVotes >= _popularityScale)
+                .Count();
+            return e;
 
         }
 
