@@ -25,7 +25,24 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(GetPopularTitles))]
+        [HttpGet("popular/{id}", Name = nameof(GetPopularTitle))]
+        public IActionResult GetPopularTitle(string id)
+        {
+                var titles = _dataService.GetTitle(id);
+
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+
+                var dto = _mapper.Map<TitleDto>(titles);
+                dto.DetailsUrl = Url.Link(nameof(PopularTitlesController.GetPopularTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
+
+                return Ok(dto);
+        }
+
+
+        [HttpGet("popular", Name = nameof(GetPopularTitles))]
         public IActionResult GetPopularTitles(int page = 0, int pageSize = 10)
         {
             var titles = _dataService.GetPopularTitles(page, pageSize);

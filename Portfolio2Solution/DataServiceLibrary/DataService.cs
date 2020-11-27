@@ -13,7 +13,7 @@ namespace DataServiceLibrary
     public class DataService : IDataService
     {
         private readonly string _connectionString;
-        private const int _popularityScale = 15000;
+        private const int _popularityScale = 450000;
         public DataService(string connectionString)
         {
             _connectionString = connectionString;

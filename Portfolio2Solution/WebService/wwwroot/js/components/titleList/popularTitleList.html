@@ -1,8 +1,11 @@
 ﻿﻿<div class="border">
-    <ul data-bind="foreach: popularTitles">
-        <li data-bind="text: name, click: $parent.selectPopularTitle"></li>
-    </ul>
-    <div>
-        <title-details params="title: selectedPopularTitle"></title-details>
-    </div>
+     <ul data-bind="foreach: popularTitles">
+         <li data-bind="text: primaryTitle"></li>
+
+         <!--<li data-bind="text: primaryTitle, click: $parent.selectPopularTitle"></li>-->
+     </ul>
+     <!--<div>
+         <title-details params="popularTitle: selectedPopularTitle"></title-details>
+
+     </div>-->
 </div>

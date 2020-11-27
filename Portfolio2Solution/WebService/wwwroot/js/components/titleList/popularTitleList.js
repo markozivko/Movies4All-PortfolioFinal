@@ -1,19 +1,19 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let popularTitles = ko.observableArray([]);
-        let selectedPopularTitle = params.selectedpopularTitle;
+        //let selectedPopularTitle = params.selectedPopularTitle;
 
-        let selectPopularTitle = title => {
-            selectedPopularTitle(title);
-            postman.publish('changePopularTitle', title);
-        }
+        //let selectPopularTitle = popularTitle => {
+        //    selectedPopularTitle(popularTitle);
+        //    postman.publish('changePopularTitle', popularTitle);
+        //}
 
         ds.getPopularTitles(function (data) { popularTitles(data) });
 
         return {
-            popularTitles,
-            selectPopularTitle,
-            selectedPopularTitle
+            popularTitles
+            //selectPopularTitle,
+            //selectedPopularTitle
         }
     }
 });
