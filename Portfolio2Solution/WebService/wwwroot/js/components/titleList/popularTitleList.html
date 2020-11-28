@@ -6,45 +6,51 @@
         <title-details params="popularTitle: selectedPopularTitle"></title-details>
     </div>
 </div>-->
+<!-- Now we're inside a nested binding context -->
+<div data-bind="foreach: popularTitles" class="row text-center">
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li data-bind="text: genre"></li>
+                    <li data-bind="text: startYear"></li>
+                    <li>
+                        <i class="far fa-clock"></i>
+                        <span data-bind="text: runtime"></span> min
+                    </li>
+                </ul>
+                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-info" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectPopularTitle">Show details</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-     <!-- Now we're inside a nested binding context -->
-     <div data-bind="foreach: popularTitles" class="row text-center">
-         <div class="col-lg-3 col-md-4">
-             <div class="card shadow-sm">
-                 <div class="card-header">
-                     <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
-                 </div>
-                 <div class="card-body">
-                     <ul class="list-unstyled mt-3 mb-4">
-                         <li data-bind="text: genre"></li>
-                         <li data-bind="text: startYear"></li>
-                         <li>
-                             <i class="far fa-clock"></i>
-                             <span data-bind="text: runtime"></span> min
-                         </li>
-                     </ul>
-                     <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-info" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectPopularTitle">Show details</button>
-                 </div>
-             </div>
-         </div>
-     </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
-     <div id="modalDetailsTitle"class="modal" tabindex="-1">
-         <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title"><title-details params="popularTitle: selectedPopularTitle"></title-details></h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <p>Modal body text goes here.</p>
-                 </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                 </div>
-             </div>
-         </div>
-     </div>
+<div id="modalDetailsTitle" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><title-details params="popularTitle: selectedPopularTitle"></title-details></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 

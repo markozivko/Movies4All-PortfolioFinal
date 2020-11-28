@@ -462,6 +462,7 @@ namespace DataServiceLibrary
                 .Include(tr => tr.Rating)
                 .Where( t => t.Rating.NumVotes >= _popularityScale)
                 .Where(t => t.Type != "tvEpisode")
+                .OrderBy(t => t.PrimaryTitle)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
