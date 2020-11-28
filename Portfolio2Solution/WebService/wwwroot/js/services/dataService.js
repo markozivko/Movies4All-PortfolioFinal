@@ -4,27 +4,27 @@
  * ****************************************************************************************************************/
 
 
-define([], () => {
+//define([], () => {
 
     /* **********************************
     * Function: Get users
     * ************************************/
 
-    let getUsers = function (callback) {
-        fetch("api/users", {
-            headers: {
-                'Authorization': 3,
+    //let getUsers = function (callback) {
+    //    fetch("api/users", {
+    //        headers: {
+    //            'Authorization': 3,
 
-            }
+    //        }
 
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                callback(data);
-            });
-    }
+    //    })
+    //        .then(function (response) {
+    //            return response.json();
+    //        })
+    //        .then(function (data) {
+    //            callback(data);
+    //        });
+    //}
 
     //getUsers(function (data) {
     //    console.log(data);
@@ -33,34 +33,34 @@ define([], () => {
     /* **********************************
     * Function: Get specific user
     * ************************************/
-    let getUser = (id, callback) => {
-        fetch("api/users/" + id)
-            .then(response => response.json())
-            .then(callback);
-    }
+    //let getUser = (id, callback) => {
+    //    fetch("api/users/" + id)
+    //        .then(response => response.json())
+    //        .then(callback);
+    //}
 
-    return {
-        getUsers,
-        getUser
-    }
+    //return {
+    //    getUsers,
+    //    getUser
+    //}
 
-});
+//});
 
 
 
 /* **********************************
 * Function: Create new user
 * ************************************/
-let createUser = function (user, callback) {
-    fetch("api", {
-        method: "POST", body: JSON.stringify(user), headers: {
-            'Content-Type': 'application/json'
+//let createUser = function (user, callback) {
+//    fetch("api", {
+//        method: "POST", body: JSON.stringify(user), headers: {
+//            'Content-Type': 'application/json'
 
-        }
-    })
-        .then(response => response.json())
-        .then(data => callback(data));
-}
+//        }
+//    })
+//        .then(response => response.json())
+//        .then(data => callback(data));
+//}
 
 //createUser({
 //    FirstName: "A-gun-evil-twin",
@@ -116,11 +116,11 @@ let createUser = function (user, callback) {
 /* **********************************
 * Function: Delete user
 * ************************************/
-let unsubscribeUser = url => fetch(url, {
-    method: "DELETE", headers: {
-        'Authorization': 50
-    }
-});
+//let unsubscribeUser = url => fetch(url, {
+//    method: "DELETE", headers: {
+//        'Authorization': 50
+//    }
+//});
 
 //unsubscribeUser("api/users/50")
 
