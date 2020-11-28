@@ -20,8 +20,8 @@ namespace WebService.Models.Profiles
             .ForMember(dest => dest.StartYear, opt => opt.MapFrom(src => src.Title.StartYear))
             .ForMember(dest => dest.Runtime, opt => opt.MapFrom(src => src.Title.Runtime))
             .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Title.Rating.Average));
-            
-        }
+
+    }
 
         public string Flatten(ICollection<TitleGenre> genres)
         {
