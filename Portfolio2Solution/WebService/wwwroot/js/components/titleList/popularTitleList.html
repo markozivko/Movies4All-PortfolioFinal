@@ -26,25 +26,39 @@
 
 
 
+     <!-- Now we're inside a nested binding context -->
+     <div data-bind="foreach: popularTitles" class="row text-center">
+         <div class="col-lg-4 col-md-4">
+             <div class="card shadow-sm">
+                 <div class="card-header">
+                     <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+                 </div>
+                 <div class="card-body">
+                     <button type="button" class="btn btn-lg btn-block btn-outline-info">Sign up for free</button>
+                 </div>
 
-<!--<div id="someId" class="row text-center">
-    <div class="col-lg-4 col-md-4">
-        <div class="card shadow-sm" >
-            <div class="card-header">
-                <h4 data-bind="text: primaryTitle, click: $parent.selectPopularTitle" class="my-0 font-weight-normal">Standard</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-                <ul class="list-unstyled mt-3 mb-4" data-bind="foreach: popularTitles">
-                    <li>Monthly invoicing</li>
-                    <li>Email support</li>
-                    <li>Help center access</li>
-                </ul>
-                <div>
-                    <title-details params="popularTitle: selectedPopularTitle"></title-details>
-                </div>
-                <button type="button" class="btn btn-lg btn-block btn-outline-info">Sign up for free</button>
-            </div>
-        </div>
-    </div>
-</div>-->
+             </div>
+         </div>
+     </div>
+
+
+
+     <div class="row text-center">
+         <div class="col-lg-4 col-md-4">
+             <div class="card shadow-sm">
+                 <div class="card-header">
+                     <h4 class="my-0 font-weight-normal">Standard</h4>
+                 </div>
+                 <div class="card-body">
+                     <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                     <ul class="list-unstyled mt-3 mb-4" data-bind="foreach: popularTitles">
+                         <li>Monthly invoicing</li>
+                         <li>Email support</li>
+                         <li>Help center access</li>
+                     </ul>
+                     <button type="button" class="btn btn-lg btn-block btn-outline-info">Sign up for free</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
