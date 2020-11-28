@@ -36,12 +36,10 @@
     </section>
 
 
-    <title-list></title-list>
-
     <button data-bind="click: changeContent">Change Content</button>
 
 
-    <div data-bind="component: {primaryTitle: selectedComponent, params: currentParams}"></div>
+    <div data-bind="component: {name: selectedComponent, params: currentParams}"></div>
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
 </html>
