@@ -7,11 +7,11 @@ namespace WebService.Models.Profiles
     {
         public PopularTitlesProfile()
         {
-            CreateMap<TitleRating, PopularTitlesDto>()
+            CreateMap<TitleRating, PopularTitlesDetailsDto>()
                .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Average))
                .ForMember(dest => dest.NumVotes, opt => opt.MapFrom(src => src.NumVotes));
 
-            CreateMap<OmdbData, PopularTitlesDto>()
+            CreateMap<OmdbData, PopularTitlesDetailsDto>()
                 .ForMember(dest => dest.Plot, opt => opt.MapFrom(src => src.Plot));
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace WebService.Models
 {
-    public class PopularTitlesDto
+    public class PopularTitlesDetailsDto
     {
 
         public decimal Rating { get; set; }

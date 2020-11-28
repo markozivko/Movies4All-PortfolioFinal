@@ -1,9 +1,9 @@
 ﻿define([], () => {
     return function (params) {
-        let primaryTitle = params.value || "notitle";
+        let PrimaryTitle = params.value || "notitle";
         //debugger;
         return {
-            primaryTitle
+            PrimaryTitle
         }
     }
 });
