@@ -145,7 +145,7 @@ define([], () => {
                 return response.json();
             })
             .then(function (data) {
-                callback(data);
+                callback(data.items);
             });
     }
 
