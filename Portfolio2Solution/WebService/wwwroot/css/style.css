@@ -6,9 +6,12 @@
 }
 
 .navbar {
+    position: fixed;
+    width: 100%;
     padding: 0.5em 2em 0.5rem;
     color: #dbd8e3;
     background-color: #232931;
+    z-index: 2;
 }
 
 .nav-item {
@@ -63,6 +66,9 @@ h4 {
     font-weight: bold;
     color: #dbd8e3;
 }
+#features{
+    padding-top: 5%;
+}
 
 #pricing1 {
     padding: 10px 30px 20px 30px;
@@ -86,10 +92,35 @@ h4 {
     margin-bottom: 2%;
 }
 
-@media (max-width: 776px) {
+@media (min-width: 350px) {
+
+    #features {
+        padding-top: 28%;
+    }
+}
+
+@media (min-width: 460px) {
+
+    #features {
+        padding-top: 20%;
+    }
+}
+
+@media (min-width: 560px) {
+
+    #features {
+        padding-top: 15%;
+    }
+}
+
+@media (min-width: 860px) {
 
     #pricing1 {
         padding: 10px 50px 20px;
     }
 
+    #features {
+        padding-top: 10%;
+    }
 }
+
