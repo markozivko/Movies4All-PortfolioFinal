@@ -23,6 +23,19 @@
     padding: 3% 12%;
 }
 
+.modal-content {
+    background-color: #112642;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #fff;
+    margin: 1em 0;
+    padding: 0;
+}
+
 h1 {
     font-size: 3.7rem;
     line-height: 1.5;
