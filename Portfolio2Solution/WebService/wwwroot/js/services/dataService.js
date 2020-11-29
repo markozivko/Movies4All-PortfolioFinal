@@ -136,8 +136,8 @@ define([], () => {
     * Function: Get popular titles
     * ************************************/
 
-    let getPopularTitles = function (callback) {
-        fetch("api/popular", {
+    let getPopularTitles = function (uri, callback) {
+        fetch(uri, {
             method : 'GET'
 
         })
@@ -145,7 +145,7 @@ define([], () => {
                 return response.json();
             })
             .then(function (data) {
-                callback(data.items);
+                callback(data.items, data.next, data.prev);
             });
     }
 
@@ -155,8 +155,8 @@ define([], () => {
             .then(callback);
     }
 
-    let getPopularTitleDetails = (id, callback) => {
-        fetch('api/detailpopulartitles' + id)
+    let getPopularTitleDetails = (uri, callback) => {
+        fetch(uri)
             .then(response => response.json())
             .then(callback);
     }

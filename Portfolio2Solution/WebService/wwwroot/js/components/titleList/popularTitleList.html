@@ -5,8 +5,15 @@
     <div>
         <title-details params="popularTitle: selectedPopularTitle"></title-details>
     </div>
-</div>-->
-<!-- Now we're inside a nested binding context -->
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="">Previous</a></li>
+        <li class="page-item"><a class="page-link">Next</a></li>
+    </ul>
+</nav>-->
+
+
 <div data-bind="foreach: popularTitles" class="row text-center">
     <div class="col-lg-4 col-md-6">
         <div class="card shadow-sm">
@@ -30,7 +37,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="">Previous</a></li>
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
 </nav>
