@@ -155,9 +155,16 @@ define([], () => {
             .then(callback);
     }
 
+    let getPopularTitleDetails = (id, callback) => {
+        fetch('api/detailpopulartitles' + id)
+            .then(response => response.json())
+            .then(callback);
+    }
+
     return {
         getPopularTitles,
-        getPopularTitle
+        getPopularTitle,
+        getPopularTitleDetails
     }
 
 });
