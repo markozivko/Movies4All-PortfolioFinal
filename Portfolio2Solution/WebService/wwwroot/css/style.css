@@ -1,10 +1,14 @@
 ﻿body {
     font-family: 'Limelight', cursive;
     text-align: center;
+    color: #dbd8e3;
+    background-image: url("https://images.pexels.com/photos/109669/pexels-photo-109669.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 }
 
 .navbar {
     padding: 1em 1em 2.5rem;
+    color: #dbd8e3;
+    background-color: #232931;
 }
 
 .nav-item {
@@ -30,8 +34,13 @@ h2 {
     font-weight: bold;
     line-height: 1.5;
     font-size: 2.3rem;
+    color: #dbd8e3;
     padding-top: 2%;
     padding-bottom: 2%;
+}
+
+.fas {
+    color: #dbd8e3;
 }
 
 
@@ -39,6 +48,7 @@ h4 {
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: bold;
+    color: #dbd8e3;
 }
 
 #pricing1 {
@@ -54,7 +64,7 @@ h4 {
 .card {
     margin-bottom: 50px;
     height: 270px;
- 
+    background-color: #232931;
 }
 
 
