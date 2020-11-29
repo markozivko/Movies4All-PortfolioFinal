@@ -2,6 +2,7 @@
     return function (params) {
         let popularTitles = ko.observableArray([]);
         //let nextPage = ko.observable();
+        //let previousPage = ko.observable();
         let selectedPopularTitle = params.selectedPopularTitle;
 
         let selectPopularTitle = popularTitle => {
