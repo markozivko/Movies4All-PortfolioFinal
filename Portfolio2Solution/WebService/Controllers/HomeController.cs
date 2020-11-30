@@ -100,10 +100,34 @@ namespace WebService.Controllers
         {
             var user = _mapper.Map<User>(newuser);
             var address = _mapper.Map<Address>(newuser);
-            _dataService.CreateNewUser(user, address);
-            user.Address = address;
-            var result = _mapper.Map<UserDto>(user);
-            return Created("", result);
+            var isEmailAvailable = _dataService.IsEmailAvailable(newuser.Email);
+            if (isEmailAvailable)
+            {
+                _dataService.CreateNewUser(user, address);
+                user.Address = address;
+                var result = _mapper.Map<UserDto>(user);
+                return Created("", result);
+            }
+            return BadRequest();
+        }
+
+
+        [HttpGet("login", Name = nameof(Login))]
+        public IActionResult Login(string email, string password)
+        {
+
+            var user = _dataService.Login(email, password);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
+            userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
+            userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
+            userDto.UserRatingsUrl = Url.Link(nameof(UserRatingsController.GetRatingsForUser), new { Id = user.UserId });
+            return Ok(userDto);
+
         }
     }
 }

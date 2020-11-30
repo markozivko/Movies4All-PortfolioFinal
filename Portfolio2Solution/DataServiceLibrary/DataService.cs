@@ -23,7 +23,31 @@ namespace DataServiceLibrary
          *                                         FUNCTIONS TO GET 
          * ****************************************************************************************************************/
 
+        /* **********************************
+        * Framework functionalities
+        * Function: Get user by Id
+        * ************************************/
+        public User Login(string email, string password)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
 
+            return ctx.Users
+                .Include(x => x.Address)
+                .Where(u => u.Email == email)
+                .Where(u => u.Password == password)
+                .FirstOrDefault();
+        }
+
+        public bool IsEmailAvailable(string email)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var user = ctx.Users
+                .Include(x => x.Address)
+                .Where(u => u.Email == email)
+                .FirstOrDefault();
+            return (user == null);
+        }
         /* **********************************
         * Framework functionalities
         * Function: Get user by Id

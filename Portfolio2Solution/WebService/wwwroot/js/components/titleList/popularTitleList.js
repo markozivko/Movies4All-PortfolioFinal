@@ -1,8 +1,10 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let popularTitles = ko.observableArray([]);
-        //let nextPage = ko.observable();
-        let previousPage = ko.observable();
+        let pageSizes = ko.observableArray();
+        let selectedPageSize = ko.observableArray([10]);
+        let prev = ko.observable();
+        let next = ko.observable();
         let selectedPopularTitle = params.selectedPopularTitle;
 
         let selectPopularTitle = popularTitle => {
@@ -10,27 +12,45 @@
             postman.publish('changePopularTitle', popularTitle);
         }
 
-        //let selectNextPage = nextPage => {
-        //    ds.getPopularTitles('api/popular', function (items, next, prev) { nextPage(next) });
-        //    postman.publish('changeNextPage', nextPage);
-        //}
+        let getData = url => {
+            ds.getPopularTitles(url, data => {
+                pageSizes(data.pageSizes);
+                prev(data.prev || undefined);
+                next(data.next || undefined);
+                popularTitles(data.items);
+            });
+        }
+        let showPrev = popularTitle => {
+            console.log(prev());
+            getData(prev());
+        }
 
-        //postman.subscribe('changeNextPage', nextPageUrl => {
-        //    let url = new URL(nextPageUrl);
-        //    console.log(popularTitle);
-        //    ds.getPopularTitles(url.pathname, function (items) { popularTitles(items) });
+        let enablePrev = ko.computed(() => prev() !== undefined);
 
-        //});
+        let showNext = popularTitle => {
+            console.log(next());
+            getData(next());
+        }
 
-        ds.getPopularTitles('api/popular', function (items, next, prev) {nextPage(next) });
-        ds.getPopularTitles('api/popular', function (items) { popularTitles(items) });
+        let enableNext = ko.computed(() => next() !== undefined);
+
+        selectedPageSize.subscribe(() => {
+            var size = selectedPageSize()[0];
+            getData(ds.getPopularTitlesUrlWithPageSize(size));
+        });
+
+        getData();
 
         return {
             popularTitles,
-          // nextPage,
-           // selectNextPage,
             selectPopularTitle,
-            selectedPopularTitle
-        }
+            selectedPopularTitle,
+            pageSizes,
+            selectedPageSize,
+            showPrev,
+            enablePrev,
+            showNext,
+            enableNext
+        };
     }
 });

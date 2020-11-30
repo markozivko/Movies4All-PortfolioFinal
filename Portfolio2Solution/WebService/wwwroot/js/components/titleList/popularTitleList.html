@@ -1,63 +1,75 @@
-﻿<!--﻿<div class="border">
-    <ul class="list-unstyled mt-3 mb-4" data-bind="foreach: popularTitles">
-        <li data-bind="text: primaryTitle, click: $parent.selectPopularTitle"></li>
-    </ul>
+﻿<!--<div>
     <div>
-        <title-details params="popularTitle: selectedPopularTitle"></title-details>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
-</div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="">Previous</a></li>
-        <li class="page-item"><a class="page-link">Next</a></li>
-    </ul>
-</nav>-->
+    <div class="border">
+        <ul class="list-unstyled mt-3 mb-4" data-bind="foreach: popularTitles">
+            <li data-bind="text: primaryTitle, click: $parent.selectPopularTitle"></li>
+        </ul>
+        <div>
+            <title-details params="popularTitle: selectedPopularTitle"></title-details>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" data-bind="click: showPrev, enable: enablePrev">Previous</li>
+            <li class="page-item" data-bind="click: showNext, enable: enableNext">Next</a></li>
+        </ul>
+    </nav>
+</div>﻿-->
 
 
-<div data-bind="foreach: popularTitles" class="row text-center">
-    <div class="col-lg-4 col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+<div>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <div data-bind="foreach: popularTitles" class="row text-center">
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li data-bind="text: genre"></li>
+                        <li data-bind="text: startYear"></li>
+                        <li>
+                            <i class="far fa-clock"></i>
+                            <span data-bind="text: runtime"></span> min
+                        </li>
+                    </ul>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-info" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectPopularTitle">Show details</button>
+                </div>
             </div>
-            <div class="card-body">
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li data-bind="text: genre"></li>
-                    <li data-bind="text: startYear"></li>
-                    <li>
-                        <i class="far fa-clock"></i>
-                        <span data-bind="text: runtime"></span> min
-                    </li>
-                </ul>
-                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-info" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectPopularTitle">Show details</button>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+            <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+            
+        </ul>
+    </nav>
+
+    <div id="modalDetailsTitle" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><title-details params="popularTitle: selectedPopularTitle"></title-details></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</nav>
-
-<div id="modalDetailsTitle" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><title-details params="popularTitle: selectedPopularTitle"></title-details></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 

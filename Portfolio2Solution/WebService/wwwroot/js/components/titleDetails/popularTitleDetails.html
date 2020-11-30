@@ -1,4 +1,8 @@
-﻿<div data-bind="with: details">
+﻿<div data-bind="with: popularTitle">
+    <!--<h3 data-bind="text: type"></h3>-->
+    <h3 data-bind="text: primaryTitle"></h3>
+</div>
+<div data-bind="with: details">
     <p style="font-size:60px">🎬</p>
     <h3><span data-bind="text: rating"></span> / 10</h3>
     <hr>
@@ -12,7 +16,9 @@
 <style>
     .plot {
         font-family: 'Montserrat', sans-serif;
-        font-size: 20px;
+        font-size: 18px;
+        text-align: justify;
+        text-justify: auto;
     }
 </style>
 

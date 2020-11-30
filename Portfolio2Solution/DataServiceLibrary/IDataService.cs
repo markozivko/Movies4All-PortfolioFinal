@@ -70,5 +70,7 @@ namespace DataServiceLibrary
         UserRates GetUserSpecificRating(int id, string title);
         IList<TitleBasics> GetPopularTitles(int page, int pageSize);
         int NumberOfPopularTitles();
+        User Login(string email, string password);
+        bool IsEmailAvailable(string email);
     }
 }
