@@ -3,6 +3,7 @@
     text-align: center;
     color: #dbd8e3;
     background-image: url("https://images.pexels.com/photos/109669/pexels-photo-109669.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size: auto;
 }
 
 .navbar {
