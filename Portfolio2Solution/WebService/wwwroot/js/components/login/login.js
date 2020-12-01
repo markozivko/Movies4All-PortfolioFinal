@@ -11,14 +11,21 @@
         }
 
         if (user() !== undefined) {
-            postman.publish('changeUser', user);
+            goToUserProfile();
+        }
+
+        let goToUserProfile = () => {
+
+            postman.publish('userLoggedIn', "profile", user);
+
         }
        
         return {
             user,
             checkUser,
             email,
-            password
+            password,
+            goToUserProfile
         }
     }
 });
