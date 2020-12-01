@@ -27,6 +27,10 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titleDetails/popularTitleDetails" },
             template: { require: "text!components/titleDetails/popularTitleDetails.html" }
         });
+    ko.components.register("login",
+        {
+            viewModel: { require: "components/loginOrRegister/login" }
+        });
 });
 
 require(['knockout', 'viewModel'], (ko, vm) => {

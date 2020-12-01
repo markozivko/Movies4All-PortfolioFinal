@@ -1,24 +1,22 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let email = params.email;
-        let password = params.password;
+        let email = ko.observable().extend({ email: true }),;
+        let password = ko.observable().extend({ required: true }),;
         let user = ko.observable();
 
 
-        //let selectUser = user => {
-        //    selectedPopularTitle(popularTitle);
-        //    postman.publish('changeUser', user);
-        //}
-        let getUser = (email, password) => {
+        let checkUser = (email, password) => {
             ds.login(email, password, data => {
                 user(data);
             });
+            alert(user.email)
         }
-        getUser(email, password);
+        checkUser(email(), password());
 
         return {
-            user
-            //,selectUser
+            user,
+            checkUser
+ 
         }
 
     }
