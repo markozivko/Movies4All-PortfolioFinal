@@ -6,8 +6,7 @@
 
         let checkUser = () => {
             ds.login(email(), password(), data => {
-                user(data.userName);
-                console.log(user());
+                user(data.userUrl);
             });
         }
 
@@ -21,6 +20,5 @@
             email,
             password
         }
-
     }
 });

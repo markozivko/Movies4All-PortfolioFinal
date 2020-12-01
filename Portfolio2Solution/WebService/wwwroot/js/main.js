@@ -44,6 +44,12 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/aboutUs/aboutUs" },
             template: { require: "text!components/aboutUs/aboutUs.html" }
         });
+
+    ko.components.register("user",
+        {
+            viewModel: { require: "components/user/userProfile" },
+            template: { require: "text!components/user/userProfile.html" }
+        });
 });
 
 require(['knockout', 'viewModel'], (ko, vm) => {
