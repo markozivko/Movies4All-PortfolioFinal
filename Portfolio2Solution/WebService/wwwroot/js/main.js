@@ -17,7 +17,7 @@ require(['knockout', 'text'], (ko) => {
 
     });
 
-    ko.components.register("title-list",
+    ko.components.register("home",
         {
             viewModel: { require: "components/titleList/popularTitleList" },
             template: { require: "text!components/titleList/popularTitleList.html" }
@@ -29,7 +29,20 @@ require(['knockout', 'text'], (ko) => {
         });
     ko.components.register("login",
         {
-            viewModel: { require: "components/loginOrRegister/login" }
+            viewModel: { require: "components/login/login" },
+            template: { require: "text!components/login/login.html" }
+
+        });
+    ko.components.register("register",
+        {
+            viewModel: { require: "components/register/register" },
+            template: { require: "text!components/register/register.html" }
+        });
+
+    ko.components.register("about",
+        {
+            viewModel: { require: "components/aboutUs/aboutUs" },
+            template: { require: "text!components/aboutUs/aboutUs.html" }
         });
 });
 

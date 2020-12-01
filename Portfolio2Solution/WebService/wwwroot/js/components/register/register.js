@@ -1,0 +1,9 @@
+﻿
+define([], () => {
+    return function () {
+
+        return {
+
+        };
+    }
+});
