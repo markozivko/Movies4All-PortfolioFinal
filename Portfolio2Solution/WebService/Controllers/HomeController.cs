@@ -68,6 +68,7 @@ namespace WebService.Controllers
             var count = _dataService.NumberOfPopularTitles();
 
             string prev = null;
+            var pages = (int)Math.Ceiling((double)count / pageSize);
 
             if (page > 0)
             {
@@ -76,7 +77,7 @@ namespace WebService.Controllers
 
             string next = null;
 
-            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+            if (page < pages - 1)
             {
                 next = Url.Link(nameof(GetPopularTitles), new { page = page + 1, pageSize });
             }
@@ -85,6 +86,8 @@ namespace WebService.Controllers
 
             var result = new
             {
+                pageSizes = new int[] { 6, 12, 24, 48 },
+                pages,
                 prev,
                 next,
                 cur,
