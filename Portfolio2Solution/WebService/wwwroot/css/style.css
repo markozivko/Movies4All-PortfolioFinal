@@ -66,7 +66,8 @@ h4 {
     font-weight: bold;
     color: #dbd8e3;
 }
-#features{
+
+#features {
     padding-top: 5%;
 }
 
@@ -84,6 +85,19 @@ h4 {
     margin-bottom: 50px;
     height: 270px;
     background-color: #232931;
+    border-radius: 4px;
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    background: #112642;
+}
+
+.btn-primary {
+    background-color: red !important;
+
 }
 
 
@@ -123,4 +137,3 @@ h4 {
         padding-top: 10%;
     }
 }
-
