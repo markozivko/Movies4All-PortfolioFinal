@@ -10,12 +10,12 @@
 
 require(['knockout', 'text'], (ko) => {
 
-    ko.components.register("my", {
+    //ko.components.register("my", {
 
-        viewModel: { require: "components/my/my" },
-        template: { require: "text!components/my/my.html" }
+    //    viewModel: { require: "components/my/my" },
+    //    template: { require: "text!components/my/my.html" }
 
-    });
+    //});
 
     ko.components.register("home",
         {
@@ -56,12 +56,12 @@ require(['knockout', 'text'], (ko) => {
         template: { require: "text!components/navbar/account.html" }
 
     });
-    ko.components.register("welcome", {
+    ko.components.register("navbar",
+        {
+            viewModel: { require: "components/test/navbar" },
+            template: { require: "text!components/test/navbar.html" }
+        });
 
-        viewModel: { require: "components/navbar/welcome" },
-        template: { require: "text!components/navbar/welcome.html" }
-
-    });
 
 });
 

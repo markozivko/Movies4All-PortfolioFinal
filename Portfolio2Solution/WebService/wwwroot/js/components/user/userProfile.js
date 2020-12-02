@@ -1,6 +1,6 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let user = params.userUrl;
+        //let user = params.userUrl;
 
         let firstName = ko.observable();
         let lastName = ko.observable();
@@ -30,7 +30,7 @@
                 country(data.country);
 
             });
-            console.log(city());
+            //console.log(city());
 
         });
 

@@ -1,5 +1,5 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
-    return function (params) {
+    return function () {
         let email = ko.observable().extend({ email: true });
         let password = ko.observable().extend({ required: true });
         let user = ko.observable();

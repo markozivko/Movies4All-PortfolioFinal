@@ -1,32 +1,20 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
-    return function (params) {
-        let selectedComponent = ko.observable('profile');
+    return function () {
+        let selectedComponent = ko.observable('home');
         let selectedPopularTitle = ko.observable();
-        let userUrl = ko.observable();
 
         let currentParams = ko.observable({ selectedPopularTitle });
 
-        let menuElements = ["Profile", "Search"];
+        let menuElements = ["Home", "About", "Login", "Register", "Profile"];
 
         let changeContent = element => {
             console.log(element);
             selectedComponent(element.toLowerCase());
         }
-        let changeNavBar = element => {
-            console.log(element);
-            currentNavBar(element.toLowerCase());
-        }
+
         let isActive = element => {
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
-
-        //TODO: add user url
-        //postman.subscribe("userLoggedIn", component => {
-        //    changeContent(component);
-
-        //}, );
-
-
 
         return {
             selectedComponent,
@@ -34,7 +22,6 @@
             menuElements,
             changeContent,
             isActive
-
         };
     }
 });
