@@ -7,7 +7,6 @@
         let birthday = ko.observable();
         let isStaff = ko.observable();
         let email = ko.observable();
-        let password = ko.observable();
         let userName = ko.observable();
         let streetNumber = ko.observable();
         let streetName = ko.observable();

@@ -45,11 +45,24 @@ require(['knockout', 'text'], (ko) => {
             template: { require: "text!components/aboutUs/aboutUs.html" }
         });
 
-    ko.components.register("user",
+    ko.components.register("profile",
         {
             viewModel: { require: "components/user/userProfile" },
             template: { require: "text!components/user/userProfile.html" }
         });
+    ko.components.register("account", {
+
+        viewModel: { require: "components/navbar/account" },
+        template: { require: "text!components/navbar/account.html" }
+
+    });
+    ko.components.register("welcome", {
+
+        viewModel: { require: "components/navbar/welcome" },
+        template: { require: "text!components/navbar/welcome.html" }
+
+    });
+
 });
 
 require(['knockout', 'viewModel'], (ko, vm) => {
