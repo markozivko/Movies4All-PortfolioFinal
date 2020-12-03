@@ -16,10 +16,8 @@
 
         postman.subscribe('changeUser', user => {
             let url = new URL(user);
-            let id = user.split('/').pop();
-            let uri = url.pathname + '?id=' + id;
-            alert(uri);
-            ds.getUser(uri, function (data) {
+            alert(url);
+            ds.getUser(url.pathname, function (data) {
 
                 firstName(data.firstName);
                 lastName(data.lastName);

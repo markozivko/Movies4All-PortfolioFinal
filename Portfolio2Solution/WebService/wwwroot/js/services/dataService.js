@@ -63,7 +63,11 @@
     * Function: Get specific user
     * ************************************/
     let getUser = (uri, callback) => {
-        fetch(uri)
+        fetch(uri, {
+            headers: {
+                'Authorization': uri.split('/').pop()
+            }
+          })
             .then(response => response.json())
             .then(callback);
     }
