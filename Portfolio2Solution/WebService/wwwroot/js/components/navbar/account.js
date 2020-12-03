@@ -1,8 +1,11 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let selectedComponent = ko.observable('profile');
+        let selectedComponent = ko.observable('latest');
+        let selectedLatestTitle = ko.observable();
 
-        let menuElements = ["Profile", "Search"];
+        let currentParams = ko.observable({ selectedLatestTitle });
+
+        let menuElements = ["Latest", "Genres", "Browse", "Profile"];
 
         let changeContent = element => {
             console.log(element);
@@ -13,6 +16,7 @@
         }
         return {
             selectedComponent,
+            currentParams,
             menuElements,
             changeContent,
             isActive

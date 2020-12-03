@@ -19,14 +19,27 @@ require(['knockout', 'text'], (ko) => {
 
     ko.components.register("home",
         {
-            viewModel: { require: "components/titleList/popularTitleList" },
-            template: { require: "text!components/titleList/popularTitleList.html" }
+            viewModel: { require: "components/titles/popularTitleList/popularTitleList" },
+            template: { require: "text!components/titles/popularTitleList/popularTitleList.html" }
         });
-    ko.components.register("title-details",
+    ko.components.register("popular-title-details",
         {
-            viewModel: { require: "components/titleDetails/popularTitleDetails" },
-            template: { require: "text!components/titleDetails/popularTitleDetails.html" }
+            viewModel: { require: "components/titles/popularTitleDetails/popularTitleDetails" },
+            template: { require: "text!components/titles/popularTitleDetails/popularTitleDetails.html" }
         });
+
+    ko.components.register("latest",
+        {
+            viewModel: { require: "components/titles/latestTitleList/latestTitleList" },
+            template: { require: "text!components/titles/latestTitleList/latestTitleList.html" }
+        });
+
+    ko.components.register("latest-title-details",
+        {
+            viewModel: { require: "components/titles/latestTitleDetails/latestTitleDetails" },
+            template: { require: "text!components/titles/latestTitleDetails/latestTitleDetails.html" }
+        });
+
     ko.components.register("login",
         {
             viewModel: { require: "components/login/login" },
@@ -50,18 +63,19 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/user/userProfile" },
             template: { require: "text!components/user/userProfile.html" }
         });
+
     ko.components.register("account", {
 
         viewModel: { require: "components/navbar/account" },
         template: { require: "text!components/navbar/account.html" }
 
     });
+
     ko.components.register("navbar",
         {
             viewModel: { require: "components/navbar/navbar" },
             template: { require: "text!components/navbar/navbar.html" }
         });
-
 
 });
 

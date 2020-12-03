@@ -168,6 +168,92 @@ namespace WebService.Controllers
             }
         }
 
+        [HttpGet("latest/{id}", Name = nameof(GetLatestTitle))]
+        public IActionResult GetLatestTitle(string id)
+        {
+
+            try
+            {
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var titles = _dataService.GetTitle(id);
+
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+
+                var dto = _mapper.Map<TitleDto>(titles);
+                dto.DetailsUrl = Url.Link(nameof(LatestTitlesController.GetLatestTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
+
+                return Ok(dto);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
+        }
+
+        [HttpGet("latest", Name = nameof(GetLatestTitles))]
+        public IActionResult GetLatestTitles(int page = 0, int pageSize = 12)
+        {
+            var titles = _dataService.GetLatestTitles(page, pageSize);
+            if (titles == null)
+            {
+                return NotFound();
+            }
+
+            var result = CreateResultForLatestTitle(titles, page, pageSize);
+            return Ok(result);
+        }
+
+        private TitleDto CreateLatestTitleElementDto(TitleBasics title)
+        {
+            var dto = _mapper.Map<TitleDto>(title);
+            dto.DetailsUrl = Url.Link(nameof(LatestTitlesController.GetLatestTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
+            return dto;
+        }
+
+        private object CreateResultForLatestTitle(IList<TitleBasics> titles, int page, int pageSize)
+        {
+            var items = titles.Select(CreateLatestTitleElementDto);
+
+            var count = _dataService.NumberOfLatestTitles();
+
+            string prev = null;
+            var pages = (int)Math.Ceiling((double)count / pageSize);
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetLatestTitle), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < pages - 1)
+            {
+                next = Url.Link(nameof(GetLatestTitle), new { page = page + 1, pageSize });
+            }
+
+            var cur = Url.Link(nameof(GetLatestTitle), new { page, pageSize });
+
+            var result = new
+            {
+                pageSizes = new int[] { 6, 12, 24, 48 },
+                pages,
+                prev,
+                next,
+                cur,
+                count,
+                items
+            };
+
+            return result;
+        }
 
     }
 }

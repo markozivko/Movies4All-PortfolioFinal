@@ -72,5 +72,7 @@ namespace DataServiceLibrary
         int NumberOfPopularTitles();
         User Login(string email, string password);
         bool IsEmailAvailable(string email);
+        IList<TitleBasics> GetLatestTitles(int page, int pageSize);
+        int NumberOfLatestTitles();
     }
 }

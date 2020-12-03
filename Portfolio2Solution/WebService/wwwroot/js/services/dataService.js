@@ -40,6 +40,39 @@
             .then(callback);
     }
 
+    /* **********************************
+    * Function: Get latest titles
+    * ************************************/
+    const latestTitleApiUrl = 'api/titles/latest';
+    let getLatestTitles = function (uri, callback) {
+        if (uri === undefined) {
+            uri = latestTitleApiUrl;
+        }
+        fetch(uri, {
+            method: 'GET'
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                callback(data);
+            });
+    }
+    let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
+
+    let getLatestTitle = (id, callback) => {
+        fetch('api/titles/latest/' + id)
+            .then(response => response.json())
+            .then(callback);
+    }
+
+    let getLatestTitleDetails = (uri, callback) => {
+        fetch(uri)
+            .then(response => response.json())
+            .then(callback);
+    }
+
 
 /* ****************************************************************************************************************
  *                                         Functionalitites for users
@@ -194,6 +227,10 @@
         getPopularTitle,
         getPopularTitlesUrlWithPageSize,
         getPopularTitleDetails,
+        getLatestTitles,
+        getLatestTitle,
+        getLatestTitlesUrlWithPageSize,
+        getLatestTitleDetails,
         login,
         getUser
     }

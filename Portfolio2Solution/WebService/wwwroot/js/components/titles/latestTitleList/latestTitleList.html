@@ -18,13 +18,13 @@
     </nav>
 </div>﻿-->
 
-<h2>Popular titles</h2>
+<h2>Latest titles</h2>
 
 <div>
     <div id="pageNumber">
-       <select class="custom-select" data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+        <select class="custom-select" data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
-    <div data-bind="foreach: popularTitles" class="row text-center">
+    <div data-bind="foreach: latestTitles" class="row text-center">
         <div class="col-lg-4 col-md-6">
             <div class="card shadow-sm">
                 <div class="card-header">
@@ -45,21 +45,21 @@
         </div>
     </div>
 
-   <div>
-       <nav aria-label="Page navigation example">
-           <ul class="pagination justify-content-center">
-               <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
-               <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
-           </ul>
-       </nav>
-   </div>
-    
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+                <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
 
     <div id="modalDetailsTitle" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div><title-details params="popularTitle: selectedPopularTitle"></title-details></div>
+                    <div><latest-title-details params="latestTitle: selectedLatestTitle"></latest-title-details></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -76,6 +76,7 @@
     <i class="fab fa-instagram social-icon"></i>
     <i class="fas fa-envelope social-icon"></i>
     <p>© Copyright 2020 Movies4All</p>
+
 </footer>
 
 

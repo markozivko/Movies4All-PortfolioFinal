@@ -1,0 +1,82 @@
+﻿<!--<div>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <div class="border">
+        <ul class="list-unstyled mt-3 mb-4" data-bind="foreach: popularTitles">
+            <li data-bind="text: primaryTitle, click: $parent.selectPopularTitle"></li>
+        </ul>
+        <div>
+            <title-details params="popularTitle: selectedPopularTitle"></title-details>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" data-bind="click: showPrev, enable: enablePrev">Previous</li>
+            <li class="page-item" data-bind="click: showNext, enable: enableNext">Next</a></li>
+        </ul>
+    </nav>
+</div>﻿-->
+
+<h2>Popular titles</h2>
+
+<div>
+    <div id="pageNumber">
+       <select class="custom-select" data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <div data-bind="foreach: popularTitles" class="row text-center">
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li data-bind="text: genre"></li>
+                        <li data-bind="text: startYear"></li>
+                        <li>
+                            <i class="far fa-clock"></i>
+                            <span data-bind="text: runtime"></span> min
+                        </li>
+                    </ul>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectPopularTitle">Show details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div>
+       <nav aria-label="Page navigation example">
+           <ul class="pagination justify-content-center">
+               <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+               <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+           </ul>
+       </nav>
+   </div>
+    
+
+    <div id="modalDetailsTitle" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><popular-title-details params="popularTitle: selectedPopularTitle"></popular-title-details></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<footer id="footer">
+    <i class="fab fa-facebook-f social-icon"></i>
+    <i class="fab fa-instagram social-icon"></i>
+    <i class="fas fa-envelope social-icon"></i>
+    <p>© Copyright 2020 Movies4All</p>
+
+</footer>
+
+

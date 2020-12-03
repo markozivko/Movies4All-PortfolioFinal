@@ -14,6 +14,7 @@ namespace DataServiceLibrary
     {
         private readonly string _connectionString;
         private const int _popularityScale = 450000;
+        private const int _latestScale = 2018;
         public DataService(string connectionString)
         {
             _connectionString = connectionString;
@@ -492,7 +493,6 @@ namespace DataServiceLibrary
                 .ToList();
         }
 
-
         /* **************************************
         * Framework functionalities
         * Function: NumberOfPopularTitles
@@ -511,6 +511,46 @@ namespace DataServiceLibrary
             return e;
 
         }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: getLatestTitles
+        * **************************************/
+        public IList<TitleBasics> GetLatestTitles(int page, int pageSize)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                //TODO: find solution to show title > certain year
+                .Where(t => t.StartYear.Equals("2020"))
+                .Where(t => t.Type != "tvEpisode")
+                .OrderBy(t => t.PrimaryTitle)
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: NumberOfLatestTitles
+        * **************************************/
+        public int NumberOfLatestTitles()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var e = ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where(t => t.StartYear.Equals("2020"))
+                .Where(t => t.Type != "tvEpisode")
+                .Count();
+            return e;
+
+        }
+
 
         /* **************************************
         * Framework functionalities

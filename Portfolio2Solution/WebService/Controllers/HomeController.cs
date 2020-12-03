@@ -5,7 +5,6 @@ using AutoMapper;
 using DataServiceLibrary;
 using DataServiceLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using WebService.Models;
 
 namespace WebService.Controllers
