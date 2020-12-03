@@ -14,7 +14,7 @@ namespace DataServiceLibrary
     {
         private readonly string _connectionString;
         private const int _popularityScale = 450000;
-        private const int _latestScale = 2018;
+        private const string _latestScale = "2020";
         public DataService(string connectionString)
         {
             _connectionString = connectionString;
@@ -485,8 +485,11 @@ namespace DataServiceLibrary
                 .Include(t => t.TitleGenres)
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
+                .Include(od => od.OmdbData)
                 .Where( t => t.Rating.NumVotes >= _popularityScale)
                 .Where(t => t.Type != "tvEpisode")
+                .Where(od => od.OmdbData.Plot != null)
+                .Where(od => od.OmdbData.Poster != null)
                 .OrderBy(t => t.PrimaryTitle)
                 .Skip(page * pageSize)
                 .Take(pageSize)
@@ -505,8 +508,11 @@ namespace DataServiceLibrary
                 .Include(t => t.TitleGenres)
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
+                .Include(od => od.OmdbData)
                 .Where(t => t.Rating.NumVotes >= _popularityScale)
                 .Where(t => t.Type != "tvEpisode")
+                .Where(od => od.OmdbData.Plot != null)
+                .Where(od => od.OmdbData.Poster != null)
                 .Count();
             return e;
 
@@ -523,9 +529,11 @@ namespace DataServiceLibrary
                 .Include(t => t.TitleGenres)
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
-                //TODO: find solution to show title > certain year
-                .Where(t => t.StartYear.Equals("2020"))
+                .Include(od => od.OmdbData)
+                .Where(t => t.StartYear.Equals(_latestScale))
                 .Where(t => t.Type != "tvEpisode")
+                .Where(od => od.OmdbData.Plot != null)
+                .Where(od => od.OmdbData.Poster != null)
                 .OrderBy(t => t.PrimaryTitle)
                 .Skip(page * pageSize)
                 .Take(pageSize)
@@ -544,8 +552,11 @@ namespace DataServiceLibrary
                 .Include(t => t.TitleGenres)
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
-                .Where(t => t.StartYear.Equals("2020"))
+                .Include(od => od.OmdbData)
+                .Where(t => t.StartYear.Equals(_latestScale))
                 .Where(t => t.Type != "tvEpisode")
+                .Where(od => od.OmdbData.Plot != null)
+                .Where(od => od.OmdbData.Poster != null)
                 .Count();
             return e;
 

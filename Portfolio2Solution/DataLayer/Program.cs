@@ -45,6 +45,17 @@ namespace DataLayer
             // * Function: findCoPlayers
             // */
 
+            /*
+             * Framework functionalities
+             * Function: getLatestTitles
+             */
+            var lt = dataService.GetLatestTitles();
+            foreach (var a in lt)
+            {
+                Console.WriteLine($"Id: {a.Const} \n" +
+                          $"Name: {a.Rating.Average}\n") ;
+            }
+
             //var coPlayer = dataService.FindCoPlayers(1, "Mads miKKelsen");
 
             //foreach (var x in coPlayer)

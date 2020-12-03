@@ -69,7 +69,13 @@
     let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
 
     let getLatestTitle = (id, callback) => {
-        fetch('api/titles/latest/' + id)
+        fetch('api/titles/latest/' + id, {
+            headers: {
+                'Authorization': 49
+            },
+            method: 'GET'
+
+        })
             .then(response => response.json())
             .then(callback);
     }

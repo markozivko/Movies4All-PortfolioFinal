@@ -189,6 +189,21 @@ namespace DataLayer
         }
         /* **************************************
          * Framework functionalities
+         * Function: getTitleGenres
+         * **************************************/
+        public IList<TitleBasics> GetLatestTitles()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Titles
+                .Include(t => t.TitleGenres)
+                .ThenInclude(tg => tg.Genre)
+                .Include(tr => tr.Rating)
+                .Where(t => t.StartYear.Equals("2020"))
+                .Where(t => t.Type != "tvEpisode")
+                .ToList();
+        }
+        /* **************************************
+         * Framework functionalities
          * Function: getAllGenres
          * **************************************/
         public IList<Genre> GetAllGenres()

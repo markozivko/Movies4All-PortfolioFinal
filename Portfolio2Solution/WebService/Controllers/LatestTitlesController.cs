@@ -28,16 +28,32 @@ namespace WebService.Controllers
         public IActionResult GetLatestTitleDetails(string id)
         {
             var rating = _dataService.GetTitleRating(id);
-            var plot = _dataService.GetOmdbData(id);
-
+            var omdb = _dataService.GetOmdbData(id);
             var tdo1 = _mapper.Map<LatestTitlesDetailsDto>(rating);
-            var tdo2 = _mapper.Map(plot, tdo1);
-            if (rating == null || plot == null)
+            if (rating == null && omdb == null)
             {
                 return NotFound();
             }
+            if (omdb == null) {
+                tdo1.Plot = "";
+                tdo1.Poster = "";
+                return Ok(tdo1);
+            }
+            if (rating == null)
+            {
+                var tdo2 = _mapper.Map<LatestTitlesDetailsDto>(omdb);
+                tdo2.NumVotes = 0;
+                tdo2.Rating = 0;
+                return Ok(tdo2);
+            }
+            else
+            {
+                var tdo2 = _mapper.Map(omdb, tdo1);
+                return Ok(tdo2);
+            }
 
-            return Ok(tdo2);
+
+
         }
     }
 }
