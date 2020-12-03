@@ -1,3 +1,15 @@
 ﻿
-    <p data-bind="text: city"> </p>
-<p>welcome to my account</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 ">
+            <div class="list-group" data-bind="foreach: menuElements">
+                <div class="list-group-item-action" data-bind="css: $parent.isActive($data)">
+                    <a class="list-group-item" href="#" data-bind="click: $parent.changeContent"><span data-bind="text:$data"></span></a>
+                </div>
+            </div>
+        </div>
+        <div id="component1" class="col-md-9 box1">
+            <div data-bind="component: {name: selectedComponent, params: currentParams}"></div>
+        </div>
+    </div>
+</div>

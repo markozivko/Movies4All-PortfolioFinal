@@ -23,7 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\js\lib\" />
-    <Folder Include="wwwroot\js\components\my\" />
     <Folder Include="wwwroot\js\components\login\" />
     <Folder Include="wwwroot\js\components\register\" />
     <Folder Include="wwwroot\js\components\aboutUs\" />
@@ -32,6 +31,7 @@
     <Folder Include="wwwroot\js\components\titles\popularTitleDetails\" />
     <Folder Include="wwwroot\js\components\titles\latestTitleList\" />
     <Folder Include="wwwroot\js\components\titles\latestTitleDetails\" />
+    <Folder Include="wwwroot\js\components\user\profile\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties config_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

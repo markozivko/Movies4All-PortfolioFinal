@@ -10,13 +10,6 @@
 
 require(['knockout', 'text'], (ko) => {
 
-    //ko.components.register("my", {
-
-    //    viewModel: { require: "components/my/my" },
-    //    template: { require: "text!components/my/my.html" }
-
-    //});
-
     ko.components.register("home",
         {
             viewModel: { require: "components/titles/popularTitleList/popularTitleList" },
@@ -75,6 +68,36 @@ require(['knockout', 'text'], (ko) => {
         {
             viewModel: { require: "components/navbar/navbar" },
             template: { require: "text!components/navbar/navbar.html" }
+        });
+
+    ko.components.register("location",
+        {
+            viewModel: { require: "components/user/profile/location" },
+            template: { require: "text!components/user/profile/location.html" }
+        });
+
+    ko.components.register("my profile",
+        {
+            viewModel: { require: "components/user/profile/profile" },
+            template: { require: "text!components/user/profile/profile.html" }
+        });
+
+    ko.components.register("title bookmarks",
+        {
+            viewModel: { require: "components/user/profile/titlebookmarks" },
+            template: { require: "text!components/user/profile/titlebookmarks.html" }
+        });
+
+    ko.components.register("personalities",
+        {
+            viewModel: { require: "components/user/profile/personalities" },
+            template: { require: "text!components/user/profile/personalities.html" }
+        });
+
+    ko.components.register("logout",
+        {
+            viewModel: { require: "components/user/profile/logout" },
+            template: { require: "text!components/user/profile/logout.html" }
         });
 
 });
