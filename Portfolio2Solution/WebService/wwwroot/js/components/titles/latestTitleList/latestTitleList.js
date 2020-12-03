@@ -7,6 +7,7 @@
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
 
+        //TODO check why it is not opening a new page
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
             postman.publish('changeLatestTitle', latestTitle);

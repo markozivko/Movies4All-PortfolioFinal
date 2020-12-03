@@ -4,7 +4,7 @@
         let details = ko.observable();
 
 
-        postman.subscribe('changeLatestTitle', latestTitle => {
+        postman.subscribe('goToLatestTitleDetails', latestTitle => {
             let url = new URL(latestTitle.detailsUrl);
             console.log(url.pathname);
             ds.getLatestTitleDetails(url.pathname, function (data) { details(data) });
