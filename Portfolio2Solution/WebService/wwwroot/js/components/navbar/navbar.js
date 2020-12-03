@@ -5,7 +5,7 @@
 
         let currentParams = ko.observable({ selectedPopularTitle });
 
-        let menuElements = ["Home", "About", "Login", "Register", "Profile"];
+        let menuElements = ["Home", "About", "Login", "Register"];
 
         let changeContent = element => {
             console.log(element);

@@ -2,21 +2,20 @@
   
     let currentComponent = ko.observable('navbar');
  
-    let changeContent = () => {
-        currentComponent('account');
+    let changeContent = (component) => {
+        currentComponent(component);
     }
    
 
     //TODO: add user url
-    //postman.subscribe("userLoggedIn", component => {
-    //    changeContent(component);
-        
-    //}, );
+    postman.subscribe("swithToAccount", component => {
+        console.log(component);
+        changeContent(component);
+    });
 
 
 
     return {
-        currentComponent,
-        changeContent
+        currentComponent
     };
 });

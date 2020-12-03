@@ -15,7 +15,11 @@
         let country = ko.observable();
 
         postman.subscribe('changeUser', user => {
-            ds.getUser(user, function (data) {
+            let url = new URL(user);
+            let id = user.split('/').pop();
+            let uri = url.pathname + '?id=' + id;
+            alert(uri);
+            ds.getUser(uri, function (data) {
 
                 firstName(data.firstName);
                 lastName(data.lastName);
@@ -30,7 +34,7 @@
                 country(data.country);
 
             });
-            //console.log(city());
+
 
         });
 

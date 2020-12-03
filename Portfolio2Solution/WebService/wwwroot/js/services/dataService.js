@@ -62,8 +62,8 @@
     /* **********************************
     * Function: Get specific user
     * ************************************/
-    let getUser = (url, callback) => {
-        fetch(url)
+    let getUser = (uri, callback) => {
+        fetch(uri)
             .then(response => response.json())
             .then(callback);
     }

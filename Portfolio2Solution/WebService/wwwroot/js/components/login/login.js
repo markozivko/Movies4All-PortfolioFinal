@@ -9,7 +9,10 @@
                 user(data.userUrl);
             });
             if (user() !== undefined) {
-                postman.publish('changeUser', user);
+                
+                postman.publish('swithToAccount', "account");
+                postman.publish('changeUser', user());
+                
             }
         }
 

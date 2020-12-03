@@ -58,8 +58,8 @@ require(['knockout', 'text'], (ko) => {
     });
     ko.components.register("navbar",
         {
-            viewModel: { require: "components/test/navbar" },
-            template: { require: "text!components/test/navbar.html" }
+            viewModel: { require: "components/navbar/navbar" },
+            template: { require: "text!components/navbar/navbar.html" }
         });
 
 

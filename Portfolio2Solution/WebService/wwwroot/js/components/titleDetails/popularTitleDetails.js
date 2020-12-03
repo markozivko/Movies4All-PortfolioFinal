@@ -6,8 +6,6 @@
  
         postman.subscribe('changePopularTitle', popularTitle => {
             let url = new URL(popularTitle.detailsUrl);
-            //alert(url.pathname);
-            console.log(popularTitle);
             ds.getPopularTitleDetails(url.pathname, function (data) { details(data) });
             
         });
