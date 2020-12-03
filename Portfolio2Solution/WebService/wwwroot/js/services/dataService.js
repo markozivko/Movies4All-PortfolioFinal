@@ -48,7 +48,10 @@
         if (uri === undefined) {
             uri = latestTitleApiUrl;
         }
-        fetch(uri, {
+        fetch(uri, {  
+            headers: {
+                'Authorization': 49
+             },
             method: 'GET'
 
         })

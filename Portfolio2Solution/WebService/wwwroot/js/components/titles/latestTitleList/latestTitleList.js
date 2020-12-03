@@ -9,7 +9,6 @@
 
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
-            alert(latestTitle);
             postman.publish('changeLatestTitle', latestTitle);
         }
 

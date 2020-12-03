@@ -172,12 +172,12 @@ namespace WebService.Controllers
         public IActionResult GetLatestTitle(string id)
         {
 
-            try
-            {
-                if (Program.CurrentUser == null)
-                {
-                    return Unauthorized();
-                }
+            //try
+            //{
+                //if (Program.CurrentUser == null)
+                //{
+                //    return Unauthorized();
+                //}
 
                 var titles = _dataService.GetTitle(id);
 
@@ -190,25 +190,38 @@ namespace WebService.Controllers
                 dto.DetailsUrl = Url.Link(nameof(LatestTitlesController.GetLatestTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
 
                 return Ok(dto);
-            }
-            catch (ArgumentException)
-            {
-                return Unauthorized();
-            }
+            //}
+            //catch (ArgumentException)
+            //{
+            //    return Unauthorized();
+            //}
             
         }
 
         [HttpGet("latest", Name = nameof(GetLatestTitles))]
         public IActionResult GetLatestTitles(int page = 0, int pageSize = 12)
         {
-            var titles = _dataService.GetLatestTitles(page, pageSize);
-            if (titles == null)
+            try
             {
-                return NotFound();
-            }
+                if (Program.CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
 
-            var result = CreateResultForLatestTitle(titles, page, pageSize);
-            return Ok(result);
+                var titles = _dataService.GetLatestTitles(page, pageSize);
+                if (titles == null)
+                {
+                    return NotFound();
+                }
+
+                var result = CreateResultForLatestTitle(titles, page, pageSize);
+                return Ok(result);
+            }
+            catch (ArgumentException)
+            {
+                return Unauthorized();
+            }
+            
         }
 
         private TitleDto CreateLatestTitleElementDto(TitleBasics title)
@@ -229,17 +242,17 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetLatestTitle), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetLatestTitles), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < pages - 1)
             {
-                next = Url.Link(nameof(GetLatestTitle), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetLatestTitles), new { page = page + 1, pageSize });
             }
 
-            var cur = Url.Link(nameof(GetLatestTitle), new { page, pageSize });
+            var cur = Url.Link(nameof(GetLatestTitles), new { page, pageSize });
 
             var result = new
             {
