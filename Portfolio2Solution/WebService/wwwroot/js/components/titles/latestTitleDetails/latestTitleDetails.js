@@ -6,8 +6,9 @@
 
         postman.subscribe('changeLatestTitle', latestTitle => {
             let url = new URL(latestTitle.detailsUrl);
+            console.log(url.pathname);
             ds.getLatestTitleDetails(url.pathname, function (data) { details(data) });
-
+            alert(details.rating);
         });
 
         return {

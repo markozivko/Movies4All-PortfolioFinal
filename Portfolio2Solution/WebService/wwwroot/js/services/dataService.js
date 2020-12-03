@@ -11,10 +11,14 @@
     * Function: Get popular titles
     * ************************************/
     const popularTitleApiUrl = 'api/popular';
+    //TODO: stop going back if it is previous
     let getPopularTitles = function (uri, callback) {
         if (uri === undefined) {
             uri = popularTitleApiUrl;
+            console.log("Last page");
+
         }
+
         fetch(uri, {
             method : 'GET'
 

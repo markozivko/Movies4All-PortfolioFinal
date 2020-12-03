@@ -30,7 +30,7 @@ namespace WebService.Controllers
             var rating = _dataService.GetTitleRating(id);
             var plot = _dataService.GetOmdbData(id);
 
-            var tdo1 = _mapper.Map<PopularTitlesDetailsDto>(rating);
+            var tdo1 = _mapper.Map<LatestTitlesDetailsDto>(rating);
             var tdo2 = _mapper.Map(plot, tdo1);
             if (rating == null || plot == null)
             {
