@@ -8,7 +8,7 @@
    
 
     //TODO: add user url
-    postman.subscribe("swithToAccount", component => {
+    postman.subscribe("switchToAccount", component => {
         console.log(component);
         changeContent(component);
     });

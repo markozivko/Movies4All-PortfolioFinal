@@ -2,7 +2,7 @@
     return function () {
         let selectedComponent = ko.observable('home');
 
-        postman.publish('swithToAccount', "navbar");
+        postman.publish('switchToAccount', "navbar");
         postman.publish('logout', 'home');
 
         return {
