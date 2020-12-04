@@ -168,36 +168,6 @@ namespace WebService.Controllers
             }
         }
 
-        [HttpGet("latest/{id}", Name = nameof(GetLatestTitle))]
-        public IActionResult GetLatestTitle(string id)
-        {
-
-            //try
-            //{
-                //if (Program.CurrentUser == null)
-                //{
-                //    return Unauthorized();
-                //}
-
-                var titles = _dataService.GetTitle(id);
-
-                if (titles == null)
-                {
-                    return NotFound();
-                }
-
-                var dto = _mapper.Map<TitleDto>(titles);
-                dto.DetailsUrl = Url.Link(nameof(LatestTitlesController.GetLatestTitleDetails), new { Id = titles.Const.Replace(" ", String.Empty) });
-
-                return Ok(dto);
-            //}
-            //catch (ArgumentException)
-            //{
-            //    return Unauthorized();
-            //}
-            
-        }
-
         [HttpGet("latest", Name = nameof(GetLatestTitles))]
         public IActionResult GetLatestTitles(int page = 0, int pageSize = 12)
         {
@@ -227,7 +197,7 @@ namespace WebService.Controllers
         private TitleDto CreateLatestTitleElementDto(TitleBasics title)
         {
             var dto = _mapper.Map<TitleDto>(title);
-            dto.DetailsUrl = Url.Link(nameof(LatestTitlesController.GetLatestTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
+            dto.DetailsUrl = Url.Link(nameof(TitleDetailsController.GetTitleDetails), new { Id = title.Const.Replace(" ", String.Empty) });
             return dto;
         }
 

@@ -54,6 +54,8 @@
         }
         fetch(uri, {  
             headers: {
+                //TODO find how to use the authorisation in correct way 
+
                 'Authorization': 49
              },
             method: 'GET'
@@ -86,6 +88,27 @@
             .then(callback);
     }
 
+    let getTitle = (id, callback) => {
+        fetch('api/titles/' + id, {
+            headers: {
+                'Authorization': 49
+            },
+            method: 'GET'
+
+        })
+            .then(response => response.json())
+            .then(callback);
+    }
+
+    let getTitleDetails = (uri, callback) => {
+        fetch(uri, {
+            headers: {
+                'Authorization': 49
+                }
+            })
+            .then(response => response.json())
+            .then(callback);
+    }
 
 /* ****************************************************************************************************************
  *                                         Functionalitites for users

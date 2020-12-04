@@ -3,15 +3,32 @@
     <h3 data-bind="text: primaryTitle"></h3>
 </div>
 <hr>
-<div data-bind="with: details">
+<div>
     <p style="font-size:60px">🎬</p>
     <h3><span data-bind="text: rating"></span> / 10</h3>
+    <!--<hr>-->
+    <!--<img alt="Qries" data-bind="attr:{src: poster}"
+         width="200" height="250">-->
+
     <hr>
-    <img alt="Qries" data-bind="attr:{src: poster}"
-         width="200" height="250">
+    <h3>Number of votes</h3>
+    <div class="plot" data-bind="text: numVotes"></div>
+
+    <hr>
+    <h3>Title principals</h3>
+    <div data-bind="foreach: principals" class="row text-center">
+        <ul class="list-unstyled mt-3 mb-4">
+            <li data-bind="text: name"></li>
+            <li data-bind="text: characters"></li>
+            <li data-bind="text: category"></li>
+        </ul>
+    </div>
+
     <hr>
     <h3>Plot</h3>
     <div class="plot" data-bind="text: plot"></div>
+
+
 </div>
 
 <style>

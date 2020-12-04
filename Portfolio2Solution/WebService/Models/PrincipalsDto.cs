@@ -8,6 +8,7 @@ namespace WebService.Models
     public class PrincipalsDto
     {
         public string Name { get; set; }
+        public string PersonUrl { get; set; }
         public string Characters { get; set; }
         public string Category { get; set; }
     }

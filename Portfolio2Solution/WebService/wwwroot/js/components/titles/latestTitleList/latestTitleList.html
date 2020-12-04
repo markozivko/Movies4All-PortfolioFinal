@@ -6,7 +6,7 @@
     </div>
     <div data-bind="foreach: latestTitles" class="row text-center">
         <div class="col-lg-4 col-md-6">
-            <div class="card shadow-sm">
+            <div class="card shadow-">
                 <div class="card-header">
                     <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
                 </div>
@@ -36,7 +36,7 @@
 
 
     <div id="modalDetailsTitle" class="modal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
                     <div><latest-title-details params="latestTitle: selectedLatestTitle"></latest-title-details></div>
@@ -48,8 +48,6 @@
         </div>
     </div>
 </div>
-
-</script>-->
 
 <!-- Footer -->
 
