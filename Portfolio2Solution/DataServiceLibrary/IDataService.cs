@@ -38,7 +38,7 @@ namespace DataServiceLibrary
         int NumberOfUserRatings(int id);
         IList<User> GetUsers(int page, int pageSize);
         int NumberOfUsers();
-        IList<TitleRecommendation> RecommendTitles(string title, int page, int pageSize);
+        IList<TitleRecommendation> RecommendTitles(string title);
         int NumberOfRecommendedTitles(string id);
         IList<SimpleSearch> StringSearch(int userid, string search, int page, int pageSize);
         int NumberOfStringSearchMatched(string search, int userid);

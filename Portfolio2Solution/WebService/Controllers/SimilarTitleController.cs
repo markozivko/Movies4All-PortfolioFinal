@@ -15,7 +15,6 @@ namespace WebService.Controllers
     {
         IDataService _dataService;
         IMapper _mapper;
-        private const int MaxPageSize = 25;
 
         public SimilarTitleController(IDataService dataService, IMapper mapper)
         {
@@ -24,7 +23,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetTitleSuggestions))]
-        public IActionResult GetTitleSuggestions(string id, int page = 0, int pageSize = 10)
+        public IActionResult GetTitleSuggestions(string id)
         {
 
             try
@@ -34,11 +33,9 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                var titleSuggestion = _dataService.RecommendTitles(id, page, pageSize);
+                var titleSuggestion = _dataService.RecommendTitles(id);
 
                 IList<SimilarTitleDto> items = new List<SimilarTitleDto>();
-
-                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
 
                 foreach (var s in titleSuggestion)
@@ -49,35 +46,7 @@ namespace WebService.Controllers
                     items.Add(title);
                 }
 
-
-                var count = _dataService.NumberOfRecommendedTitles(id);
-
-                string prev = null;
-
-                if (page > 0)
-                {
-                    prev = Url.Link(nameof(GetTitleSuggestions), new { page = page - 1, pageSize });
-                }
-
-                string next = null;
-
-                if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                {
-                    next = Url.Link(nameof(GetTitleSuggestions), new { page = page + 1, pageSize });
-                }
-
-                var cur = Url.Link(nameof(GetTitleSuggestions), new { page, pageSize });
-
-                var result = new
-                {
-                    prev,
-                    next,
-                    cur,
-                    count,
-                    items
-                };
-
-                return Ok(result);
+                return Ok(items);
             }
             catch (ArgumentException)
             {

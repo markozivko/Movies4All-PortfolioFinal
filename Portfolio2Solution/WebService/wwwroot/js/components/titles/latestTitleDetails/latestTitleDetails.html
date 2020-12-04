@@ -3,40 +3,72 @@
     <h3 data-bind="text: primaryTitle"></h3>
 </div>
 <hr>
-<div>
-    <p style="font-size:60px">🎬</p>
-    <h3><span data-bind="text: rating"></span> / 10</h3>
-    <!--<hr>-->
-    <!--<img alt="Qries" data-bind="attr:{src: poster}"
-         width="200" height="250">-->
 
-    <hr>
-    <h3>Number of votes</h3>
-    <div class="plot" data-bind="text: numVotes"></div>
-
-    <hr>
-    <h3>Title principals</h3>
-    <div data-bind="foreach: principals" class="row text-center">
-        <ul class="list-unstyled mt-3 mb-4">
-            <li data-bind="text: name"></li>
-            <li data-bind="text: characters"></li>
-            <li data-bind="text: category"></li>
-        </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <img alt="Qries" data-bind="attr:{src: poster}"
+                 width="300" height="350">
+            <hr>
+            <h3>Similar titles</h3>
+         
+            <div class="similarTitles">
+                <ul class="list-group list-group-flush" data-bind="foreach: similarTitles">
+                    <li id="cast-li" class="list-group-item" data-bind="text: primaryTitle"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <p style="font-size:60px">🎬</p>
+            <h3><span data-bind="text: rating"></span> / 10</h3>
+            <hr>
+            <h3>Number of votes</h3>
+            <h3 data-bind="text: numVotes"></h3>
+            <hr>
+            <h3>Plot</h3>
+            <div class="plot" data-bind="text: plot"></div>
+            <hr>
+            <h3>Cast</h3>
+            <div class="cast">
+                <ul class="list-group list-group-flush" data-bind="foreach: principals">
+                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span></li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-    <hr>
-    <h3>Plot</h3>
-    <div class="plot" data-bind="text: plot"></div>
-
-
 </div>
 
 <style>
+    #cast-li {
+        background-color: #112642;
+    }
+
+    .similarTitles {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .cast {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        text-align: center;
+        text-justify: auto;
+    }
+
     .plot {
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
         text-align: justify;
         text-justify: auto;
+    }
+
+    @media (max-width: 990px) {
+
+        #image-detail{
+            margin-top: 10%;
+        }
     }
 </style>
 

@@ -84,7 +84,7 @@ h4 {
 
 .card {
     margin-bottom: 50px;
-    height: 270px;
+    height: 320px;
     background-color: #232931;
     border-radius: 4px;
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
@@ -153,32 +153,14 @@ h4 {
         font-weight: 500
     }
 
-    .box input[type="text"]:focus,
-    .box input[type="email"]:focus ,
-    .box input[type="date"]:focus,
-    .box input[type="password"]:focus {
-        width: 300px;
-        border-color: #2ecc71
-    }
+.box input[type="text"]:focus,
+.box input[type="email"]:focus,
+.box input[type="date"]:focus,
+.box input[type="password"]:focus {
+    width: 300px;
+    border-color: #f0ad4e;
+}
 
-    .box input[type="submit"] {
-        border: 0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border: 2px solid #2ecc71;
-        padding: 14px 40px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        cursor: pointer
-    }
-
-        .box input[type="submit"]:hover {
-            background: #2ecc71
-        }
 
 .forgot {
     text-decoration: underline

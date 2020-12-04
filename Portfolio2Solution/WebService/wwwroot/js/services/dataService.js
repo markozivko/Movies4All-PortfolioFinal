@@ -82,14 +82,8 @@
             .then(callback);
     }
 
-    let getLatestTitleDetails = (uri, callback) => {
-        fetch(uri)
-            .then(response => response.json())
-            .then(callback);
-    }
-
-    let getTitle = (id, callback) => {
-        fetch('api/titles/' + id, {
+    let getTitle = (uri, callback) => {
+        fetch(uri, {
             headers: {
                 'Authorization': 49
             },
@@ -106,6 +100,18 @@
                 'Authorization': 49
                 }
             })
+            .then(response => response.json())
+            .then(callback);
+    }
+
+    let getSimilarTitles = (uri, callback) => {
+        fetch(uri, {
+            headers: {
+                'Authorization': 49
+            },
+            method: 'GET'
+
+        })
             .then(response => response.json())
             .then(callback);
     }
@@ -259,6 +265,9 @@
 //unsubscribeUser("api/users/50")
 
     return {
+        getTitle,
+        getTitleDetails,
+        getSimilarTitles,
         getPopularTitles,
         getPopularTitle,
         getPopularTitlesUrlWithPageSize,
@@ -266,7 +275,6 @@
         getLatestTitles,
         getLatestTitle,
         getLatestTitlesUrlWithPageSize,
-        getLatestTitleDetails,
         login,
         getUser
     }

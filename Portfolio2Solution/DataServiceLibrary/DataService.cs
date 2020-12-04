@@ -803,13 +803,12 @@ namespace DataServiceLibrary
          * Framework functionalities
          * Function: Title recommendation
          * ***********************************************/
-        public IList<TitleRecommendation> RecommendTitles(string title, int page, int pageSize)
+        public IList<TitleRecommendation> RecommendTitles(string title)
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.TitleRecommendations
                 .FromSqlRaw("select * from title_recommendations({0})", title)
-                .Skip(page * pageSize)
-                .Take(pageSize)
+                .Take(8)
                 .ToList();
         }
         /* **************************************
