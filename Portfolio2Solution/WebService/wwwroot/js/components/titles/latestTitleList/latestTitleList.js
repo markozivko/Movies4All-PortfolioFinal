@@ -10,7 +10,7 @@
         //TODO check why it is not opening a new page
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
-            postman.publish('changeLatestTitle', latestTitle);
+            postman.publish('goToLatestTitleDetails', latestTitle);
         }
 
         let getData = url => {

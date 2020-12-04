@@ -6,11 +6,17 @@
         let checkUser = () => {
             ds.login(email(), password(), data => {
                 postman.publish('changeUser', data.userUrl);
-                postman.publish('switchToAccount', "account");
+                var delayInMilliseconds = 1000; //1 second
+                setTimeout(function () {
+                    postman.publish('switchToAccount', "account");
+                }, delayInMilliseconds);
+                
             });
         }
 
-       
+        
+
+
         return {
             checkUser,
             email,

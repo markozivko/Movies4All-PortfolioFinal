@@ -7,12 +7,15 @@
     }
    
 
-    //TODO: add user url
     postman.subscribe("switchToAccount", component => {
-        console.log(component);
         changeContent(component);
     });
 
+    postman.subscribe('logout', component => {
+
+        currentComponent(component);
+
+    });
 
 
     return {
