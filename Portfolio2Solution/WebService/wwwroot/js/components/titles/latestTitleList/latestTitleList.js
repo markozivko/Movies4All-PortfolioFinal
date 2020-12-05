@@ -1,13 +1,13 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
+        let currentUser = ko.observable(params.currentUser())
         let latestTitles = ko.observableArray([]);
         let pageSizes = ko.observableArray();
         let selectedPageSize = ko.observableArray([10]);
         let prev = ko.observable();
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
-
-        //TODO check why it is not opening a new page
+       // let userId = currentUser().split("/").pop();
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
             postman.publish('goToLatestTitleDetails', latestTitle);

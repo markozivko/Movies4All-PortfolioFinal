@@ -6,7 +6,7 @@
 
         let checkUser = () => {
             ds.login(email(), password(), data => {
-                postman.publish('switchToAccount', "account");
+                postman.publish('switchToAccount',["account",data.userUrl]);
 
                 postman.publish('changeUser', data.userUrl);
                 

@@ -3,7 +3,8 @@
         let selectedComponent = ko.observable('my profile');
         let selectedLatestTitle = ko.observable();
         let latestTitle = ko.observable();
-        let currentParams = ko.observable({ selectedLatestTitle, latestTitle });
+        let currentUser = ko.observable(params.currentUser())
+
 
         let menuElements = ["My Profile", "Location", "Title Bookmarks", "Personalities", "Logout"];
 
@@ -15,7 +16,7 @@
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
 
-
+        let currentParams = ko.observable({ selectedLatestTitle, latestTitle, currentUser });
         return {
             selectedComponent,
             currentParams,
