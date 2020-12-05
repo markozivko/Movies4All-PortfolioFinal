@@ -4,7 +4,7 @@
         //console.log(currentUser)
         let firstName = ko.observable();
         let lastName = ko.observable();
-        //let birthday = ko.observable();
+        let birthday = ko.observable();
         let isStaff = ko.observable();
         let email = ko.observable();
         let userName = ko.observable();
@@ -14,17 +14,18 @@
             ds.getUser(url.pathname, function (data) {
                 firstName(data.fName);
                 lastName(data.lName);
-                //birthday(data.birthday.split(":")[0]);
+                birthday(data.birthDay.split(" ")[0]);
                 isStaff(data.isStaff);
                 email(data.email);
                 userName(data.userName);
             });
 
+       
 
         return {
             firstName,
             lastName,
-           // birthday,
+            birthday,
             isStaff,
             email,
             userName

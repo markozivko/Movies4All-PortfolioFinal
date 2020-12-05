@@ -8,6 +8,7 @@
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
        // let userId = currentUser().split("/").pop();
+
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
             postman.publish('goToLatestTitleDetails', latestTitle);
