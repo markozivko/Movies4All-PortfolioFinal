@@ -586,6 +586,8 @@ namespace DataServiceLibrary
             return ctx.Episodes
                 .Include(e => e.Title)
                 .Where(e => e.SerieId == serieid)
+                .OrderBy(e => e.Season)
+                .ThenBy(e => e.NumEpisode)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();

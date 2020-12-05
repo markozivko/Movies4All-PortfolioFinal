@@ -32,7 +32,9 @@
                     temp().forEach((element) => {
                         console.log(element)
                         let urlNew = new URL(element.titleUrl);
-                        similarTitles.removeAll();
+                        if (similarTitles().length > 0) {
+                            similarTitles.removeAll();
+                        }
 
                         ds.getTitle(urlNew.pathname, function (data) {
                             similarTitles.push(data); 

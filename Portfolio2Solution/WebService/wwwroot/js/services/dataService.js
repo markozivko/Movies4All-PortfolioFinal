@@ -147,6 +147,17 @@
             .then(callback);
     }
 
+
+    let getTitleBookmarks = (uri, callback) => {
+        fetch(uri, {
+            headers: {
+                'Authorization': 49
+            }
+        })
+            .then(response => response.json())
+            .then(callback);
+    }
+
 /* **********************************
 * Function: Get users
 * ************************************/
@@ -265,6 +276,7 @@
 //unsubscribeUser("api/users/50")
 
     return {
+        getTitleBookmarks,
         getTitle,
         getTitleDetails,
         getSimilarTitles,

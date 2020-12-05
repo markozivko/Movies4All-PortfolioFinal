@@ -6,12 +6,20 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <!--<div class="form-group row">
-            <label for="address" class="col-4">Address</label>
+    <div class="col-md-12" data-bind="foreach: bookmarkList">
+        <div class="form-group row">
+            <label for="username" class="col-4">favorite title</label>
             <div class="col-8">
-                <p id="address" name="address"> User address </p>
+                <p id="username" name="username" data-bind="text: favoriteTitleUrl">  </p>
             </div>
-        </div>-->
+        </div>
+
+        <div class="form-group row">
+            <label for="firstname" class="col-4">Notes</label>
+            <div class="col-8">
+                <p id="firstname" name="firstname" data-bind="text: notes"></p>
+            </div>
+        </div>
+        <hr>
     </div>
 </div>
