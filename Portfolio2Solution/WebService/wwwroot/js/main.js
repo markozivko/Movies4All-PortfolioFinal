@@ -33,6 +33,12 @@ require(['knockout', 'text'], (ko) => {
             template: { require: "text!components/titles/latestTitleDetails/latestTitleDetails.html" }
         });
 
+    ko.components.register("genres",
+        {
+            viewModel: { require: "components/titles/genres/genres" },
+            template: { require: "text!components/titles/genres/genres.html" }
+        });
+
     ko.components.register("login",
         {
             viewModel: { require: "components/login/login" },
@@ -93,6 +99,7 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/user/profile/personalities" },
             template: { require: "text!components/user/profile/personalities.html" }
         });
+
 
     ko.components.register("logout",
         {

@@ -94,6 +94,19 @@
             .then(callback);
     }
 
+    let getGenres = (user, callback) => {
+
+        fetch("api/genres", {
+            headers: {
+                'Authorization': parseInt(user.currentUser())
+            },
+            method: 'GET'
+
+        })
+            .then(response => response.json())
+            .then(callback);
+    }
+
     let getTitleDetails = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
@@ -298,6 +311,7 @@
 
 
     return {
+        getGenres,
         getTitleBookmarks,
         getTitle,
         getTitleDetails,

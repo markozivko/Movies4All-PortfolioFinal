@@ -247,6 +247,7 @@ namespace DataServiceLibrary
         {
             using var ctx = new DatabaseContext(_connectionString);
             return ctx.Genres
+                .OrderBy(g => g.Name)
                 .ToList();
         }
 
