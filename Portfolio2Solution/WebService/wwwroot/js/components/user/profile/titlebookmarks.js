@@ -20,9 +20,6 @@
                         }
 
                         ds.getTitle([titleUrl.pathname, currentUser()], function (data) {
-
-                            console.log(data.primaryTitle);
-
                         });
 
                     });

@@ -31,22 +31,22 @@
                 plot(data.plot);
                 poster(data.poster);
                 principals(data.principals);
-                //episodes(data.episodes)
-                ////let url = new URL(data.similarTitleUrl);
-                ////ds.getSimilarTitles([url.pathname, user()], function (data) {
-                ////    temp(data);
-                ////    temp().forEach((element) => {
-                ////        console.log(element)
-                ////        let urlNew = new URL(element.titleUrl);
-                ////        if (similarTitles().length > 0) {
-                ////            similarTitles.removeAll();
-                ////        }
+                episodes(data.episodes)
+                //let url = new URL(data.similarTitleUrl);
+                //ds.getSimilarTitles([url.pathname, user()], function (data) {
+                //    temp(data);
+                //    temp().forEach((element) => {
+                //        console.log(element)
+                //        let urlNew = new URL(element.titleUrl);
+                //        if (similarTitles().length > 0) {
+                //            similarTitles.removeAll();
+                //        }
 
-                ////        ds.getTitle([urlNew.pathname, user()], function (data) {
-                ////            similarTitles.push(data); 
-                ////        });
-                ////    });
-                ////});
+                //        ds.getTitle([urlNew.pathname, user()], function (data) {
+                //            similarTitles.push(data); 
+                //        });
+                //    });
+                //});
             });
         });
 
