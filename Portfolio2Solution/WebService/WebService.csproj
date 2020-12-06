@@ -33,6 +33,7 @@
     <Folder Include="wwwroot\js\components\titles\latestTitleDetails\" />
     <Folder Include="wwwroot\js\components\user\profile\" />
     <Folder Include="wwwroot\js\components\modals\" />
+    <Folder Include="wwwroot\js\components\titles\genres\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties config_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

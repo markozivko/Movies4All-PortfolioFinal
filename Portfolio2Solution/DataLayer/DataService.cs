@@ -46,7 +46,6 @@ namespace DataLayer
          *                                         FUNCTIONS TO GET 
          * ****************************************************************************************************************/
 
-
         /* **********************************
         * Framework functionalities
         * Function: Get user by Id

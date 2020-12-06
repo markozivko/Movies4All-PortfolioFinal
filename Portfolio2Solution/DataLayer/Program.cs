@@ -49,12 +49,13 @@ namespace DataLayer
              * Framework functionalities
              * Function: getLatestTitles
              */
-            var lt = dataService.GetLatestTitles();
-            foreach (var a in lt)
-            {
-                Console.WriteLine($"Id: {a.Const} \n" +
-                          $"Name: {a.Rating.Average}\n") ;
-            }
+            //var lt = dataService.GetLatestTitles();
+            //foreach (var a in lt)
+            //{
+            //    Console.WriteLine($"Id: {a.Const} \n" +
+            //              $"Name: {a.Rating.Average}\n") ;
+            //}
+
 
             //var coPlayer = dataService.FindCoPlayers(1, "Mads miKKelsen");
 
@@ -222,12 +223,12 @@ namespace DataLayer
             /////*
             ////* Return all genres 
             ////*/
-            //var genres2 = dataService.GetAllGenres();
+            var genres2 = dataService.GetAllGenres();
 
-            //foreach (var g in genres2)
-            //{
-            //    Console.WriteLine($"Id: {g.Id}, Genre: {g.Name}");
-            //}
+            foreach (var g in genres2)
+            {
+                Console.WriteLine($"Id: {g.Id}, Genre: {g.Name}");
+            }
 
             /////*
             //// * Return all titlebookmarks 
@@ -309,11 +310,11 @@ namespace DataLayer
             //var specUR = dataService.GetUserSpecificRating(11, "tt0078672");
             //Console.WriteLine($"{ specUR.VerbalR}");
 
-            var popularTitles = dataService.GetPopularTitles();
-            foreach(var i in popularTitles)
-            {
-                Console.WriteLine($"Popular Titles {i.Const}, {i.Rating.NumVotes}, {i.TitleGenres.FirstOrDefault().Genre.Name}");
-            }
+            //var popularTitles = dataService.GetPopularTitles();
+            //foreach(var i in popularTitles)
+            //{
+            //    Console.WriteLine($"Popular Titles {i.Const}, {i.Rating.NumVotes}, {i.TitleGenres.FirstOrDefault().Genre.Name}");
+            //}
         }
     }
     

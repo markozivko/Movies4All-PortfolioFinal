@@ -239,6 +239,16 @@ namespace DataServiceLibrary
                 .FirstOrDefault();
         }
 
+        /* **************************************
+         * Framework functionalities
+         * Function: getAllGenres
+         * **************************************/
+        public IList<Genre> GetAllGenres()
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.Genres
+                .ToList();
+        }
 
         /* **************************************
          * Framework functionalities
@@ -283,16 +293,6 @@ namespace DataServiceLibrary
 
         }
 
-        /* **************************************
-         * Framework functionalities
-         * Function: getAllGenres
-         * **************************************/
-        public IList<Genre> GetAllGenres()
-        {
-            using var ctx = new DatabaseContext(_connectionString);
-            return ctx.Genres
-                .ToList();
-        }
         /* **************************************
          * Framework functionalities
          * Function: getAllTitleBookmarks
