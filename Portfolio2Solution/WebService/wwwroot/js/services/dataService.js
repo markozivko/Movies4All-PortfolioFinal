@@ -1,9 +1,9 @@
 ﻿define([], () => {
 
 
-/* ****************************************************************************************************************
-*                                         Functionalitites for titles
-* ****************************************************************************************************************/
+    /* ****************************************************************************************************************
+    *                                         Functionalitites for titles
+    * ****************************************************************************************************************/
 
 
 
@@ -20,7 +20,7 @@
         }
 
         fetch(uri, {
-            method : 'GET'
+            method: 'GET'
 
         })
             .then(function (response) {
@@ -52,12 +52,12 @@
         if (uri === undefined) {
             uri = latestTitleApiUrl;
         }
-        fetch(uri, {  
+        fetch(uri, {
             headers: {
                 //TODO find how to use the authorisation in correct way 
 
                 'Authorization': parseInt(user.currentUser())
-             },
+            },
             method: 'GET'
 
         })
@@ -98,8 +98,8 @@
         fetch(uri, {
             headers: {
                 'Authorization': parseInt(user.currentUser())
-                }
-            })
+            }
+        })
             .then(response => response.json())
             .then(callback);
     }
@@ -116,9 +116,9 @@
             .then(callback);
     }
 
-/* ****************************************************************************************************************
- *                                         Functionalitites for users
- * ****************************************************************************************************************/
+    /* ****************************************************************************************************************
+     *                                         Functionalitites for users
+     * ****************************************************************************************************************/
     /* **********************************
     * Function: Login
     * ************************************/
@@ -143,7 +143,7 @@
             headers: {
                 'Authorization': uri.split('/').pop()
             }
-          })
+        })
             .then(response => response.json())
             .then(callback);
     }
@@ -159,9 +159,10 @@
             .then(callback);
     }
 
-/* **********************************
-* Function: Get users
-* ************************************/
+
+    /* **********************************
+    * Function: Get users
+    * ************************************/
 
     //let getUsers = function (callback) {
     //    fetch("api/users", {
@@ -182,9 +183,9 @@
     //    console.log(data);
     //});
 
-/* **********************************
-* Function: Get specific user
-* ************************************/
+    /* **********************************
+    * Function: Get specific user
+    * ************************************/
     //let getUser = (id, callback) => {
     //    fetch("api/users/" + id)
     //        .then(response => response.json())
@@ -196,85 +197,105 @@
     //    getUser
     //}
 
-//});
+    //});
 
 
 
-/* **********************************
-* Function: Create new user
-* ************************************/
-//let createUser = function (user, callback) {
-//    fetch("api", {
-//        method: "POST", body: JSON.stringify(user), headers: {
-//            'Content-Type': 'application/json'
+    /* **********************************
+    * Function: Create new user
+    * ************************************/
+    //let createUser = function (user, callback) {
+    //    fetch("api", {
+    //        method: "POST", body: JSON.stringify(user), headers: {
+    //            'Content-Type': 'application/json'
 
-//        }
-//    })
-//        .then(response => response.json())
-//        .then(data => callback(data));
-//}
+    //        }
+    //    })
+    //        .then(response => response.json())
+    //        .then(data => callback(data));
+    //}
 
-//createUser({
-//    FirstName: "A-gun-evil-twin",
-//    LastName: "Aabidah2",
-//    BirthDay: "01/08/2009",
-//    IsStaff: false,
-//    Email: "gun@super.com",
-//    Password: "gun123",
-//    UserName: "shootGub2009",
-//    StreetNumber: "21",
-//    StreetName: "Joyful",
-//    ZipCode: "35214",
-//    City: "Mumbai",
-//    Country: "India"
-//}, function (data) {
-//        console.log(data);
-//});
+    //createUser({
+    //    FirstName: "A-gun-evil-twin",
+    //    LastName: "Aabidah2",
+    //    BirthDay: "01/08/2009",
+    //    IsStaff: false,
+    //    Email: "gun@super.com",
+    //    Password: "gun123",
+    //    UserName: "shootGub2009",
+    //    StreetNumber: "21",
+    //    StreetName: "Joyful",
+    //    ZipCode: "35214",
+    //    City: "Mumbai",
+    //    Country: "India"
+    //}, function (data) {
+    //        console.log(data);
+    //});
 
-/* **********************************
-* Function: Update the user
-* ************************************/
+    /* **********************************
+    * Function: Update the user
+    * ************************************/
 
-//let updateUser = function (user, callback) {
-//    fetch("api/users/49", {
-//        method: "PUT",
-//        body: JSON.stringify(user),
-//        headers: {
-//                'Content-Type': 'application/json',
-//                'Authorization': 49
-//        }
-//    })
-//        .then(response => response.json())
-//        .then(data => callback(data));
-//}
+    //let updateUser = function (user, callback) {
+    //    fetch("api/users/49", {
+    //        method: "PUT",
+    //        body: JSON.stringify(user),
+    //        headers: {
+    //                'Content-Type': 'application/json',
+    //                'Authorization': 49
+    //        }
+    //    })
+    //        .then(response => response.json())
+    //        .then(data => callback(data));
+    //}
 
-//updateUser({
-//    FirstName: "A-gun-new-name",
-//    LastName: "Aabidah2",
-//    BirthDay: "01/08/2009",
-//    IsStaff: false,
-//    Email: "gun@super.com",
-//    Password: "gun123",
-//    UserName: "shootGub-newName",
-//    StreetNumber: "21",
-//    StreetName: "Joyful",
-//    ZipCode: "35214",
-//    City: "Mumbai",
-//    Country: "India"
-//}, function (data) {
-//        console.log(data);
-//});
+    //updateUser({
+    //    FirstName: "A-gun-new-name",
+    //    LastName: "Aabidah2",
+    //    BirthDay: "01/08/2009",
+    //    IsStaff: false,
+    //    Email: "gun@super.com",
+    //    Password: "gun123",
+    //    UserName: "shootGub-newName",
+    //    StreetNumber: "21",
+    //    StreetName: "Joyful",
+    //    ZipCode: "35214",
+    //    City: "Mumbai",
+    //    Country: "India"
+    //}, function (data) {
+    //        console.log(data);
+    //});
 
-/* **********************************
-* Function: Delete user
-* ************************************/
-//let unsubscribeUser = url => fetch(url, {
-//    method: "DELETE", headers: {
-//        'Authorization': 50
-//    }
-//});
+    /* **********************************
+    * Function: Delete user
+    * ************************************/
+    //let unsubscribeUser = url => fetch(url, {
+    //    method: "DELETE", headers: {
+    //        'Authorization': 50
+    //    }
+    //});
 
-//unsubscribeUser("api/users/50")
+    //unsubscribeUser("api/users/50")
+
+    /* ****************************************************************************************************************
+    *                                         Functionalitites for person
+    * ****************************************************************************************************************/
+    /* **********************************
+    * Function: view person
+    * ************************************/
+
+    let getPerson = ([uri, user], callback) => {
+        fetch(uri, {
+            headers: {
+                'Authorization': parseInt(user.currentUser())
+            },
+            method: 'GET'
+
+        })
+            .then(response => response.json())
+            .then(callback);
+    }
+
 
     return {
         getTitleBookmarks,
@@ -289,7 +310,8 @@
         getLatestTitle,
         getLatestTitlesUrlWithPageSize,
         login,
-        getUser
+        getUser,
+        getPerson
     }
 
 });

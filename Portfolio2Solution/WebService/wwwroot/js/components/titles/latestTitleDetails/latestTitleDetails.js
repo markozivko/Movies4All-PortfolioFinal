@@ -14,6 +14,9 @@
         let temp = ko.observableArray();
         let title = ko.observable();
         let similarTitles = ko.observableArray();
+        let person = ko.observable();
+
+
         postman.subscribe('userData', currentUser => {
             user(currentUser)
             console.log(user())
@@ -31,7 +34,9 @@
                 plot(data.plot);
                 poster(data.poster);
                 principals(data.principals);
-                episodes(data.episodes)
+
+                
+                //episodes(data.episodes)
                 //let url = new URL(data.similarTitleUrl);
                 //ds.getSimilarTitles([url.pathname, user()], function (data) {
                 //    temp(data);
@@ -50,6 +55,17 @@
             });
         });
 
+        let showPerson = (arg) => {
+
+            let url = new URL(arg);
+            ds.getPerson([url.pathname, user()], function (data) {
+
+                person(data.name);
+                //postman.publish('personDetails', person());
+
+            });
+        } 
+
         return {
             rating,
             numVotes,
@@ -57,7 +73,8 @@
             poster,
             principals,
             latestTitle,
-            similarTitles
+            similarTitles,
+            showPerson
         }
     }
 });

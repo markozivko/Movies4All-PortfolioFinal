@@ -7,6 +7,7 @@
         let prev = ko.observable();
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
+        let personModal = ko.observable();
 
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
@@ -41,6 +42,17 @@
             getData(ds.getLatestTitlesUrlWithPageSize(size), currentUser());
         });
 
+        let selectPerson = () => {
+
+            //postman.subscribe('personDetails', person => {
+
+            //    personModal(person);
+            //    console.log('subscribe');
+            //    console.log(personModal().name);
+            //});
+
+        }
+
         getData(undefined,currentUser());
         return {
             latestTitles,
@@ -52,7 +64,8 @@
             enablePrev,
             showNext,
             enableNext,
-            currentUser
+            currentUser,
+            selectPerson
         };
     }
 });

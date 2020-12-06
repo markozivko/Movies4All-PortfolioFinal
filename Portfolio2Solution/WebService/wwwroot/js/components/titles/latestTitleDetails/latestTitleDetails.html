@@ -31,8 +31,27 @@
             <h3>Cast</h3>
             <div class="cast">
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
-                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span></li>
+                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span> URL: <span data-bind="text: personUrl"></span></li>
+                    <li>
+                        <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalPerson" data-bind="click: $parent.showPerson.bind($data, personUrl)">Show person</button>
+                    </li>
                 </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="modalPerson" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Hello</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -43,6 +62,7 @@
     .button-row {
         margin-bottom: 2%;
     }
+
     #cast-li {
         background-color: #112642;
     }
@@ -70,7 +90,7 @@
 
     @media (max-width: 990px) {
 
-        #image-detail{
+        #image-detail {
             margin-top: 10%;
         }
     }
