@@ -6,7 +6,7 @@
         let currentUser = ko.observable(params.currentUser())
 
 
-        let menuElements = ["My Profile", "Location", "Title Bookmarks", "Personalities", "Logout"];
+        let menuElements = ["My Profile", "Location", "Title Bookmarks", "Personalities", "Search History", "Logout"];
 
         let changeContent = element => {
             console.log(element);

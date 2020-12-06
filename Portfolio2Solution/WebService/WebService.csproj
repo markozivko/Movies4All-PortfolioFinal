@@ -34,6 +34,13 @@
     <Folder Include="wwwroot\js\components\user\profile\" />
     <Folder Include="wwwroot\js\components\modals\" />
     <Folder Include="wwwroot\js\components\titles\genres\" />
+    <Folder Include="wwwroot\js\components\user\profile\searchHistory\" />
+    <Folder Include="wwwroot\js\components\user\profile\location\" />
+    <Folder Include="wwwroot\js\components\user\profile\personalities\" />
+    <Folder Include="wwwroot\js\components\user\profile\profile\" />
+    <Folder Include="wwwroot\js\components\user\profile\logout\" />
+    <Folder Include="wwwroot\js\components\user\profile\titlebookmarks\" />
+    <Folder Include="wwwroot\js\components\user\profile\userProfile\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties config_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
