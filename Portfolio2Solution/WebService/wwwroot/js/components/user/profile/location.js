@@ -4,9 +4,7 @@
 
         let address = ko.observable();
 
-
-        let url = new URL(currentUser());
-        ds.getUser(url.pathname, function (data) {
+        ds.getUser('api/users/' + currentUser(), function (data) {
             address(data.address);
 
         });

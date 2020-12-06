@@ -1,7 +1,7 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let currentUser = ko.observable(params.currentUser().currentUser());
-        //console.log(currentUser)
+        
         let firstName = ko.observable();
         let lastName = ko.observable();
         let birthday = ko.observable();
@@ -9,9 +9,8 @@
         let email = ko.observable();
         let userName = ko.observable();
 
-
-        let url = new URL(currentUser());
-            ds.getUser(url.pathname, function (data) {
+   
+        ds.getUser('api/users/' + currentUser(), function (data) {
                 firstName(data.fName);
                 lastName(data.lName);
                 birthday(data.birthDay.split(" ")[0]);

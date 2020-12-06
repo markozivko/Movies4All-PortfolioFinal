@@ -7,42 +7,41 @@
         let prev = ko.observable();
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
-       // let userId = currentUser().split("/").pop();
 
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
             postman.publish('goToLatestTitleDetails', latestTitle);
         }
 
-        let getData = url => {
-            ds.getLatestTitles(url, data => {
+        let getData = (url, id) => {
+            ds.getLatestTitles([url,id], data => {
                 pageSizes(data.pageSizes);
                 prev(data.prev || undefined);
                 next(data.next || undefined);
                 latestTitles(data.items);
+                postman.publish('userData', currentUser());
             });
         }
         let showPrev = latestTitle => {
             console.log(prev());
-            getData(prev());
+            getData(prev(), currentUser());
         }
 
         let enablePrev = ko.computed(() => prev() !== undefined);
 
         let showNext = latestTitle => {
             console.log(next());
-            getData(next());
+            getData(next(), currentUser());
         }
 
         let enableNext = ko.computed(() => next() !== undefined);
 
         selectedPageSize.subscribe(() => {
             var size = selectedPageSize()[0];
-            getData(ds.getLatestTitlesUrlWithPageSize(size));
+            getData(ds.getLatestTitlesUrlWithPageSize(size), currentUser());
         });
 
-        getData();
-
+        getData(undefined,currentUser());
         return {
             latestTitles,
             selectLatestTitle,
@@ -52,7 +51,8 @@
             showPrev,
             enablePrev,
             showNext,
-            enableNext
+            enableNext,
+            currentUser
         };
     }
 });

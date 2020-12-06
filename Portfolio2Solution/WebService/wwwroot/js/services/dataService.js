@@ -48,7 +48,7 @@
     * Function: Get latest titles
     * ************************************/
     const latestTitleApiUrl = 'api/titles/latest';
-    let getLatestTitles = function (uri, callback) {
+    let getLatestTitles = function ([uri, user], callback) {
         if (uri === undefined) {
             uri = latestTitleApiUrl;
         }
@@ -56,7 +56,7 @@
             headers: {
                 //TODO find how to use the authorisation in correct way 
 
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
              },
             method: 'GET'
 
@@ -70,10 +70,10 @@
     }
     let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
 
-    let getLatestTitle = (id, callback) => {
+    let getLatestTitle = ([id, user], callback) => {
         fetch('api/titles/latest/' + id, {
             headers: {
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
             },
             method: 'GET'
 
@@ -82,10 +82,10 @@
             .then(callback);
     }
 
-    let getTitle = (uri, callback) => {
+    let getTitle = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
             },
             method: 'GET'
 
@@ -94,20 +94,20 @@
             .then(callback);
     }
 
-    let getTitleDetails = (uri, callback) => {
+    let getTitleDetails = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
                 }
             })
             .then(response => response.json())
             .then(callback);
     }
 
-    let getSimilarTitles = (uri, callback) => {
+    let getSimilarTitles = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
             },
             method: 'GET'
 
@@ -138,6 +138,7 @@
     * Function: Get specific user
     * ************************************/
     let getUser = (uri, callback) => {
+        console.log(uri)
         fetch(uri, {
             headers: {
                 'Authorization': uri.split('/').pop()
@@ -148,10 +149,10 @@
     }
 
 
-    let getTitleBookmarks = (uri, callback) => {
+    let getTitleBookmarks = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
-                'Authorization': 49
+                'Authorization': parseInt(user.currentUser())
             }
         })
             .then(response => response.json())
