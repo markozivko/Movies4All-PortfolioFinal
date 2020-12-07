@@ -24,14 +24,14 @@
             });
         }
         let showPrev = latestTitle => {
-            console.log(prev());
+            //console.log(prev());
             getData(prev(), currentUser());
         }
 
         let enablePrev = ko.computed(() => prev() !== undefined);
 
         let showNext = latestTitle => {
-            console.log(next());
+            //console.log(next());
             getData(next(), currentUser());
         }
 

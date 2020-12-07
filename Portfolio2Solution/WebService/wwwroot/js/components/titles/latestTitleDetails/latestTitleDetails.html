@@ -10,13 +10,14 @@
             <img alt="Qries" data-bind="attr:{src: poster}"
                  width="300" height="350">
             <hr>
-            <h3>Similar titles</h3>
-
-            <div class="similarTitles">
-                <ul class="list-group list-group-flush" data-bind="foreach: similarTitles">
-                    <li id="cast-li" class="list-group-item" data-bind="text: primaryTitle"></li>
-                </ul>
-            </div>
+            <div data-bind="visible: similarTitles().length > 0">
+                <h3>Similar titles</h3>
+                <div class="similarTitles">
+                    <ul class="list-group list-group-flush" data-bind="foreach: similarTitles">
+                        <li id="cast-li" class="list-group-item" data-bind="text: primaryTitle"></li>
+                    </ul>
+                </div>
+            </div>    
         </div>
         <div class="col-lg-6">
             <p style="font-size:60px">🎬</p>
@@ -25,9 +26,12 @@
             <h3>Number of votes</h3>
             <h3 data-bind="text: numVotes"></h3>
             <hr>
-            <h3>Plot</h3>
-            <div class="plot" data-bind="text: plot"></div>
-            <hr>
+            <div data-bind="visible: plot() !== 'N/A'">
+                <h3>Plot</h3>
+                <div class="plot" data-bind="text: plot"></div>
+                <hr>
+            </div>
+          
             <h3>Cast</h3>
             <div class="cast">
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
