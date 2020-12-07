@@ -63,11 +63,13 @@ namespace WebService.Controllers
             {
 
                 var dto = _mapper.Map<EpisodeDto>(e);
-                var plot = _dataService.GetOmdbData(e.TitleConst.Trim()).Plot;
+                var plot = _dataService.GetOmdbData(e.TitleConst.Trim());
+                 
+                if(plot != null)
+                {
+                    dto.StoryLine = plot.Plot;
 
-                Console.WriteLine(e.TitleConst);
-                Console.WriteLine(plot);
-                dto.StoryLine = plot;
+                }
                 items.Add(dto);
             }
 

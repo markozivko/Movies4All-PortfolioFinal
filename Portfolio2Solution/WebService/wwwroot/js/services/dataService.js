@@ -15,7 +15,6 @@
     let getPopularTitles = function (uri, callback) {
         if (uri === undefined) {
             uri = popularTitleApiUrl;
-            console.log("Last page");
 
         }
 

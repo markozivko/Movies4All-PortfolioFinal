@@ -42,7 +42,7 @@ namespace WebService.Controllers
 
 
         [HttpGet("popular", Name = nameof(GetPopularTitles))]
-        public IActionResult GetPopularTitles(int page = 0, int pageSize = 12)
+        public IActionResult GetPopularTitles(int page = 0, int pageSize = 6)
         {
             var titles = _dataService.GetPopularTitles(page, pageSize);
             if (titles == null)

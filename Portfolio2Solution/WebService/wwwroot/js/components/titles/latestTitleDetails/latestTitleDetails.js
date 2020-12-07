@@ -1,21 +1,15 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let latestTitle = params.latestTitle;
-        let user = ko.observable();
+        let user = params.currentUser;
         let rating = ko.observable();
         let numVotes = ko.observable();
         let plot = ko.observable();
         let poster = ko.observable();
         let principals = ko.observableArray();
-        //TODO finish episodes
-        //let episodes = ko.observable();
+        let episodes = ko.observable();
         let similarTitles = ko.observableArray();
         let person = ko.observable();
-
-
-        postman.subscribe('userData', currentUser => {
-            user(currentUser)
-        });
 
         postman.subscribe('goToLatestTitleDetails', latestTitle => {
             let titleId = latestTitle.detailsUrl.split('/').pop();
@@ -27,11 +21,20 @@
                 plot(data.plot);
                 poster(data.poster);
                 principals(data.principals);
-                //episodes(data.episodes)
                 let url = new URL(data.similarTitleUrl);
                 ds.getSimilarTitles([url.pathname, user()], function (data) {
                     getTitle(data)
                 });
+                // check if there are episodes or not
+                let urlEpisodes = new URL(data.episodeUrl);
+                ds.getTitle([urlEpisodes.pathname, user()], function (data) {
+                    if (data.count !== 0) {
+                        episodes(urlEpisodes)
+                    }
+
+                });
+                console.log(episodes())
+
             });
 
         });
@@ -44,7 +47,9 @@
                     similarTitles.push({ titleUrl: url.pathname, primaryTitle: data.primaryTitle });
                 });
             });
-
+        }
+        let goToEpisodes = () => {
+            postman.subscribe('goToEpisodes', [episodes().pathname, user()]);
         }
         
 
@@ -58,7 +63,6 @@
 
             });
         } 
-
         return {
             rating,
             numVotes,
@@ -67,7 +71,9 @@
             principals,
             latestTitle,
             similarTitles,
-            showPerson
+            showPerson,
+            goToEpisodes,
+            episodes
         }
     }
 });

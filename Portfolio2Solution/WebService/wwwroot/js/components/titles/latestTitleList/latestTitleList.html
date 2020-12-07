@@ -13,6 +13,7 @@
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
                         <li data-bind="text: genre"></li>
+                        <li data-bind="text: type"></li>
                         <li data-bind="text: startYear"></li>
                         <li>
                             <i class="far fa-clock"></i>
@@ -40,7 +41,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div><latest-title-details params="latestTitle: selectedLatestTitle"></latest-title-details></div>
+                    <div><latest-title-details params="latestTitle: selectedLatestTitle, currentUser: currentUser"></latest-title-details></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

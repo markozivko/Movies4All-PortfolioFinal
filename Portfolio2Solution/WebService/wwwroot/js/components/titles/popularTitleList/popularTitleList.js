@@ -2,7 +2,7 @@
     return function (params) {
         let popularTitles = ko.observableArray([]);
         let pageSizes = ko.observableArray();
-        let selectedPageSize = ko.observableArray([10]);
+        let selectedPageSize = ko.observableArray([4]);
         let prev = ko.observable();
         let next = ko.observable();
         let selectedPopularTitle = params.selectedPopularTitle;
@@ -21,7 +21,6 @@
             });
         }
         let showPrev = popularTitle => {
-            console.log(prev());
             getData(prev());
         }
 
@@ -35,6 +34,7 @@
         let enableNext = ko.computed(() => next() !== undefined);
 
         selectedPageSize.subscribe(() => {
+            console.log(selectedPageSize())
             var size = selectedPageSize()[0];
             getData(ds.getPopularTitlesUrlWithPageSize(size));
         });

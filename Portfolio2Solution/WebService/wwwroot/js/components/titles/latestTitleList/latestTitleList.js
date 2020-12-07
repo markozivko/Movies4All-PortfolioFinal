@@ -17,14 +17,14 @@
         let getData = (url, id) => {
             ds.getLatestTitles([url,id], data => {
                 pageSizes(data.pageSizes);
-                prev(data.prev || undefined);
+                prev(data.prev);
                 next(data.next || undefined);
                 latestTitles(data.items);
-                postman.publish('userData', currentUser());
             });
         }
         let showPrev = latestTitle => {
-            //console.log(prev());
+            console.log("prec")
+            console.log(prev());
             getData(prev(), currentUser());
         }
 
@@ -52,7 +52,6 @@
             //});
 
         }
-
         getData(undefined,currentUser());
         return {
             latestTitles,

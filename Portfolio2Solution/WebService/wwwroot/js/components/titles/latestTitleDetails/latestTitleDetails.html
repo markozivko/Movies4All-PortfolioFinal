@@ -31,7 +31,7 @@
                 <div class="plot" data-bind="text: plot"></div>
                 <hr>
             </div>
-          
+
             <h3>Cast</h3>
             <div class="cast">
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
@@ -42,6 +42,12 @@
                 </ul>
 
             </div>
+            <div data-bind="visible: episodes() !== 'undefined' ">
+                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger"  data-bind="click: $parent.goToEpisodes">See episodes</button>
+            </div>
+
+            
+
         </div>
     </div>
 </div>
