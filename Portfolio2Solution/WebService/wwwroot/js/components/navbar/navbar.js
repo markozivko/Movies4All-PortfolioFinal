@@ -8,7 +8,6 @@
         let menuElements = ["Home", "About", "Login", "Register"];
 
         let changeContent = element => {
-            console.log(element);
             selectedComponent(element.toLowerCase());
         }
 

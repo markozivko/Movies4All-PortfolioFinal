@@ -15,7 +15,6 @@
             let titleId = latestTitle.detailsUrl.split('/').pop();
 
             ds.getTitleDetails(['api/detailtitles/' + titleId, user()], function (data) {
-
                 rating(data.rating);
                 numVotes(data.numVotes);
                 plot(data.plot);
@@ -28,13 +27,13 @@
                 // check if there are episodes or not
                 let urlEpisodes = new URL(data.episodeUrl);
                 ds.getTitle([urlEpisodes.pathname, user()], function (data) {
-                    if (data.count !== 0) {
-                        episodes(urlEpisodes)
+                    if (data.count > 0) {
+                        episodes(urlEpisodes.pathname)
                     }
-
+                    else {
+                        episodes(undefined)
+                    }
                 });
-                console.log(episodes())
-
             });
 
         });
@@ -49,10 +48,9 @@
             });
         }
         let goToEpisodes = () => {
-            postman.subscribe('goToEpisodes', [episodes().pathname, user()]);
+            postman.publish('goToEpisodes', [episodes(), user()]);
+            console.log("published")
         }
-        
-
         let showPerson = (arg) => {
 
             let url = new URL(arg);

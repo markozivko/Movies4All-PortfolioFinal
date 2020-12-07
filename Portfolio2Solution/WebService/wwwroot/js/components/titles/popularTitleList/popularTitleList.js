@@ -27,14 +27,12 @@
         let enablePrev = ko.computed(() => prev() !== undefined);
 
         let showNext = popularTitle => {
-            console.log(next());
             getData(next());
         }
 
         let enableNext = ko.computed(() => next() !== undefined);
 
         selectedPageSize.subscribe(() => {
-            console.log(selectedPageSize())
             var size = selectedPageSize()[0];
             getData(ds.getPopularTitlesUrlWithPageSize(size));
         });

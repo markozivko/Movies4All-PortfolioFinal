@@ -1,5 +1,4 @@
 ﻿<div data-bind="with: latestTitle">
-    <!--<h3 data-bind="text: type"></h3>-->
     <h3 data-bind="text: primaryTitle"></h3>
 </div>
 <hr>
@@ -42,8 +41,8 @@
                 </ul>
 
             </div>
-            <div data-bind="visible: episodes() !== 'undefined' ">
-                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger"  data-bind="click: $parent.goToEpisodes">See episodes</button>
+            <div data-bind="visible: episodes() ">
+                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger"  data-bind="click: goToEpisodes">See episodes</button>
             </div>
 
             
@@ -52,20 +51,6 @@
     </div>
 </div>
 
-
-
-<div id="modalPerson" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>Hello</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style>
 

@@ -7,7 +7,7 @@
         let prev = ko.observable();
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
-        let personModal = ko.observable();
+        let episodesUrl = ko.observableArray().extend({ deferred: true });
 
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
@@ -23,15 +23,12 @@
             });
         }
         let showPrev = latestTitle => {
-            console.log("prec")
-            console.log(prev());
             getData(prev(), currentUser());
         }
 
         let enablePrev = ko.computed(() => prev() !== undefined);
 
         let showNext = latestTitle => {
-            //console.log(next());
             getData(next(), currentUser());
         }
 
@@ -42,17 +39,14 @@
             getData(ds.getLatestTitlesUrlWithPageSize(size), currentUser());
         });
 
-        let selectPerson = () => {
+        getData(undefined, currentUser());
 
-            //postman.subscribe('personDetails', person => {
+        postman.subscribe('goToEpisodes', args => {
+            $('#modalDetailsTitle').modal('hide');
+            episodesUrl(args)
+            $('#modalEpisodesTitle').modal('show')
+        });
 
-            //    personModal(person);
-            //    console.log('subscribe');
-            //    console.log(personModal().name);
-            //});
-
-        }
-        getData(undefined,currentUser());
         return {
             latestTitles,
             selectLatestTitle,
@@ -64,7 +58,7 @@
             showNext,
             enableNext,
             currentUser,
-            selectPerson
+            episodesUrl
         };
     }
 });

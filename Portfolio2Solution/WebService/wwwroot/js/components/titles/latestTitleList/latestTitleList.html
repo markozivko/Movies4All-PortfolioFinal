@@ -13,14 +13,13 @@
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4">
                         <li data-bind="text: genre"></li>
-                        <li data-bind="text: type"></li>
                         <li data-bind="text: startYear"></li>
                         <li>
                             <i class="far fa-clock"></i>
                             <span data-bind="text: runtime"></span> min
                         </li>
                     </ul>
-                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning"  data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectLatestTitle">Show details</button>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectLatestTitle">Show details</button>
                     <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal" data-target="#modalDetailsTitle" data-bind="click: $parent.selectLatestTitle">Save to bookmarks</button>
                 </div>
             </div>
@@ -42,6 +41,20 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div><latest-title-details params="latestTitle: selectedLatestTitle, currentUser: currentUser"></latest-title-details></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modalEpisodesTitle" class="modal" tabindex="-1" data-bind="if: episodesUrl()">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><title-episodes params="episodes: episodesUrl, currentUser: currentUser"></title-episodes></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -112,6 +112,11 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/user/profile/searchHistory/searchHistory" },
             template: { require: "text!components/user/profile/searchHistory/searchHistory.html" }
         });
+    ko.components.register("title-episodes",
+        {
+            viewModel: { require: "components/titles/titleEpisodes/titleEpisodes" },
+            template: { require: "text!components/titles/titleEpisodes/titleEpisodes.html" }
+        });
 
 });
 
