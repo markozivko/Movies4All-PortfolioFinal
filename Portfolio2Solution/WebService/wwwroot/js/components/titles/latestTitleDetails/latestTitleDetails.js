@@ -1,5 +1,8 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
+       /* **********************************
+        * Section: Variables
+        * ************************************/
         let latestTitle = params.latestTitle;
         let user = params.currentUser;
         let rating = ko.observable();
@@ -9,8 +12,10 @@
         let principals = ko.observableArray();
         let episodes = ko.observable();
         let similarTitles = ko.observableArray();
-        let person = ko.observable();
 
+       /* **********************************
+        * Section: Data Handling
+        * ************************************/
         postman.subscribe('goToLatestTitleDetails', latestTitle => {
             let titleId = latestTitle.detailsUrl.split('/').pop();
 
@@ -24,9 +29,10 @@
                 ds.getSimilarTitles([url.pathname, user()], function (data) {
                     getTitle(data)
                 });
-                // check if there are episodes or not
+                
                 let urlEpisodes = new URL(data.episodeUrl);
                 ds.getTitle([urlEpisodes.pathname, user()], function (data) {
+                    // check if there are episodes or not
                     if (data.count > 0) {
                         episodes(urlEpisodes.pathname)
                     }
@@ -47,19 +53,15 @@
                 });
             });
         }
+       /* **********************************
+        * Section: Publication
+        * ************************************/
         let goToEpisodes = () => {
             postman.publish('goToEpisodes', [episodes(), user()]);
-            console.log("published")
         }
         let showPerson = (arg) => {
-
             let url = new URL(arg);
-            ds.getPerson([url.pathname, user()], function (data) {
-
-                person(data.name);
-                //postman.publish('personDetails', person());
-
-            });
+            postman.publish('goToPerson', [url.pathname, user()]);
         } 
         return {
             rating,

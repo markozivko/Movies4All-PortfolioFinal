@@ -1,0 +1,52 @@
+﻿
+<div class="container">
+    <ul class="row" data-bind="with: person">
+        <li data-bind="text: name"></li>
+        <li  data-bind="text: birthYear"></li>
+        <li  data-bind="text: deathYear"></li>
+    </ul>
+</div>
+
+
+
+
+
+<style>
+
+    .button-row {
+        margin-bottom: 2%;
+    }
+
+    #cast-li {
+        background-color: #112642;
+    }
+
+    .similarTitles {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .cast {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        text-align: center;
+        text-justify: auto;
+    }
+
+    .plot {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    @media (max-width: 990px) {
+
+        #image-detail {
+            margin-top: 10%;
+        }
+    }
+</style>
+

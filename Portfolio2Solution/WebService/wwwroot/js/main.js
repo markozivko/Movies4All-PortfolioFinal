@@ -117,7 +117,11 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titles/titleEpisodes/titleEpisodes" },
             template: { require: "text!components/titles/titleEpisodes/titleEpisodes.html" }
         });
-
+    ko.components.register("person",
+        {
+            viewModel: { require: "components/persons/person" },
+            template: { require: "text!components/persons/person.html" }
+        });
 });
 
 require(['knockout', 'viewModel'], (ko, vm) => {

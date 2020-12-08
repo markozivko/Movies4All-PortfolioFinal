@@ -34,9 +34,9 @@
             <h3>Cast</h3>
             <div class="cast">
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
-                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span> URL: <span data-bind="text: personUrl"></span></li>
+                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span></li>
                     <li>
-                        <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalPerson" data-bind="click: $parent.showPerson.bind($data, personUrl)">Show person</button>
+                        <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-bind="click: $parent.showPerson.bind($data, personUrl)">Show person</button>
                     </li>
                 </ul>
 

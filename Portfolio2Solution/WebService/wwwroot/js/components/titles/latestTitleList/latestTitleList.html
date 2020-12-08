@@ -50,11 +50,24 @@
     </div>
 
 
-    <div id="modalEpisodesTitle" class="modal" tabindex="-1" data-bind="if: episodesUrl()">
+    <div id="modalForEpisodes" class="modal" tabindex="-1" data-bind="if: episodesUrl()">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
                     <div><title-episodes params="currentUser: currentUser"></title-episodes></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalForPerson" class="modal" tabindex="-1" data-bind="if: personUrl()">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><person params="currentUser: currentUser"></person></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

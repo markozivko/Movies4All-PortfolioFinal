@@ -1,5 +1,8 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
+       /* **********************************
+        * Section: Declarations
+        * ************************************/
         let currentUser = ko.observable(params.currentUser())
         let latestTitles = ko.observableArray([]);
         let pageSizes = ko.observableArray();
@@ -8,7 +11,12 @@
         let next = ko.observable();
         let selectedLatestTitle = params.selectedLatestTitle;
         let episodesUrl = ko.observableArray().extend({ deferred: true });
+        let personUrl = ko.observableArray().extend({ deferred: true });
 
+
+       /* **********************************
+        * Section: Data Handling
+        * ************************************/
         let selectLatestTitle = latestTitle => {
             selectedLatestTitle(latestTitle);
             postman.publish('goToLatestTitleDetails', latestTitle);
@@ -41,10 +49,20 @@
 
         getData(undefined, currentUser());
 
+        /* **********************************
+        * Section: Subscriptions
+        * ************************************/
         postman.subscribe('goToEpisodes', args => {
             $('#modalDetailsTitle').modal('hide');
             episodesUrl(args)
-            $('#modalEpisodesTitle').modal('show')
+            $('#modalForEpisodes').modal('show')
+        });
+
+
+        postman.subscribe('goToPerson', args => {
+            $('#modalDetailsTitle').modal('hide');
+            personUrl(args)
+            $('#modalForPerson').modal('show')
         });
 
         return {
@@ -58,7 +76,8 @@
             showNext,
             enableNext,
             currentUser,
-            episodesUrl
+            episodesUrl,
+            personUrl
         };
     }
 });
