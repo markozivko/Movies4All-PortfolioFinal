@@ -6,8 +6,11 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <img alt="Qries" data-bind="attr:{src: poster}"
+            <img class="title-image" alt="Qries" data-bind="attr:{src: poster}"
                  width="300" height="350">
+            <div data-bind="visible: episodes() ">
+                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-bind="click: goToEpisodes">See episodes</button>
+            </div>
             <hr>
             <div data-bind="visible: similarTitles().length > 0">
                 <h3>Similar titles</h3>
@@ -16,7 +19,7 @@
                         <li id="cast-li" class="list-group-item" data-bind="text: primaryTitle"></li>
                     </ul>
                 </div>
-            </div>    
+            </div>
         </div>
         <div class="col-lg-6">
             <p style="font-size:60px">🎬</p>
@@ -34,19 +37,11 @@
             <h3>Cast</h3>
             <div class="cast">
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
-                    <li id="cast-li" class="list-group-item"><span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span></li>
-                    <li>
-                        <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-bind="click: $parent.showPerson.bind($data, personUrl)">Show person</button>
-                    </li>
+                    <li id="cast-li" class="list-group-item cast-li-right">
+                        <span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span>
+                        <a class="btn btn-dark" data-bind="click: $parent.showPerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
                 </ul>
-
             </div>
-            <div data-bind="visible: episodes() ">
-                <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger"  data-bind="click: goToEpisodes">See episodes</button>
-            </div>
-
-            
-
         </div>
     </div>
 </div>
@@ -54,12 +49,20 @@
 
 <style>
 
+    .title-image {
+        margin-bottom: 5%;
+    }
+
     .button-row {
         margin-bottom: 2%;
     }
 
     #cast-li {
         background-color: #112642;
+    }
+
+    .cast-li-right {
+        text-align: right;
     }
 
     .similarTitles {
@@ -72,9 +75,8 @@
     .cast {
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
-        text-align: center;
-        text-justify: auto;
     }
+
 
     .plot {
         font-family: 'Montserrat', sans-serif;
