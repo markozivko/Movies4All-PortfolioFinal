@@ -52,7 +52,7 @@ namespace WebService.Controllers
             
         }
         [HttpGet("category/{id}", Name = nameof(GetTitlesByCategory))]
-        public IActionResult GetTitlesByCategory(int id, int page = 0, int pageSize = 10)
+        public IActionResult GetTitlesByCategory(int id, int page = 0, int pageSize = 6)
         {
             try
             {

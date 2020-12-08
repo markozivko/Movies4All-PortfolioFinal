@@ -14,7 +14,7 @@
                     <ul class="list-unstyled mt-3 mb-4">
                         <li data-bind="text: genre"></li>
                         <li data-bind="text: startYear"></li>
-                        <li>
+                        <li data-bind="visible: runtime">
                             <i class="far fa-clock"></i>
                             <span data-bind="text: runtime"></span> min
                         </li>
@@ -68,6 +68,19 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div><person params="currentUser: currentUser"></person></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalForTitle" class="modal" tabindex="-1" data-bind="if: similarTitleUrl()">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><titles params="currentUser: currentUser"></titles></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

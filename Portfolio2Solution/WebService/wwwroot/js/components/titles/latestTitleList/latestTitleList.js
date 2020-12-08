@@ -4,7 +4,7 @@
         * Section: Declarations
         * ************************************/
         let currentUser = ko.observable(params.currentUser())
-        let latestTitles = ko.observableArray([]);
+        let latestTitles = ko.observableArray([]).extend({ deferred: true });
         let pageSizes = ko.observableArray();
         let selectedPageSize = ko.observableArray([10]);
         let prev = ko.observable();
@@ -12,6 +12,7 @@
         let selectedLatestTitle = params.selectedLatestTitle;
         let episodesUrl = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true });
+        let similarTitleUrl = ko.observableArray().extend({ deferred: true });
 
 
        /* **********************************
@@ -61,10 +62,16 @@
 
         postman.subscribe('goToPerson', args => {
             $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
             personUrl(args)
             $('#modalForPerson').modal('show')
         });
 
+        postman.subscribe('goToSimilarTitle', args => {
+            $('#modalDetailsTitle').modal('hide');
+            similarTitleUrl(args)
+            $('#modalForTitle').modal('show')
+        });
         return {
             latestTitles,
             selectLatestTitle,
@@ -77,7 +84,8 @@
             enableNext,
             currentUser,
             episodesUrl,
-            personUrl
+            personUrl,
+            similarTitleUrl
         };
     }
 });

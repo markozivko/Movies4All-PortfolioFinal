@@ -1,35 +1,38 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-       /* **********************************
-        * Section: Variables
-        * ************************************/
-        let latestTitle = params.latestTitle;
-        let user = params.currentUser;
+
+        let title = ko.observable();
         let rating = ko.observable();
         let numVotes = ko.observable();
         let plot = ko.observable();
         let poster = ko.observable();
+        let user = ko.observable();
         let principals = ko.observableArray();
         let episodes = ko.observable();
         let similarTitles = ko.observableArray();
 
-       /* **********************************
-        * Section: Data Handling
-        * ************************************/
-        postman.subscribe('goToLatestTitleDetails', latestTitle => {
-            let titleId = latestTitle.detailsUrl.split('/').pop();
+        postman.subscribe('goToSimilarTitle', args => {
+            ds.getTitle([args[0], args[1]], function (data) {
+                title(data)
+                user(args[1])
+                console.log(title())
+                getDetails(data.detailsUrl)
 
-            ds.getTitleDetails(['api/detailtitles/' + titleId, user()], function (data) {
+            });
+        });
+        let getDetails = (args) => {
+            let url = new URL(args);
+            ds.getTitleDetails([url.pathname, user()], function (data) {
                 rating(data.rating);
                 numVotes(data.numVotes);
                 plot(data.plot);
                 poster(data.poster);
+                console.log(poster())
                 principals(data.principals);
                 let url = new URL(data.similarTitleUrl);
                 ds.getSimilarTitles([url.pathname, user()], function (data) {
                     getTitle(data)
                 });
-                
                 let urlEpisodes = new URL(data.episodeUrl);
                 ds.getTitle([urlEpisodes.pathname, user()], function (data) {
                     // check if there are episodes or not
@@ -41,8 +44,7 @@
                     }
                 });
             });
-
-        });
+        }
 
         let getTitle = (args) => {
             similarTitles([]);
@@ -53,28 +55,28 @@
                 });
             });
         }
-       /* **********************************
-        * Section: Publication
-        * ************************************/
+        /* **********************************
+       * Section: Publication
+       * ************************************/
         let goToEpisodes = () => {
             postman.publish('goToEpisodes', [episodes(), user()]);
         }
         let showPerson = (arg) => {
+
             let url = new URL(arg);
             postman.publish('goToPerson', [url.pathname, user()]);
-        } 
+        }
 
         let goToTitle = (arg) => {
             postman.publish('goToSimilarTitle', [arg, user()]);
         } 
-        
         return {
+            title,
             rating,
             numVotes,
             plot,
             poster,
             principals,
-            latestTitle,
             similarTitles,
             showPerson,
             goToEpisodes,

@@ -1,15 +1,24 @@
-﻿<div data-bind="with: latestTitle">
-    <h3 data-bind="text: primaryTitle"></h3>
-</div>
-<hr>
-
+﻿
 <div class="container">
+    <div class="row">
+        <ul class="list-unstyled mt-3 mb-4" data-bind="with: title">
+            <li data-bind="text: primaryTitle"></li>
+            <li data-bind="text: genre"></li>
+            <li data-bind="text: startYear"></li>
+            <li data-bind="visible: runtime">
+                <i class="far fa-clock"></i>
+                <span data-bind="text: runtime"></span> min
+            </li>
+        </ul>
+
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <div data-bind="if: poster() !== 'N/A'">
                 <img class="title-image" alt="Qries" data-bind="attr:{src: poster}"
                      width="300" height="350">
             </div>
+            
             <div data-bind="visible: episodes() ">
                 <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-bind="click: goToEpisodes">See episodes</button>
             </div>
@@ -51,7 +60,7 @@
 
 <style>
 
-    .info-button{
+    .info-button {
         margin-left: 10%;
     }
 

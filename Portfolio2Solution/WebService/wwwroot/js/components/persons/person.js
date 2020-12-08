@@ -4,7 +4,6 @@
         let knownFor = ko.observableArray().extend({ deferred: true });
         let person = ko.observable()
         let user = ko.observable()
-        console.log('Hello')
         postman.subscribe('goToPerson', args => {
             ds.getPerson([args[0], args[1]], function (data) {
                 user(args[1])
