@@ -39,7 +39,7 @@
                 <ul class="list-group list-group-flush" data-bind="foreach: principals">
                     <li id="cast-li" class="list-group-item cast-li-right">
                         <span data-bind="text: name"></span> enrolled as <span data-bind="text: category"></span>
-                        <a class="btn btn-dark" data-bind="click: $parent.showPerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
+                        <a class="btn btn-dark info-button" data-bind="click: $parent.showPerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
                 </ul>
             </div>
         </div>
@@ -48,6 +48,10 @@
 
 
 <style>
+
+    .info-button{
+        margin-left: 10%;
+    }
 
     .title-image {
         margin-bottom: 5%;
