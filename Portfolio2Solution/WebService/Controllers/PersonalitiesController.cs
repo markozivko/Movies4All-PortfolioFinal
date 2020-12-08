@@ -41,7 +41,20 @@ namespace WebService.Controllers
                         pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
                         var pMarks = _dataService.GetPersonalitiesForUser(id, page, pageSize);
+
+                        Console.WriteLine($"$$$$$$$ BEFORE");
+
+
+                        //foreach (var p in pMarks)
+                        //{
+                        //    Console.WriteLine($"$$$$$$$ {p.NameConst}");
+
+                        //}
+
+                        //Console.WriteLine($"$$$$$$$ AFTER");
+
                         var result = CreateResult(pMarks, id, page, pageSize);
+                        
 
                         return Ok(result);
                     }
@@ -70,7 +83,7 @@ namespace WebService.Controllers
         {
             var items = p.Select(CreatePersonalitiesElementDto);
 
-            var count = _dataService.NumberOfBookmarksForUser(id);
+            var count = _dataService.NumberOfPersonalitiesForUser(id);
 
             string prev = null;
 

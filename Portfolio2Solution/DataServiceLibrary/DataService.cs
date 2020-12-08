@@ -356,7 +356,7 @@ namespace DataServiceLibrary
             return ctx.Personalities
                 .Include(p => p.User)
                 .Include(p => p.FavoritePerson)
-                .Where(tbm => tbm.UserId == id)
+                .Where(p => p.UserId == id)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();

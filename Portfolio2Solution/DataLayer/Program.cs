@@ -223,12 +223,12 @@ namespace DataLayer
             /////*
             ////* Return all genres 
             ////*/
-            var genres2 = dataService.GetAllGenres();
+            //var genres2 = dataService.GetAllGenres();
 
-            foreach (var g in genres2)
-            {
-                Console.WriteLine($"Id: {g.Id}, Genre: {g.Name}");
-            }
+            //foreach (var g in genres2)
+            //{
+            //    Console.WriteLine($"Id: {g.Id}, Genre: {g.Name}");
+            //}
 
             /////*
             //// * Return all titlebookmarks 
@@ -243,12 +243,12 @@ namespace DataLayer
             ///*
             // * Return personalities 
             // */
-            //var favorite = dataService.GetPersonalitiesForUser(3);
+            var favorite = dataService.GetPersonalitiesForUser(2);
 
-            //foreach (var t in favorite)
-            //{
-            //    Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
-            //}
+            foreach (var t in favorite)
+            {
+                Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+            }
 
             /////*
             ////* Return titleprincipals

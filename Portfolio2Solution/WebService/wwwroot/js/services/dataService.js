@@ -171,6 +171,16 @@
             .then(callback);
     }
 
+    let getPersonalities = ([uri, user], callback) => {
+        fetch(uri, {
+            headers: {
+                'Authorization': parseInt(user.currentUser())
+            }
+        })
+            .then(response => response.json())
+            .then(callback);
+    }
+
 
     /* **********************************
     * Function: Get users
@@ -324,7 +334,8 @@
         getLatestTitlesUrlWithPageSize,
         login,
         getUser,
-        getPerson
+        getPerson,
+        getPersonalities
     }
 
 });
