@@ -15,7 +15,6 @@
         let isActive = element => {
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
-
         let currentParams = ko.observable({ selectedLatestTitle, latestTitle, currentUser });
         return {
             selectedComponent,

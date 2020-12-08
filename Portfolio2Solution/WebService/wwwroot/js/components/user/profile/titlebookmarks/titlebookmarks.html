@@ -10,9 +10,9 @@
         <div class="form-group row">
             <label for="username" class="col-4">favorite title</label>
             <div class="col-8">
-                <p id="username" name="username" data-bind="text: favoriteTitleUrl">  </p>
+                <p id="username" name="username" data-bind="text: primaryTitle">  </p>
             </div>
-            <button type="button" class="btn btn-warning">Go To Title</button>
+            <button type="button" class="btn btn-warning" data-bind="click: $parent.goToTitle.bind($data, titleUrl)">Go To Title</button>
         </div>
 
         <div class="form-group row">
@@ -22,5 +22,19 @@
             </div>
         </div>
         <hr>
+    </div>
+</div>
+
+
+<div id="modalForTitle" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Hello</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

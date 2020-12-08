@@ -8,29 +8,32 @@
 
         ds.getUser('api/users/' + currentUser().currentUser(), function (data) {
             titleBookmark(data.titleBookMarksUrl);
-
-            //TODO: check how to get the title and notes to display
             let bookmarkUrl = new URL(titleBookmark());
             ds.getTitleBookmarks([bookmarkUrl.pathname, currentUser()], function (data) {
                 if (data.items !== undefined) {
-                    data.items.forEach((element) => {
-                        let titleUrl = new URL(element.favoriteTitleUrl);
-                        if (bookmarkList().length > 0) {
-                            bookmarkList.removeAll();
-                        }
-
-                        ds.getTitle([titleUrl.pathname, currentUser()], function (data) {
-                        });
-
-                    });
-                    bookmarkList(data.items);
+                    getTitle(data.items)
                 }
                 
             });
         });
+        let getTitle = (args) => {
+            bookmarkList([]);
+            args.forEach((element) => {
+                let url = new URL(element.favoriteTitleUrl);
+                ds.getTitle([url.pathname, currentUser()], function (data) {
+                    bookmarkList.push({ titleUrl: url.pathname, primaryTitle: data.primaryTitle, notes: element.notes });
+                });
+            });
+        }
 
+        let goToTitle = (arg) => {
+            console.log(arg)
+            $('#modalForTitle').modal('show')
+            //postman.publish('goToTitle', [arg, currentUser()]);
+        } 
         return {
-            bookmarkList
+            bookmarkList,
+            goToTitle
         }
     }
 });
