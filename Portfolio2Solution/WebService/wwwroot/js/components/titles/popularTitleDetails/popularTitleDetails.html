@@ -7,16 +7,22 @@
     <p style="font-size:60px">🎬</p>
     <h3><span data-bind="text: rating"></span> / 10</h3>
     <hr>
-    <div data-bind="if: poster() !== 'N/A'">
-        <img alt="Qries" data-bind="attr:{src: poster}"
-             width="200" height="250">
-    </div>
+    <!--<div data-bind="if: poster() !== 'N/A'">
+
+    </div>-->
+    <img alt="Qries" data-bind="attr:{src: poster}"
+         width="200" height="250">
     <hr>
-    <div data-bind="visible: plot() !== 'N/A'">
+    <!--<div data-bind="visible: plot() !== 'N/A'">
         <h3>Plot</h3>
         <div class="plot" data-bind="text: plot"></div>
         <hr>
-    </div>
+    </div>-->
+
+    <h3>Plot</h3>
+    <div class="plot" data-bind="text: plot"></div>
+    <hr>
+
 </div>
 
 <style>

@@ -1,33 +1,39 @@
-﻿
-<div class="container">
-    <div class="row">
-        <ul class="list-unstyled mt-3 mb-4" data-bind="with: title">
-            <li data-bind="text: primaryTitle"></li>
-            <li data-bind="text: genre"></li>
-            <li data-bind="text: startYear"></li>
-            <li data-bind="visible: runtime">
-                <i class="far fa-clock"></i>
-                <span data-bind="text: runtime"></span> min
-            </li>
-        </ul>
+﻿<div data-bind="with: title">
 
+    <h3 data-bind="text: primaryTitle"></h3>
+    <div class="col-lg-12">
+        <h5 data-bind="text: genre"></h5>
+        <h6 data-bind="text: startYear"></h6>
+
+        <div data-bind="visible: runtime">
+            <h6> <span data-bind="text: runtime"></span> minutes</h6>
+        </div>
     </div>
+</div>
+<hr>
+
+
+<div class="container container-details">
+
     <div class="row">
         <div class="col-lg-6">
             <div data-bind="if: poster() !== 'N/A'">
                 <img class="title-image" alt="Qries" data-bind="attr:{src: poster}"
                      width="300" height="350">
             </div>
-            
+
             <div data-bind="visible: episodes() ">
                 <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-bind="click: goToEpisodes">See episodes</button>
             </div>
-            <hr>
+            
             <div data-bind="visible: similarTitles().length > 0">
                 <h3>Similar titles</h3>
                 <div class="similarTitles">
                     <ul class="list-group list-group-flush" data-bind="foreach: similarTitles">
-                        <li id="cast-li" class="list-group-item" data-bind="text: primaryTitle, click: $parent.goToTitle.bind($data, titleUrl)"></li>
+                        <li id="cast-li" class="list-group-item">
+                            <a class="btn btn-dark info-button" data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+                            <span data-bind="text: primaryTitle"></span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -59,6 +65,10 @@
 
 
 <style>
+
+    .container-details {
+        margin-bottom: 5%;
+    }
 
     .info-button {
         margin-left: 10%;
