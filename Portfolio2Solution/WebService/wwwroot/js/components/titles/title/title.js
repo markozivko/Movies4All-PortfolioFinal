@@ -20,6 +20,15 @@
 
             });
         });
+        postman.subscribe('goToFavoriteTitle', args => {
+            ds.getTitle([args[0], args[1]], function (data) {
+                title(data)
+                user(args[1])
+                console.log(title())
+                getDetails(data.detailsUrl)
+
+            });
+        });
         let getDetails = (args) => {
             let url = new URL(args);
             ds.getTitleDetails([url.pathname, user()], function (data) {

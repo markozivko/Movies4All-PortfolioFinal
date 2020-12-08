@@ -72,6 +72,7 @@
             similarTitleUrl(args)
             $('#modalForTitle').modal('show')
         });
+
         return {
             latestTitles,
             selectLatestTitle,

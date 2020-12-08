@@ -5,6 +5,9 @@
         let prev = ko.observable();
         let next = ko.observable();
         let bookmarkList = ko.observableArray();
+        let episodesUrl = ko.observableArray().extend({ deferred: true });
+        let personUrl = ko.observableArray().extend({ deferred: true });
+        let similarTitleUrl = ko.observableArray().extend({ deferred: true });
 
         ds.getUser('api/users/' + currentUser().currentUser(), function (data) {
             titleBookmark(data.titleBookMarksUrl);
@@ -28,12 +31,34 @@
 
         let goToTitle = (arg) => {
             console.log(arg)
-            $('#modalForTitle').modal('show')
-            //postman.publish('goToTitle', [arg, currentUser()]);
+            postman.publish('goToFavoriteTitle', [arg, currentUser()]);
         } 
+
+        postman.subscribe('goToEpisodes', args => {
+            $('#modalForTitle').modal('hide');
+            episodesUrl(args)
+            $('#modalForEpisodes').modal('show')
+        });
+
+
+        postman.subscribe('goToPerson', args => {
+            $('#modalForTitle').modal('hide');
+            personUrl(args)
+            $('#modalForPerson').modal('show')
+        });
+
+        postman.subscribe('goToSimilarTitle', args => {
+            $('#modalForTitle').modal('hide');
+            similarTitleUrl(args)
+            $('#modalForSimilarTitle').modal('show')
+        });
         return {
             bookmarkList,
-            goToTitle
+            goToTitle,
+            currentUser,
+            episodesUrl,
+            personUrl,
+            similarTitleUrl
         }
     }
 });
