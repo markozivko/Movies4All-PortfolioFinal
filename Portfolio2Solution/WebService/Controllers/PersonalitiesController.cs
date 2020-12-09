@@ -42,7 +42,7 @@ namespace WebService.Controllers
 
                         var pMarks = _dataService.GetPersonalitiesForUser(id, page, pageSize);
 
-                        Console.WriteLine($"$$$$$$$ BEFORE");
+                        //Console.WriteLine($"$$$$$$$ BEFORE");
 
 
                         //foreach (var p in pMarks)

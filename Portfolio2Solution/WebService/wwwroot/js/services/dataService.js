@@ -69,6 +69,8 @@
     }
     let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
 
+
+
     let getLatestTitle = ([id, user], callback) => {
         fetch('api/titles/latest/' + id, {
             headers: {
@@ -127,7 +129,30 @@
             .then(response => response.json())
             .then(callback);
     }
+    /* **********************************
+ * Function: Get titles by category
+ * ************************************/
+    const titleApiUrl = 'api/titles/category/';
+    let getTitlesByCategory = function ([uri, id, user], callback) {
+        if (uri === undefined) {
+            uri = titleApiUrl + id;
+        }
+        fetch(uri, {
+            headers: {
 
+                'Authorization': parseInt(user.currentUser())
+            },
+            method: 'GET'
+
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                callback(data);
+            });
+    }
+    let getTitlesUrlWithPageSize = (size, id) => titleApiUrl +  id + "?pageSize=" + size;
     /* ****************************************************************************************************************
      *                                         Functionalitites for users
      * ****************************************************************************************************************/
@@ -335,7 +360,9 @@
         login,
         getUser,
         getPerson,
-        getPersonalities
+        getPersonalities,
+        getTitlesByCategory,
+        getTitlesUrlWithPageSize
     }
 
 });

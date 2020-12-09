@@ -8,7 +8,6 @@ namespace DataServiceLibrary.Models
     public class Personalities
     {
         public int UserId { get; set; }
-        [JsonIgnore]
         public User User { get; set; }
         public string NameConst { get; set; }
         public Person FavoritePerson { get; set; }

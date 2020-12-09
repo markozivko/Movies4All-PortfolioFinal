@@ -26,7 +26,7 @@
         let getData = (url, id) => {
             ds.getLatestTitles([url,id], data => {
                 pageSizes(data.pageSizes);
-                prev(data.prev);
+                prev(data.prev || undefined);
                 next(data.next || undefined);
                 latestTitles(data.items);
             });

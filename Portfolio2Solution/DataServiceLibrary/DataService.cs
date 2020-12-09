@@ -371,10 +371,7 @@ namespace DataServiceLibrary
 
             var tb = ctx.Personalities.Where(tb => tb.UserId == id).Count();
             return tb;
-
         }
-
-
         /* **************************************
          * Framework functionalities
          * Function: getTitlePrincipals

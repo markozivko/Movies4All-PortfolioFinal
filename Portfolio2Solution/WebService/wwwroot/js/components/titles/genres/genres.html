@@ -1,9 +1,95 @@
 ﻿<h2>Genres</h2>
 
 <ul class="list-genres" data-bind="foreach: genres">
-    <li data-bind="text: genre"></li>
+    <li class='pointer' data-bind="text: genre, click: $parent.showTitleFromThisCategory.bind($data, genreUrl, genre), css: { active: $parent.selectedGenre() === genre}"></li>
 </ul>
 
+<div data-bind="if: titlesList(), visible:titlesList().length > 0">
+    <div id="pageNumber">
+        <select class="custom-select" data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <div data-bind="foreach: titlesList" class="row text-center">
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-latest shadow-">
+                <div class="card-header">
+                    <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li data-bind="text: startYear"></li>
+                        <li data-bind="visible: runtime">
+                            <i class="far fa-clock"></i>
+                            <span data-bind="text: runtime"></span> min
+                        </li>
+                    </ul>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalForTitle" data-bind="click: $parent.selectTitle.bind($data, titleUrl)">Show details</button>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal" data-target="#modalForTitle" data-bind="click: $parent.selectTitle">Save to bookmarks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalForTitle" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><titles params="currentUser: currentUser"></titles></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalForEpisodes" class="modal" tabindex="-1" data-bind="if: episodesUrl()">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><title-episodes params="currentUser: currentUser"></title-episodes></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalForPerson" class="modal" tabindex="-1" data-bind="if: personUrl()">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div><person params="currentUser: currentUser"></person></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+                <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Footer -->
+
+<footer id="footer">
+    <div class="col-md-12 col-sm-6">
+        <ul class="social-network social-circle">
+            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
+        </ul>
+    </div>
+    <p>© Copyright 2020 Movies4All</p>
+
+</footer>
 
 <style>
 
@@ -42,5 +128,13 @@
             -webkit-columns: 2;
             -moz-columns: 2;
         }
+    }
+
+    .active {
+        background-color: red
+    }
+
+    .pointer {
+        cursor: pointer;
     }
 </style>

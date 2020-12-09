@@ -82,6 +82,7 @@ namespace WebService.Controllers
         private TitleListDto CreateTitleElementDto(TitleGenre title)
         {
             var dto = _mapper.Map<TitleListDto>(title);
+            dto.TitleUrl = Url.Link(nameof(GetTitle), new { Id = title.TitleConst.Trim() });
             return dto;
         }
 
@@ -110,6 +111,7 @@ namespace WebService.Controllers
 
             var result = new
             {
+                pageSizes = new int[] { 6, 12, 24, 48 },
                 prev,
                 next,
                 cur,

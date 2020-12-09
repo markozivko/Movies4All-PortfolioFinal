@@ -22,7 +22,6 @@ namespace DataServiceLibrary
         IList<KnownFor> GetKnownTitleForPersons(string person, int page, int pageSize);
         int NumberOfKnownTitlesForPerson(string id);
         IList<Personalities> GetPersonalities();
-        IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize);
         int NumberOfPersonalitiesForUser(int id);
         IList<SearchHistory> GetSearchHistoryForUser(int id, int page, int pageSize);
         int NumberOfSearchHistoryForUser(int id);
@@ -74,5 +73,6 @@ namespace DataServiceLibrary
         bool IsEmailAvailable(string email);
         IList<TitleBasics> GetLatestTitles(int page, int pageSize);
         int NumberOfLatestTitles();
+        IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize);
     }
 }
