@@ -1,24 +1,42 @@
-﻿
-<div class="container">
-    <div class="row" data-bind="with: person">
-        <div data-bind="text: name"></div>
-        <div data-bind="text: birthYear"></div>
-        <div data-bind="text: deathYear"></div>
-    </div>
-    <div data-bind="visible: knownFor().length > 0">
-        <div class="row" data-bind="foreach: knownFor">
+﻿<div class="container">
+    <div data-bind="with: person">
 
-            <div data-bind="text: primaryTitle"></div>
-            <div class="col-4">
-                <a class="btn btn-outline-light" data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+        <div class="row">
+            <h3 class="col-lg-12" data-bind="text: name"></h3>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h5 data-bind="text: birthYear"></h5>
+                <h5 data-bind="text: deathYear"></h5>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12" data-bind="visible: knownFor().length > 0">
+            <div data-bind="foreach: knownFor">
+
+                <div class="row row-know">
+                    <div class="col-lg-8" data-bind="text: primaryTitle">
+
+                    </div>
+
+                    <div class="col-lg-1">
+                        <a class="btn btn-outline-light " data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <style>
 
+    .row-know{
+        margin-bottom: 2%;
+    }
     .button-row {
         margin-bottom: 2%;
     }
