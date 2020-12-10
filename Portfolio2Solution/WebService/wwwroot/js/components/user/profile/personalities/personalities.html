@@ -13,13 +13,13 @@
                 <p id="username" name="username" data-bind="text: name">  </p>
             </div>
             <div class="col-1">
-                <a class="btn btn-outline-light" data-toggle="modal" data-target="#modalForPerson" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
+                <a class="btn btn-outline-light" data-toggle="modal" data-target="#modal" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
             </div>
             <div class="col-1">
-                <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modalForPerson" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="fas fa-edit"></em></a>
+                <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modal" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="fas fa-edit"></em></a>
             </div>
             <div class="col-1">
-                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#modalForPerson" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="far fa-trash-alt"></em></a>
+                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#modal" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="far fa-trash-alt"></em></a>
             </div>
         </div>
 
@@ -34,11 +34,11 @@
     </div>
 </div>
 
-<div id="modalForPerson" class="modal" tabindex="-1">
+<div id="modal" class="modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-body">
-                <div><persons params="currentUser: currentUser"></persons></div>
+                <div><person params="currentUser: currentUser"></person></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

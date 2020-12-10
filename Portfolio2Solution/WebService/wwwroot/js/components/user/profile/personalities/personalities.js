@@ -33,11 +33,8 @@
         }
 
         let seePerson = (arg) => {
-            console.log(arg)
             personUrl(arg);
-
             postman.publish('goToPerson', [arg, currentUser()]);
-
         }
 
         return {

@@ -8,13 +8,13 @@
             ds.getPerson([args[0], args[1]], function (data) {
                 user(args[1])
                 person(data)
-                console.log(person())
                 let url = new URL(data.knownForUrl);
                 ds.getTitle([url.pathname, user()], function (data) {
                     getTitle(data.knowForList)
                 });
             });
         });
+
 
         let getTitle = (args) => {
             knownFor([]);
@@ -24,6 +24,7 @@
                     knownFor.push({ titleUrl: url.pathname, primaryTitle: data.primaryTitle });
                 });
             });
+            console.log(knownFor())
         }
         return {
             person,

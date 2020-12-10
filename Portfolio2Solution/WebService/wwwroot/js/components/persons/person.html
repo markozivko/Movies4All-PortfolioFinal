@@ -1,10 +1,15 @@
 ﻿
 <div class="container">
-    <ul class="row" data-bind="with: person">
-        <li data-bind="text: name"></li>
-        <li  data-bind="text: birthYear"></li>
-        <li  data-bind="text: deathYear"></li>
-    </ul>
+    <div class="row" data-bind="with: person">
+        <div data-bind="text: name"></div>
+        <div data-bind="text: birthYear"></div>
+        <div data-bind="text: deathYear"></div>
+    </div>
+
+    <div lass="row" data-bind="foreach: knownFor">
+        <div data-bind="text: titleUrl"></div>
+        <div data-bind="text: primaryTitle"></div>
+    </div>
 </div>
 
 
