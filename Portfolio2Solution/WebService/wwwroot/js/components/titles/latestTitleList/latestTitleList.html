@@ -29,8 +29,8 @@
     <div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
-                <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+                <li class="page-item pointer" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+                <li class="page-item pointer" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
             </ul>
         </nav>
     </div>
@@ -104,3 +104,9 @@
 </footer>
 
 
+<style>
+
+    .pointer {
+        cursor: pointer;
+    }
+</style>

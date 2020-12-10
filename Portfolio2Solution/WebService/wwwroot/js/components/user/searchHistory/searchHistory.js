@@ -1,28 +1,37 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-
-        let episodes = ko.observableArray().extend({ deferred: true });
+        let currentUser = ko.observable(params.currentUser()).extend({ deferred: true });
+        let searchHistory = ko.observable().extend({ deferred: true });
         let prev = ko.observable().extend({ deferred: true });
         let next = ko.observable().extend({ deferred: true });
         let pageSizes = ko.observableArray().extend({ deferred: true });
         let selectedPageSize = ko.observableArray([10]);
-        let currentUser = ko.observable().extend({ deferred: true });
+        let searchList = ko.observableArray().extend({ deferred: true });
+
+        ds.getUser('api/users/' + currentUser().currentUser(), function (data) {
+            searchHistory(data.searchHistoryUrl);
+            let searchHistoryUrl = new URL(searchHistory());
+            getData(searchHistoryUrl.pathname, currentUser());
+        });
 
         let getData = (url, id) => {
-            ds.getTitle([url, id], function (data) {
+            ds.getSearchHistory([url, id], function (data) {
                 pageSizes(data.pageSizes);
                 prev(data.prev || undefined);
                 next(data.next || undefined);
-                episodes(data.items)
-                console.log(episodes())
+                if (data.items !== undefined) {
+                    getHistory(data.items)
+                }
+
             });
         }
-
-        postman.subscribe('goToEpisodes', args => {
-            currentUser(args[1]);
-            getData(args[0], args[1]);
-        });
-
+        let getHistory = (args) => {
+            searchList([]);
+            args.forEach((element) => {
+                searchList.push({ word: element.word, date: element.date.split('T').shift() + ' ' + element.date.split('T').pop()});
+             });
+           
+        }
 
         let showPrev = latestTitle => {
             getData(prev(), currentUser());
@@ -38,18 +47,20 @@
 
         selectedPageSize.subscribe(() => {
             var size = selectedPageSize()[0];
-            getData(ds.getTitleBookmarksUrlWithPageSize(size, currentUser()), currentUser());
+            getData(ds.getSearchHistoryUrlWithPageSize(size, currentUser()), currentUser());
         });
 
 
         return {
-            episodes,
+            searchList,
             showPrev,
             enablePrev,
             showNext,
             enableNext,
             selectedPageSize,
-            pageSizes
+            pageSizes,
+            currentUser
+
         }
     }
 });

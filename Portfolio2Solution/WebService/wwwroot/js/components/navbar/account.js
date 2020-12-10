@@ -13,13 +13,18 @@
         let isActive = element => {
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
+
+        let goToHome = element => {
+            selectedComponent('latest');
+        }
         let currentParams = ko.observable({ selectedLatestTitle, currentUser }).extend({ deferred: true });
         return {
             selectedComponent,
             currentParams,
             menuElements,
             changeContent,
-            isActive
+            isActive,
+            goToHome
 
         };
     }

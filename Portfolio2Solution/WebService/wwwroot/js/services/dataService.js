@@ -5,13 +5,10 @@
     *                                         Functionalitites for titles
     * ****************************************************************************************************************/
 
-
-
     /* **********************************
     * Function: Get popular titles
     * ************************************/
     const popularTitleApiUrl = 'api/popular';
-    //TODO: stop going back if it is previous
     let getPopularTitles = function (uri, callback) {
         if (uri === undefined) {
             uri = popularTitleApiUrl;
@@ -31,6 +28,10 @@
     }
     let getPopularTitlesUrlWithPageSize = size => popularTitleApiUrl + "?pageSize=" + size;
 
+
+    /* **********************************
+    * Function: Get popular title by id
+    * ************************************/
     let getPopularTitle = (id, callback) => {
         fetch('api/popular/' + id)
             .then(response => response.json())
@@ -53,7 +54,6 @@
         }
         fetch(uri, {
             headers: {
-                //TODO find how to use the authorisation in correct way 
 
                 'Authorization': parseInt(user.currentUser())
             },
@@ -69,7 +69,9 @@
     }
     let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
 
-
+    /* **********************************
+    * Function: Get latest title by id
+    * ************************************/
 
     let getLatestTitle = ([id, user], callback) => {
         fetch('api/titles/latest/' + id, {
@@ -82,19 +84,29 @@
             .then(response => response.json())
             .then(callback);
     }
-
+    /* **********************************
+    * Function: Get title by id
+    * ************************************/
     let getTitle = ([uri, user], callback) => {
-        fetch(uri, {
-            headers: {
-                'Authorization': parseInt(user.currentUser())
-            },
-            method: 'GET'
+        if (uri === undefined) {
+            console.log('undefined')
+        }
+        else {
+            fetch(uri, {
+                headers: {
+                    'Authorization': parseInt(user.currentUser())
+                },
+                method: 'GET'
 
-        })
-            .then(response => response.json())
-            .then(callback);
+            })
+                .then(response => response.json())
+                .then(callback);
+        }
+
     }
-
+    /* **********************************
+    * Function: Get all genres
+    * ************************************/
     let getGenres = (user, callback) => {
 
         fetch("api/genres", {
@@ -107,7 +119,9 @@
             .then(response => response.json())
             .then(callback);
     }
-
+    /* **********************************
+    * Function: Get titleDetails
+    * ************************************/
     let getTitleDetails = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
@@ -117,7 +131,9 @@
             .then(response => response.json())
             .then(callback);
     }
-
+    /* **********************************
+    * Function: Get similarTitles
+    * ************************************/
     let getSimilarTitles = ([uri, user], callback) => {
         fetch(uri, {
             headers: {
@@ -152,7 +168,8 @@
                 callback(data);
             });
     }
-    let getTitlesUrlWithPageSize = (size, id) => titleApiUrl +  id + "?pageSize=" + size;
+    let getTitlesUrlWithPageSize = (size, id) => titleApiUrl + id + "?pageSize=" + size;
+
     /* ****************************************************************************************************************
      *                                         Functionalitites for users
      * ****************************************************************************************************************/
@@ -184,7 +201,9 @@
             .then(response => response.json())
             .then(callback);
     }
-
+    /* **********************************
+    * Function: Get titleBookmarks
+    * ************************************/
     const titleBookmarksApiUrl = 'api/titlebookmarks/';
     let getTitleBookmarks = ([uri, user], callback) => {
         if (uri === undefined) {
@@ -199,7 +218,9 @@
             .then(callback);
     }
     let getTitleBookmarksUrlWithPageSize = (size, id) => titleBookmarksApiUrl + id + "?pageSize=" + size;
-
+    /* **********************************
+    * Function: Get personalities
+    * ************************************/
     const personalitiesApiUrl = 'api/personalities/';
     let getPersonalities = ([uri, user], callback) => {
         if (uri === undefined) {
@@ -214,6 +235,27 @@
             .then(callback);
     }
     let getPersonalitiesUrlWithPageSize = (size, id) => personalitiesApiUrl + id + "?pageSize=" + size;
+
+    /* **********************************
+     * Function: Get user search history
+     * **********************************/
+    const searchHistoryApiUrl = 'api/searchHistory/';
+    let getSearchHistory = ([uri, user], callback) => {
+        if (uri === undefined) {
+            console.log('undefined')
+        }
+        else {
+            fetch(uri, {
+                headers: {
+                    'Authorization': parseInt(user.currentUser())
+                }
+            })
+                .then(response => response.json())
+                .then(callback);
+        }
+
+    }
+    let getSearchHistoryUrlWithPageSize = (size, id) => searchHistoryApiUrl + id + "?pageSize=" + size;
 
     /* **********************************
     * Function: Get users
@@ -336,7 +378,8 @@
     *                                         Functionalitites for person
     * ****************************************************************************************************************/
     /* **********************************
-    * Function: view person
+    * Function: get actor or 
+    * production team member
     * ************************************/
 
     let getPerson = ([uri, user], callback) => {
@@ -372,7 +415,9 @@
         getTitlesByCategory,
         getTitlesUrlWithPageSize,
         getTitleBookmarksUrlWithPageSize,
-        getPersonalitiesUrlWithPageSize
+        getPersonalitiesUrlWithPageSize,
+        getSearchHistoryUrlWithPageSize,
+        getSearchHistory
     }
 
 });

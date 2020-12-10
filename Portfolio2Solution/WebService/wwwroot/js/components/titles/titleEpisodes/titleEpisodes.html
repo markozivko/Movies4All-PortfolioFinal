@@ -13,7 +13,7 @@
     </div>
     <br>
     <div class="row" data-bind="foreach: episodes">
-       
+
         <div class="col-6 titles">
             <p data-bind="text: title"></p>
         </div>
@@ -26,6 +26,14 @@
             <p data-bind="text: seasonNumber"></p>
         </div>
 
+    </div>
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item pointer" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+                <li class="page-item pointer" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
     </div>
 </div>
 
