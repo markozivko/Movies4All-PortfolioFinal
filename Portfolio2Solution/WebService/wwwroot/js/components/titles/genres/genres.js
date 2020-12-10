@@ -57,14 +57,14 @@
         * Section: Subscriptions
         * ************************************/
         postman.subscribe('goToEpisodes', args => {
-            $('#modalForTitle').modal('hide');
+            $('#modal').modal('hide');
             episodesUrl(args)
             $('#modalForEpisodes').modal('show')
         });
 
 
         postman.subscribe('goToPerson', args => {
-            $('#modalForTitle').modal('hide');
+            $('#modal').modal('hide');
             personUrl(args)
             $('#modalForPerson').modal('show')
         });
