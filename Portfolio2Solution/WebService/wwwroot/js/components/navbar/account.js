@@ -1,8 +1,8 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let selectedComponent = ko.observable('latest');
-        let selectedLatestTitle = ko.observable();
-        let currentUser = ko.observable(params)
+        let selectedComponent = ko.observable('latest').extend({ deferred: true });
+        let selectedLatestTitle = ko.observable().extend({ deferred: true });
+        let currentUser = ko.observable(params).extend({ deferred: true })
     
         let menuElements = ["Latest", "Genres", "Browse", "Profile"];
 
@@ -13,7 +13,7 @@
         let isActive = element => {
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
-        let currentParams = ko.observable({ selectedLatestTitle, currentUser });
+        let currentParams = ko.observable({ selectedLatestTitle, currentUser }).extend({ deferred: true });
         return {
             selectedComponent,
             currentParams,

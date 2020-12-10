@@ -1,9 +1,9 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function () {
-        let selectedComponent = ko.observable('home');
-        let selectedPopularTitle = ko.observable();
+        let selectedComponent = ko.observable('home').extend({ deferred: true });
+        let selectedPopularTitle = ko.observable().extend({ deferred: true });
 
-        let currentParams = ko.observable({ selectedPopularTitle });
+        let currentParams = ko.observable({ selectedPopularTitle }).extend({ deferred: true });
 
         let menuElements = ["Home", "About", "Login", "Register"];
 
