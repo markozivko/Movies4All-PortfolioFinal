@@ -258,6 +258,27 @@
     let getSearchHistoryUrlWithPageSize = (size, id) => searchHistoryApiUrl + id + "?pageSize=" + size;
 
     /* **********************************
+ * Function: Get user search history
+ * **********************************/
+    const ratingsApiUrl = 'api/ratings/';
+    let getRatings = ([uri, user], callback) => {
+        if (uri === undefined) {
+            console.log('undefined')
+        }
+        else {
+            fetch(uri, {
+                headers: {
+                    'Authorization': parseInt(user.currentUser())
+                }
+            })
+                .then(response => response.json())
+                .then(callback);
+        }
+
+    }
+    let getRatingsUrlWithPageSize = (size, id) => ratingsApiUrl + id + "?pageSize=" + size;
+
+    /* **********************************
     * Function: Get users
     * ************************************/
 
@@ -417,7 +438,9 @@
         getTitleBookmarksUrlWithPageSize,
         getPersonalitiesUrlWithPageSize,
         getSearchHistoryUrlWithPageSize,
-        getSearchHistory
+        getSearchHistory,
+        getRatingsUrlWithPageSize,
+        getRatings
     }
 
 });

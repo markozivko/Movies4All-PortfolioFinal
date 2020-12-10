@@ -62,6 +62,7 @@ namespace WebService.Controllers
         {
 
             var dto = _mapper.Map<UserRatingsDto>(ur);
+            dto.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = ur.TitleConst.Trim() });
             return dto;
 
         }
