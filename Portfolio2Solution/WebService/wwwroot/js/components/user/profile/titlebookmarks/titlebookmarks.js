@@ -43,6 +43,8 @@
 
         postman.subscribe('goToPerson', args => {
             $('#modalForTitle').modal('hide');
+            $('#modalForSimilarTitle').modal('hide')
+
             personUrl(args)
             $('#modalForPerson').modal('show')
         });
