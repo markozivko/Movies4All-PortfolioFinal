@@ -54,6 +54,10 @@
             similarTitleUrl(args)
             $('#modalForSimilarTitle').modal('show')
         });
+        postman.subscribe('goToTitle', args => {
+            $('#modalForPerson').modal('hide');
+            $('#modalForTitle').modal('show')
+        });
         return {
             bookmarkList,
             goToTitle,

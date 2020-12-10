@@ -73,6 +73,11 @@
             $('#modalForTitle').modal('show')
         });
 
+        postman.subscribe('goToTitle', args => {
+            $('#modalForPerson').modal('hide');
+            $('#modalForTitle').modal('show')
+        });
+
         return {
             latestTitles,
             selectLatestTitle,

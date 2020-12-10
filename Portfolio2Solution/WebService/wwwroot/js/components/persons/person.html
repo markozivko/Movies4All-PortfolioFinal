@@ -5,14 +5,16 @@
         <div data-bind="text: birthYear"></div>
         <div data-bind="text: deathYear"></div>
     </div>
+    <div data-bind="visible: knownFor().length > 0">
+        <div lass="row" data-bind="foreach: knownFor">
 
-    <div lass="row" data-bind="foreach: knownFor">
-
-        <div data-bind="text: primaryTitle"></div>
-        <div class="col-4">
-            <a class="btn btn-outline-light" data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+            <div data-bind="text: primaryTitle"></div>
+            <div class="col-4">
+                <a class="btn btn-outline-light" data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+            </div>
         </div>
     </div>
+
 </div>
 
 
