@@ -353,13 +353,14 @@ namespace DataServiceLibrary
         public IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
-            return ctx.Personalities
+            var person= ctx.Personalities
                 .Include(p => p.User)
                 .Include(p => p.FavoritePerson)
                 .Where(p => p.UserId == id)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
+            return person;
         }
        /* **************************************
         * Framework functionalities

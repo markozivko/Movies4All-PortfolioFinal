@@ -25,7 +25,7 @@ namespace WebService.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetPersonalitiesForUser))]
-        public IActionResult GetPersonalitiesForUser(int id, int page, int pageSize)
+        public IActionResult GetPersonalitiesForUser(int id, int page = 0, int pageSize = 10)
         {
             try
             {
@@ -41,18 +41,7 @@ namespace WebService.Controllers
                         pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
                         var pMarks = _dataService.GetPersonalitiesForUser(id, page, pageSize);
-
-                        //Console.WriteLine($"$$$$$$$ BEFORE");
-
-
-                        //foreach (var p in pMarks)
-                        //{
-                        //    Console.WriteLine($"$$$$$$$ {p.NameConst}");
-
-                        //}
-
-                        //Console.WriteLine($"$$$$$$$ AFTER");
-
+                      
                         var result = CreateResult(pMarks, id, page, pageSize);
                         
 

@@ -44,12 +44,6 @@ namespace WebService.Controllers
 
                         var titleBookmarks = _dataService.GetTitleBookmarkForUser(id, page, pageSize);
 
-                        foreach (var p in titleBookmarks)
-                        {
-                            Console.WriteLine($"$$$$$$$ {p.TitleConst}");
-
-                        }
-
                         var result = CreateResult(titleBookmarks, id, page, pageSize);
 
                         return Ok(result);
