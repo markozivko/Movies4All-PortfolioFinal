@@ -5,10 +5,10 @@
         * ************************************/
         let currentUser = ko.observable(params.currentUser()).extend({ deferred: true })
         let latestTitles = ko.observableArray([]).extend({ deferred: true });
-        let pageSizes = ko.observableArray();
+        let pageSizes = ko.observableArray().extend({ deferred: true });
         let selectedPageSize = ko.observableArray([10]);
-        let prev = ko.observable();
-        let next = ko.observable();
+        let prev = ko.observable().extend({ deferred: true });
+        let next = ko.observable().extend({ deferred: true });
         let selectedLatestTitle = params.selectedLatestTitle;
         let episodesUrl = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true });

@@ -1,9 +1,9 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let selectedComponent = ko.observable('my profile');
-        let selectedLatestTitle = ko.observable();
-        let latestTitle = ko.observable();
-        let currentUser = ko.observable(params.currentUser())
+        let selectedLatestTitle = ko.observable().extend({ deferred: true });
+        let latestTitle = ko.observable().extend({ deferred: true });
+        let currentUser = ko.observable(params.currentUser()).extend({ deferred: true });
 
 
         let menuElements = ["My Profile", "Location", "Title Bookmarks", "Personalities", "Search History", "Logout"];

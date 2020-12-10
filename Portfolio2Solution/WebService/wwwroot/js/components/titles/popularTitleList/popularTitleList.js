@@ -1,10 +1,10 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let popularTitles = ko.observableArray([]);
-        let pageSizes = ko.observableArray();
-        let selectedPageSize = ko.observableArray([4]);
-        let prev = ko.observable();
-        let next = ko.observable();
+        let popularTitles = ko.observableArray([]).extend({ deferred: true });
+        let pageSizes = ko.observableArray().extend({ deferred: true });
+        let selectedPageSize = ko.observableArray([4]).extend({ deferred: true });
+        let prev = ko.observable().extend({ deferred: true });
+        let next = ko.observable().extend({ deferred: true });
         let selectedPopularTitle = params.selectedPopularTitle;
 
         let selectPopularTitle = popularTitle => {
