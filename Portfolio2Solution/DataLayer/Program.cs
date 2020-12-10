@@ -243,12 +243,12 @@ namespace DataLayer
             ///*
             // * Return personalities 
             // */
-            var favorite = dataService.GetPersonalitiesForUser(2);
+            //var favorite = dataService.GetPersonalitiesForUser(2);
 
-            foreach (var t in favorite)
-            {
-                Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
-            }
+            //foreach (var t in favorite)
+            //{
+            //    Console.WriteLine($"Title Id: {t.NameConst}, Title: {t.FavoritePerson.Name}, User Id: {t.UserId}, User: {t.User.UserName}, Notes: {t.Notes}");
+            //}
 
             /////*
             ////* Return titleprincipals
@@ -273,13 +273,13 @@ namespace DataLayer
 
             ///*
             // * Return known for
-            //// */
-            //var kfor = dataService.GetKnownTitleForPersons("nm0000083");
+            // */
+            var kfor = dataService.GetKnownTitleForPersons("nm0000142");
 
-            //foreach (var t in kfor)
-            //{
-            //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
-            //}
+            foreach (var t in kfor)
+            {
+                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
+            }
 
             //var kfor1 = dataService.GetTitleByGenre(2);
 

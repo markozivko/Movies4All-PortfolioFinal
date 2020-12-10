@@ -39,13 +39,16 @@ namespace WebService.Controllers
 
                 var knownForTitle = _dataService.GetKnownTitleForPersons(id, page, pageSize);
                 IList<KnownForDto> knowForList = new List<KnownForDto>();
-                var kf = new KnownForDto();
 
 
                 foreach (var know in knownForTitle)
                 {
+
+                    var kf = new KnownForDto();
+
                     kf.TitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = know.TitleConst.Trim() });
                     knowForList.Add(kf);
+
                 }
 
                 var count = _dataService.NumberOfKnownTitlesForPerson(id);
