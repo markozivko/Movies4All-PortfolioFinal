@@ -13,6 +13,7 @@
         let episodesUrl = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true });
         let similarTitleUrl = ko.observableArray().extend({ deferred: true });
+        let knownForTitlesUrl = ko.observableArray().extend({ deferred: true });
 
 
        /* **********************************
@@ -77,6 +78,12 @@
             $('#modalForPerson').modal('hide');
             $('#modalForTitle').modal('show')
         });
+        postman.subscribe('goToKnownForTitle', args => {
+            $('#modalForPerson').modal('hide');
+            knownForTitlesUrl(args)
+            $('#modalForTitle').modal('show')
+        });
+
 
         return {
             latestTitles,

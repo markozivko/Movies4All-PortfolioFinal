@@ -41,13 +41,18 @@
             <div class="col-3">
             </div>
         </div>
-
-
         <hr>
     </div>
 </div>
 
-
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+            <li class="page-item" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+</div>
 <div id="modal" class="modal" tabindex="-1" data-bind="if: personUrl()">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
@@ -60,7 +65,7 @@
         </div>
     </div>
 </div>
-<div id="modalTitle" class="modal" data-bind="if: knownForTitlesUrl()" tabindex="-1" >
+<div id="modalTitle" class="modal" data-bind="if: knownForTitlesUrl()" tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-body">

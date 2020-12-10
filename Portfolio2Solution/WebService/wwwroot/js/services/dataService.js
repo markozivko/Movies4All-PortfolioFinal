@@ -185,8 +185,11 @@
             .then(callback);
     }
 
-
+    const titleBookmarksApiUrl = 'api/titlebookmarks/';
     let getTitleBookmarks = ([uri, user], callback) => {
+        if (uri === undefined) {
+            uri = titleBookmarksApiUrl + user.currentUser();
+        }
         fetch(uri, {
             headers: {
                 'Authorization': parseInt(user.currentUser())
@@ -195,8 +198,13 @@
             .then(response => response.json())
             .then(callback);
     }
+    let getTitleBookmarksUrlWithPageSize = (size, id) => titleBookmarksApiUrl + id + "?pageSize=" + size;
 
+    const personalitiesApiUrl = 'api/personalities/';
     let getPersonalities = ([uri, user], callback) => {
+        if (uri === undefined) {
+            uri = personalitiesApiUrl + user.currentUser();
+        }
         fetch(uri, {
             headers: {
                 'Authorization': parseInt(user.currentUser())
@@ -205,7 +213,7 @@
             .then(response => response.json())
             .then(callback);
     }
-
+    let getPersonalitiesUrlWithPageSize = (size, id) => personalitiesApiUrl + id + "?pageSize=" + size;
 
     /* **********************************
     * Function: Get users
@@ -362,7 +370,9 @@
         getPerson,
         getPersonalities,
         getTitlesByCategory,
-        getTitlesUrlWithPageSize
+        getTitlesUrlWithPageSize,
+        getTitleBookmarksUrlWithPageSize,
+        getPersonalitiesUrlWithPageSize
     }
 
 });

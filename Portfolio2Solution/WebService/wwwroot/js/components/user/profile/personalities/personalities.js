@@ -4,6 +4,8 @@
         let personalities = ko.observable().extend({ deferred: true });
         let prev = ko.observable().extend({ deferred: true });
         let next = ko.observable().extend({ deferred: true });
+        let pageSizes = ko.observableArray().extend({ deferred: true });
+        let selectedPageSize = ko.observableArray([10]);
         let personalitiesList = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true })
         let episodesUrl = ko.observableArray().extend({ deferred: true });
@@ -12,19 +14,11 @@
 
         ds.getUser('api/users/' + currentUser().currentUser(), function (data) {
             personalities(data.personalitiesUrl);
-
             if (personalities() !== undefined) {
-
-                ds.getPersonalities([personalities(), currentUser()], function (data) {
-                    if (data.items !== undefined) {
-                        getPerson(data.items)
-                    }
-
-                });
-
+                getData(personalities(), currentUser());
             }
-            
         });
+
         let getPerson = (args) => {
             personalitiesList([]);
             args.forEach((element) => {
@@ -35,10 +29,43 @@
             });
         }
 
+        let getData = (url, id) => {
+            ds.getPersonalities([url, id], function (data) {
+                pageSizes(data.pageSizes);
+                prev(data.prev || undefined);
+                next(data.next || undefined);
+                if (data.items !== undefined) {
+                    getPerson(data.items)
+                }
+            });
+        }
+
+        let showPrev = latestTitle => {
+            getData(prev(), currentUser());
+        }
+
+        let enablePrev = ko.computed(() => prev() !== undefined);
+
+        let showNext = latestTitle => {
+            getData(next(), currentUser());
+        }
+
+        let enableNext = ko.computed(() => next() !== undefined);
+
+        selectedPageSize.subscribe(() => {
+            var size = selectedPageSize()[0];
+            getData(ds.getPersonalitiesUrlWithPageSize(size, currentUser()), currentUser());
+        });
+
         let seePerson = (arg) => {
             personUrl(arg);
             postman.publish('goToPerson', [arg, currentUser()]);
         }
+        postman.subscribe('goToKnownForTitle', args => {
+            $('#modal').modal('hide');
+            knownForTitlesUrl(args)
+            $('#modalTitle').modal('show')
+        });
         postman.subscribe('goToTitle', args => {
             $('#modal').modal('hide');
             knownForTitlesUrl(args)
@@ -68,6 +95,12 @@
             seePerson,
             currentUser,
             episodesUrl,
+            showPrev,
+            enablePrev,
+            showNext,
+            enableNext,
+            selectedPageSize,
+            pageSizes,
             personUrl,
             similarTitleUrl,
             knownForTitlesUrl

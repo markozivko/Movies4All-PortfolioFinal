@@ -89,6 +89,7 @@ namespace WebService.Controllers
 
             var result = new
             {
+                pageSizes = new int[] { 6, 12, 24, 48 },
                 prev,
                 next,
                 cur,

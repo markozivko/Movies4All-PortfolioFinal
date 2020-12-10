@@ -11,6 +11,7 @@
         let next = ko.observable().extend({ deferred: true });
         let episodesUrl = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true });
+        let knownForTitlesUrl = ko.observableArray().extend({ deferred: true });
 
         ds.getGenres(currentUser(), data => {
             genres(data);
@@ -67,6 +68,12 @@
             $('#modal').modal('hide');
             personUrl(args)
             $('#modalForPerson').modal('show')
+        });
+
+        postman.subscribe('goToKnownForTitle', args => {
+            $('#modalForPerson').modal('hide');
+            knownForTitlesUrl(args)
+            $('#modal').modal('show')
         });
 
         return {
