@@ -3,7 +3,7 @@
        /* **********************************
         * Section: Declarations
         * ************************************/
-        let currentUser = ko.observable(params.currentUser())
+        let currentUser = ko.observable(params.currentUser()).extend({ deferred: true })
         let latestTitles = ko.observableArray([]).extend({ deferred: true });
         let pageSizes = ko.observableArray();
         let selectedPageSize = ko.observableArray([10]);
