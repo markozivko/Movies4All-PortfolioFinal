@@ -7,8 +7,11 @@
     </div>
 
     <div lass="row" data-bind="foreach: knownFor">
-        <div data-bind="text: titleUrl"></div>
+
         <div data-bind="text: primaryTitle"></div>
+        <div class="col-4">
+            <a class="btn btn-outline-light" data-bind="click: $parent.goToTitle.bind($data, titleUrl)"><em class="fas fa-info"></em></a>
+        </div>
     </div>
 </div>
 

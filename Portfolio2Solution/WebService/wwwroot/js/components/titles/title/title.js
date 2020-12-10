@@ -84,6 +84,7 @@
 
             let url = new URL(arg);
             postman.publish('goToPerson', [url.pathname, user()]);
+            postman.publish('showPerson', [url.pathname, user()]);
         }
 
         let goToTitle = (arg) => {

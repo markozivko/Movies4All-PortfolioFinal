@@ -24,11 +24,16 @@
                     knownFor.push({ titleUrl: url.pathname, primaryTitle: data.primaryTitle });
                 });
             });
-            console.log(knownFor())
         }
+
+        let goToTitle = (arg) => {
+            console.log(arg)
+            postman.publish('goToTitle', [arg, user()]);
+        } 
         return {
             person,
-            knownFor
+            knownFor,
+            goToTitle
         }
     }
 });
