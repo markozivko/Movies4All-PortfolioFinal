@@ -1,7 +1,7 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         let popularTitle = params.popularTitle;
-        let details = ko.observable();
+        let details = ko.observable().extend({ deferred: true });
  
  
         postman.subscribe('changePopularTitle', popularTitle => {

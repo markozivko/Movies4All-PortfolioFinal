@@ -1,10 +1,10 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let currentUser = ko.observable(params.currentUser());
-        let titleBookmark = ko.observable();
-        let prev = ko.observable();
-        let next = ko.observable();
-        let bookmarkList = ko.observableArray();
+        let currentUser = ko.observable(params.currentUser()).extend({ deferred: true });
+        let titleBookmark = ko.observable().extend({ deferred: true });
+        let prev = ko.observable().extend({ deferred: true });
+        let next = ko.observable().extend({ deferred: true });
+        let bookmarkList = ko.observableArray().extend({ deferred: true });
         let episodesUrl = ko.observableArray().extend({ deferred: true });
         let personUrl = ko.observableArray().extend({ deferred: true });
         let similarTitleUrl = ko.observableArray().extend({ deferred: true });

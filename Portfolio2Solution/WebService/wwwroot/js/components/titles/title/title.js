@@ -1,15 +1,15 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
 
-        let title = ko.observable();
-        let rating = ko.observable();
-        let numVotes = ko.observable();
-        let plot = ko.observable();
-        let poster = ko.observable();
-        let user = ko.observable();
-        let principals = ko.observableArray();
-        let episodes = ko.observable();
-        let similarTitles = ko.observableArray();
+        let title = ko.observable().extend({ deferred: true });
+        let rating = ko.observable().extend({ deferred: true });
+        let numVotes = ko.observable().extend({ deferred: true });
+        let plot = ko.observable().extend({ deferred: true });
+        let poster = ko.observable().extend({ deferred: true });
+        let user = ko.observable().extend({ deferred: true });
+        let principals = ko.observableArray().extend({ deferred: true });
+        let episodes = ko.observable().extend({ deferred: true });
+        let similarTitles = ko.observableArray().extend({ deferred: true });
 
         postman.subscribe('goToSimilarTitle', args => {
             ds.getTitle([args[0], args[1]], function (data) {

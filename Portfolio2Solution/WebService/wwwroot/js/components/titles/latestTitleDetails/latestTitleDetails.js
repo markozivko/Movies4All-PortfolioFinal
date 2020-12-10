@@ -5,13 +5,13 @@
         * ************************************/
         let latestTitle = params.latestTitle;
         let user = params.currentUser;
-        let rating = ko.observable();
-        let numVotes = ko.observable();
-        let plot = ko.observable();
-        let poster = ko.observable();
-        let principals = ko.observableArray();
-        let episodes = ko.observable();
-        let similarTitles = ko.observableArray();
+        let rating = ko.observable().extend({ deferred: true });
+        let numVotes = ko.observable().extend({ deferred: true });
+        let plot = ko.observable().extend({ deferred: true });
+        let poster = ko.observable().extend({ deferred: true });
+        let principals = ko.observableArray().extend({ deferred: true });
+        let episodes = ko.observable().extend({ deferred: true });
+        let similarTitles = ko.observableArray().extend({ deferred: true });
 
        /* **********************************
         * Section: Data Handling

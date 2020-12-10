@@ -1,6 +1,6 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let currentUser = ko.observable(params.currentUser().currentUser())
+        let currentUser = ko.observable(params.currentUser().currentUser()).extend({ deferred: true })
 
         let address = ko.observable();
 
