@@ -4,9 +4,9 @@
         let genres = ko.observableArray().extend({ deferred: true });
         let selectedGenre = ko.observable().extend({ deferred: true });
         let titlesList = ko.observableArray().extend({ deferred: true });
-        let id = ko.observable().extend({ deferred: true });
+        let id = ko.observable().extend({ deferred: true })
         let pageSizes = ko.observableArray().extend({ deferred: true });
-        let selectedPageSize = ko.observableArray([10]);
+        let selectedPageSize = ko.observableArray([10]).extend({ deferred: true });
         let prev = ko.observable().extend({ deferred: true });
         let next = ko.observable().extend({ deferred: true });
         let episodesUrl = ko.observableArray().extend({ deferred: true });

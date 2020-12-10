@@ -22,18 +22,19 @@
                             <span data-bind="text: runtime"></span> min
                         </li>
                     </ul>
-                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modalForTitle" data-bind="click: $parent.selectTitle.bind($data, titleUrl)">Show details</button>
-                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal" data-target="#modalForTitle" data-bind="click: $parent.selectTitle">Save to bookmarks</button>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modal" data-bind="click: $parent.selectTitle.bind($data, titleUrl)">Show details</button>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal" data-target="#modal" data-bind="click: $parent.selectTitle">Save to bookmarks</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="modalForTitle" class="modal" tabindex="-1">
+    <div id="modal" class="modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
                     <div><titles params="currentUser: currentUser"></titles></div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

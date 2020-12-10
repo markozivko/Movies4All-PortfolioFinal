@@ -28,7 +28,7 @@
 
         let goToTitle = (arg) => {
             console.log(arg)
-            postman.publish('goToTitle', [arg, user()]);
+            postman.publish('goToKnownForTitle', [arg, user()]);
         } 
         return {
             person,
