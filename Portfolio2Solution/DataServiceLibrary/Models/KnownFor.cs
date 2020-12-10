@@ -8,7 +8,6 @@ namespace DataServiceLibrary.Models
     public class KnownFor
     {
         public string TitleConst { get; set; }
-        [JsonIgnore]
         public TitleBasics Title { get; set; }
         public string NameConst { get; set; }
         public Person Person { get; set; }
