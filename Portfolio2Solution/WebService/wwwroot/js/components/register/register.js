@@ -14,6 +14,7 @@
         let zipCode = ko.observable("").extend({ deferred: true });
         let city = ko.observable("").extend({ deferred: true });
         let country = ko.observable("").extend({ deferred: true });
+        let user = ko.observable().extend({ deferred: true });
 
 
         let createUser = () => {
@@ -34,13 +35,19 @@
                 Country: country()
 
             }, function (data) {
-                console.log(data);
-
+                    console.log(data);
+                    user(data);
+                    $('#modalForRegister').modal('show');
             });
         }
 
-
-        let checkUserPassword
+        let goToAccount = () => {
+            console.log(email());
+            console.log(password());
+            ds.login(email(), password(), data => {
+                postman.publish('switchToAccount', ["account", data.userUrl.split("/").pop()]);
+            });
+        }
 
         return {
             firstName,
@@ -56,7 +63,9 @@
             zipCode,
             city,
             country,
-            createUser
+            createUser,
+            user,
+            goToAccount
         }
     }
 });

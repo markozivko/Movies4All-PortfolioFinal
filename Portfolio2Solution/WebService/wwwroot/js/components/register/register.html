@@ -1,6 +1,6 @@
 ﻿<div class="container">
     <div class="col-lg-12">
-        <form class="box needs-validation" data-bind="submit: createUser" novalidate>
+        <form class="box" data-bind="submit: createUser">
             <h3>Register</h3>
 
             <div class="form-row">
@@ -124,6 +124,15 @@
                 </ul>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="modalForRegister" class="modal border-primary rounded-0" data-bind="if: user">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm">
+        <div class="bg-info text-white text-center py-2" data-bind="with: user">
+            <h3><i class="fa fa-envelope"></i> Succesfully Registered, <span data-bind="text: userName"></span></h3>
+            <button type="button" class="btn btn-secondary" data-bind="click: goToAccount">Login</button>
+        </div>
     </div>
 </div>
 

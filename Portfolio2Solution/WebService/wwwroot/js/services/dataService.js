@@ -312,15 +312,7 @@
 
             }
         })
-            .then(response => {
-
-                if (response.ok) {
-                    response.json()
-                } else {
-                    alert("User email is already in use!");
-                }
-
-            })
+            .then(response => response.json())
             .then(data => callback(data));
     }
 
