@@ -301,55 +301,22 @@
     //    console.log(data);
     //});
 
-    /* **********************************
-    * Function: Get specific user
-    * ************************************/
-    //let getUser = (id, callback) => {
-    //    fetch("api/users/" + id)
-    //        .then(response => response.json())
-    //        .then(callback);
-    //}
-
-    //return {
-    //    getUsers,
-    //    getUser
-    //}
-
-    //});
-
-
 
     /* **********************************
     * Function: Create new user
     * ************************************/
-    //let createUser = function (user, callback) {
-    //    fetch("api", {
-    //        method: "POST", body: JSON.stringify(user), headers: {
-    //            'Content-Type': 'application/json'
+    let createUser = function (user, callback) {
+        fetch("api", {
+            method: "POST", body: JSON.stringify(user), headers: {
+                'Content-Type': 'application/json'
 
-    //        }
-    //    })
-    //        .then(response => response.json())
-    //        .then(data => callback(data));
-    //}
+            }
+        })
+            .then(response => response.json())
+            .then(data => callback(data));
+    }
 
-    //createUser({
-    //    FirstName: "A-gun-evil-twin",
-    //    LastName: "Aabidah2",
-    //    BirthDay: "01/08/2009",
-    //    IsStaff: false,
-    //    Email: "gun@super.com",
-    //    Password: "gun123",
-    //    UserName: "shootGub2009",
-    //    StreetNumber: "21",
-    //    StreetName: "Joyful",
-    //    ZipCode: "35214",
-    //    City: "Mumbai",
-    //    Country: "India"
-    //}, function (data) {
-    //        console.log(data);
-    //});
-
+    
     /* **********************************
     * Function: Update the user
     * ************************************/
@@ -440,7 +407,8 @@
         getSearchHistoryUrlWithPageSize,
         getSearchHistory,
         getRatingsUrlWithPageSize,
-        getRatings
+        getRatings,
+        createUser
     }
 
 });
