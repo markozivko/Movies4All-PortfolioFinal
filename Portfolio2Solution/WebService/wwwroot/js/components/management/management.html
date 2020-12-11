@@ -1,10 +1,81 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Staff</title>
-</head>
-<body>
+﻿
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>All Users</h4>
+            <hr>
+        </div>
+    </div>
 
-</body>
-</html>
+    <div class="row search_description">
+        <div class="col-lg-4">
+            <h6>Full name</h6>
+        </div>
+        <div class="col-lg-4">
+            <h6>Role</h6>
+        </div>
+        <div class="col-lg-4">
+            <h6>Email</h6>
+        </div>
+    </div>
+
+    <div class="row search_content">
+        <div class="col-lg-12" data-bind="foreach: userList">
+            <div class="form-group row">
+                <div class="col-lg-4">
+                    <p id="fullname" name="fullname" data-bind="text: fullName">  </p>
+                </div>
+
+                <div class="col-lg-4">
+                    <p id="role" name="role" data-bind="text: role"></p>
+                </div>
+
+                <div class="col-lg-4">
+                    <p id="email" name="email" data-bind="text: email"></p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5">
+                </div>
+
+                <div class="col-2">
+                    <a class="btn btn-outline-danger" data-toggle="modal" data-target="#modal"><em class="far fa-trash-alt"></em></a>
+                </div>
+                <div class="col-5">
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item pointer" data-bind="click: showPrev, enable: enablePrev"><a class="page-link">Previous</a></li>
+            <li class="page-item pointer" data-bind="click: showNext, enable: enableNext"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+
+    .container {
+        width: 100%;
+        padding: 6% 2%;
+        background: #191919;
+        text-align: center;
+        transition: 0.25s;
+        margin-top: 5%;
+        border-radius: 10px;
+    }
+
+    .search_description {
+        margin-bottom: 7%;
+    }
+
+    .search_content {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+    }
+</style>

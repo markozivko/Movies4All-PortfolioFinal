@@ -282,24 +282,26 @@
     * Function: Get users
     * ************************************/
 
-    //let getUsers = function (callback) {
-    //    fetch("api/users", {
-    //        headers: {
-    //            'Authorization': 3,
-    //        }
+    const usersApiUrl = 'api/users';
+    let getUsers = function ([uri, user], callback) {
+        if (uri === undefined) {
+            uri = usersApiUrl;
+        }
+        fetch("api/users", {
+            headers: {
+                'Authorization': parseInt(user.currentUser())
+            }
 
-    //    })
-    //        .then(function (response) {
-    //            return response.json();
-    //        })
-    //        .then(function (data) {
-    //            callback(data);
-    //        });
-    //}
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                callback(data);
+            });
+    }
 
-    //getUsers(function (data) {
-    //    console.log(data);
-    //});
+    let getAllUsersUrlWithPageSize = (size) => usersApiUrl + "?pageSize=" + size;
 
 
     /* **********************************
@@ -408,7 +410,9 @@
         getSearchHistory,
         getRatingsUrlWithPageSize,
         getRatings,
-        createUser
+        createUser,
+        getUsers,
+        getAllUsersUrlWithPageSize
     }
 
 });
