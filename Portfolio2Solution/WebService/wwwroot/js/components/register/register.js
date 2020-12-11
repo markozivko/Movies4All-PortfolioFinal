@@ -1,35 +1,62 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function () {
-        let email = ko.observable().extend({ email: true });
-        let password = ko.observable().extend({ required: true });
-        let FirstName = "A-gun-evil-twin";
-        let LastName = "Aabidah2";
-        let BirthDay = "01/08/2009";
-        let IsStaff =  false;
-        let Email =  "gun@super.com";
-        let Password =  "gun123";
-        let UserName =  "shootGub2009";
-        let StreetNumber =  "21";
-        let StreetName =  "Joyful";
-        let ZipCode =  "35214";
-        let City =  "Mumbai";
-        let Country =  "India";
 
-        ds.createUser({}, function (data) {
-            console.log(data);
-    });
+        let firstName = ko.observable("").extend({ required: true });
+        let lastName = ko.observable("").extend({ deferred: true });
+        let birthDay = ko.observable().extend({ deferred: true });
+        let isStaff = ko.observable(false).extend({ deferred: true });
+        let email = ko.observable("").extend({ deferred: true });
+        let password = ko.observable("").extend({ deferred: true });
+        let repeatPassword = ko.observable("").extend({ deferred: true });
+        let userName = ko.observable("").extend({ deferred: true });
+        let streetNumber = ko.observable("").extend({ deferred: true });
+        let streetName = ko.observable("").extend({ deferred: true });
+        let zipCode = ko.observable("").extend({ deferred: true });
+        let city = ko.observable("").extend({ deferred: true });
+        let country = ko.observable("").extend({ deferred: true });
 
 
-        let checkUser = () => {
-            ds.login(email(), password(), data => {
-                postman.publish('switchToAccount', ["account", data.userUrl.split("/").pop()]);
+        let createUser = () => {
+
+            ds.createUser({
+
+                FirstName: firstName(),
+                LastName: lastName(),
+                BirthDay: birthDay(),
+                IsStaff: isStaff(),
+                Email: email(),
+                Password: password(),
+                UserName: userName(),
+                StreetNumber: streetNumber(),
+                StreetName: streetName(),
+                ZipCode: zipCode(),
+                City: city(),
+                Country: country()
+
+            }, function (data) {
+                console.log(data);
+
             });
         }
 
+
+        let checkUserPassword
+
         return {
-            checkUser,
+            firstName,
+            lastName,
+            birthDay,
+            isStaff,
             email,
-            password
+            password,
+            repeatPassword,
+            userName,
+            streetNumber,
+            streetName,
+            zipCode,
+            city,
+            country,
+            createUser
         }
     }
 });

@@ -1,52 +1,52 @@
 ﻿<div class="container">
     <div class="col-lg-12">
-        <form class="box" >
+        <form class="box needs-validation" data-bind="submit: createUser" novalidate>
             <h3>Register</h3>
 
             <div class="form-row">
                 <div class="col-md-6 mb-6">
                     <label for="validationCustom01">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
+                    <input type="text" class="form-control" id="validationCustom01" data-bind="value:firstName" placeholder="First name" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
                 </div>
                 <div class="col-md-6 mb-6">
                     <label for="validationCustom02">Last name</label>
-                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" required>
+                    <input type="text" class="form-control" id="validationCustom02" data-bind="value:lastName" placeholder="Last name" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-12 mb-12">
                     <label for="validationCustom01">Username</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="Username" required>
+                    <input type="text" class="form-control" id="validationCustom03" data-bind="value:userName" placeholder="Username" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-12 mb-12">
                     <label for="validationCustom02">Email</label>
-                    <input type="email" class="form-control" id="validationCustom02" placeholder="Email" required>
+                    <input type="email" class="form-control" id="validationCustom04" data-bind="value:email" placeholder="Email" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-12 mb-12">
-                    <label for="validationCustom02">Birthday</label>
+                    <label for="validationCustom05">Birthday</label>
                     <div class="form-group">
                         <input type="date" name="bday" max="3000-12-31"
-                               min="1000-01-01" class="form-control">
+                               min="1000-01-01" data-bind="value:birthDay" class="form-control">
                     </div>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
 
                 </div>
@@ -54,37 +54,37 @@
 
             <div class="form-row">
                 <div class="col-md-6 mb-6">
-                    <label for="validationCustom02">Password</label>
-                    <input type="password" class="form-control" id="validationCustom02" placeholder="Password" required>
+                    <label for="validationCustom06">Password</label>
+                    <input type="password" class="form-control" id="validationCustom06" data-bind="value: password" placeholder="Password" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="col-md-6 mb-6">
-                    <label for="validationCustom02">Repeat password</label>
-                    <input type="password" class="form-control" id="validationCustom02" placeholder="Repeat password" required>
+                    <label for="validationCustom07">Repeat password</label>
+                    <input type="password" class="form-control" id="validationCustom07" data-bind="value: repeatPassword" placeholder="Repeat password" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        ✅
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-6">
-                    <label for="validationCustom03">City</label>
-                    <input type="text" class="form-control" id="validationCustom03" required>
+                    <label for="validationCustom08">City</label>
+                    <input type="text" class="form-control" data-bind="value: city" id="validationCustom08" required>
                     <div class="invalid-feedback">
-                        Please provide a valid city.
+                        ❌
                     </div>
                 </div>
                 <div class="col-md-6 mb-6">
-                    <label for="validationCustom04">Country</label>
-                    <input type="text" class="form-control" id="validationCustom02" placeholder="Country" required>
+                    <label for="validationCustom09">Country</label>
+                    <input type="text" class="form-control" id="validationCustom09" data-bind="value: country" placeholder="Country" required>
 
                     <!--<select class="form-control countrypicker" data-default="DE"></select>
 
-    <script>
-        $('.countrypicker').countrypicker();
-    </script>-->
+                    <script>
+                        $('.countrypicker').countrypicker();
+                    </script>-->
                     <div class="invalid-feedback">
                         Please select a valid state.
                     </div>
@@ -92,36 +92,25 @@
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-4">
-                    <label for="validationCustom04">Street name</label>
-                    <input type="text" class="form-control" id="validationCustom04" required>
+                    <label for="validationCustom10">Street name</label>
+                    <input type="text" class="form-control" data-bind="value: streetName" id="validationCustom10" required>
                     <div class="invalid-feedback">
-                        Please provide a valid city.
+                        ❌
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-4">
-                    <label for="validationCustom05">Street Number</label>
-                    <input type="text" class="form-control" id="validationCustom05" required>
+                    <label for="validationCustom11">Street Number</label>
+                    <input type="text" class="form-control" data-bind="value:streetNumber" id="validationCustom11" required>
                     <div class="invalid-feedback">
-                        Please provide a valid number.
+                        ❌
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <label for="validationCustom05">Zip</label>
-                    <input type="text" class="form-control" id="validationCustom05" required>
+                    <label for="validationCustom12">Zip</label>
+                    <input type="text" class="form-control" data-bind="value: zipCode" id="validationCustom012" required>
                     <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                    <label class="form-check-label" for="invalidCheck">
-                        Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
+                        ❌
                     </div>
                 </div>
             </div>
@@ -137,6 +126,31 @@
         </form>
     </div>
 </div>
+
+<script>
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 
 <script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
 
