@@ -56,6 +56,8 @@
         * ************************************/
         postman.subscribe('goToEpisodes', args => {
             $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
+
             episodesUrl(args)
             $('#modalForEpisodes').modal('show')
         });
