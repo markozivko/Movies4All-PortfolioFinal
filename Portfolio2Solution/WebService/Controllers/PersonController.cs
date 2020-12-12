@@ -60,12 +60,19 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                _dataService.UserAddPersonality(Program.CurrentUser.UserId, pfc.Name, pfc.Notes);
+                if (_dataService.CheckIfPersonalitiesExistsForUser(Program.CurrentUser.UserId, pfc.Name) != null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    _dataService.UserAddPersonality(Program.CurrentUser.UserId, pfc.Name, pfc.Notes);
 
-                var personality = _mapper.Map<Personalities>(pfc);
-                var result = _mapper.Map<PersonalitiesDto>(personality);
-                result.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new {Id = personality.NameConst.Trim() });
-                return Created("", result);
+                    var personality = _mapper.Map<Personalities>(pfc);
+                    var result = _mapper.Map<PersonalitiesDto>(personality);
+                    result.FavoritePersonUrl = Url.Link(nameof(PersonController.GetPerson), new { Id = personality.NameConst.Trim() });
+                    return Created("", result);
+                }
             }
             catch (ArgumentException)
             {

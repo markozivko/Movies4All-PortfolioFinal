@@ -522,6 +522,36 @@
 
                 if (response.ok) {
                     return response.json();
+                } else if (response.status == '400') {
+                    throw new Error('Bookmark already exist for this movie');
+                } else
+                {
+                    throw new Error('Unauthorised');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+    /* **********************************
+    * Function: createFavoritePerson
+    * ************************************/
+    let createFavoritePerson = function ([bookmark, id, user], callback) {
+        fetch("api/persons/" + id, {
+            method: "POST", body: JSON.stringify(bookmark), headers: {
+                'Content-Type': 'application/json',
+                'Authorization': parseInt(user.currentUser())
+            }
+        })
+
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status == '400') {
+                    throw new Error('Person already exist in your favorite list');
                 } else {
                     throw new Error('Unauthorised');
                 }
@@ -635,7 +665,8 @@
         createUser,
         getUsers,
         getAllUsersUrlWithPageSize,
-        createTitleBookmark
+        createTitleBookmark,
+        createFavoritePerson
     }
 
 });

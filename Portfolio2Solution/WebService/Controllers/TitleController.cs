@@ -131,15 +131,25 @@ namespace WebService.Controllers
                 if (Program.CurrentUser == null)
                 {
                     return Unauthorized();
-                } 
+                }
 
-                _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.TitleId, td.Notes);
 
-                var bookmark = _mapper.Map<TitleBookmark>(td);
-                var result = _mapper.Map<TitleBookmarkDto>(bookmark);
-                result.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = bookmark.TitleConst.Trim()});
+                if (_dataService.CheckIfTitleBookmarkExistsForUser(Program.CurrentUser.UserId, td.TitleId) != null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
 
-                return Created("", result);
+                    _dataService.UserAddTitleBookmark(Program.CurrentUser.UserId, td.TitleId, td.Notes);
+
+                    var bookmark = _mapper.Map<TitleBookmark>(td);
+                    var result = _mapper.Map<TitleBookmarkDto>(bookmark);
+                    result.FavoriteTitleUrl = Url.Link(nameof(TitleController.GetTitle), new { Id = bookmark.TitleConst.Trim() });
+
+                    return Created("", result);
+                }
+
             }
             catch (ArgumentException)
             {

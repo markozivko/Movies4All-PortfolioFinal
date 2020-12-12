@@ -38,9 +38,8 @@
                 TitleId: id,
                 Notes: notes()
             }, id, currentUser()], function (data) {
-                    alert("added");
-            });
-               
+                    $('#modalForBookmark').modal('hide');
+            }); 
         }
 
 

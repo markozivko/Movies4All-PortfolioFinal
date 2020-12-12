@@ -74,5 +74,7 @@ namespace DataServiceLibrary
         IList<TitleBasics> GetLatestTitles(int page, int pageSize);
         int NumberOfLatestTitles();
         IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize);
+        IList<TitleBookmark> CheckIfTitleBookmarkExistsForUser(int id, string idTitle);
+        IList<Personalities> CheckIfPersonalitiesExistsForUser(int id, string idPerson);
     }
 }

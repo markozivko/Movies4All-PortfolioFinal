@@ -334,6 +334,21 @@ namespace DataServiceLibrary
             return tb;
 
         }
+
+        /* **************************************
+        * Framework functionalities
+        * Function: CheckIfTitleBookmarkExistsForUser
+        * **************************************/
+        public IList<TitleBookmark> CheckIfTitleBookmarkExistsForUser(int id, string idTitle)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            return ctx.TitleBookmarks
+                .Include(tbm => tbm.Title)
+                .Include(tbm => tbm.User)
+                .Where(tbm => tbm.UserId == id)
+                .Where(tbm => tbm.TitleConst == idTitle)
+                .ToList();
+        }
         /* **************************************
          * Framework functionalities
          * Function: getPersonalities
@@ -353,7 +368,7 @@ namespace DataServiceLibrary
         public IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize)
         {
             using var ctx = new DatabaseContext(_connectionString);
-            var person= ctx.Personalities
+            var person = ctx.Personalities
                 .Include(p => p.User)
                 .Include(p => p.FavoritePerson)
                 .Where(p => p.UserId == id)
@@ -362,16 +377,32 @@ namespace DataServiceLibrary
                 .ToList();
             return person;
         }
-       /* **************************************
-        * Framework functionalities
-        * Function: NumberOfRecomendedTitles
-        ***************************************/
+        /* **************************************
+         * Framework functionalities
+         * Function: NumberOfRecomendedTitles
+         ***************************************/
         public int NumberOfPersonalitiesForUser(int id)
         {
             using var ctx = new DatabaseContext(_connectionString);
 
             var tb = ctx.Personalities.Where(tb => tb.UserId == id).Count();
             return tb;
+        }
+
+        /* **************************************
+       * Framework functionalities
+       * Function: CheckIfTitleBookmarkExistsForUser
+       * **************************************/
+        public IList<Personalities> CheckIfPersonalitiesExistsForUser(int id, string idPerson)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+            var person = ctx.Personalities
+                .Include(p => p.User)
+                .Include(p => p.FavoritePerson)
+                .Where(p => p.UserId == id)
+                .Where(p => p.NameConst == idPerson)
+                .ToList();
+            return person;
         }
         /* **************************************
          * Framework functionalities
@@ -485,7 +516,7 @@ namespace DataServiceLibrary
                 .ThenInclude(tg => tg.Genre)
                 .Include(tr => tr.Rating)
                 .Include(od => od.OmdbData)
-                .Where( t => t.Rating.NumVotes >= _popularityScale)
+                .Where(t => t.Rating.NumVotes >= _popularityScale)
                 .Where(t => t.Type != "tvEpisode")
                 .Where(od => od.OmdbData.Plot != null)
                 .Where(od => od.OmdbData.Poster != null)
@@ -832,7 +863,7 @@ namespace DataServiceLibrary
         * Framework functionalities
         * Function: CreateNewUser
         * ***********************************************/
-        public void CreateNewUser(User user, Address address )
+        public void CreateNewUser(User user, Address address)
         {
             using var ctx = new DatabaseContext(_connectionString);
             ctx.Database.ExecuteSqlInterpolated($"call create_new_user({user.FirstName}, {user.LastName}, {user.BirthDay}, {user.IsStaff}, {user.Email}, {HashPassword(user.Password)}, {user.UserName}, {address.StreetNumber}, {address.StreetName}, {address.ZipCode}, {address.City}, {address.Country})");
@@ -855,9 +886,9 @@ namespace DataServiceLibrary
         * ***********************************************/
         public void UserAddTitleBookmark(int Iduser, string TitleId, string Notes)
         {
+
             using var ctx = new DatabaseContext(_connectionString);
             ctx.Database.ExecuteSqlInterpolated($"call user_add_titlebookmarks({Iduser}, {TitleId}, {Notes})");
-
         }
 
         /* ***********************************************
