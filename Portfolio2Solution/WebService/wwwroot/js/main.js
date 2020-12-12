@@ -109,6 +109,11 @@ require(['knockout', 'text'], (ko) => {
             template: { require: "text!components/user/personalities/personalities.html" }
         });
 
+    ko.components.register("unsubscribe",
+        {
+            viewModel: { require: "components/user/unsubscribe/unsubscribe" },
+            template: { require: "text!components/user/unsubscribe/unsubscribe.html" }
+        });
 
     ko.components.register("logout",
         {
