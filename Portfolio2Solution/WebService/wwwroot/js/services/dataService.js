@@ -24,28 +24,22 @@
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('something went wrong');
+                    throw new Error('No popular titles');
                 }
             })
             .then(function (data) {
                 callback(data);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
     }
     let getPopularTitlesUrlWithPageSize = size => popularTitleApiUrl + "?pageSize=" + size;
 
 
     /* **********************************
-    * Function: Get popular title by id
+    * Function: Get popular title details
     * ************************************/
-    let getPopularTitle = (id, callback) => {
-        fetch('api/popular/' + id)
-            .then(response => response.json())
-            .then(callback);
-    }
-
     let getPopularTitleDetails = (uri, callback) => {
         fetch(uri)
             .then(response => {
@@ -53,12 +47,14 @@
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('something went wrong');
+                    throw new Error('Details for movie not found');
                 }
             })
-            .then(callback)
+            .then(function (data) {
+                callback(data);
+            })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
     }
 
@@ -82,7 +78,10 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                } else if (response.status === '404') {
+                    throw new Error('Come back in few minutes');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -111,7 +110,10 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                } else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -269,7 +271,7 @@
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('ho ho maybe you made a mistake, user does not exit');
+                    throw new Error('User not found');
                 }
             })
             .then(function (data) {
@@ -295,8 +297,10 @@
 
                 if (response.ok) {
                     return response.json();
+                } else if (response.status === '404') {
+                    throw new Error('User not found');
                 } else {
-                    throw new Error('something went wrong');
+                    throw new Error('Something went wrong.');
                 }
             })
             .then(callback)
@@ -588,7 +592,6 @@
         getTitleDetails,
         getSimilarTitles,
         getPopularTitles,
-        getPopularTitle,
         getPopularTitlesUrlWithPageSize,
         getPopularTitleDetails,
         getLatestTitles,

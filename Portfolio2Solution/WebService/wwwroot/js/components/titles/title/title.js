@@ -13,7 +13,8 @@
 
         let goToAddNotesFromTitle = (title) => {
             console.log(title)
-            postman.publish('goToAddNotesFromTitle', title());
+            //postman.publish('goToAddNotesFromTitle', title());
+
         }
 
 

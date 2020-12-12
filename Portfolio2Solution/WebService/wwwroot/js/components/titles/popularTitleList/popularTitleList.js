@@ -6,6 +6,7 @@
         let prev = ko.observable().extend({ deferred: true });
         let next = ko.observable().extend({ deferred: true });
         let selectedPopularTitle = params.selectedPopularTitle;
+        let error = ko.observable();
 
         let selectPopularTitle = popularTitle => {
             selectedPopularTitle(popularTitle);

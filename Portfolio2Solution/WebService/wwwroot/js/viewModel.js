@@ -10,6 +10,8 @@
    
 
     postman.subscribe("switchToAccount", component => {
+        console.log("Comp 0");
+        console.log(component[0]);
         changeContent(component[0]);
         if (component[0] == "account") {
             currentUser(component[1])

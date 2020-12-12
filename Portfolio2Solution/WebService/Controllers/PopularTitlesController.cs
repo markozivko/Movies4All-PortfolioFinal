@@ -28,13 +28,34 @@ namespace WebService.Controllers
             var plot = _dataService.GetOmdbData(id);
 
             var tdo1 = _mapper.Map<PopularTitlesDetailsDto>(rating);
-            var tdo2 = _mapper.Map(plot, tdo1);
-            if (rating == null || plot == null)
+            if (rating == null && plot == null)
             {
                 return NotFound();
             }
 
-            return Ok(tdo2);
+            if (rating == null)
+            {
+                var tdo2 = _mapper.Map<TitleDetailsDto>(plot);
+
+                tdo2.NumVotes = 0;
+                tdo2.Rating = 0;
+                tdo2.EpisodeUrl = Url.Link(nameof(EpisodeController.GetEpisodeForSerie), new { Id = id });
+                tdo2.SimilarTitleUrl = Url.Link(nameof(SimilarTitleController.GetTitleSuggestions), new { Id = id });
+                return Ok(tdo2);
+            }
+
+            if (plot == null)
+            {
+                tdo1.Plot = "";
+                tdo1.Poster = "";
+                return Ok(tdo1);
+            }
+            else
+            {
+                var tdo2 = _mapper.Map(plot, tdo1);
+                return Ok(tdo2);
+            }
+
         }
     }
 }

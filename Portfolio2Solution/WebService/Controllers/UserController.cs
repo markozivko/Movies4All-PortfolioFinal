@@ -39,13 +39,21 @@ namespace WebService.Controllers
                     {
                         var user = _dataService.GetUser(id);
 
-                        var userDto = _mapper.Map<UserDto>(user);
-                        userDto.UserUrl = Url.Link(nameof(UserController.GetUser), new { Id = id });
-                        userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
-                        userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
-                        userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
-                        userDto.UserRatingsUrl = Url.Link(nameof(UserRatingsController.GetRatingsForUser), new { Id = user.UserId });
-                        return Ok(userDto);
+                        if (user == null)
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            var userDto = _mapper.Map<UserDto>(user);
+                            userDto.UserUrl = Url.Link(nameof(UserController.GetUser), new { Id = id });
+                            userDto.TitleBookMarksUrl = Url.Link(nameof(TitleBookmarkController.GetTitleBookmarksForUser), new { Id = user.UserId });
+                            userDto.PersonalitiesUrl = Url.Link(nameof(PersonalitiesController.GetPersonalitiesForUser), new { Id = user.UserId });
+                            userDto.SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistoryForUser), new { Id = user.UserId });
+                            userDto.UserRatingsUrl = Url.Link(nameof(UserRatingsController.GetRatingsForUser), new { Id = user.UserId });
+                            return Ok(userDto);
+                        }
+
                     }
                     else
                     {
