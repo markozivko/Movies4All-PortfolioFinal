@@ -37,16 +37,11 @@
             }, function (data) {
                     console.log(data);
                     user(data);
-                    $('#modalForRegister').modal('show');
+                    $('#modalForRegister').modal('show');  
             });
         }
-
         let goToAccount = () => {
-            console.log(email());
-            console.log(password());
-            ds.login(email(), password(), data => {
-                postman.publish('switchToAccount', ["account", data.userUrl.split("/").pop()]);
-            });
+           postman.publish('newUser', 'login');
         }
 
         return {

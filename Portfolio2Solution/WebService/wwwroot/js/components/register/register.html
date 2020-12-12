@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <label for="validationCustom12">Zip</label>
-                    <input type="text" class="form-control" data-bind="value: zipCode" id="validationCustom012" required>
+                    <input type="text" class="form-control" data-bind="value: zipCode" id="validationCustom12" required>
                     <div class="invalid-feedback">
                         ❌
                     </div>
@@ -131,7 +131,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-sm">
         <div class="bg-info text-white text-center py-2" data-bind="with: user">
             <h3><i class="fa fa-envelope"></i> Succesfully Registered, <span data-bind="text: userName"></span></h3>
-            <button type="button" class="btn btn-secondary" data-bind="click: goToAccount">Login</button>
+            <button type="button" class="btn btn-secondary" data-bind="click: $parent.goToAccount">Login</button>
         </div>
     </div>
 </div>

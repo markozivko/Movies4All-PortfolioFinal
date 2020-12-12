@@ -14,7 +14,7 @@
         let personUrl = ko.observableArray().extend({ deferred: true });
         let similarTitleUrl = ko.observableArray().extend({ deferred: true });
         let knownForTitlesUrl = ko.observableArray().extend({ deferred: true });
-
+        let notes = ko.observable().extend({ deferred: true });
 
        /* **********************************
         * Section: Data Handling
@@ -23,6 +23,26 @@
             selectedLatestTitle(latestTitle);
             postman.publish('goToLatestTitleDetails', latestTitle);
         }
+
+        let changeContent = latestTitle => {
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
+            selectedLatestTitle(latestTitle);
+        }
+
+        let saveAsFavorite = latestTitle => {
+            console.log(latestTitle());
+            console.log(notes())
+            let id = latestTitle().detailsUrl.split("/").pop()
+            ds.createTitleBookmark([{
+                TitleId: id,
+                Notes: notes()
+            }, id, currentUser()], function (data) {
+                    alert("added");
+            });
+               
+        }
+
 
         let getData = (url, id) => {
             ds.getLatestTitles([url,id], data => {
@@ -62,6 +82,22 @@
             $('#modalForEpisodes').modal('show')
         });
 
+        postman.subscribe('goToAddNotes', args => {
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
+            $('#modalForBookmark').modal('show')
+        });
+        postman.subscribe('goToAddNotesFromTitle', args => {
+            selectedLatestTitle(args)
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
+            $('#modalForBookmark').modal('show')
+        });
+
+        postman.subscribe('goToAddNotesFromTitle', args => {
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForTitle').modal('hide');
+        });
 
         postman.subscribe('goToPerson', args => {
             $('#modalDetailsTitle').modal('hide');
@@ -100,7 +136,10 @@
             currentUser,
             episodesUrl,
             personUrl,
-            similarTitleUrl
+            similarTitleUrl,
+            saveAsFavorite,
+            notes,
+            changeContent
         };
     }
 });

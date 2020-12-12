@@ -53,11 +53,16 @@
                 });
             });
         }
+
+
        /* **********************************
         * Section: Publication
         * ************************************/
         let goToEpisodes = () => {
             postman.publish('goToEpisodes', [episodes(), user()]);
+        }
+        let goToAddNotes = () => {
+            postman.publish('goToAddNotes', latestTitle());
         }
         let showPerson = (arg) => {
             let url = new URL(arg);
@@ -79,7 +84,8 @@
             showPerson,
             goToEpisodes,
             episodes,
-            goToTitle
+            goToTitle,
+            goToAddNotes
         }
     }
 });

@@ -19,11 +19,19 @@
             method: 'GET'
 
         })
-            .then(function (response) {
-                return response.json();
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
             })
             .then(function (data) {
                 callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
     let getPopularTitlesUrlWithPageSize = size => popularTitleApiUrl + "?pageSize=" + size;
@@ -40,8 +48,18 @@
 
     let getPopularTitleDetails = (uri, callback) => {
         fetch(uri)
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
     /* **********************************
@@ -60,11 +78,19 @@
             method: 'GET'
 
         })
-            .then(function (response) {
-                return response.json();
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
             })
             .then(function (data) {
                 callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
     let getLatestTitlesUrlWithPageSize = size => latestTitleApiUrl + "?pageSize=" + size;
@@ -81,8 +107,18 @@
             method: 'GET'
 
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     /* **********************************
     * Function: Get title by id
@@ -99,8 +135,18 @@
                 method: 'GET'
 
             })
-                .then(response => response.json())
-                .then(callback);
+                .then(response => {
+
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('something went wrong');
+                    }
+                })
+                .then(callback)
+                .catch((error) => {
+                    console.log(error)
+                });
         }
 
     }
@@ -116,8 +162,18 @@
             method: 'GET'
 
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     /* **********************************
     * Function: Get titleDetails
@@ -128,8 +184,18 @@
                 'Authorization': parseInt(user.currentUser())
             }
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     /* **********************************
     * Function: Get similarTitles
@@ -142,8 +208,18 @@
             method: 'GET'
 
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     /* **********************************
  * Function: Get titles by category
@@ -161,11 +237,19 @@
             method: 'GET'
 
         })
-            .then(function (response) {
-                return response.json();
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
             })
             .then(function (data) {
                 callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
     let getTitlesUrlWithPageSize = (size, id) => titleApiUrl + id + "?pageSize=" + size;
@@ -180,12 +264,21 @@
     let login = (email, password, callback) => {
 
         fetch('api/login?email=' + email + '&password=' + password)
-            .then(function (response) {
-                return response.json();
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('ho ho maybe you made a mistake, user does not exit');
+                }
             })
             .then(function (data) {
                 callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
             });
+
     }
 
     /* **********************************
@@ -198,8 +291,18 @@
                 'Authorization': uri.split('/').pop()
             }
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     /* **********************************
     * Function: Get titleBookmarks
@@ -214,8 +317,18 @@
                 'Authorization': parseInt(user.currentUser())
             }
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     let getTitleBookmarksUrlWithPageSize = (size, id) => titleBookmarksApiUrl + id + "?pageSize=" + size;
     /* **********************************
@@ -231,8 +344,18 @@
                 'Authorization': parseInt(user.currentUser())
             }
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
     let getPersonalitiesUrlWithPageSize = (size, id) => personalitiesApiUrl + id + "?pageSize=" + size;
 
@@ -250,8 +373,18 @@
                     'Authorization': parseInt(user.currentUser())
                 }
             })
-                .then(response => response.json())
-                .then(callback);
+                .then(response => {
+
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('something went wrong');
+                    }
+                })
+                .then(callback)
+                .catch((error) => {
+                    console.log(error)
+                });
         }
 
     }
@@ -271,8 +404,18 @@
                     'Authorization': parseInt(user.currentUser())
                 }
             })
-                .then(response => response.json())
-                .then(callback);
+                .then(response => {
+
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('something went wrong');
+                    }
+                })
+                .then(callback)
+                .catch((error) => {
+                    console.log(error)
+                });
         }
 
     }
@@ -293,11 +436,19 @@
             }
 
         })
-            .then(function (response) {
-                return response.json();
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
             })
             .then(function (data) {
                 callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
 
@@ -307,18 +458,53 @@
     /* **********************************
     * Function: Create new user
     * ************************************/
+
     let createUser = function (user, callback) {
         fetch("api", {
             method: "POST", body: JSON.stringify(user), headers: {
                 'Content-Type': 'application/json'
-
             }
         })
-            .then(response => response.json())
-            .then(data => callback(data));
+  
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Email is already in use');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
-    
+    /* **********************************
+* Function: Create new title bookmark
+* ************************************/
+    let createTitleBookmark = function ([bookmark, id, user], callback) {
+        fetch("api/titles/"+id, {
+            method: "POST", body: JSON.stringify(bookmark), headers: {
+                'Content-Type': 'application/json',
+                'Authorization': parseInt(user.currentUser())
+            }
+        })
+
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Unauthorised');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     /* **********************************
     * Function: Update the user
     * ************************************/
@@ -380,8 +566,18 @@
             method: 'GET'
 
         })
-            .then(response => response.json())
-            .then(callback);
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(callback)
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
 
@@ -412,7 +608,8 @@
         getRatings,
         createUser,
         getUsers,
-        getAllUsersUrlWithPageSize
+        getAllUsersUrlWithPageSize,
+        createTitleBookmark
     }
 
 });
