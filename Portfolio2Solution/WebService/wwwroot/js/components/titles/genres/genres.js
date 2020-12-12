@@ -76,6 +76,12 @@
             $('#modal').modal('show')
         });
 
+        $('#modal').modal('hide');
+        $('#modalForPerson').modal('hide');
+        $('#modalForEpisodes').modal('hide');
+
+
+
         return {
             genres,
             showTitleFromThisCategory,

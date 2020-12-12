@@ -89,6 +89,12 @@
             $('#modalForPerson').modal('hide');
             $('#modalForTitle').modal('show')
         });
+
+        $('#modalForPerson').modal('hide');
+        $('#modalForTitle').modal('hide');
+        $('#modalForEpisodes').modal('hide');
+        $('#modalForSimilarTitle').modal('hide');
+
         return {
             bookmarkList,
             goToTitle,

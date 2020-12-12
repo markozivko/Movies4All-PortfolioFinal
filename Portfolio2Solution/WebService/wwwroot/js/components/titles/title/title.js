@@ -46,14 +46,6 @@
             });
         });
 
-        postman.subscribe('goToTitleFromGenre', args => {
-            ds.getTitle([args[0], args[1]], function (data) {
-                title(data)
-                user(args[1])
-                getDetails(data.detailsUrl)
-
-            });
-        });
         postman.subscribe('goToKnownForTitle', args => {
             ds.getTitle([args[0], args[1]], function (data) {
                 title(data)

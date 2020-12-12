@@ -90,6 +90,12 @@
             $('#modal').modal('show')
             seePerson(args[0])
         });
+
+        $('#modalForTitle').modal('hide');
+        $('#modalEpisodes').modal('hide')
+        $('#modalSimilarTitle').modal('hide');
+        $('#modal').modal('hide');
+
         return {
             personalitiesList,
             seePerson,

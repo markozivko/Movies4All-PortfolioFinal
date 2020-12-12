@@ -107,13 +107,19 @@
 
         postman.subscribe('goToTitle', args => {
             $('#modalForPerson').modal('hide');
-            $('#modalForTitle').modal('show')
+            $('#modalForTitle').modal('show');
         });
         postman.subscribe('goToKnownForTitle', args => {
             $('#modalForPerson').modal('hide');
             knownForTitlesUrl(args)
             $('#modalForTitle').modal('show')
         });
+
+        $('#modalDetailsTitle').modal('hide');
+        $('#modalForPerson').modal('hide');
+        $('#modalForTitle').modal('hide');
+        $('#modalForEpisodes').modal('hide');
+        $('#modalForBookmark').modal('hide');
 
 
         return {
