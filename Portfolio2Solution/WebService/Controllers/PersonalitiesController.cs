@@ -42,10 +42,19 @@ namespace WebService.Controllers
 
                         var pMarks = _dataService.GetPersonalitiesForUser(id, page, pageSize);
                       
-                        var result = CreateResult(pMarks, id, page, pageSize);
-                        
+                       
 
-                        return Ok(result);
+                        if (pMarks == null)
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            var result = CreateResult(pMarks, id, page, pageSize);
+
+                            return Ok(result);
+                        }
+
                     }
                     else
                     {

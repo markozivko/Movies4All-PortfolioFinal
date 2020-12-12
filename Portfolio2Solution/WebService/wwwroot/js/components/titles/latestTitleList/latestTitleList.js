@@ -92,11 +92,6 @@
             $('#modalForTitle').modal('hide');
         });
 
-        postman.subscribe('goToAddNotesFromTitle', args => {
-            $('#modalDetailsTitle').modal('hide');
-            $('#modalForTitle').modal('hide');
-        });
-
         postman.subscribe('goToPerson', args => {
             $('#modalDetailsTitle').modal('hide');
             $('#modalForTitle').modal('hide');

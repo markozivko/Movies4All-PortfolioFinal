@@ -123,7 +123,7 @@
             });
     }
     /* **********************************
-    * Function: Get title by id
+    * Function: Get title / similar title, episodes
     * ************************************/
     let getTitle = ([uri, user], callback) => {
         if (uri === undefined) {
@@ -141,7 +141,10 @@
 
                     if (response.ok) {
                         return response.json();
-                    } else {
+                    } else if (response.status === '404') {
+                        throw new Error('Title not found');
+                    }
+                    else {
                         throw new Error('something went wrong');
                     }
                 })
@@ -190,7 +193,11 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -214,7 +221,11 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -243,7 +254,11 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -325,7 +340,11 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -352,7 +371,11 @@
 
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else if (response.status === '404') {
+                    throw new Error('Title not found');
+                }
+                else {
                     throw new Error('something went wrong');
                 }
             })
@@ -469,7 +492,7 @@
                 'Content-Type': 'application/json'
             }
         })
-  
+
             .then(response => {
 
                 if (response.ok) {
@@ -488,7 +511,7 @@
 * Function: Create new title bookmark
 * ************************************/
     let createTitleBookmark = function ([bookmark, id, user], callback) {
-        fetch("api/titles/"+id, {
+        fetch("api/titles/" + id, {
             method: "POST", body: JSON.stringify(bookmark), headers: {
                 'Content-Type': 'application/json',
                 'Authorization': parseInt(user.currentUser())

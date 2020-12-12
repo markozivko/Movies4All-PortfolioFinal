@@ -41,12 +41,18 @@ namespace WebService.Controllers
                     {
                         pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
-
                         var titleBookmarks = _dataService.GetTitleBookmarkForUser(id, page, pageSize);
 
-                        var result = CreateResult(titleBookmarks, id, page, pageSize);
+                       
+                        if(titleBookmarks == null)
+                        {
+                            return NotFound();
 
-                        return Ok(result);
+                        } else {
+                            var result = CreateResult(titleBookmarks, id, page, pageSize);
+                            return Ok(result);
+
+                        }
                     }
                     else
                     {
