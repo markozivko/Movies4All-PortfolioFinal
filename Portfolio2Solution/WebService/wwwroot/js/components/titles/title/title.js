@@ -12,6 +12,7 @@
         let similarTitles = ko.observableArray().extend({ deferred: true });
 
         let goToAddNotesFromTitle = (title) => {
+            console.log(title)
             postman.publish('goToAddNotesFromTitle', title());
         }
 

@@ -88,10 +88,8 @@
             $('#modalForBookmark').modal('show')
         });
         postman.subscribe('goToAddNotesFromTitle', args => {
-            selectedLatestTitle(args)
             $('#modalDetailsTitle').modal('hide');
             $('#modalForTitle').modal('hide');
-            $('#modalForBookmark').modal('show')
         });
 
         postman.subscribe('goToAddNotesFromTitle', args => {
