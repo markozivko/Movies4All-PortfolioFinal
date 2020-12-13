@@ -21,8 +21,9 @@
 
             let validatePass = validatePassword();
             let validatePassRepeat = validateRepeatPassword();
+            let validateBDay = validateDate();
 
-            if (validatePass && validatePassRepeat) {
+            if (validatePass && validatePassRepeat && validateBDay) {
                 ds.createUser({
 
                     FirstName: firstName(),
@@ -44,9 +45,8 @@
                     $('#modalForRegister').modal('show');
                 });
             } else {
-                alert('Passwords should be the same');
+                alert('Check your input');
             }
-            
         }
 
 
@@ -64,6 +64,19 @@
 
             return true;
 
+        }
+
+        let validateDate = () => {
+
+            let bDay = new Date(birthDay());
+            let currentDate = new Date();
+            console.log(currentDate - bDay);
+
+            if (currentDate - bDay < 8) {
+                return false;
+
+            }
+            return true;
         }
 
 
