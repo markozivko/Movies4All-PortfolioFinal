@@ -10,9 +10,10 @@
         let principals = ko.observableArray().extend({ deferred: true });
         let episodes = ko.observable().extend({ deferred: true });
         let similarTitles = ko.observableArray().extend({ deferred: true });
-$
 
-
+        let goToAddNotes = (arg) => {
+            postman.publish('closeModalAndgoToNotes', arg());
+        }
         postman.subscribe('goToSimilarTitle', args => {
             ds.getTitle([args[0], args[1]], function (data) {
                 title(data)
@@ -100,6 +101,7 @@ $
         let goToTitle = (arg) => {
             postman.publish('goToSimilarTitle', [arg, user()]);
         } 
+
         return {
             title,
             rating,
@@ -112,7 +114,7 @@ $
             goToEpisodes,
             episodes,
             goToTitle,
-            goToAddNotesFromTitle
+            goToAddNotes
 
         }
     }

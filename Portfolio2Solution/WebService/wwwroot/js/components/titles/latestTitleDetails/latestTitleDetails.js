@@ -18,7 +18,7 @@
         * ************************************/
         postman.subscribe('goToLatestTitleDetails', latestTitle => {
             let titleId = latestTitle.detailsUrl.split('/').pop();
-
+            console.log(user())
             ds.getTitleDetails(['api/detailtitles/' + titleId, user()], function (data) {
                 rating(data.rating);
                 numVotes(data.numVotes);
@@ -62,7 +62,7 @@
             postman.publish('goToEpisodes', [episodes(), user()]);
         }
         let goToAddNotes = () => {
-            postman.publish('goToAddNotes', latestTitle());
+            postman.publish('closeModalAndgoToNotes', latestTitle());
         }
         let showPerson = (arg) => {
             let url = new URL(arg);

@@ -15,7 +15,7 @@
 <div class="container container-details">
     <div class="row">
         <div class="col-lg-6">
-            <div data-bind="if: poster() !== 'N/A'">
+            <div data-bind="if: poster() !== 'N/A' && poster()!==''">
                 <img class="title-image" alt="Qries" data-bind="attr:{src: poster}"
                      width="300" height="350">
             </div>

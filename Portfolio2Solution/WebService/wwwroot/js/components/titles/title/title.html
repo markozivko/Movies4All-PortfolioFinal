@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div data-bind="if: poster() !== 'N/A'">
+            <div data-bind="if: poster() !== 'N/A' && poster()!==''">
                 <img class="title-image" alt="Qries" data-bind="attr:{src: poster}"
                      width="300" height="350">
             </div>
@@ -41,7 +41,7 @@
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-6">
-                    <button id="showDetails" type="button" class="btn btn-md btn-block btn-outline-danger"  data-bind="click: goToAddNotesFromTitle.bind($data, title)">Add to bookmarks</button>
+                    <button id="showDetails" type="button" class="btn btn-md btn-block btn-outline-danger"  data-bind="click: goToAddNotes.bind($data, title)">Add to bookmarks</button>
                 </div>
                 <div class="col-lg-6">
                     <button id="showDetails" type="button" class="btn btn-md btn-block btn-outline-warning">Add rating</button>
@@ -72,7 +72,6 @@
     </div>
 
 </div>
-
 
 <style>
 

@@ -25,9 +25,8 @@
         }
 
         let changeContent = latestTitle => {
-            $('#modalDetailsTitle').modal('hide');
-            $('#modalForTitle').modal('hide');
             selectedLatestTitle(latestTitle);
+            postman.publish('goToNotes', latestTitle);
         }
 
         let saveAsFavorite = latestTitle => {
@@ -73,22 +72,25 @@
         /* **********************************
         * Section: Subscriptions
         * ************************************/
+
+        $('#modalDetailsTitle').modal('hide');
+        $('#modalForPerson').modal('hide');
+        $('#modalForTitle').modal('hide');
+        $('#modalForEpisodes').modal('hide');
+        $('#modalForBookmark').modal('hide');
+
         postman.subscribe('goToEpisodes', args => {
             $('#modalDetailsTitle').modal('hide');
             $('#modalForTitle').modal('hide');
-
             episodesUrl(args)
             $('#modalForEpisodes').modal('show')
         });
 
-        postman.subscribe('goToAddNotes', args => {
+        postman.subscribe('closeModalAndgoToNotes', args => {
             $('#modalDetailsTitle').modal('hide');
+            $('#modalForPerson').modal('hide');
             $('#modalForTitle').modal('hide');
-            $('#modalForBookmark').modal('show')
-        });
-        postman.subscribe('goToAddNotesFromTitle', args => {
-            $('#modalDetailsTitle').modal('hide');
-            $('#modalForTitle').modal('hide');
+            changeContent(args);
         });
 
         postman.subscribe('goToPerson', args => {
@@ -114,11 +116,7 @@
             $('#modalForTitle').modal('show')
         });
 
-        $('#modalDetailsTitle').modal('hide');
-        $('#modalForPerson').modal('hide');
-        $('#modalForTitle').modal('hide');
-        $('#modalForEpisodes').modal('hide');
-        $('#modalForBookmark').modal('hide');
+
 
 
         return {

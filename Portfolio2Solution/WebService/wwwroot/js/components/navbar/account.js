@@ -25,6 +25,10 @@
         let goToHome = element => {
             selectedComponent('latest');
         }
+
+        postman.subscribe('goToNotes', args => {
+            selectedComponent('notes');
+        });
         let currentParams = ko.observable({ selectedLatestTitle, currentUser }).extend({ deferred: true });
         return {
             selectedComponent,

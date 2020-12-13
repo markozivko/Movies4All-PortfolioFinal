@@ -61,6 +61,12 @@
             postman.publish('goToFavoriteTitle', [arg, currentUser()]);
         } 
 
+        postman.subscribe('closeModalAndgoToNotes', args => {
+            $('#modalForSimilarTitle').modal('hide')
+            $('#modalForPerson').modal('hide');
+            $('#modalForTitle').modal('hide');
+            postman.publish('goToNotes', args);
+        });
         postman.subscribe('goToEpisodes', args => {
             $('#modalForTitle').modal('hide');
             episodesUrl(args)
