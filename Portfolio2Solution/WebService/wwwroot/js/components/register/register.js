@@ -48,8 +48,12 @@
             }
             
         }
+
+
+
         let goToAccount = () => {
-           postman.publish('newUser', null);
+            $('#modalForRegister').modal('hide');
+            postman.publish('newUser', null);
         }
 
         let validatePassword = () => {
