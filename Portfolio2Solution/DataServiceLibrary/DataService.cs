@@ -399,7 +399,7 @@ namespace DataServiceLibrary
        * Framework functionalities
        * Function: CheckIfTitleBookmarkExistsForUser
        * **************************************/
-        public IList<Personalities> CheckIfPersonalitiesExistsForUser(int id, string idPerson)
+        public bool CheckIfPersonalitiesExistsForUser(int id, string idPerson)
         {
             using var ctx = new DatabaseContext(_connectionString);
             var person = ctx.Personalities
@@ -408,7 +408,11 @@ namespace DataServiceLibrary
                 .Where(p => p.UserId == id)
                 .Where(p => p.NameConst == idPerson)
                 .ToList();
-            return person;
+            if (person.Count() == 0)
+            {
+                return false;
+            }
+            return true;
         }
         /* **************************************
          * Framework functionalities

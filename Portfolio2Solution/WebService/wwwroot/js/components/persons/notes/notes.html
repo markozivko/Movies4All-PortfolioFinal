@@ -1,0 +1,40 @@
+﻿
+<div class="box">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Save personality</h4>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group row">
+                <div class="col-lg-12">
+
+                    <form data-bind="submit: saveAsFavorite">
+                        <div>
+                            <h6>Add notes</h6>
+                            <textarea data-bind="textInput:notes" type="text" name=""></textarea>
+                        </div>
+
+                        <button class="btn btn-outline-warning btn-lg" type="submit">Save</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .box {
+        width: 100%;
+        padding: 2% 2%;
+        background: #191919;
+        text-align: center;
+        transition: 0.25s;
+        margin-top: 5%;
+        border-radius: 10px;
+    }
+</style>

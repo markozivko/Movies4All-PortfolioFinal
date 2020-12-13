@@ -75,6 +75,6 @@ namespace DataServiceLibrary
         int NumberOfLatestTitles();
         IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize);
         bool CheckIfTitleBookmarkExistsForUser(int id, string idTitle);
-        IList<Personalities> CheckIfPersonalitiesExistsForUser(int id, string idPerson);
+        bool CheckIfPersonalitiesExistsForUser(int id, string idPerson);
     }
 }

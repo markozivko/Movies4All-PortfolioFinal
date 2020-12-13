@@ -15,6 +15,9 @@
             });
         });
 
+        let goToNotes = (arg) => {
+            postman.publish('closeModalAndgoToPNotes', arg());
+        }
 
         let getTitle = (args) => {
             knownFor([]);
@@ -29,11 +32,13 @@
         let goToTitle = (arg) => {
             console.log(arg)
             postman.publish('goToKnownForTitle', [arg, user()]);
-        } 
+        }
+
         return {
             person,
             knownFor,
-            goToTitle
+            goToTitle,
+            goToNotes
         }
     }
 });

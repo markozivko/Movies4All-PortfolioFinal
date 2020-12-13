@@ -60,7 +60,7 @@ namespace WebService.Controllers
                     return Unauthorized();
                 }
 
-                if (_dataService.CheckIfPersonalitiesExistsForUser(Program.CurrentUser.UserId, pfc.Name) != null)
+                if (_dataService.CheckIfPersonalitiesExistsForUser(Program.CurrentUser.UserId, pfc.Name) == true)
                 {
                     return BadRequest();
                 }

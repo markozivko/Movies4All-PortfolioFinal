@@ -79,6 +79,13 @@
             changeContent(args);
         });
 
+        postman.subscribe('closeModalAndgoToPNotes', args => {
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForPerson').modal('hide');
+            $('#modalForTitle').modal('hide');
+            postman.publish('goToPNotes', args);
+        });
+
         postman.subscribe('goToPerson', args => {
             $('#modalDetailsTitle').modal('hide');
             $('#modalForTitle').modal('hide');
