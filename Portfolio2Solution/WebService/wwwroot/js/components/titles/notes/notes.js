@@ -2,21 +2,20 @@
     return function (params) {
         let currentUser = ko.observable(params.currentUser()).extend({ deferred: true });
         let notes = ko.observable().extend({ deferred: true });
+        let title = params.selectedLatestTitle();
         let saveAsFavorite = latestTitle => {
-            console.log(latestTitle());
-            console.log(notes())
-            let id = latestTitle().detailsUrl.split("/").pop()
+            let id = title.detailsUrl.split("/").pop()
+            console.log(id)
             ds.createTitleBookmark([{
                 TitleId: id,
                 Notes: notes()
             }, id, currentUser()], function (data) {
-                $('#modalForBookmark').modal('hide');
+                    console.log(data)
             });
         }
-
-
         return {
-
+            saveAsFavorite,
+            notes
         };
     }
 });

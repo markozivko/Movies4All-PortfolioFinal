@@ -339,15 +339,21 @@ namespace DataServiceLibrary
         * Framework functionalities
         * Function: CheckIfTitleBookmarkExistsForUser
         * **************************************/
-        public IList<TitleBookmark> CheckIfTitleBookmarkExistsForUser(int id, string idTitle)
+        public bool CheckIfTitleBookmarkExistsForUser(int id, string idTitle)
         {
             using var ctx = new DatabaseContext(_connectionString);
-            return ctx.TitleBookmarks
+            var tb = ctx.TitleBookmarks
                 .Include(tbm => tbm.Title)
                 .Include(tbm => tbm.User)
                 .Where(tbm => tbm.UserId == id)
                 .Where(tbm => tbm.TitleConst == idTitle)
                 .ToList();
+
+            if (tb.Count() == 0)
+            {
+                return false;
+            }
+            return true;
         }
         /* **************************************
          * Framework functionalities

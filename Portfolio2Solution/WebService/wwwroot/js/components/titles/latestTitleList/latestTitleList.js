@@ -14,7 +14,6 @@
         let personUrl = ko.observableArray().extend({ deferred: true });
         let similarTitleUrl = ko.observableArray().extend({ deferred: true });
         let knownForTitlesUrl = ko.observableArray().extend({ deferred: true });
-        let notes = ko.observable().extend({ deferred: true });
 
        /* **********************************
         * Section: Data Handling
@@ -28,19 +27,6 @@
             selectedLatestTitle(latestTitle);
             postman.publish('goToNotes', latestTitle);
         }
-
-        let saveAsFavorite = latestTitle => {
-            console.log(latestTitle());
-            console.log(notes())
-            let id = latestTitle().detailsUrl.split("/").pop()
-            ds.createTitleBookmark([{
-                TitleId: id,
-                Notes: notes()
-            }, id, currentUser()], function (data) {
-                    $('#modalForBookmark').modal('hide');
-            }); 
-        }
-
 
         let getData = (url, id) => {
             ds.getLatestTitles([url,id], data => {
@@ -133,8 +119,6 @@
             episodesUrl,
             personUrl,
             similarTitleUrl,
-            saveAsFavorite,
-            notes,
             changeContent
         };
     }

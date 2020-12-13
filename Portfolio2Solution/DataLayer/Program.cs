@@ -57,12 +57,11 @@ namespace DataLayer
             //}
 
 
-            //var coPlayer = dataService.FindCoPlayers(1, "Mads miKKelsen");
+            var res= dataService.CheckIfTitleBookmarkExistsForUser(3, "tt11602414");
 
-            //foreach (var x in coPlayer)
-            //{
-            //    Console.WriteLine($"Id: {x.NameConst}, Name: {x.Name}, Freq: {x.Frequency}");
-            //}
+                    Console.WriteLine(res);
+
+            
 
             /////*
             //// * Return users by user ID
@@ -273,13 +272,13 @@ namespace DataLayer
 
             ///*
             // * Return known for
-            // */
-            var kfor = dataService.GetKnownTitleForPersons("nm0000142");
+            //// */
+            //var kfor = dataService.GetKnownTitleForPersons("nm0000142");
 
-            foreach (var t in kfor)
-            {
-                Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
-            }
+            //foreach (var t in kfor)
+            //{
+            //    Console.WriteLine($"Title Id: {t.TitleConst}, {t.Title.PrimaryTitle}");
+            //}
 
             //var kfor1 = dataService.GetTitleByGenre(2);
 

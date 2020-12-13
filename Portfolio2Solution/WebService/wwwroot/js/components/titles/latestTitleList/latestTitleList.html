@@ -49,24 +49,6 @@
         </div>
     </div>
 
-    <div id="modalForBookmark" class="modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-scrollable modal-xl">
-            <div class="modal-content">
-                <form data-bind="submit: saveAsFavorite.bind($data, selectedLatestTitle)">
-                    <div class="modal-body">
-                        <h3>Add notes</h3>
-                        <hr />
-                        <textarea data-bind="textInput:notes" type="text" name=""></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-warning btn-lg" type="submit">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <div id="modalForEpisodes" class="modal" tabindex="-1" data-bind="if: episodesUrl()">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">

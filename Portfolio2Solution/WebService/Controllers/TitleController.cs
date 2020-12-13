@@ -134,7 +134,7 @@ namespace WebService.Controllers
                 }
 
 
-                if (_dataService.CheckIfTitleBookmarkExistsForUser(Program.CurrentUser.UserId, td.TitleId) != null)
+                if (_dataService.CheckIfTitleBookmarkExistsForUser(Program.CurrentUser.UserId, td.TitleId))
                 {
                     return BadRequest();
                 }
