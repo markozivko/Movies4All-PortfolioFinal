@@ -40,6 +40,8 @@
         postman.subscribe('goToLatest', args => {
             selectedComponent('latest');
         });
+
+        
        
         return {
             selectedComponent,

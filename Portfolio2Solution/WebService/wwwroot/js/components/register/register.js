@@ -19,29 +19,64 @@
 
         let createUser = () => {
 
-            ds.createUser({
+            let validatePass = validatePassword();
+            let validatePassRepeat = validateRepeatPassword();
 
-                FirstName: firstName(),
-                LastName: lastName(),
-                BirthDay: birthDay(),
-                IsStaff: isStaff(),
-                Email: email(),
-                Password: password(),
-                UserName: userName(),
-                StreetNumber: streetNumber(),
-                StreetName: streetName(),
-                ZipCode: zipCode(),
-                City: city(),
-                Country: country()
+            if (validatePass && validatePassRepeat) {
+                ds.createUser({
 
-            }, function (data) {
+                    FirstName: firstName(),
+                    LastName: lastName(),
+                    BirthDay: birthDay(),
+                    IsStaff: isStaff(),
+                    Email: email(),
+                    Password: password(),
+                    UserName: userName(),
+                    StreetNumber: streetNumber(),
+                    StreetName: streetName(),
+                    ZipCode: zipCode(),
+                    City: city(),
+                    Country: country()
+
+                }, function (data) {
                     console.log(data);
                     user(data);
-                    $('#modalForRegister').modal('show');  
-            });
+                    $('#modalForRegister').modal('show');
+                });
+            } else {
+                alert('Passwords should be the same');
+            }
+            
         }
         let goToAccount = () => {
-           postman.publish('newUser', 'login');
+           postman.publish('newUser', null);
+        }
+
+        let validatePassword = () => {
+
+            if (password().length < 8) {
+                return false;
+            }
+
+            return true;
+
+        }
+
+
+        let validateRepeatPassword = () => {
+
+            console.log("validation")
+            console.log(password());
+            console.log(repeatPassword());
+
+            if (password() === repeatPassword()) {
+                return true;
+            }
+
+
+
+            return false;
+
         }
 
         return {

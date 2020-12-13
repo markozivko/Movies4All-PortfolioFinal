@@ -15,11 +15,11 @@
         let isActive = element => {
             element.toLowerCase() === selectedComponent() ? "active" : "";
         }
-        postman.subscribe('newUser', element => {
-            console.log(element)
-            selectedComponent(element);
 
+        postman.subscribe('newUser', args => {
+            selectedComponent('login');
         });
+
         return {
             selectedComponent,
             currentParams,

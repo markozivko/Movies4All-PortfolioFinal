@@ -128,41 +128,20 @@
 </div>
 
 <div id="modalForRegister" class="modal border-primary rounded-0" data-bind="if: user">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm">
-        <div class="bg-info text-white text-center py-2" data-bind="with: user">
-            <h3><i class="fa fa-envelope"></i> Succesfully Registered, <span data-bind="text: userName"></span></h3>
-            <button type="button" class="btn btn-secondary" data-bind="click: $parent.goToAccount">Login</button>
+    <div class="modal-dialog modal-dialog-scrollable modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-white text-center py-2" data-bind="with: user">
+                    <h3><i class="fa fa-envelope"></i> Succesfully Registered, <span data-bind="text: userName"></span></h3>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bind="click: goToAccount">Go to login</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<script>
-
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
-
-<script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
-
-<script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
-
 
