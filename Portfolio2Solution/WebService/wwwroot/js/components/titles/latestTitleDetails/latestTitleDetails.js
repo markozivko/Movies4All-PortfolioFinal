@@ -64,6 +64,9 @@
         let goToAddNotes = () => {
             postman.publish('closeModalAndgoToNotes', latestTitle());
         }
+        let goToAddRating = () => {
+            postman.publish('closeModalAndgoToRating', latestTitle());
+        }
         let showPerson = (arg) => {
             let url = new URL(arg);
             postman.publish('goToPerson', [url.pathname, user()]);
@@ -85,7 +88,8 @@
             goToEpisodes,
             episodes,
             goToTitle,
-            goToAddNotes
+            goToAddNotes,
+            goToAddRating
         }
     }
 });

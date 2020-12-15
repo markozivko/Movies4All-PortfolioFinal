@@ -165,14 +165,23 @@ namespace WebService.Controllers
                 {
                     return Unauthorized();
                 }
-                _dataService.UserRatesTitles(ur.TitleId, Program.CurrentUser.UserId, ur.Rating);
-                var uRating = _mapper.Map<UserRates>(ur);
-                uRating.Date = _dataService.GetUserSpecificRating(Program.CurrentUser.UserId, ur.TitleId).Date;
-                uRating.VerbalR = _dataService.GetUserSpecificRating(Program.CurrentUser.UserId, ur.TitleId).VerbalR;
-                var result = _mapper.Map<UserRatingsDto>(uRating);
-                result.Title = _dataService.GetTitleRating(ur.TitleId).Title.PrimaryTitle;
-                
-                return Created("", result);
+                if(_dataService.CheckIfUserRatedTitle(Program.CurrentUser.UserId, ur.TitleId))
+                {
+                    Console.WriteLine("i'm inside");
+                    return BadRequest();
+                }
+                else
+                {
+                    _dataService.UserRatesTitles(ur.TitleId, Program.CurrentUser.UserId, ur.Rating);
+                    var uRating = _mapper.Map<UserRates>(ur);
+                    uRating.Date = _dataService.GetUserSpecificRating(Program.CurrentUser.UserId, ur.TitleId).Date;
+                    uRating.VerbalR = _dataService.GetUserSpecificRating(Program.CurrentUser.UserId, ur.TitleId).VerbalR;
+                    var result = _mapper.Map<UserRatingsDto>(uRating);
+                    result.Title = _dataService.GetTitleRating(ur.TitleId).Title.PrimaryTitle;
+
+                    return Created("", result);
+                }
+              
             }
             catch (ArgumentException)
             {

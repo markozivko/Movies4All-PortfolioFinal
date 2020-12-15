@@ -78,7 +78,13 @@
             $('#modalForTitle').modal('hide');
             changeContent(args);
         });
-
+        postman.subscribe('closeModalAndgoToRating', args => {
+            $('#modalDetailsTitle').modal('hide');
+            $('#modalForPerson').modal('hide');
+            $('#modalForTitle').modal('hide');
+            selectedLatestTitle(args);
+            postman.publish('goToRating', args);
+        });
         postman.subscribe('closeModalAndgoToPNotes', args => {
             $('#modalDetailsTitle').modal('hide');
             $('#modalForPerson').modal('hide');

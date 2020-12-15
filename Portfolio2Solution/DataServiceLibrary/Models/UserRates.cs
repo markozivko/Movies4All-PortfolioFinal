@@ -22,5 +22,6 @@ namespace DataServiceLibrary.Models
         {
             return $"User: {UserId}, Title: {TitleConst}, Numeric Ratings: {NumericR}, Verbal Ratings: {VerbalR}"  + $"Date: {Date.Year}-{Date.Month}-{Date.Day}";
         }
+
     }
 }

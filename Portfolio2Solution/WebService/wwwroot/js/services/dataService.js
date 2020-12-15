@@ -508,6 +508,34 @@
     }
 
     /* **********************************
+* Function: Rate title
+* ************************************/
+    let rateTitle = function ([rating, id, user], callback) {
+        fetch("api/titles/Ratings/" + id, {
+            method: "POST", body: JSON.stringify(rating), headers: {
+                'Content-Type': 'application/json',
+                'Authorization': parseInt(user.currentUser())
+            }
+        })
+
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status == '400') {
+                    throw new Error('Title already rated');
+                } else {
+                    throw new Error('Unauthorised');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+
+    /* **********************************
 * Function: Create new title bookmark
 * ************************************/
     let createTitleBookmark = function ([bookmark, id, user], callback) {
@@ -666,7 +694,8 @@
         getUsers,
         getAllUsersUrlWithPageSize,
         createTitleBookmark,
-        createFavoritePerson
+        createFavoritePerson,
+        rateTitle
     }
 
 });

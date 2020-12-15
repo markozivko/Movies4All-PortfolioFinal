@@ -1,0 +1,53 @@
+﻿
+<div class="box">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Add rating</h4>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group row">
+                <div class="col-lg-12">
+
+                    <form data-bind="submit: rateTitle">
+                        <div>
+                            <h6>Add rating</h6>
+                            <select class="browser-default custom-select" data-bind="selectedOptions: selectedRating">
+                                <option selected>Open this select menu</option>
+                                <option value="1"> 🤮     Ridiculous (Just Burn it!) </option>
+                                <option value="2"> 🤢     Awful (Nobody can, you can't borrow it)</option>
+                                <option value="3"> 🥴     Bad (No but you can borrow it)</option>
+                                <option value="4"> 😕     Ehh (No desire to watch again...might with someone)</option>
+                                <option value="5"> 😐     Average (Probably not)</option>
+                                <option value="6"> 🙂     Good (Maybe)</option>
+                                <option value="7"> 😃     Good+ (Probably)</option>
+                                <option value="8"> 😘     Very Good (Again)</option>
+                                <option value="9"> 😍     Excellent (Again and Again)</option>
+                                <option value="10">🤩     Amazing (Indefinetely!)</option>
+                               
+                            </select>
+                           
+                        </div>
+                        <button class="btn btn-outline-warning btn-lg" type="submit">Save</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .box {
+        width: 100%;
+        padding: 2% 2%;
+        background: #191919;
+        text-align: center;
+        transition: 0.25s;
+        margin-top: 5%;
+        border-radius: 10px;
+    }
+</style>

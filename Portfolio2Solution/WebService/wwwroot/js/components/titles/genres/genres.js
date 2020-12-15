@@ -53,7 +53,17 @@
             getData(ds.getTitlesUrlWithPageSize(size, id()), id(), currentUser());
         });
 
-        
+        let goToAddNotes = (el) => {
+            console.log(el)
+            let url = new URL(el);
+            ds.getTitle([url.pathname, currentUser()], function (data) {
+                $('#modal').modal('hide');
+                $('#modalForPerson').modal('hide');
+                $('#modalForEpisodes').modal('hide');
+                postman.publish('goToNotes', data);
+            });
+           
+        }
         /* **********************************
         * Section: Subscriptions
         * ************************************/
@@ -80,6 +90,11 @@
         $('#modalForPerson').modal('hide');
         $('#modalForEpisodes').modal('hide');
 
+        postman.subscribe('closeModalAndgoToRating', args => {
+            $('#modal').modal('hide');
+            $('#modalForPerson').modal('hide');
+            $('#modalForEpisodes').modal('hide');
+        });
 
 
         return {
@@ -98,7 +113,8 @@
             currentUser,
             episodesUrl,
             personUrl,
-            selectedGenre
+            selectedGenre,
+            goToAddNotes
 
 
             

@@ -76,5 +76,6 @@ namespace DataServiceLibrary
         IList<Personalities> GetPersonalitiesForUser(int id, int page, int pageSize);
         bool CheckIfTitleBookmarkExistsForUser(int id, string idTitle);
         bool CheckIfPersonalitiesExistsForUser(int id, string idPerson);
+        bool CheckIfUserRatedTitle(int id, string title);
     }
 }

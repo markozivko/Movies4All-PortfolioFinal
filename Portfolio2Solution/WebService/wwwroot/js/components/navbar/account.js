@@ -32,6 +32,11 @@
             selectedLatestTitle(args)
         });
 
+        postman.subscribe('goToRating', args => {
+            selectedComponent('ratings');
+            selectedLatestTitle(args)
+        });
+
         postman.subscribe('goToPNotes', args => {
             selectedComponent('pNotes');
             selectedPerson(args)

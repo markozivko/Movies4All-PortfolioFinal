@@ -14,7 +14,9 @@
         let goToAddNotes = (arg) => {
             postman.publish('closeModalAndgoToNotes', arg());
         }
-
+        let goToAddRating = (arg) => {
+            postman.publish('closeModalAndgoToRating', arg());
+        }
 
         postman.subscribe('goToSimilarTitle', args => {
             ds.getTitle([args[0], args[1]], function (data) {
@@ -116,7 +118,8 @@
             goToEpisodes,
             episodes,
             goToTitle,
-            goToAddNotes
+            goToAddNotes,
+            goToAddRating
 
         }
     }
