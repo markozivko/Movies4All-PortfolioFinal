@@ -39,7 +39,12 @@
                 }
             });
         }
-
+        let deletePerson = (arg) => {
+            console.log(currentUser().currentUser())
+            let id = arg.split("/").pop();
+            ds.deletePersonFromPersonalities(id, currentUser());
+            postman.publish('goToLatest', null);
+        }
         let showPrev = latestTitle => {
             getData(prev(), currentUser());
         }
@@ -109,7 +114,8 @@
             pageSizes,
             personUrl,
             similarTitleUrl,
-            knownForTitlesUrl
+            knownForTitlesUrl,
+            deletePerson
         }
     }
 });

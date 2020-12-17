@@ -28,11 +28,16 @@
         let getRating = (args) => {
             ratingsList([]);
             args.forEach((element) => {
-                ratingsList.push({ title: element.title, date: element.date, rating: element.rating, description: element.ratingDescription });
+                ratingsList.push({ url: element.titleUrl, title: element.title, date: element.date, rating: element.rating, description: element.ratingDescription });
             });
 
         }
-
+        let deleteRating = (arg) => {
+            console.log(currentUser().currentUser())
+            let id = arg.url.split("/").pop();
+            ds.deleteRating(id, currentUser());
+            postman.publish('goToLatest', null);
+        }
         let showPrev = latestTitle => {
             getData(prev(), currentUser());
         }
@@ -59,7 +64,8 @@
             enableNext,
             selectedPageSize,
             pageSizes,
-            currentUser
+            currentUser,
+            deleteRating
 
         }
     }
