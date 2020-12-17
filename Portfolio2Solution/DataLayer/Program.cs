@@ -31,6 +31,11 @@ namespace DataLayer
             //Console.WriteLine($"Name: {user.UserId} \n" +
             //              $"Is staff: {user.IsStaff}");
 
+            //var users = dataService.GetUsers();
+            //foreach(var el in users)
+            //{
+            //    dataService.Update(el.UserId);
+            //}
 
             //var actor = dataService.FindActors(1, "america", "", "", "");
             //foreach (var a in actor)
@@ -57,11 +62,10 @@ namespace DataLayer
             //}
 
 
-            var res= dataService.CheckIfTitleBookmarkExistsForUser(3, "tt11602414");
+            //var res= dataService.CheckIfTitleBookmarkExistsForUser(3, "tt11602414");
 
-                    Console.WriteLine(res);
+            //        Console.WriteLine(res);
 
-            
 
             /////*
             //// * Return users by user ID

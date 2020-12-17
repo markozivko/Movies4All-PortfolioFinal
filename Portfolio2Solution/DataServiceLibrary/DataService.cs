@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using DataServiceLibrary.FromSQL;
 using DataServiceLibrary.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -31,11 +32,11 @@ namespace DataServiceLibrary
         public User Login(string email, string password)
         {
             using var ctx = new DatabaseContext(_connectionString);
-
+            
             return ctx.Users
                 .Include(x => x.Address)
                 .Where(u => u.Email == email)
-                .Where(u => u.Password == password)
+                .Where(u => u.Password == HashPassword(password))
                 .FirstOrDefault();
         }
 
@@ -1149,11 +1150,8 @@ namespace DataServiceLibrary
         public string HashPassword(string password)
         {
             // generate a 128-bit salt using a secure PRNG
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+
+            byte[] salt = Encoding.ASCII.GetBytes("saltForHashPassword");
             Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(

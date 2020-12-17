@@ -9,6 +9,7 @@ using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Npgsql;
+using System.Text;
 
 namespace DataLayer
 {
@@ -24,11 +25,8 @@ namespace DataLayer
         public string HashPassword(string password)
         {
             // generate a 128-bit salt using a secure PRNG
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+
+            byte[] salt = Encoding.ASCII.GetBytes("saltForHashPassword");
             Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -41,6 +39,23 @@ namespace DataLayer
             return hashed;
         }
 
+
+        public bool Update(int Iduser)
+        {
+            using var ctx = new DatabaseContext(_connectionString);
+
+            var user = ctx.Users.Find(Iduser);
+            
+            if (user != null)
+            {
+                user.Password = HashPassword(user.Password);
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
+
+        }
 
         /* ****************************************************************************************************************
          *                                         FUNCTIONS TO GET 
@@ -629,6 +644,7 @@ namespace DataLayer
             return false;
 
         }
+      
         /* ***********************************************
         * Framework functionalities
         * Function: UserUpdatesRatings

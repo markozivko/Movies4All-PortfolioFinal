@@ -56,6 +56,12 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titles/notes/notes" },
             template: { require: "text!components/titles/notes/notes.html" }
         });
+
+    ko.components.register("updateNotes",
+        {
+            viewModel: { require: "components/titles/notes/updateNotes" },
+            template: { require: "text!components/titles/notes/notes.html" }
+        });
     ko.components.register("ratings",
         {
             viewModel: { require: "components/titles/ratings/ratings" },

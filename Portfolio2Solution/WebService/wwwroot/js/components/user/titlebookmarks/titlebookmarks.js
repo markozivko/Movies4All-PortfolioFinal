@@ -68,6 +68,10 @@
             postman.publish('goToLatest', null);
         }
 
+        let updateNotes = (arg) => {
+            postman.publish('goToUpdateNotes', arg);
+        }
+
         postman.subscribe('closeModalAndgoToNotes', args => {
             $('#modalForSimilarTitle').modal('hide')
             $('#modalForPerson').modal('hide');
@@ -121,7 +125,8 @@
             episodesUrl,
             personUrl,
             similarTitleUrl,
-            deleteTitle
+            deleteTitle,
+            updateNotes
         }
     }
 });

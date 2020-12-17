@@ -590,21 +590,33 @@
     }
 
     /* **********************************
-    * Function: Update the user
+    * Function: Update notes title bookmarks
     * ************************************/
 
-    //let updateUser = function (user, callback) {
-    //    fetch("api/users/49", {
-    //        method: "PUT",
-    //        body: JSON.stringify(user),
-    //        headers: {
-    //                'Content-Type': 'application/json',
-    //                'Authorization': 49
-    //        }
-    //    })
-    //        .then(response => response.json())
-    //        .then(data => callback(data));
-    //}
+    let updateNotesForTitleBookmark = function ([bookmark, id, user], callback) {
+        fetch("api/titlebookmarks/" + id, {
+            method: "PUT",
+            body: json.stringify(bookmark),
+            headers: {
+                    'content-type': 'application/json',
+                'authorization': parseInt(user.currentUser())
+            }
+        })
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status == '404') {
+                    throw new Error('This title is not in your bookmarks');
+                } else {
+                    throw new Error('Unauthorised');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     //updateUser({
     //    FirstName: "A-gun-new-name",
@@ -767,7 +779,8 @@
         deletePersonFromPersonalities,
         deleteRating,
         simpleSearchUrlWithPageSize,
-        simpleSearch
+        simpleSearch,
+        updateNotesForTitleBookmark
     }
 
 });
