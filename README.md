@@ -13,7 +13,7 @@ Group members:
 ### Built With
 
 * [Navicat Premium](https://www.navicat.com/en/products/navicat-premium)
-* [PostgreQL](https://www.postgresql.org/)
+* [PostgreSQL](https://www.postgresql.org/)
 * [Visual Studio](https://visualstudio.microsoft.com/)
 * [.NET](https://dotnet.microsoft.com/)
 * [Bootstrap](https://getbootstrap.com)
