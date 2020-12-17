@@ -1,8 +1,8 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
-        let currentUser = ko.observable(params.currentUser())
-        let genres = ko.observableArray().extend({ deferred: true });
-        let selectedGenre = ko.observable().extend({ deferred: true });
+        let currentUser = ko.observable(params.currentUser());
+        let search = ko.observable().extend({ deferred: true });
+
         let titlesList = ko.observableArray().extend({ deferred: true });
         let id = ko.observable().extend({ deferred: true })
         let pageSizes = ko.observableArray().extend({ deferred: true });
@@ -13,14 +13,11 @@
         let personUrl = ko.observableArray().extend({ deferred: true });
         let knownForTitlesUrl = ko.observableArray().extend({ deferred: true });
 
-        ds.getGenres(currentUser(), data => {
-            genres(data);
-        });
 
-        let showTitleFromThisCategory = (url, name) => {
-            selectedGenre(name);
-            id(url.split('=').pop())
-            getData(undefined, id(), currentUser());
+        let showResult = arg => {
+            console.log('hello')
+            console.log(search())
+            getData(undefined, search(), currentUser());
         }
 
         let selectTitle = title => {
@@ -28,38 +25,42 @@
             postman.publish('goToTitle', [url.pathname, currentUser()]);
         }
 
-        let getData = (url, id, user) => {
-            ds.getTitlesByCategory([url, id, user], data => {
+        let getData = (url, search, user) => {
+            ds.simpleSearch([url, search, user], data => {
                 pageSizes(data.pageSizes);
                 prev(data.prev || undefined);
                 next(data.next || undefined);
                 titlesList(data.items);
+                console.log(titlesList())
             });
         }
         let showPrev = title => {
-            getData(prev(), id(), currentUser());
+            getData(prev(), search(), currentUser());
         }
 
         let enablePrev = ko.computed(() => prev() !== undefined);
 
         let showNext = title => {
-            getData(next(), id(), currentUser());
+            getData(next(), search(), currentUser());
         }
 
         let enableNext = ko.computed(() => next() !== undefined);
 
         selectedPageSize.subscribe(() => {
             var size = selectedPageSize()[0];
-            getData(ds.getTitlesUrlWithPageSize(size, id()), id(), currentUser());
+            getData(ds.simpleSearchUrlWithPageSize(size, search()), search(), currentUser());
         });
 
         let goToAddNotes = (el) => {
             console.log(el)
             let url = new URL(el);
             ds.getTitle([url.pathname, currentUser()], function (data) {
+                $('#modal').modal('hide');
+                $('#modalForPerson').modal('hide');
+                $('#modalForEpisodes').modal('hide');
                 postman.publish('goToNotes', data);
             });
-           
+
         }
         /* **********************************
         * Section: Subscriptions
@@ -92,19 +93,12 @@
             $('#modalForPerson').modal('hide');
             $('#modalForEpisodes').modal('hide');
         });
-        postman.subscribe('closeModalAndgoToNotes', args => {
-            $('#modal').modal('hide');
-            $('#modalForPerson').modal('hide');
-            $('#modalForEpisodes').modal('hide');
-        });
-        postman.subscribe('closeModalAndgoToPNotes', args => {
-            $('#modal').modal('hide');
-            $('#modalForPerson').modal('hide');
-            $('#modalForEpisodes').modal('hide');
-        });
+
+
         return {
-            genres,
-            showTitleFromThisCategory,
+            currentUser,
+            search,
+            showResult,
             titlesList,
             pageSizes,
             selectedPageSize,
@@ -115,14 +109,9 @@
             enableNext,
             selectedPageSize,
             pageSizes,
-            currentUser,
             episodesUrl,
             personUrl,
-            selectedGenre,
             goToAddNotes
-
-
-            
-        };
+        }
     }
 });

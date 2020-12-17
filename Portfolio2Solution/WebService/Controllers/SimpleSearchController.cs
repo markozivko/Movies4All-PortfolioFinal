@@ -56,17 +56,17 @@ namespace WebService.Controllers
 
                 if (page > 0)
                 {
-                    prev = Url.Link(nameof(SimpleSearch), new { page = page - 1, pageSize });
+                    prev = Url.Link(nameof(SimpleSearch), new { search, page = page - 1, pageSize });
                 }
 
                 string next = null;
 
                 if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
                 {
-                    next = Url.Link(nameof(SimpleSearch), new { page = page + 1, pageSize });
+                    next = Url.Link(nameof(SimpleSearch), new { search, page = page + 1, pageSize });
                 }
 
-                var cur = Url.Link(nameof(SimpleSearch), new { page, pageSize });
+                var cur = Url.Link(nameof(SimpleSearch), new { search, page, pageSize });
 
                 var result = new
                 {

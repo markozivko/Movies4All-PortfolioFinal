@@ -25,7 +25,11 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/titles/popularTitleDetails/popularTitleDetails" },
             template: { require: "text!components/titles/popularTitleDetails/popularTitleDetails.html" }
         });
-
+    ko.components.register("browse",
+        {
+            viewModel: { require: "components/browse/simpleSearch/simpleSearch" },
+            template: { require: "text!components/browse/simpleSearch/simpleSearch.html" }
+        });
     ko.components.register("latest",
         {
             viewModel: { require: "components/titles/latestTitleList/latestTitleList" },

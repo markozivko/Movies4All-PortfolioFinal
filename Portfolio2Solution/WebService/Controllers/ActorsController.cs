@@ -65,17 +65,17 @@ namespace WebService.Controllers
 
                 if (page > 0)
                 {
-                    prev = Url.Link(nameof(SearchActors), new { page = page - 1, pageSize });
+                    prev = Url.Link(nameof(SearchActors), new { SearchTitle, SearchPlot, SearchCharacter, SearchPersonName,page = page - 1, pageSize });
                 }
 
                 string next = null;
 
                 if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
                 {
-                    next = Url.Link(nameof(SearchActors), new { page = page + 1, pageSize });
+                    next = Url.Link(nameof(SearchActors), new { SearchTitle, SearchPlot, SearchCharacter, SearchPersonName,page = page + 1, pageSize });
                 }
 
-                var cur = Url.Link(nameof(SearchActors), new { page, pageSize });
+                var cur = Url.Link(nameof(SearchActors), new { SearchTitle, SearchPlot, SearchCharacter, SearchPersonName,page, pageSize });
 
                 var result = new
                 {

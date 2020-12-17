@@ -1,8 +1,17 @@
-﻿<h2>Genres</h2>
-
-<ul class="list-genres" data-bind="foreach: genres">
-    <li class='pointer' data-bind="text: genre, click: $parent.showTitleFromThisCategory.bind($data, genreUrl, genre), css: { active: $parent.selectedGenre() === genre}"></li>
-</ul>
+﻿<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div>
+            <form data-bind="submit: showResult">
+                <input type="text" name="" data-bind="value:search" placeholder="Simple Search...">
+                
+                <div>
+                    <input class="btn btn-outline-warning btn-lg" type="submit" value="Search">
+                </div>
+            </form>
+               
+        </div>
+    </div>
+</div>
 
 <div data-bind="if: titlesList(), visible:titlesList().length > 0">
     <div id="pageNumber">
@@ -15,15 +24,8 @@
                     <div class="my-0 font-weight-normal" data-bind="text: primaryTitle"></div>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li data-bind="text: startYear"></li>
-                        <li data-bind="visible: runtime">
-                            <i class="far fa-clock"></i>
-                            <span data-bind="text: runtime"></span> min
-                        </li>
-                    </ul>
                     <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-warning" data-toggle="modal" data-target="#modal" data-bind="click: $parent.selectTitle.bind($data, titleUrl)">Show details</button>
-                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-bind="click: $parent.goToAddNotes.bind($data, titleUrl)">Save to bookmarks</button>
+                    <button id="showDetails" type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal" data-target="#modal" data-bind="click: $parent.goToAddNotes.bind($data, titleUrl)">Save to bookmarks</button>
                 </div>
             </div>
         </div>
@@ -92,50 +94,3 @@
 
 </footer>
 
-<style>
-
-    .list-genres {
-        columns: 7;
-        -webkit-columns: 7;
-        -moz-columns: 7;
-        background-color: #232931;
-        border-radius: 20px;
-        padding: 2%;
-        list-style-type: none;
-    }
-
-    @media (max-width: 1100px) {
-
-        .list-genres {
-            columns: 4;
-            -webkit-columns: 4;
-            -moz-columns: 4;
-        }
-    }
-
-    @media (max-width: 700px) {
-
-        .list-genres {
-            columns: 3;
-            -webkit-columns: 3;
-            -moz-columns: 3;
-        }
-    }
-
-    @media (max-width: 500px) {
-
-        .list-genres {
-            columns: 2;
-            -webkit-columns: 2;
-            -moz-columns: 2;
-        }
-    }
-
-    .active {
-        color: #f0ad4e;
-    }
-
-    .pointer {
-        cursor: pointer;
-    }
-</style>

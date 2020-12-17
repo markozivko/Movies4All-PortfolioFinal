@@ -693,8 +693,44 @@
                 console.log(error)
             });
     }
+/* ****************************************************************************************************************
+*                                         Functionalitites for searching
+* ****************************************************************************************************************/
+    /* **********************************
+     * Function: Simple Search
+     * ************************************/
+    const simpleSearchApiUrl = 'api/search/simple';
+    let simpleSearch = function ([uri, search, user], callback) {
+        if (uri === undefined) {
+            uri = simpleSearchApiUrl;
+        }
+        fetch(uri + "?search=" + search, {
+            headers: {
 
+                'Authorization': parseInt(user.currentUser())
+            },
+            method: 'GET'
 
+        })
+            .then(response => {
+
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status === '404') {
+                    throw new Error('Come back in few minutes');
+                }
+                else {
+                    throw new Error('something went wrong');
+                }
+            })
+            .then(function (data) {
+                callback(data);
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+    let simpleSearchUrlWithPageSize = (size, search) => simpleSearchApiUrl + "?search=" + search + "?pageSize=" + size;
     return {
         getGenres,
         getTitleBookmarks,
@@ -729,7 +765,9 @@
         deleteTitleFromBookmarks,
         unsubscribeCustomer,
         deletePersonFromPersonalities,
-        deleteRating
+        deleteRating,
+        simpleSearchUrlWithPageSize,
+        simpleSearch
     }
 
 });

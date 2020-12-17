@@ -15,7 +15,6 @@
                 prev(data.prev || undefined);
                 next(data.next || undefined);
                 userList(data.items);
-
             });
         }
         let unsubscribeCustomer = (id) => {
