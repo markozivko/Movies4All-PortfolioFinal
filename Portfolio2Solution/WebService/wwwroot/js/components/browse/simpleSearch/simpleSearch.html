@@ -14,9 +14,7 @@
 </div>
 
 <div data-bind="if: titlesList(), visible:titlesList().length > 0">
-    <div id="pageNumber">
-        <select class="custom-select" data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
-    </div>
+
     <div data-bind="foreach: titlesList" class="row text-center">
         <div class="col-lg-4 col-md-6">
             <div class="card card-latest shadow-">

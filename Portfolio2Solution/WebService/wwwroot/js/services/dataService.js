@@ -702,9 +702,9 @@
     const simpleSearchApiUrl = 'api/search/simple';
     let simpleSearch = function ([uri, search, user], callback) {
         if (uri === undefined) {
-            uri = simpleSearchApiUrl;
+            uri = simpleSearchApiUrl + "?search=" + search;
         }
-        fetch(uri + "?search=" + search, {
+        fetch(uri , {
             headers: {
 
                 'Authorization': parseInt(user.currentUser())
@@ -730,7 +730,7 @@
                 console.log(error)
             });
     }
-    let simpleSearchUrlWithPageSize = (size, search) => simpleSearchApiUrl + "?search=" + search + "?pageSize=" + size;
+    let simpleSearchUrlWithPageSize = (size, search) => simpleSearchApiUrl + "?search=" + search+ "?pageSize=" + size;
     return {
         getGenres,
         getTitleBookmarks,
