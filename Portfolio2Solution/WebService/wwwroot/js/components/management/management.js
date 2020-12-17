@@ -18,7 +18,11 @@
 
             });
         }
-
+        let unsubscribeCustomer = (id) => {
+            let customerId = id.split("/").pop()
+            console.log(customerId)
+            ds.unsubscribeCustomer(customerId, currentUser());
+        }
         let showPrev = user => {
             getData(prev(), currentUser());
         }
@@ -48,7 +52,8 @@
             showPrev,
             showNext,
             enableNext,
-            enablePrev
+            enablePrev,
+            unsubscribeCustomer
 
         }
     }

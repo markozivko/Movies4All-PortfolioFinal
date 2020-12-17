@@ -536,8 +536,8 @@
 
 
     /* **********************************
-* Function: Create new title bookmark
-* ************************************/
+     * Function: Create new title bookmark
+     * ************************************/
     let createTitleBookmark = function ([bookmark, id, user], callback) {
         fetch("api/titles/" + id, {
             method: "POST", body: JSON.stringify(bookmark), headers: {
@@ -552,8 +552,7 @@
                     return response.json();
                 } else if (response.status == '400') {
                     throw new Error('Bookmark already exist for this movie');
-                } else
-                {
+                } else {
                     throw new Error('Unauthorised');
                 }
             })
@@ -624,16 +623,46 @@
     //        console.log(data);
     //});
 
-    /* **********************************
+   /* **********************************
     * Function: Delete user
     * ************************************/
-    //let unsubscribeUser = url => fetch(url, {
-    //    method: "DELETE", headers: {
-    //        'Authorization': 50
-    //    }
-    //});
-
-    //unsubscribeUser("api/users/50")
+    let unsubscribeUser = (user) => fetch("api/users/" + user.currentUser(), {
+        method: "DELETE", headers: {
+            'Authorization': parseInt(user.currentUser())
+        }
+    });
+   /* **********************************
+    * Function: Delete customer
+    * ************************************/
+    let unsubscribeCustomer = (customerId, user) => fetch("api/users/" + customerId, {
+        method: "DELETE", headers: {
+            'Authorization': parseInt(user.currentUser())
+        }
+    });
+    /* **********************************
+    * Function: Delete title bookmarks
+    * ************************************/
+    let deleteTitleFromBookmarks = (id, user) => fetch("api/titlebookmarks/" + user.currentUser() + "/" + id, {
+        method: "DELETE", headers: {
+            'Authorization': parseInt(user.currentUser())
+        }
+    });
+    /* **********************************
+   * Function: Delete person
+   * ************************************/
+    let deletePersonFromPersonalities = (id, user) => fetch("api/personalities/" + user.currentUser() + "/" + id, {
+        method: "DELETE", headers: {
+            'Authorization': parseInt(user.currentUser())
+        }
+    });
+    /* **********************************
+    * Function: Delete rating
+    * ************************************/
+    let deleteRating = (id, user) => fetch("api/ratings/" + user.currentUser() + "/" + id, {
+        method: "DELETE", headers: {
+            'Authorization': parseInt(user.currentUser())
+        }
+    });
 
     /* ****************************************************************************************************************
     *                                         Functionalitites for person
@@ -695,7 +724,12 @@
         getAllUsersUrlWithPageSize,
         createTitleBookmark,
         createFavoritePerson,
-        rateTitle
+        rateTitle,
+        unsubscribeUser,
+        deleteTitleFromBookmarks,
+        unsubscribeCustomer,
+        deletePersonFromPersonalities,
+        deleteRating
     }
 
 });

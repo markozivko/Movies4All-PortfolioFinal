@@ -61,6 +61,13 @@
             postman.publish('goToFavoriteTitle', [arg, currentUser()]);
         } 
 
+        let deleteTitle = (arg) => {
+            console.log(currentUser().currentUser())
+            let id = arg.split("/").pop();
+            ds.deleteTitleFromBookmarks(id, currentUser());
+            postman.publish('goToLatest', null);
+        }
+
         postman.subscribe('closeModalAndgoToNotes', args => {
             $('#modalForSimilarTitle').modal('hide')
             $('#modalForPerson').modal('hide');
@@ -113,7 +120,8 @@
             currentUser,
             episodesUrl,
             personUrl,
-            similarTitleUrl
+            similarTitleUrl,
+            deleteTitle
         }
     }
 });

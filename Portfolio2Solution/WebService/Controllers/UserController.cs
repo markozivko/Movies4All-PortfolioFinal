@@ -103,6 +103,7 @@ namespace WebService.Controllers
         private UserListDto CreateUserElementDto(User user)
         {
             var dto = _mapper.Map<UserListDto>(user);
+            dto.UserUrl = Url.Link(nameof(UserController.GetUser), new { Id = user.UserId });
             return dto;
         }
 
