@@ -34,6 +34,7 @@
 
         postman.subscribe('goToUpdateNotes', args => {
             selectedComponent('updateNotes');
+            console.log(args)
             selectedLatestTitle(args)
         });
 

@@ -593,20 +593,18 @@
     * Function: Update notes title bookmarks
     * ************************************/
 
-    let updateNotesForTitleBookmark = function ([bookmark, id, user], callback) {
-        fetch("api/titlebookmarks/" + id, {
-            method: "PUT",
-            body: json.stringify(bookmark),
-            headers: {
-                    'content-type': 'application/json',
+    let updateNotesForTitleBookmark = function ([bookmark,user], callback) {
+        fetch("api/titlebookmarks/" + user.currentUser(), {
+            method: "PUT",body: JSON.stringify(bookmark), headers: {
+                'content-type': 'application/json',
                 'authorization': parseInt(user.currentUser())
             }
         })
             .then(response => {
 
                 if (response.ok) {
-                    return response.json();
-                } else if (response.status == '404') {
+                    return "ok";
+                }  if (response.status == '404') {
                     throw new Error('This title is not in your bookmarks');
                 } else {
                     throw new Error('Unauthorised');
@@ -618,22 +616,6 @@
             });
     }
 
-    //updateUser({
-    //    FirstName: "A-gun-new-name",
-    //    LastName: "Aabidah2",
-    //    BirthDay: "01/08/2009",
-    //    IsStaff: false,
-    //    Email: "gun@super.com",
-    //    Password: "gun123",
-    //    UserName: "shootGub-newName",
-    //    StreetNumber: "21",
-    //    StreetName: "Joyful",
-    //    ZipCode: "35214",
-    //    City: "Mumbai",
-    //    Country: "India"
-    //}, function (data) {
-    //        console.log(data);
-    //});
 
    /* **********************************
     * Function: Delete user
