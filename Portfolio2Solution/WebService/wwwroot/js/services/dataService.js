@@ -616,7 +616,32 @@
             });
     }
 
+    /* **********************************
+ * Function: Update notes title bookmarks
+ * ************************************/
 
+    let updateNotesForPersonalities = function ([person, user], callback) {
+        fetch("api/personalities/" + user.currentUser(), {
+            method: "PUT", body: JSON.stringify(person), headers: {
+                'content-type': 'application/json',
+                'authorization': parseInt(user.currentUser())
+            }
+        })
+            .then(response => {
+
+                if (response.ok) {
+                    return "ok";
+                } if (response.status == '404') {
+                    throw new Error('This personality was not bookmarked');
+                } else {
+                    throw new Error('Unauthorised');
+                }
+            })
+            .then(data => callback(data))
+            .catch((error) => {
+                console.log(error)
+            });
+    }
    /* **********************************
     * Function: Delete user
     * ************************************/
@@ -762,7 +787,8 @@
         deleteRating,
         simpleSearchUrlWithPageSize,
         simpleSearch,
-        updateNotesForTitleBookmark
+        updateNotesForTitleBookmark,
+        updateNotesForPersonalities
     }
 
 });

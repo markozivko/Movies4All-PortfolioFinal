@@ -72,7 +72,11 @@ require(['knockout', 'text'], (ko) => {
             viewModel: { require: "components/persons/notes/notes" },
             template: { require: "text!components/persons/notes/notes.html" }
         });
-
+    ko.components.register("updatePNotes",
+        {
+            viewModel: { require: "components/persons/notes/updateNotes" },
+            template: { require: "text!components/persons/notes/notes.html" }
+        });
     ko.components.register("login",
         {
             viewModel: { require: "components/login/login" },

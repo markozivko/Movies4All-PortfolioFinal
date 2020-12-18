@@ -33,7 +33,7 @@
                 <a class="btn btn-outline-light" data-toggle="modal" data-target="#modal" data-bind="click: $parent.seePerson.bind($data, personUrl)"><em class="fas fa-info"></em></a>
             </div>
             <div class="col-2">
-                <a class="btn btn-outline-warning" ><em class="fa fa-pencil"></em></a>
+                <a class="btn btn-outline-warning" ><em class="fa fa-pencil" data-bind="click: $parent.updateNotes.bind($data, personUrl)"></em></a>
             </div>
             <div class="col-2">
                 <a class="btn btn-outline-danger" data-bind="click: $parent.deletePerson.bind($data, personUrl)"><em class="far fa-trash-alt"></em></a>

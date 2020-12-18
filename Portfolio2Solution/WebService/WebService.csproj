@@ -32,7 +32,6 @@
     <Folder Include="wwwroot\js\components\titles\latestTitleDetails\" />
     <Folder Include="wwwroot\js\components\titles\genres\" />
     <Folder Include="wwwroot\js\components\user\unsubscribe\" />
-    <Folder Include="wwwroot\js\components\persons\notes\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties config_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

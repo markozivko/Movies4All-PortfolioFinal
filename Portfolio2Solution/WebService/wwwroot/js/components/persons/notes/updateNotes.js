@@ -2,13 +2,13 @@
     return function (params) {
         let currentUser = ko.observable(params.currentUser()).extend({ deferred: true });
         let notes = ko.observable().extend({ deferred: true });
-        let title = params.selectedTitle();
-        console.log(title)
+        let personality = params.selectedPerson();
+        console.log(personality)
         let saveAsFavorite = latestTitle => {
-            let id = title.split("/").pop()
+            let id = personality.split("/").pop()
             console.log(id)
-            ds.updateNotesForTitleBookmark([{
-                TitleId: id,
+            ds.updateNotesForPersonalities([{
+                name: id,
                 Notes: notes()
             }, currentUser()], function (data) {
                     postman.publish('goToLatest', null);

@@ -45,6 +45,9 @@
             ds.deletePersonFromPersonalities(id, currentUser());
             postman.publish('goToLatest', null);
         }
+        let updateNotes = (arg) => {
+            postman.publish('goToUpdatePNotes', arg);
+        }
         let showPrev = latestTitle => {
             getData(prev(), currentUser());
         }
@@ -115,7 +118,8 @@
             personUrl,
             similarTitleUrl,
             knownForTitlesUrl,
-            deletePerson
+            deletePerson,
+            updateNotes
         }
     }
 });

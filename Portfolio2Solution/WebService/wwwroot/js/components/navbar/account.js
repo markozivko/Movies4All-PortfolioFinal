@@ -2,11 +2,12 @@
     return function (params) {
         let selectedComponent = ko.observable('latest').extend({ deferred: true });
         let selectedLatestTitle = ko.observable().extend({ deferred: true });
+        let selectedTitle = ko.observable().extend({ deferred: true });
         let selectedPerson = ko.observable().extend({ deffered: true });
         let currentUser = ko.observable(params).extend({ deferred: true });
         let role = ko.observable().extend({ deferred: true });
         let menuElements = ko.observableArray(["Latest", "Genres", "Browse", "Profile"]);
-        let currentParams = ko.observable({ selectedLatestTitle, selectedPerson, currentUser }).extend({ deferred: true });
+        let currentParams = ko.observable({ selectedLatestTitle, selectedPerson, currentUser, selectedTitle }).extend({ deferred: true });
         ds.getUser('/api/users/' + currentUser().currentUser(), data => {
             role(data.role)
             console.log(role())
@@ -35,7 +36,13 @@
         postman.subscribe('goToUpdateNotes', args => {
             selectedComponent('updateNotes');
             console.log(args)
-            selectedLatestTitle(args)
+            selectedTitle(args)
+        });
+
+        postman.subscribe('goToUpdatePNotes', args => {
+            selectedComponent('updatePNotes');
+            console.log(args)
+            selectedPerson(args)
         });
 
         postman.subscribe('goToRating', args => {

@@ -15,7 +15,6 @@
 
 
         let showResult = arg => {
-            console.log('hello')
             console.log(search())
             getData(undefined, search(), currentUser());
         }
@@ -93,7 +92,16 @@
             $('#modalForPerson').modal('hide');
             $('#modalForEpisodes').modal('hide');
         });
-
+        postman.subscribe('closeModalAndgoToNotes', args => {
+            $('#modal').modal('hide');
+            $('#modalForPerson').modal('hide');
+            $('#modalForEpisodes').modal('hide');
+        });
+        postman.subscribe('closeModalAndgoToPNotes', args => {
+            $('#modal').modal('hide');
+            $('#modalForPerson').modal('hide');
+            $('#modalForEpisodes').modal('hide');
+        });
 
         return {
             currentUser,

@@ -1041,7 +1041,8 @@ namespace DataServiceLibrary
 
             using var ctx = new DatabaseContext(_connectionString);
 
-            var personality = ctx.TitleBookmarks.Find(Iduser, Name);
+            var personality = ctx.Personalities.Find(Iduser, Name);
+            Console.WriteLine(personality);
 
             if (personality != null)
             {
